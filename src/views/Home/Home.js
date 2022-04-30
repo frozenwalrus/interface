@@ -21,6 +21,9 @@ import tvl from '../../assets/img/tvl.svg';
 
 import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
+import Label from '../../components/Label';
+import useTokenBalance from '../../hooks/useTokenBalance';
+import { getDisplayBalance } from '../../utils/formatBalance';
 
 const BackgroundImage = createGlobalStyle`
   body {
@@ -125,6 +128,18 @@ const Home = () => {
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
+  const tombBalance = useTokenBalance(tombFinance.TOMB);
+  const displayTombBalance = useMemo(() => getDisplayBalance(tombBalance), [tombBalance]);
+  const tombBalanceinDollars = (displayTombBalance * tombPriceInDollars).toFixed(2);
+
+  const tshareBalance = useTokenBalance(tombFinance.TSHARE);
+  const displayTshareBalance = useMemo(() => getDisplayBalance(tshareBalance), [tshareBalance]);
+  const tshareBalanceinDollars = (displayTshareBalance * tSharePriceInDollars).toFixed(2);
+
+  const tbondBalance = useTokenBalance(tombFinance.TBOND);
+  const displayTbondBalance = useMemo(() => getDisplayBalance(tbondBalance), [tbondBalance]);
+  const tbondBalanceinDollars = (displayTbondBalance * tBondPriceInFTM).toFixed(2);
+
   const Row = styled.div`
     align-items: center;
     display: flex;
@@ -137,22 +152,157 @@ const Home = () => {
     <Page>
       <BackgroundImage />
       <Grid container spacing={3}>
-        <Grid item sm={12} md={6} style={{ display: 'flex', width: '100%' }}>
+        <Grid item sm={12} md={6}>
+          <Card>
+            <CardContent style={{ position: 'relative' }}>
+              <Box p={4}>
+                <h1 style={{ textAlign: 'center' }}>My balance</h1>
+              </Box>
+              <Balances>
+                <StyledBalanceWrapper>
+                  <TokenSymbol symbol="TOMB" />
+                  <StyledBalance>
+                    <StyledValue>{/* {displayTombBalance} */}0</StyledValue>
+                    <Label text=" WLRS available" variant="noraml" />
+                    <span style={{ fontSize: '15px', marginLeft: '2%' }}>
+                      {/* (${tombBalanceinDollars ? tombBalanceinDollars : '-.----'})  */}
+                      ($0.00)
+                    </span>
+                    <div className={classes.flex}>
+                      <Button
+                        color="primary"
+                        target="_blank"
+                        href={buyTombAddress}
+                        variant="contained"
+                        style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                        className={classes.tokenButton}
+                        disabled
+                      >
+                        Buy
+                      </Button>
+                      <Button
+                        color="primary"
+                        target="_blank"
+                        href="https://dexscreener.com/avalanche/0xe63b66a8cf7811525cd15dab15f17fb62aa5af2f"
+                        variant="contained"
+                        style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                        className={classes.tokenButton}
+                        disabled
+                      >
+                        Chart
+                      </Button>
+                      <Button
+                        color="primary"
+                        target="_blank"
+                        href="https://snowtrace.io/address/0x1fE4869f2C5181b9CD780a7E16194FA2c4C4293D#code"
+                        variant="contained"
+                        style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                        className={classes.tokenButton}
+                        disabled
+                      >
+                        Contract
+                      </Button>
+                    </div>
+                  </StyledBalance>
+                </StyledBalanceWrapper>
+                <StyledBalanceWrapper>
+                  <TokenSymbol symbol="HSHARE" />
+                  <StyledBalance>
+                    <StyledValue>{/* {displayTshareBalance} */}0</StyledValue>
+                    <Label text="WSHARE available" variant="noraml" />
+                    <span style={{ fontSize: '15px', marginLeft: '2%' }}>
+                      {/* (${tshareBalanceinDollars ? tshareBalanceinDollars : '-.----'}) */}
+                      ($0.00)
+                    </span>
+                    <div className={classes.flex}>
+                      <Button
+                        color="primary"
+                        target="_blank"
+                        href={buyTShareAddress}
+                        variant="contained"
+                        style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                        className={classes.tokenButton}
+                        disabled
+                      >
+                        Buy
+                      </Button>
+                      <Button
+                        color="primary"
+                        target="_blank"
+                        href="https://dexscreener.com/avalanche/0x061349a57b702ebe3139ca419457bb23f7e0d8a2"
+                        variant="contained"
+                        style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                        className={classes.tokenButton}
+                        disabled
+                      >
+                        Chart
+                      </Button>
+                      <Button
+                        color="primary"
+                        target="_blank"
+                        href="https://snowtrace.io/address/0xe7a102fbc8ab3581d62830ddb599eccaae5e7875#code"
+                        variant="contained"
+                        style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                        className={classes.tokenButton}
+                        disabled
+                      >
+                        Contract
+                      </Button>
+                    </div>
+                  </StyledBalance>
+                </StyledBalanceWrapper>
+                <StyledBalanceWrapper>
+                  <TokenSymbol symbol="HBOND" />
+                  <StyledBalance>
+                    <StyledValue>{/* {displayTbondBalance} */}0</StyledValue>
+                    <Label text="WBOND available" variant="noraml" />
+                    <span style={{ fontSize: '15px', marginLeft: '2%' }}>
+                      {/* (${tbondBalanceinDollars ? tbondBalanceinDollars : '-.----'}) */}
+                      ($0.00)
+                    </span>
+                    <div className={classes.flex}>
+                      <Button
+                        color="primary"
+                        href="/bonds"
+                        variant="contained"
+                        style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                        className={classes.tokenButton}
+                        disabled
+                      >
+                        Bond
+                      </Button>
+                      <Button
+                        color="primary"
+                        target="_blank"
+                        href="https://snowtrace.io/address/0x8aB4Ac266d8e698b7E39f97Ec17876076680f6f1#code"
+                        variant="contained"
+                        style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                        className={classes.tokenButton}
+                        disabled
+                      >
+                        Contract
+                      </Button>
+                    </div>
+                  </StyledBalance>
+                </StyledBalanceWrapper>
+              </Balances>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item sm={12} md={6} container direction="column" style={{ justifyContent: 'space-between' }}>
           <Typography
             variant="h1"
             style={{
               fontWeight: 900,
               textAlign: 'center',
               fontSize: 50,
-              margin: 'auto',
               ...(!matches ? { fontSize: 36 } : {}),
             }}
             gutterBottom
           >
-            Welcome to WALRUS
+            Welcome to Frozen Walrus
           </Typography>
-        </Grid>
-        <Grid item sm={12} md={6} container direction="column" style={{ justifyContent: 'space-between' }}>
           <Card>
             <CardContent
               style={{ margin: '37px', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}
@@ -160,7 +310,7 @@ const Home = () => {
               <div>
                 <h1>Total Value Locked</h1>
                 {/* <CountUp style={{ fontSize: '40px' }} end={TVL} separator="," prefix="$" /> */}
-                <div style={{fontSize: 40}}>$0</div>
+                <div style={{ fontSize: 40 }}>$0</div>
               </div>
               <img
                 src={`${tvl}`}
@@ -182,7 +332,7 @@ const Home = () => {
                 <span style={{ fontSize: '26px' }}>
                   {/* {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} WLRS /{' '}
                   {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} UST */}
-                 0 WLRS / 0 UST
+                  0 WLRS / 0 UST
                 </span>
               </Box>
               <Box>
@@ -310,8 +460,7 @@ const Home = () => {
                   {tombCirculatingSupply - 20000} <br />
                   {tombTotalSupply} */}
                   $0 <br />
-                  0 <br />
-                  0
+                  0 <br />0
                 </span>
               </Row>
               <Box>
@@ -362,8 +511,7 @@ const Home = () => {
                   {tShareCirculatingSupply} <br />
                   {tShareTotalSupply} */}
                   $0 <br />
-                  0 <br />
-                  0
+                  0 <br />0
                 </span>
               </Row>
               <Box>
@@ -414,8 +562,7 @@ const Home = () => {
                   {tBondCirculatingSupply} <br />
                   {tBondTotalSupply} */}
                   $0 <br />
-                  0 <br />
-                  0
+                  0 <br />0
                 </span>
               </Row>
               <Box>
@@ -438,5 +585,35 @@ const Home = () => {
     </Page>
   );
 };
+
+const StyledValue = styled.div`
+  //color: ${(props) => props.theme.color.grey[300]};
+  font-size: 30px;
+  font-weight: 700;
+`;
+
+const StyledBalance = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+`;
+
+const Balances = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+`;
+
+const StyledBalanceWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin: 1%;
+`;
 
 export default Home;
