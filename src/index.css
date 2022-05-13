@@ -119,18 +119,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', 'Lato', 'Kanit', 'Roboto';
 }
 
-.wallet-button {
-  color: #2c2560 !important;
-  font-size: 1.1rem !important;
-  text-align: left !important;
-  justify-content: flex-start !important;
-  text-transform: none !important;
-}
-.wallet-button:hover {
-  background-color: black !important;
-  color: #757ce8 !important;
-}
-
 .MuiButton-root {
   background-color: #284c7b !important;
 }
@@ -143,4 +131,17 @@ code {
 .MuiAlert-root,
 .MuiButton-root {
     font-family: var(--font) !important;
+}
+.wallet-button {
+  color: black !important;
+  background-color: #ddd !important;
+  font-size: 1.1rem !important;
+  text-align: left !important;
+  justify-content: flex-start !important;
+  text-transform: none !important;
+  margin: 3px 0 !important;
+}
+.wallet-button:hover {
+  background-color: black !important;
+  color: #757ce8 !important;
 }
