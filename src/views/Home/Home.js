@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import Page from '../../components/Page';
 import styled from 'styled-components';
 import HomeImage from '../../assets/img/SVG_Icons_and_web_bg/bg.svg';
-import AvaxLogo from '../../assets/img/SVG_Icons_and_web_bg/UST.svg';
+import AvaxLogo from '../../assets/img/USDC.png';
 import { createGlobalStyle } from 'styled-components';
 import CountUp from 'react-countup';
 import TokenSymbol from '../../components/TokenSymbol';
@@ -12,8 +12,6 @@ import useFantomPrice from '../../hooks/useFantomPrice.js';
 import useBondStats from '../../hooks/useBondStats';
 import usetShareStats from '../../hooks/usetShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
-import { tomb as tombTesting, tShare as tShareTesting } from '../../tomb-finance/deployments/deployments.testing.json';
-import { tomb as tombProd, tShare as tShareProd } from '../../tomb-finance/deployments/deployments.mainnet.json';
 
 import { Box, Button, CardContent, Grid, Typography, useMediaQuery } from '@material-ui/core';
 import Card from '../../components/Card';
@@ -21,9 +19,9 @@ import tvl from '../../assets/img/tvl.svg';
 
 import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
-import Label from '../../components/Label';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import { getDisplayBalance } from '../../utils/formatBalance';
+import Label from '../../components/Label';
 
 const BackgroundImage = createGlobalStyle`
   body {
@@ -70,28 +68,28 @@ const Home = () => {
   const matches = useMediaQuery('(min-width:600px)');
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const tombFtmLpStats = useLpStats('SNO-JOE-LP');
-  const tShareFtmLpStats = useLpStats('SNOSHARE-JOE-LP');
+  const tombFtmLpStats = useLpStats('WLRS-USDC-LP');
+  const tShareFtmLpStats = useLpStats('WSHARE-USDC-LP');
   const tombStats = useTombStats();
   const tShareStats = usetShareStats();
   const tBondStats = useBondStats();
   const tombFinance = useTombFinance();
   const { price: JOEPrice, marketCap: JOEMarketCap, priceChange: JOEPriceChange } = useFantomPrice();
 
-  let tomb;
-  let tShare;
-  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-    tomb = tombTesting;
-    tShare = tShareTesting;
-  } else {
-    tomb = tombProd;
-    tShare = tShareProd;
-  }
+  // let tomb;
+  // let tShare;
+  // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  //   tomb = tombTesting;
+  //   tShare = tShareTesting;
+  // } else {
+  //   tomb = tombProd;
+  //   tShare = tShareProd;
+  // }
 
   const buyTombAddress =
-    'https://traderjoexyz.com/trade?inputCurrency=0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd&outputCurrency=0x1fE4869f2C5181b9CD780a7E16194FA2c4C4293D';
+    'https://traderjoexyz.com/trade?inputCurrency=0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664&outputCurrency=0x395908aeb53d33A9B8ac35e148E9805D34A555D3#/';
   const buyTShareAddress =
-    'https://traderjoexyz.com/trade?inputCurrency=0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd&outputCurrency=0xe7A102Fbc8AB3581d62830DdB599eCCaae5e7875';
+    'https://traderjoexyz.com/trade?inputCurrency=0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664&outputCurrency=0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6#/';
 
   const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
@@ -130,15 +128,15 @@ const Home = () => {
 
   const tombBalance = useTokenBalance(tombFinance.TOMB);
   const displayTombBalance = useMemo(() => getDisplayBalance(tombBalance), [tombBalance]);
-  const tombBalanceinDollars = (displayTombBalance * tombPriceInDollars).toFixed(2);
+  const tombBalanceInDollars = tombPriceInDollars && tombBalance ? (Number(tombPriceInDollars) * tombBalance.div('1000000000000000000').toNumber()).toFixed(2) : null;
 
-  const tshareBalance = useTokenBalance(tombFinance.TSHARE);
-  const displayTshareBalance = useMemo(() => getDisplayBalance(tshareBalance), [tshareBalance]);
-  const tshareBalanceinDollars = (displayTshareBalance * tSharePriceInDollars).toFixed(2);
+  const tShareBalance = useTokenBalance(tombFinance.TSHARE);
+  const displayTShareBalance = useMemo(() => getDisplayBalance(tShareBalance), [tShareBalance]);
+  const tShareBalanceInDollars = tSharePriceInDollars && tShareBalance ? (Number(tSharePriceInDollars) * tShareBalance.div('1000000000000000000').toNumber()).toFixed(2) : null;
 
-  const tbondBalance = useTokenBalance(tombFinance.TBOND);
-  const displayTbondBalance = useMemo(() => getDisplayBalance(tbondBalance), [tbondBalance]);
-  const tbondBalanceinDollars = (displayTbondBalance * tBondPriceInFTM).toFixed(2);
+  const tBondBalance = useTokenBalance(tombFinance.TBOND);
+  const displayTBondBalance = useMemo(() => getDisplayBalance(tBondBalance), [tBondBalance]);
+  const tBondBalanceInDollars = tBondPriceInDollars && displayTBondBalance ? (Number(tBondPriceInDollars) * tBondBalance.div('1000000000000000000').toNumber()).toFixed(2) : null;
 
   const Row = styled.div`
     align-items: center;
@@ -162,11 +160,10 @@ const Home = () => {
                 <StyledBalanceWrapper>
                   <TokenSymbol symbol="TOMB" />
                   <StyledBalance>
-                    <StyledValue>{/* {displayTombBalance} */}0</StyledValue>
-                    <Label text=" WLRS available" variant="noraml" />
+                    <StyledValue>{displayTombBalance}</StyledValue>
+                    <Label text="WLRS available" variant="noraml" />
                     <span style={{ fontSize: '15px', marginLeft: '2%' }}>
-                      {/* (${tombBalanceinDollars ? tombBalanceinDollars : '-.----'})  */}
-                      ($0.00)
+                      (${tombBalanceInDollars ? tombBalanceInDollars : '-.----'}) 
                     </span>
                     <div className={classes.flex}>
                       <Button
@@ -176,29 +173,26 @@ const Home = () => {
                         variant="contained"
                         style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
                         className={classes.tokenButton}
-                        disabled
                       >
                         Buy
                       </Button>
                       <Button
                         color="primary"
                         target="_blank"
-                        href="https://dexscreener.com/avalanche/0xe63b66a8cf7811525cd15dab15f17fb62aa5af2f"
+                        href="https://dexscreener.com/avalanche/0x82845B52b53c80595bbF78129126bD3E6Fc2C1DF"
                         variant="contained"
                         style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
                         className={classes.tokenButton}
-                        disabled
                       >
                         Chart
                       </Button>
                       <Button
                         color="primary"
                         target="_blank"
-                        href="https://snowtrace.io/address/0x1fE4869f2C5181b9CD780a7E16194FA2c4C4293D#code"
+                        href="https://snowtrace.io/address/0x395908aeb53d33A9B8ac35e148E9805D34A555D3#code"
                         variant="contained"
                         style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
                         className={classes.tokenButton}
-                        disabled
                       >
                         Contract
                       </Button>
@@ -206,13 +200,12 @@ const Home = () => {
                   </StyledBalance>
                 </StyledBalanceWrapper>
                 <StyledBalanceWrapper>
-                  <TokenSymbol symbol="HSHARE" />
+                  <TokenSymbol symbol="WSHARE" />
                   <StyledBalance>
-                    <StyledValue>{/* {displayTshareBalance} */}0</StyledValue>
+                    <StyledValue>{displayTShareBalance}</StyledValue>
                     <Label text="WSHARE available" variant="noraml" />
                     <span style={{ fontSize: '15px', marginLeft: '2%' }}>
-                      {/* (${tshareBalanceinDollars ? tshareBalanceinDollars : '-.----'}) */}
-                      ($0.00)
+                      (${tShareBalanceInDollars ? tShareBalanceInDollars : '-.----'})
                     </span>
                     <div className={classes.flex}>
                       <Button
@@ -222,29 +215,26 @@ const Home = () => {
                         variant="contained"
                         style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
                         className={classes.tokenButton}
-                        disabled
                       >
                         Buy
                       </Button>
                       <Button
                         color="primary"
                         target="_blank"
-                        href="https://dexscreener.com/avalanche/0x061349a57b702ebe3139ca419457bb23f7e0d8a2"
+                        href="https://dexscreener.com/avalanche/0x03d15E0451e54Eec95ac5AcB5B0a7ce69638c62A"
                         variant="contained"
                         style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
                         className={classes.tokenButton}
-                        disabled
                       >
                         Chart
                       </Button>
                       <Button
                         color="primary"
                         target="_blank"
-                        href="https://snowtrace.io/address/0xe7a102fbc8ab3581d62830ddb599eccaae5e7875#code"
+                        href="https://snowtrace.io/address/0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6#code"
                         variant="contained"
                         style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
                         className={classes.tokenButton}
-                        disabled
                       >
                         Contract
                       </Button>
@@ -252,13 +242,12 @@ const Home = () => {
                   </StyledBalance>
                 </StyledBalanceWrapper>
                 <StyledBalanceWrapper>
-                  <TokenSymbol symbol="HBOND" />
+                  <TokenSymbol symbol="WBOND" />
                   <StyledBalance>
-                    <StyledValue>{/* {displayTbondBalance} */}0</StyledValue>
+                    <StyledValue>{displayTBondBalance}</StyledValue>
                     <Label text="WBOND available" variant="noraml" />
                     <span style={{ fontSize: '15px', marginLeft: '2%' }}>
-                      {/* (${tbondBalanceinDollars ? tbondBalanceinDollars : '-.----'}) */}
-                      ($0.00)
+                      (${tBondBalanceInDollars ? tBondBalanceInDollars : '-.----'})
                     </span>
                     <div className={classes.flex}>
                       <Button
@@ -267,18 +256,16 @@ const Home = () => {
                         variant="contained"
                         style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
                         className={classes.tokenButton}
-                        disabled
                       >
                         Bond
                       </Button>
                       <Button
                         color="primary"
                         target="_blank"
-                        href="https://snowtrace.io/address/0x8aB4Ac266d8e698b7E39f97Ec17876076680f6f1#code"
+                        href="https://snowtrace.io/address/0xa8cFe8b4e8632cF551692Ddf78B97Ff4784dF14a#code"
                         variant="contained"
                         style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
                         className={classes.tokenButton}
-                        disabled
                       >
                         Contract
                       </Button>
@@ -301,7 +288,7 @@ const Home = () => {
             }}
             gutterBottom
           >
-            Welcome to Frozen Walrus
+            Welcome to Walrus
           </Typography>
           <Card>
             <CardContent
@@ -309,8 +296,7 @@ const Home = () => {
             >
               <div>
                 <h1>Total Value Locked</h1>
-                {/* <CountUp style={{ fontSize: '40px' }} end={TVL} separator="," prefix="$" /> */}
-                <div style={{ fontSize: 40 }}>$0</div>
+                <CountUp style={{ fontSize: '40px' }} end={TVL} separator="," prefix="$" />
               </div>
               <img
                 src={`${tvl}`}
@@ -324,27 +310,20 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>WLRS-UST LP</h2>
+              <h2>WLRS-USDC LP</h2>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol size={50} symbol="SNO-JOE-LP" />
+                <TokenSymbol size={50} symbol="WLRS-USDC-LP" />
               </div>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
-                  {/* {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} WLRS /{' '}
-                  {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} UST */}
-                  0 WLRS / 0 UST
+                  {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} WLRS /{' '}
+                  {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} USDC
                 </span>
               </Box>
-              <Box>
-                {/* ${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'} */}
-                $0
-              </Box>
+              <Box>${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}</Box>
               <span style={{ fontSize: '12px' }}>
-                {/* Liquidity: ${tombLPStats?.totalLiquidity ? tombLPStats.totalLiquidity : '-.--'} <br />
-                Total supply: {tombLPStats?.totalSupply ? tombLPStats.totalSupply : '-.--'} */}
-                Liquidity: $0
-                <br />
-                Total supply: 0
+                Liquidity: ${tombLPStats?.totalLiquidity ? tombLPStats.totalLiquidity : '-.--'} <br />
+                Total supply: {tombLPStats?.totalSupply ? (Number(tombLPStats.totalSupply) < 1/10**4 ? Number(tombLPStats.totalSupply) * 10**6 + 'µ' : tombLPStats.totalSupply) : '-.--'}
               </span>
             </CardContent>
           </Card>
@@ -352,28 +331,21 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>WSHARE-UST LP</h2>
+              <h2>WSHARE-USDC LP</h2>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol size={50} symbol="SNOSHARE-JOE-LP" />
+                <TokenSymbol size={50} symbol="WSHARE-USDC-LP" />
               </div>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
-                  {/* {tshareLPStats?.tokenAmount ? tshareLPStats?.tokenAmount : '-.--'} WSHARE /{' '}
-                  {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} UST */}
-                  0 WSHARE / 0 UST
+                  {tshareLPStats?.tokenAmount ? tshareLPStats?.tokenAmount : '-.--'} WSHARE /{' '}
+                  {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} USDC
                 </span>
               </Box>
-              <Box>
-                {/* ${tshareLPStats?.priceOfOne ? tshareLPStats.priceOfOne : '-.--'} */}
-                $0
-              </Box>
+              <Box>${tshareLPStats?.priceOfOne ? tshareLPStats.priceOfOne : '-.--'}</Box>
               <span style={{ fontSize: '12px' }}>
-                {/* Liquidity: ${tshareLPStats?.totalLiquidity ? tshareLPStats.totalLiquidity : '-.--'}
+                Liquidity: ${tshareLPStats?.totalLiquidity ? tshareLPStats.totalLiquidity : '-.--'}
                 <br />
-                Total supply: {tshareLPStats?.totalSupply ? tshareLPStats.totalSupply : '-.--'} */}
-                Liquidity: $0
-                <br />
-                Total supply: 0
+                Total supply: {tshareLPStats?.totalSupply ? (Number(tshareLPStats.totalSupply) < 1/10**4 ? Number(tshareLPStats.totalSupply) * 10**6 + 'µ' : tshareLPStats.totalSupply) : '-.--'}
               </span>
             </CardContent>
           </Card>
@@ -383,15 +355,12 @@ const Home = () => {
           <Card>
             <CardContent style={{ position: 'relative' }}>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol symbol="WFTM" size={50} />
+                <TokenSymbol symbol="USDC" size={50} />
               </div>
-              <h2 align="center">UST</h2>
+              <h2 align="center">USDC.e</h2>
               <p align="center">Current Price</p>
               <Box align="center">
-                <span style={{ fontSize: '30px' }}>
-                  {/* ${JOEPrice ? JOEPrice : '-.----'} */}
-                  $0
-                </span>
+                <span style={{ fontSize: '30px' }}>${JOEPrice ? JOEPrice : '-.----'}</span>
               </Box>
               <Box align="center" marginBottom={3}>
                 &nbsp;
@@ -404,10 +373,8 @@ const Home = () => {
                   &nbsp;
                 </span>
                 <span style={{ fontSize: '14px', textAlign: 'right' }}>
-                  {/* ${JOEMarketCap} <br />
-                  {JOEPriceChange.toFixed(2)}% <br /> */}
-                  $0 <br />
-                  %0 <br />
+                  ${JOEMarketCap} <br />
+                  {JOEPriceChange.toFixed(2)}% <br />
                   &nbsp;
                 </span>
               </Row>
@@ -415,11 +382,10 @@ const Home = () => {
                 <Button
                   color="primary"
                   target="_blank"
-                  href={'https://traderjoexyz.com/trade?outputCurrency=0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd#/'}
+                  href={'https://traderjoexyz.com/trade?outputCurrency=0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664#/'}
                   variant="contained"
                   style={{ marginTop: '10px', borderRadius: '10px', width: '100%' }}
                   className={classes.button}
-                  disabled
                 >
                   Purchase
                 </Button>
@@ -436,16 +402,14 @@ const Home = () => {
               <h2 align="center">WLRS</h2>
               <p align="center">Current Price</p>
               <Box align="center">
-                <span style={{ fontSize: '30px' }}>
-                  {/* {tombPriceInFTM ? tombPriceInFTM : '-.----'}{' '} */}
-                  0
-                  <img alt="logo" style={{ width: '30px' }} src={AvaxLogo} />
+                <span style={{ fontSize: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {tombPriceInFTM ? tombPriceInFTM : '-.----'}{' '}
+                  <img alt="logo" style={{ width: '30px', marginLeft: '6px' }} src={AvaxLogo} />
                 </span>
               </Box>
               <Box align="center" marginBottom={3}>
                 <span style={{ fontSize: '16px', alignContent: 'flex-start' }}>
-                  {/* ${tombPriceInDollars ? tombPriceInDollars : '-.--'} */}
-                  $0
+                  ${tombPriceInDollars ? tombPriceInDollars : '-.--'}
                 </span>
               </Box>
               <Row>
@@ -456,11 +420,9 @@ const Home = () => {
                   Total Supply:
                 </span>
                 <span style={{ fontSize: '14px', textAlign: 'right' }}>
-                  {/* ${((tombCirculatingSupply - 20000) * tombPriceInDollars).toFixed(2)} <br />
-                  {tombCirculatingSupply - 20000} <br />
-                  {tombTotalSupply} */}
-                  $0 <br />
-                  0 <br />0
+                  ${(tombCirculatingSupply * tombPriceInDollars).toFixed(2)} <br />
+                  {tombCirculatingSupply} <br />
+                  {tombTotalSupply}
                 </span>
               </Row>
               <Box>
@@ -471,7 +433,6 @@ const Home = () => {
                   variant="contained"
                   style={{ marginTop: '10px', borderRadius: '10px', width: '100%' }}
                   className={classes.button}
-                  disabled
                 >
                   Purchase
                 </Button>
@@ -483,22 +444,18 @@ const Home = () => {
           <Card>
             <CardContent style={{ position: 'relative' }}>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol symbol="HSHARE" size={50} />
+                <TokenSymbol symbol="WSHARE" size={50} />
               </div>
               <h2 align="center">WSHARE</h2>
               <p align="center">Current Price</p>
               <Box align="center">
-                <span style={{ fontSize: '30px' }}>
-                  {/* {tSharePriceInFTM ? tSharePriceInFTM : '-.----'}{' '} */}
-                  0
-                  <img alt="logo" style={{ width: '30px' }} src={AvaxLogo} />
+                <span style={{ fontSize: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {tSharePriceInFTM ? tSharePriceInFTM : '-.----'}{' '}
+                  <img alt="logo" style={{ width: '30px', marginLeft: '6px' }} src={AvaxLogo} />
                 </span>
               </Box>
               <Box align="center" marginBottom={3}>
-                <span style={{ fontSize: '16px' }}>
-                  {/* ${tSharePriceInDollars ? tSharePriceInDollars : '-.--'} */}
-                  $0
-                </span>
+                <span style={{ fontSize: '16px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
               </Box>
               <Row>
                 <span style={{ fontSize: '14px' }}>
@@ -507,11 +464,9 @@ const Home = () => {
                   Total Supply:
                 </span>
                 <span style={{ fontSize: '14px', textAlign: 'right' }}>
-                  {/* ${(tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)} <br />
+                  ${(tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)} <br />
                   {tShareCirculatingSupply} <br />
-                  {tShareTotalSupply} */}
-                  $0 <br />
-                  0 <br />0
+                  {tShareTotalSupply}
                 </span>
               </Row>
               <Box>
@@ -522,7 +477,6 @@ const Home = () => {
                   variant="contained"
                   style={{ marginTop: '10px', borderRadius: '10px', width: '100%' }}
                   className={classes.button}
-                  disabled
                 >
                   Purchase
                 </Button>
@@ -534,22 +488,18 @@ const Home = () => {
           <Card>
             <CardContent style={{ position: 'relative' }}>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol symbol="HBOND" size={50} />
+                <TokenSymbol symbol="WBOND" size={50} />
               </div>
               <h2 align="center">WBOND</h2>
               <p align="center">Current Price</p>
               <Box align="center">
-                <span style={{ fontSize: '30px' }}>
-                  {/* {tBondPriceInFTM ? tBondPriceInFTM : '-.----'}{' '} */}
-                  0
-                  <img alt="logo" style={{ width: '30px' }} src={AvaxLogo} />
+                <span style={{ fontSize: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {tBondPriceInFTM ? tBondPriceInFTM : '-.----'}{' '}
+                  <img alt="logo" style={{ width: '30px', marginLeft: '6px' }} src={AvaxLogo} />
                 </span>
               </Box>
               <Box align="center" marginBottom={3}>
-                <span style={{ fontSize: '16px' }}>
-                  {/* ${tBondPriceInDollars ? tBondPriceInDollars : '-.--'} */}
-                  $0
-                </span>
+                <span style={{ fontSize: '16px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
               </Box>
               <Row>
                 <span style={{ fontSize: '14px' }}>
@@ -558,11 +508,9 @@ const Home = () => {
                   Total Supply:
                 </span>
                 <span style={{ fontSize: '14px', textAlign: 'right' }}>
-                  {/* ${(tBondCirculatingSupply * tBondPriceInDollars).toFixed(2)} <br />
+                  ${(tBondCirculatingSupply * tBondPriceInDollars).toFixed(2)} <br />
                   {tBondCirculatingSupply} <br />
-                  {tBondTotalSupply} */}
-                  $0 <br />
-                  0 <br />0
+                  {tBondTotalSupply}
                 </span>
               </Row>
               <Box>
@@ -573,7 +521,6 @@ const Home = () => {
                   variant="contained"
                   style={{ marginTop: '10px', borderRadius: '10px', width: '100%' }}
                   className={classes.button}
-                  disabled
                 >
                   Bond
                 </Button>

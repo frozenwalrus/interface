@@ -45,7 +45,7 @@ const Bank: React.FC = () => {
     <>
       <PageHeader
         icon="🏦"
-        subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
+        subtitle={`Deposit ${bank?.depositTokenName === 'USDC' || bank?.depositTokenName === 'USDT' ? bank?.depositTokenName + '.e' : bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
       {bank?.depositTokenName === 'SNO' && Date.now() < 1646510400000 ? (
@@ -80,7 +80,7 @@ const Bank: React.FC = () => {
           <Grid item xs={12} md={2} lg={3} className={classes.gridItem}>
             <Card style={{ background: '#161414', borderRadius: '15px', height: '120px' }} className={classes.gridItem}>
               <CardContent style={{ textAlign: 'center' }}>
-                <h3 style={{ color: '#5686d6' }}>Total Value Locked</h3>
+                <h3 style={{ color: '#5686d6' }}>TVL</h3>
                 <h2 style={{ fontWeight: 'lighter' }}>${statsOnPool?.TVL}</h2>
               </CardContent>
             </Card>
@@ -118,7 +118,7 @@ const Bank: React.FC = () => {
     pairName = 'TOMB-AVAX pair';
     uniswapUrl = 'https://app.pangolin.exchange/#/add/AVAX/' + tombAddr;
   } else {
-    pairName = 'HSHARE-AVAX pair';
+    pairName = 'WSHARE-AVAX pair';
     uniswapUrl = 'https://app.pangolin.exchange/#/add/AVAX/' + tshareAddr;
   }
   return (

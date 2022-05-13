@@ -35,7 +35,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
         </StyledBalanceWrapper>
 
         <StyledBalanceWrapper>
-          <TokenSymbol symbol="HSHARE" />
+          <TokenSymbol symbol="WSHARE" />
           <StyledBalance>
             <StyledValue>{displayTshareBalance}</StyledValue>
             <Label text="SNOSHARE Available" />
@@ -43,10 +43,10 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
         </StyledBalanceWrapper>
 
         <StyledBalanceWrapper>
-          <TokenSymbol symbol="HBOND" />
+          <TokenSymbol symbol="WBOND" />
           <StyledBalance>
             <StyledValue>{displayTbondBalance}</StyledValue>
-            <Label text="SNOBOND Available" />
+            <Label text="WBOND Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
       </Balances>

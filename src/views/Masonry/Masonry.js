@@ -56,7 +56,7 @@ const Masonry = () => {
       <BackgroundImage />
       {!!account ? (
         <>
-          <Typography color="primary.black" align="center" variant="h3" gutterBottom>
+          <Typography align="center" variant="h3" gutterBottom>
             Boardroom
           </Typography>
           <Box mt={5}>
@@ -68,8 +68,7 @@ const Masonry = () => {
                 >
                   <CardContent>
                     <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>Next Epoch</h3>
-                    {/* <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" /> */}
-                    <h2 style={{textAlign: 'center'}}>00:00:00</h2>
+                    <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
                   </CardContent>
                 </Card>
               </Grid>
@@ -80,8 +79,7 @@ const Masonry = () => {
                 >
                   <CardContent align="center">
                     <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>Current Epoch</h3>
-                    {/* <h2 style={{ fontWeight: 'lighter' }}>{Number(currentEpoch)}</h2> */}
-                    <h2>0</h2>
+                    <h2 style={{ fontWeight: 'lighter' }}>{Number(currentEpoch)}</h2>
                   </CardContent>
                 </Card>
               </Grid>
@@ -94,8 +92,7 @@ const Masonry = () => {
                     <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>
                       WLRS Price<small> (TWAP)</small>
                     </h3>
-                    {/* <h2 style={{ fontWeight: 'lighter' }}>{scalingFactor} UST</h2> */}
-                    <h2 style={{ fontWeight: 'lighter' }}>0 UST</h2>
+                    <h2 style={{ fontWeight: 'lighter' }}>{scalingFactor} USDC</h2>
                   </CardContent>
                 </Card>
               </Grid>
@@ -106,8 +103,7 @@ const Masonry = () => {
                 >
                   <CardContent align="center">
                     <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>APR</h3>
-                    {/* <h2 style={{ fontWeight: 'lighter' }}>{masonryAPR.toFixed(2)}%</h2> */}
-                    <h2 style={{ fontWeight: 'lighter' }}>0%</h2>
+                    <h2 style={{ fontWeight: 'lighter' }}>{masonryAPR.toFixed(2)}%</h2>
                   </CardContent>
                 </Card>
               </Grid>
@@ -118,8 +114,7 @@ const Masonry = () => {
                 >
                   <CardContent align="center">
                     <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>Shares Staked</h3>
-                    {/* <h2 style={{ fontWeight: 'lighter' }}>{getDisplayBalance(totalStaked)}</h2> */}
-                    <h2 style={{ fontWeight: 'lighter' }}>0</h2>
+                    <h2 style={{ fontWeight: 'lighter' }}>{getDisplayBalance(totalStaked)}</h2>
                   </CardContent>
                 </Card>
               </Grid>

@@ -84,18 +84,18 @@ const CemeteryCard = ({ bank }) => {
             <TokenSymbol size={50} symbol={bank.depositTokenName} />
           </Box>
           <div className={classes.black}>
-            {bank.depositTokenName === 'SNOSHARE-JOE-LP'
-              ? 'WSHARE-UST-LP'
-              : bank.depositTokenName === 'SNO-JOE-LP'
-              ? 'WLRS-UST LP'
+            {bank.depositTokenName === 'WSHARE-USDC-LP'
+              ? 'WSHARE-USDC-LP'
+              : bank.depositTokenName === 'WLRS-USDC-LP'
+              ? 'WLRS-USDC LP'
               : ''}
           </div>
           <div className={classes.black}>
             Bond&nbsp;
-            {bank.depositTokenName === 'SNOSHARE-JOE-LP'
-              ? 'WSHARE-UST-LP'
-              : bank.depositTokenName === 'SNO-JOE-LP'
-              ? 'WLRS-UST LP'
+            {bank.depositTokenName === 'WSHARE-USDC-LP'
+              ? 'WSHARE-USDC-LP'
+              : bank.depositTokenName === 'WLRS-USDC-LP'
+              ? 'WLRS-USDC LP'
               : ''}
             <br />
             Earn WLRS
@@ -105,21 +105,20 @@ const CemeteryCard = ({ bank }) => {
       <CardActions>
         {approveStatus !== ApprovalState.APPROVED ? (
           <Button
-            // disabled={approveStatus !== ApprovalState.NOT_APPROVED}
+            disabled={approveStatus !== ApprovalState.NOT_APPROVED}
             variant="contained"
             color="primary"
             onClick={approve}
-            disabled
           >
             Approve{' '}
-            {bank.depositTokenName === 'SNOSHARE-JOE-LP'
-              ? 'WSHARE-UST-LP'
-              : bank.depositTokenName === 'SNO-JOE-LP'
-              ? 'WLRS-UST LP'
+            {bank.depositTokenName === 'WSHARE-USDC-LP'
+              ? 'WSHARE-USDC-LP'
+              : bank.depositTokenName === 'WLRS-USDC-LP'
+              ? 'WLRS-USDC LP'
               : ''}
           </Button>
         ) : (
-          <Button color="primary" size="small" variant="contained" onClick={onPresentDeposit} disabled>
+          <Button color="primary" size="small" variant="contained" onClick={onPresentDeposit}>
             Bond
           </Button>
         )}

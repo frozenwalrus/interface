@@ -37,7 +37,7 @@ interface StakeProps {
 const Stake: React.FC<StakeProps> = ({ bank }) => {
   const [approveStatus, approve] = useApprove(bank.depositToken, bank.address);
 
-  const { color: themeColor } = useContext(ThemeContext);
+  // const { color: themeColor } = useContext(ThemeContext);
   const tokenBalance = useTokenBalance(bank.depositToken);
   const stakedBalance = useStakedBalance(bank.contract, bank.poolId);
   const stakedTokenPriceInDollars = useStakedTokenPriceInDollars(bank.depositTokenName, bank.depositToken);
@@ -45,9 +45,9 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
     () => (stakedTokenPriceInDollars ? stakedTokenPriceInDollars : null),
     [stakedTokenPriceInDollars],
   );
-  const earnedInDollars = (
-    Number(tokenPriceInDollars) * Number(getDisplayBalance(stakedBalance, bank.depositToken.decimal))
-  ).toFixed(2);
+
+  const multiplier = bank.depositTokenName.includes('WLRS') || bank.depositTokenName.includes('WSHARE') ? 10**6 : 1;
+  const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(stakedBalance, bank.depositToken.decimal, bank.depositToken.decimal === 6 ? 3 : 9)) * multiplier).toFixed(2);
   const { onStake } = useStake(bank);
   const { onZap } = useZap(bank);
   const { onWithdraw } = useWithdraw(bank);
@@ -90,15 +90,16 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
     />,
   );
 
+  const stakedBalanceNumber = Number(getDisplayBalance(stakedBalance, bank.depositToken.decimal, bank.depositToken.decimal === 6 ? 3 : 9));
   return (
     <Card>
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
             <TokenSymbol symbol={bank.depositToken.symbol} size={100} />
-            <Value value={getDisplayBalance(stakedBalance, bank.depositToken.decimal)} />
-            <Label text={`≈ $${earnedInDollars}`} />
-            <Label text={`${bank.depositTokenName} Staked`} />
+            <Value value={'' + (stakedBalanceNumber < 1/10**4 ? stakedBalanceNumber * 10**6 + 'µ' : stakedBalanceNumber)} />
+            <Label color="#777" text={`≈ $${earnedInDollars}`} />
+            <Label color="#777" text={`${bank.depositTokenName === 'USDC' || bank.depositTokenName === 'USDT' ? bank.depositTokenName + '.e' : bank.depositTokenName} Staked`} />
           </StyledCardHeader>
           <StyledCardActions>
             {approveStatus !== ApprovalState.APPROVED ? (

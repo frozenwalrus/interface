@@ -43,27 +43,23 @@ const Harvest: React.FC = () => {
           <StyledCardContentInner>
             <StyledCardHeader>
               <TokenSymbol symbol="TOMB" />
-              {/* <Value value={getDisplayBalance(earnings)} /> */}
-              <Value value={'0'} />
-              {/* <Label text={`≈ $${earnedInDollars}`} /> */}
-              <Label text={'0'} />
-              <Label text="WLRS Earned" />
+              <Value value={getDisplayBalance(earnings)} />
+              <Label color="#777" text={`≈ $${earnedInDollars}`} />
+              <Label color="#777" text="WLRS Earned" />
             </StyledCardHeader>
             <StyledCardActions>
               <Button
                 onClick={onReward}
                 color="primary"
                 variant="contained"
-                // disabled={earnings.eq(0) || !canClaimReward}
-                disabled
+                disabled={earnings.eq(0) || !canClaimReward}
                 style={{ borderRadius: '15px', width: '250px' }}
               >
                 Claim Reward
               </Button>
             </StyledCardActions>
             <Button
-              // disabled={stakedBalance.eq(0) || (!canWithdraw && !canClaimReward)}
-              disabled
+              disabled={stakedBalance.eq(0) || (!canWithdraw && !canClaimReward)}
               onClick={onRedeem}
               color="primary"
               variant="contained"
@@ -80,10 +76,8 @@ const Harvest: React.FC = () => {
         ) : (
           <Card>
             <CardContent>
-              <Typography style={{ textAlign: 'center' }}>Claim possible in</Typography>
-              {/* <ProgressCountdown hideBar={true} base={from} deadline={to} description="Claim available in" /> */}
-              <h2>Claim available in</h2>
-              <h2>00:00:00</h2>
+              <Typography style={{ textAlign: 'center', color: '#000' }}>Claim possible in</Typography>
+              <ProgressCountdown hideBar={true} base={from} deadline={to} description="Claim available in" />
             </CardContent>
           </Card>
         )}

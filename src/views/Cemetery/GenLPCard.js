@@ -7,8 +7,8 @@ import TokenSymbol from '../../components/TokenSymbol';
 import useLpStats from '../../hooks/useLpStats';
 
 const GenLPCard = () => {
-  const tombFtmLpStats = useLpStats('SNO-JOE-LP');
-  const tShareFtmLpStats = useLpStats('SNOSHARE-JOE-LP');
+  const tombFtmLpStats = useLpStats('WLRS-USDC-LP');
+  const tShareFtmLpStats = useLpStats('WSHARE-USDC-LP');
   const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
   return (
@@ -16,10 +16,10 @@ const GenLPCard = () => {
       <Card>
         <CardContent align="center">
           <Typography variant="h5" component="h2">
-            SNO-JOE-LP
+            WLRS-USDC-LP
           </Typography>
           <Box mt={2}>
-            <TokenSymbol symbol="SNO-JOE-LP" />
+            <TokenSymbol symbol="WLRS-USDC-LP" />
           </Box>
           <Box mt={2}></Box>
           <Box mt={2}>
@@ -41,7 +41,7 @@ const GenLPCard = () => {
             style={{ width: '400px' }}
             variant="contained"
             component={Link}
-            to={`/farms/SnoJoeLPSnoShareRewardPool/`}
+            to={`/farms/WlrsUsdcLPWShareRewardPool/`}
           >
             View
           </Button>

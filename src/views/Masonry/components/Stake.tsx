@@ -38,7 +38,7 @@ const Stake: React.FC = () => {
   const stakedBalance = useStakedBalanceOnMasonry();
   const { from, to } = useUnstakeTimerMasonry();
 
-  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('HSHARE', tombFinance.TSHARE);
+  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('WSHARE', tombFinance.TSHARE);
   const tokenPriceInDollars = useMemo(
     () =>
       stakedTokenPriceInDollars
@@ -80,18 +80,15 @@ const Stake: React.FC = () => {
         <CardContent>
           <StyledCardContentInner>
             <StyledCardHeader>
-              <TokenSymbol symbol="HSHARE" />
-              {/* <Value value={getDisplayBalance(stakedBalance)} /> */}
-              <Value value={'0'} />
-              {/* <Label text={`≈ $${tokenPriceInDollars}`} /> */}
-              <Label text={`0`} />
-              <Label text={'WSHARE Staked'} />
+              <TokenSymbol symbol="WSHARE" />
+              <Value value={getDisplayBalance(stakedBalance)} />
+              <Label color="#777" text={`≈ $${tokenPriceInDollars}`} />
+              <Label color="#777" text={'WSHARE Staked'} />
             </StyledCardHeader>
             <StyledCardActions>
               {approveStatus !== ApprovalState.APPROVED ? (
                 <Button
-                  // disabled={approveStatus !== ApprovalState.NOT_APPROVED}
-                  disabled
+                  disabled={approveStatus !== ApprovalState.NOT_APPROVED}
                   variant="contained"
                   color="primary"
                   style={{ marginTop: '65px' }}
@@ -102,15 +99,11 @@ const Stake: React.FC = () => {
               ) : (
                 <>
                   <StyledCardActions2>
-                    <IconButton
-                      // disabled={!canWithdrawFromMasonry}
-                      disabled
-                      onClick={onPresentWithdraw}
-                    >
+                    <IconButton disabled={!canWithdrawFromMasonry} onClick={onPresentWithdraw}>
                       <RemoveIcon />
                     </IconButton>
                     <StyledActionSpacer />
-                    <IconButton onClick={onPresentDeposit} disabled>
+                    <IconButton onClick={onPresentDeposit}>
                       <AddIcon />
                     </IconButton>
                   </StyledCardActions2>
@@ -126,10 +119,8 @@ const Stake: React.FC = () => {
         ) : (
           <Card>
             <CardContent>
-              <Typography style={{ textAlign: 'center' }}>Withdraw possible in</Typography>
-              {/* <ProgressCountdown hideBar={true} base={from} deadline={to} description="Withdraw available in" /> */}
-              <h2>Withdraw available in</h2>
-              <h2>00:00:00</h2>
+              <Typography style={{ textAlign: 'center', color: '#000' }}>Withdraw possible in</Typography>
+              <ProgressCountdown hideBar={true} base={from} deadline={to} description="Withdraw available in" />
             </CardContent>
           </Card>
         )}

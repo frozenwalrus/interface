@@ -4,14 +4,28 @@ import { Bank, ContractName } from '../tomb-finance';
 
 const useBank = (contractName: ContractName): Bank => {
   const { banks } = useContext(BanksContext);
-  if (contractName === 'SnoShareJoeLPSnoShareRewardPool') {
-    return banks.find((bank) => bank.sectionInUI === 2 && bank.depositTokenName === 'SNOSHARE-JOE-LP');
-  } else if (contractName === 'SnoJoeLPSnoShareRewardPool') {
-    return banks.find((bank) => bank.sectionInUI === 2 && bank.depositTokenName === 'SNO-JOE-LP');
-  } else if (contractName === 'SnoSnoShareLPSnoShareRewardPool') {
-    return banks.find((bank) => bank.sectionInUI === 2 && bank.depositTokenName === 'SNO-SNOSHARE-LP');
-  } else if (contractName === 'SnoSnoShareRewardPool') {
-    return banks.find((bank) => bank.sectionInUI === 2 && bank.depositTokenName === 'SNO');
+  if (contractName === 'WlrsSnoGenesisRewardPool') {
+    return banks.find((bank) => bank.sectionInUI === 0 && bank.depositTokenName === 'SNO');
+  } else if (contractName === 'WlrsFoxGenesisRewardPool') {
+    return banks.find((bank) => bank.sectionInUI === 0 && bank.depositTokenName === 'FOX');
+  } else if (contractName === 'WlrsSnobondGenesisRewardPool') {
+    return banks.find((bank) => bank.sectionInUI === 0 && bank.depositTokenName === 'SNOBOND');
+  } else if (contractName === 'WlrsDibsGenesisRewardPool') {
+    return banks.find((bank) => bank.sectionInUI === 0 && bank.depositTokenName === 'DIBS');
+  } else if (contractName === 'WlrsAvaxGenesisRewardPool') {
+    return banks.find((bank) => bank.sectionInUI === 0 && bank.depositTokenName === 'WAVAX');
+  } else if (contractName === 'WlrsUsdcGenesisRewardPool') {
+    return banks.find((bank) => bank.sectionInUI === 0 && bank.depositTokenName === 'USDC');
+  } else if (contractName === 'WlrsGrapeGenesisRewardPool') {
+    return banks.find((bank) => bank.sectionInUI === 0 && bank.depositTokenName === 'GRAPE');
+  } else if (contractName === 'WlrsUsdtGenesisRewardPool') {
+    return banks.find((bank) => bank.sectionInUI === 0 && bank.depositTokenName === 'USDT');
+  }
+
+  if (contractName === 'WShareUsdcLPWShareRewardPool') {
+    return banks.find((bank) => bank.sectionInUI === 2 && bank.depositTokenName === 'WSHARE-USDC-LP');
+  } else if (contractName === 'WlrsUsdcLPWShareRewardPool') {
+    return banks.find((bank) => bank.sectionInUI === 2 && bank.depositTokenName === 'WLRS-USDC-LP');
   } else {
     return null;
   }

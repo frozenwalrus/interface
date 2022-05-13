@@ -12,13 +12,10 @@ const GenesisCard = () => {
         <Card>
           <CardContent align="center">
             <Typography variant="h5" component="h2">
-              SNO-JOE HLP
+            SNO
             </Typography>
             <Box mt={2}>
-              <TokenSymbol symbol="SNO-JOE-LP" />
-            </Box>
-            <Box mt={2}>
-              <span style={{ fontSize: '18px' }}>Multiplier: 10000x</span>
+              <TokenSymbol symbol="SNO" />
             </Box>
           </CardContent>
           <CardActions style={{ justifyContent: 'center' }}>
@@ -28,7 +25,7 @@ const GenesisCard = () => {
               style={{ width: '200px', height: '40px', marginBottom: '10%' }}
               variant="contained"
               component={Link}
-              to={`/farms/TombAvaxLPHShareRewardPool/`}
+              to={`/farms/WlrsSnoGenesisRewardPool/`}
             >
               Stake
             </Button>
@@ -39,13 +36,10 @@ const GenesisCard = () => {
         <Card>
           <CardContent align="center">
             <Typography variant="h5" component="h2">
-              JOE
+            FOX
             </Typography>
             <Box mt={2}>
-              <TokenSymbol symbol="SNO-JOE-LP" />
-            </Box>
-            <Box mt={2}>
-              <span style={{ fontSize: '18px' }}>Multiplier: 10000x</span>
+              <TokenSymbol symbol="FOX" />
             </Box>
           </CardContent>
           <CardActions style={{ justifyContent: 'center' }}>
@@ -55,7 +49,7 @@ const GenesisCard = () => {
               style={{ width: '200px', height: '40px', marginBottom: '10%' }}
               variant="contained"
               component={Link}
-              to={`/farms/TombAvaxLPHShareRewardPool/`}
+              to={`/farms/WlrsFoxGenesisRewardPool/`}
             >
               Stake
             </Button>
@@ -66,13 +60,10 @@ const GenesisCard = () => {
         <Card>
           <CardContent align="center">
             <Typography variant="h5" component="h2">
-              wXDAI
+              SNOBOND
             </Typography>
             <Box mt={2}>
-              <TokenSymbol symbol="SNOSHARE-JOE-LP" />
-            </Box>
-            <Box mt={2}>
-              <span style={{ fontSize: '18px' }}>Multiplier: 10000x</span>
+              <TokenSymbol symbol="SNOBOND" />
             </Box>
           </CardContent>
           <CardActions style={{ justifyContent: 'center' }}>
@@ -82,7 +73,7 @@ const GenesisCard = () => {
               style={{ width: '200px', height: '40px', marginBottom: '10%' }}
               variant="contained"
               component={Link}
-              to={`/farms/HshareAvaxLPHShareRewardPool/`}
+              to={`/farms/WlrsSnobondGenesisRewardPool/`}
             >
               Stake
             </Button>
@@ -93,13 +84,10 @@ const GenesisCard = () => {
         <Card>
           <CardContent align="center">
             <Typography variant="h5" component="h2">
-              wETH
+            DIBS
             </Typography>
             <Box mt={2}>
-              <TokenSymbol symbol="SNOSHARE-JOE-LP" />
-            </Box>
-            <Box mt={2}>
-              <span style={{ fontSize: '18px' }}>Multiplier: 10000x</span>
+              <TokenSymbol symbol="DIBS" />
             </Box>
           </CardContent>
           <CardActions style={{ justifyContent: 'center' }}>
@@ -109,7 +97,103 @@ const GenesisCard = () => {
               style={{ width: '200px', height: '40px', marginBottom: '10%' }}
               variant="contained"
               component={Link}
-              to={`/farms/HshareAvaxLPHShareRewardPool/`}
+              to={`/farms/WlrsDibsGenesisRewardPool/`}
+            >
+              Stake
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
+      <Grid item xs={12} sm={3}>
+        <Card>
+          <CardContent align="center">
+            <Typography variant="h5" component="h2">
+              wAVAX
+            </Typography>
+            <Box mt={2}>
+              <TokenSymbol symbol="WAVAX" />
+            </Box>
+          </CardContent>
+          <CardActions style={{ justifyContent: 'center' }}>
+            <Button
+              color="primary"
+              size="small"
+              style={{ width: '200px', height: '40px', marginBottom: '10%' }}
+              variant="contained"
+              component={Link}
+              to={`/farms/WlrsAvaxGenesisRewardPool/`}
+            >
+              Stake
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
+      <Grid item xs={12} sm={3}>
+        <Card>
+          <CardContent align="center">
+            <Typography variant="h5" component="h2">
+            USDC.e
+            </Typography>
+            <Box mt={2}>
+              <TokenSymbol symbol="USDC" />
+            </Box>
+          </CardContent>
+          <CardActions style={{ justifyContent: 'center' }}>
+            <Button
+              color="primary"
+              size="small"
+              style={{ width: '200px', height: '40px', marginBottom: '10%' }}
+              variant="contained"
+              component={Link}
+              to={`/farms/WlrsUsdcGenesisRewardPool/`}
+            >
+              Stake
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
+      <Grid item xs={12} sm={3}>
+        <Card>
+          <CardContent align="center">
+            <Typography variant="h5" component="h2">
+            GRAPE
+            </Typography>
+            <Box mt={2}>
+              <TokenSymbol symbol="GRAPE" />
+            </Box>
+          </CardContent>
+          <CardActions style={{ justifyContent: 'center' }}>
+            <Button
+              color="primary"
+              size="small"
+              style={{ width: '200px', height: '40px', marginBottom: '10%' }}
+              variant="contained"
+              component={Link}
+              to={`/farms/WlrsGrapeGenesisRewardPool/`}
+            >
+              Stake
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
+      <Grid item xs={12} sm={3}>
+        <Card>
+          <CardContent align="center">
+            <Typography variant="h5" component="h2">
+              USDT.e
+            </Typography>
+            <Box mt={2}>
+              <TokenSymbol symbol="USDT" />
+            </Box>
+          </CardContent>
+          <CardActions style={{ justifyContent: 'center' }}>
+            <Button
+              color="primary"
+              size="small"
+              style={{ width: '200px', height: '40px', marginBottom: '10%' }}
+              variant="contained"
+              component={Link}
+              to={`/farms/WlrsUsdtGenesisRewardPool/`}
             >
               Stake
             </Button>

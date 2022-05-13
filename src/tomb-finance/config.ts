@@ -1,5 +1,6 @@
 import { Deployments } from './deployments';
 import { ChainId } from '@traderjoe-xyz/sdk';
+// import { ChainId } from 'quickswap-sdk';
 
 export type Configuration = {
   chainId: ChainId;

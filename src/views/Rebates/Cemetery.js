@@ -112,7 +112,7 @@ const Cemetery = () => {
               </Grid>
               <Grid item>
                 <Alert variant="filled" severity="info" icon={false} style={{ textAlign: 'center' }}>
-                  WLRS rewards from bonds are vested for 3 days linearly.
+                  WLRS rewards from bonds are vested for 7 days linearly.
                 </Alert>
               </Grid>
               <Grid item container md={10} spacing={5} style={{ justifyContent: 'center' }}>
@@ -123,8 +123,7 @@ const Cemetery = () => {
                         WLRS Price <small>(TWAP)</small>
                       </Typography>
                       <Typography variant="h6" component="p">
-                        {/* {tombPriceInFTM ? tombPriceInFTM : '-.----'} UST */}
-                        0 UST
+                        {tombPriceInFTM ? tombPriceInFTM : '-.----'} USDC
                       </Typography>
                     </CardContent>
                   </Card>
@@ -136,8 +135,7 @@ const Cemetery = () => {
                         Bond Premium
                       </Typography>
                       <Typography variant="h6" component="p">
-                        {/* {rebateStats.bondPremium.toFixed(3)}% */}
-                        0%
+                        {rebateStats.bondPremium.toFixed(3)}%
                       </Typography>
                     </CardContent>
                   </Card>
@@ -145,7 +143,7 @@ const Cemetery = () => {
               </Grid>
               <Grid item>
                 <Typography variant="h3" style={{ textAlign: 'center', wordBreak: 'break-word' }}>
-                  Boundable assets
+                  Bondable assets
                 </Typography>
               </Grid>
               <Grid item container md={10} spacing={5} style={{ justifyContent: 'center' }}>
@@ -163,12 +161,10 @@ const Cemetery = () => {
                         WLRS Vesting
                       </Typography>
                       <Typography variant="h6" component="p">
-                        {/* {vested.toFixed(4)} Total Vested */}
-                        0 Total Vested
+                        {vested.toFixed(4)} Total Vested
                       </Typography>
                       <Typography variant="h6" component="p">
-                        {/* {claimable3omb.toFixed(4)} Claimable */}
-                        0 Claimable
+                        {claimable3omb.toFixed(4)} Claimable
                       </Typography>
                       <Button
                         color="primary"
@@ -176,7 +172,6 @@ const Cemetery = () => {
                         variant="contained"
                         onClick={claimTomb}
                         style={{ marginTop: '8px' }}
-                        disabled
                       >
                         CLAIM
                       </Button>

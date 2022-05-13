@@ -10,7 +10,7 @@ const useWithdrawFromMasonry = () => {
     (amount: string) => {
       handleTransactionReceipt(
         tombFinance.withdrawShareFromMasonry(amount),
-        `Withdraw ${amount} HSHARE from the boardroom`,
+        `Withdraw ${amount} WSHARE from the boardroom`,
       );
     },
     [tombFinance, handleTransactionReceipt],

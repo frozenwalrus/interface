@@ -18,7 +18,7 @@ const useFantomPrice = () => {
   return { price, marketCap, priceChange };
 
   async function getPrice() {
-    const { data } = await axios('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=joe');
+    const { data } = await axios('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=usd-coin-avalanche-bridged-usdc-e');
     setPrice(data[0].current_price);
     setMarketCap(data[0].market_cap);
     setPriceChange(data[0].price_change_percentage_24h);

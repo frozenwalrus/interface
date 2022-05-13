@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#e0e3bd',
     'background-color': 'transparent',
     padding: '30px',
-    marginBottom: '3rem',
+    // marginBottom: '3rem',
   },
   drawer: {
     width: 240,
@@ -128,9 +128,9 @@ const Nav = () => {
               <Link color="textPrimary" to="/bonds" className={classes.link}>
                 Bonds
               </Link>
-              <Link color="textPrimary" to="/rebates" className={classes.link}>
+              {/* <Link color="textPrimary" to="/rebates" className={classes.link}>
                 Rebates
-              </Link>
+              </Link> */}
               {/* <a
                 href="https://yieldwolf.finance/avalanche/snowy-owl/"
                 target="_blank"
@@ -147,9 +147,6 @@ const Nav = () => {
               >
                 Docs
               </a>
-              {/* <a href="https://arctic-fox.finance/" target="_blank" rel="noopener noreferrer" className={classes.link}>
-                ArcticFox
-              </a> */}
             </Box>
             <div
               style={{
@@ -218,23 +215,12 @@ const Nav = () => {
                 <Link color="textPrimary" to="/bonds" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Bonds</div>
                 </Link>
-                <Link color="textPrimary" to="/rebates" className={classes.link}>
+                {/* <Link color="textPrimary" to="/rebates" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Rebates</div>
-                </Link>
-                {/* <a 
-                  href="https://yieldwolf.finance/avalanche/snowy-owl/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={classes.link}
-                >
-                  Compound
-                </a> */}
-                <a href="https://snowyowlfinance.gitbook.io/" target="_blank" className={classes.link}>
+                </Link> */}
+                <a href="https://docs.frozenwalrus.finance/welcome" target="_blank" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Docs</div>
                 </a>
-                {/* <a href="https://arctic-fox.finance" target="_blank" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>ArcticFox</div>
-                </a> */}
                 <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <AccountButton text="Connect" />
                 </ListItem>
