@@ -956,7 +956,7 @@ export class TombFinance {
 
     let asset;
     let assetUrl;
-    if (assetName === 'TOMB') {
+    if (assetName === 'WLRS') {
       asset = this.TOMB;
       assetUrl = 'https://gateway.pinata.cloud/ipfs/QmVL6cK5iUmkfGhw41s4gCksHn4H4KoF2tnEin2fhbEMmQ';
     } else if (assetName === 'WSHARE') {
