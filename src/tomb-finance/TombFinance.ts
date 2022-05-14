@@ -297,7 +297,7 @@ export class TombFinance {
     const depositToken = bank.depositToken;
     const poolContract = this.contracts[bank.contract];
     const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
-    const stakeInPool = (await depositToken.balanceOf(bank.address))/*.mul(bank.depositTokenName.includes('USDC') ? 10**6 : 1)*/;
+    const stakeInPool = (await depositToken.balanceOf(bank.address)).mul(bank.depositTokenName.endsWith('USDC-LP') ? 10**6 : 1);
     const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal, depositToken.decimal === 6 ? 3 : 9));
     const stat = bank.earnTokenName === 'WLRS' ? await this.getTombStat() : await this.getShareStat();
     const tokenPerSecond = await this.getTokenPerSecond(
