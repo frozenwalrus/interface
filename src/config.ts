@@ -164,6 +164,28 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 2,
     closedForStaking: false,
   },
+  SnoJoeLPRebate: {
+    name: 'Bond WLRS-USDC-LP for WLRS',
+    poolId: 100,
+    sectionInUI: 3,
+    contract: 'TombAvaxLPHShareRewardPool',
+    depositTokenName: 'WLRS-USDC-LP',
+    earnTokenName: 'WLRS',
+    finished: false,
+    sort: 1,
+    closedForStaking: false,
+  },
+  SnoShareJoeLPRebate: {
+    name: 'Bond WSHARE-USDC-LP for WLRS',
+    poolId: 100,
+    sectionInUI: 3,
+    contract: 'TombAvaxLPHShareRewardPool',
+    depositTokenName: 'WSHARE-USDC-LP',
+    earnTokenName: 'WLRS',
+    finished: false,
+    sort: 2,
+    closedForStaking: false,
+  },
 };
 
 export default configurations[/*process.env.NODE_ENV || */'production'];
