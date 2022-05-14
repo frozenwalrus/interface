@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
 import { Button, Select, MenuItem, InputLabel, withStyles } from '@material-ui/core';
 // import Button from '../../../components/Button'
@@ -13,10 +13,11 @@ import Label from '../../../components/Label';
 import useLpStats from '../../../hooks/useLpStats';
 import useTokenBalance from '../../../hooks/useTokenBalance';
 import useTombFinance from '../../../hooks/useTombFinance';
-import { useWallet } from 'use-wallet';
+// import { useWallet } from 'use-wallet';
 import useApproveZapper, { ApprovalState } from '../../../hooks/useApproveZapper';
 import { TOMB_TICKER, TSHARE_TICKER, FTM_TICKER } from '../../../utils/constants';
 import { Alert } from '@material-ui/lab';
+// import { isCommunityResourcable } from '@ethersproject/providers';
 
 interface ZapProps extends ModalProps {
   onConfirm: (zapAsset: string, lpName: string, amount: string) => void;
@@ -26,13 +27,18 @@ interface ZapProps extends ModalProps {
 
 const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', decimals = 18 }) => {
   const tombFinance = useTombFinance();
-  const { balance } = useWallet();
-  const ftmBalance = (Number(balance) / 1e18).toFixed(4).toString();
+  // const { balance } = useWallet();
+  // const ftmBalance = (Number(balance) / 1e18).toFixed(4).toString();
+  const ftmBalanceVal = useTokenBalance(tombFinance.FTM);
+  useEffect(() => {
+    setZappingTokenBalance(getDisplayBalance(ftmBalanceVal, 6));
+  }, [ftmBalanceVal]);
+
   const tombBalance = useTokenBalance(tombFinance.TOMB);
   const tshareBalance = useTokenBalance(tombFinance.TSHARE);
   const [val, setVal] = useState('');
   const [zappingToken, setZappingToken] = useState(FTM_TICKER);
-  const [zappingTokenBalance, setZappingTokenBalance] = useState(ftmBalance);
+  const [zappingTokenBalance, setZappingTokenBalance] = useState(getDisplayBalance(ftmBalanceVal, 6));
   const [estimate, setEstimate] = useState({ token0: '0', token1: '0' }); // token0 will always be FTM in this case
   const [approveZapperStatus, approveZapper] = useApproveZapper(zappingToken);
   const tombFtmLpStats = useLpStats('WLRS-USDC-LP');
@@ -51,13 +57,16 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   const handleChangeAsset = (event: any) => {
     const value = event.target.value;
     setZappingToken(value);
-    setZappingTokenBalance(ftmBalance);
+    setZappingTokenBalance(getDisplayBalance(ftmBalanceVal, 6));
     if (event.target.value === TSHARE_TICKER) {
       setZappingTokenBalance(getDisplayBalance(tshareBalance, decimals));
     }
     if (event.target.value === TOMB_TICKER) {
       setZappingTokenBalance(getDisplayBalance(tombBalance, decimals));
     }
+    // if (event.target.value === FTM_TICKER) {
+    //   setZappingTokenBalance(ftmBalance);
+    // }
   };
 
   const handleChange = async (e: any) => {
@@ -82,19 +91,18 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
       <ModalTitle text={`Zap in ${tokenName}`} />
 
       <StyledActionSpacer />
-      <InputLabel style={{ color: '#F7F7F7' }} id="label">
+      <InputLabel style={{ color: 'black', marginBottom: '8px' }} id="label">
         Select asset to zap with
       </InputLabel>
       <Select
         onChange={handleChangeAsset}
-        style={{ color: '#F7F7F7' }}
+        style={{ color: 'black', borderBottom: '1px solid rgba(0, 0, 0, 0.15)', }}
         labelId="label"
         id="select"
         value={zappingToken}
       >
-        <StyledMenuItem value={FTM_TICKER}>AVAX</StyledMenuItem>
-        <StyledMenuItem value={TSHARE_TICKER}>WSHARE</StyledMenuItem>
-        <StyledMenuItem value={TOMB_TICKER}>TOMB</StyledMenuItem>
+        <StyledMenuItem value={FTM_TICKER}>{FTM_TICKER}</StyledMenuItem>
+        <StyledMenuItem value={tokenName.startsWith(TOMB_TICKER) ? TOMB_TICKER : TSHARE_TICKER}>{tokenName.startsWith(TOMB_TICKER) ? TOMB_TICKER : TSHARE_TICKER}</StyledMenuItem>
         {/* Tomb as an input for zapping will be disabled due to issues occuring with the Gatekeeper system */}
         {/* <StyledMenuItem value={TOMB_TICKER}>TOMB</StyledMenuItem> */}
       </Select>
@@ -105,7 +113,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         max={zappingTokenBalance}
         symbol={zappingToken}
       />
-      <Label text="Zap Estimations" />
+      <Label text="Zap Estimations" color='black' />
       <StyledDescriptionText>
         {' '}
         {tokenName}: {Number(estimate.token1) / Number(ftmAmountPerLP)}
@@ -152,13 +160,14 @@ const StyledDescriptionText = styled.div`
 const StyledMenuItem = withStyles({
   root: {
     backgroundColor: 'white',
-    color: '#2c2560',
+    color: 'black',
     '&:hover': {
       backgroundColor: 'grey',
-      color: '#2c2560',
+      color: 'black',
     },
     selected: {
       backgroundColor: 'black',
+      color: 'white',
     },
   },
 })(MenuItem);

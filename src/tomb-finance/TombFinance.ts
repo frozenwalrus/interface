@@ -16,8 +16,8 @@ import IUniswapV2PairABI from './IUniswapV2Pair.abi.json';
 import { /*config,*/ bankDefinitions } from '../config';
 import moment from 'moment';
 import { parseUnits } from 'ethers/lib/utils';
-import { FTM_TICKER, SPOOKY_ROUTER_ADDR, TOMB_TICKER } from '../utils/constants';
-import { CompareArrowsOutlined } from '@material-ui/icons';
+import { FTM_TICKER, SPOOKY_ROUTER_ADDR, TOMB_TICKER, TSHARE_TICKER } from '../utils/constants';
+// import { CompareArrowsOutlined } from '@material-ui/icons';
 // import { CompareArrowsOutlined, CompassCalibrationOutlined } from '@material-ui/icons';
 /**
  * An API module of Tomb Finance contracts.
@@ -1084,17 +1084,20 @@ export class TombFinance {
     const { zapper } = this.contracts;
     const lpToken = this.externalTokens[lpName];
     let estimate;
-    if (tokenName === FTM_TICKER) {
+    if (parseFloat(amount) === 0) {
+      return [0,0];
+    }
+    /*if (tokenName === FTM_TICKER) {
       estimate = await zapper.estimateZapIn(lpToken.address, SPOOKY_ROUTER_ADDR, parseUnits(amount, 18));
-    } else {
-      const token = tokenName === TOMB_TICKER ? this.TOMB : this.TSHARE;
+    } else {*/
+      const token = tokenName === TOMB_TICKER ? this.TOMB : tokenName === TSHARE_TICKER ? this.TSHARE : this.FTM;
       estimate = await zapper.estimateZapInToken(
         token.address,
         lpToken.address,
         SPOOKY_ROUTER_ADDR,
         parseUnits(amount, 18),
       );
-    }
+    /*}*/
     return [estimate[0] / 1e18, estimate[1] / 1e18];
   }
   async zapIn(tokenName: string, lpName: string, amount: string): Promise<TransactionResponse> {

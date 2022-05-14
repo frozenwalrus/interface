@@ -36,7 +36,7 @@ const CemeteryCard = () => {
               <Box>${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}</Box>
               <span style={{ fontSize: '12px' }}>
                 Liquidity: ${tombLPStats?.totalLiquidity ? tombLPStats.totalLiquidity : '-.--'} <br />
-                Total supply: {tombLPStats?.totalSupply ? (Number(tombLPStats.totalSupply) < 1/10**4 ? Number(tombLPStats.totalSupply) * 10**6 + 'µ' : tombLPStats.totalSupply) : '-.--'}
+                Total supply: {tombLPStats?.totalSupply ? (Number(tombLPStats.totalSupply) < 1/10**4 ? (Number(tombLPStats.totalSupply) * 10**6).toFixed(4) + 'µ' : tombLPStats.totalSupply) : '-.--'}
               </span>
             </div>
           </CardContent>
@@ -83,7 +83,7 @@ const CemeteryCard = () => {
               <span style={{ fontSize: '12px' }}>
                 Liquidity: ${tshareLPStats?.totalLiquidity ? tshareLPStats.totalLiquidity : '-.--'}
                 <br />
-                Total supply: {tshareLPStats?.totalSupply ? (Number(tshareLPStats.totalSupply) < 1/10**4 ? Number(tshareLPStats.totalSupply) * 10**6 + 'µ' : tshareLPStats.totalSupply) : '-.--'}
+                Total supply: {tshareLPStats?.totalSupply ? (Number(tshareLPStats.totalSupply) < 1/10**4 ? (Number(tshareLPStats.totalSupply) * 10**6).toFixed(4) + 'µ' : tshareLPStats.totalSupply) : '-.--'}
               </span>
             </div>
           </CardContent>

@@ -123,6 +123,16 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
                     <RemoveIcon />
                   </IconButton>
                   <StyledActionSpacer />
+                  {
+                    bank.depositTokenName !== 'WLRS-USDC-LP' &&  bank.depositTokenName !== 'WSHARE-USDC-LP'
+                      ? null
+                      : <IconButton
+                          disabled={bank.closedForStaking}
+                          onClick={() => (bank.closedForStaking ? null : onPresentZap())}
+                        >
+                          <FlashOnIcon style={{color: '#ccc'}} />
+                        </IconButton>
+                  }
                   <StyledActionSpacer />
                   <IconButton
                     disabled={bank.closedForStaking}
