@@ -439,15 +439,32 @@ export class TombFinance {
     for (const bankInfo of Object.values(bankDefinitions)) {
       const pool = this.contracts[bankInfo.contract];
       const token = this.externalTokens[bankInfo.depositTokenName];
-      const tokenPrice = await this.getDepositTokenPriceInDollars(bankInfo.depositTokenName, token);
-      const tokenAmountInPool = await token.balanceOf(pool.address);
-      const value = Number(getDisplayBalance(tokenAmountInPool, token.decimal)) * Number(tokenPrice);
-      const poolValue = Number.isNaN(value) ? 0 : value;
+      // const tokenPrice = await this.getDepositTokenPriceInDollars(bankInfo.depositTokenName, token);
+      // const tokenAmountInPool = await token.balanceOf(pool.address);
+
+      const [tokenPrice, tokenAmountInPool] = await Promise.all([
+        this.getDepositTokenPriceInDollars(bankInfo.depositTokenName, token),
+        token.balanceOf(pool.address)
+      ]);
+
+      const value = Number(getDisplayBalance(tokenAmountInPool, token.decimal, 6)) * Number(tokenPrice);
+      let poolValue = Number.isNaN(value) ? 0 : value;
+      if (bankInfo.depositTokenName.endsWith('-USDC-LP')) {
+        poolValue = poolValue * 10**6;
+      }
+
       totalValue += poolValue;
     }
 
-    const TSHAREPrice = (await this.getShareStat()).priceInDollars;
-    const masonrytShareBalanceOf = await this.TSHARE.balanceOf(this.currentMasonry().address);
+    // const TSHAREPrice = (await this.getShareStat()).priceInDollars;
+    // const masonrytShareBalanceOf = await this.TSHARE.balanceOf(this.currentMasonry().address);
+
+    const [shareStat, masonrytShareBalanceOf] = await Promise.all([
+      this.getShareStat(),
+      this.TSHARE.balanceOf(this.currentMasonry().address)
+    ]);
+
+    const TSHAREPrice = shareStat.priceInDollars;
     const masonryTVL = Number(getDisplayBalance(masonrytShareBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
 
     return totalValue + masonryTVL;
