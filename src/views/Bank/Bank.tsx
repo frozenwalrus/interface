@@ -48,7 +48,7 @@ const Bank: React.FC = () => {
         subtitle={`Deposit ${bank?.depositTokenName === 'USDC' || bank?.depositTokenName === 'USDT' ? bank?.depositTokenName + '.e' : bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
-      {bank?.depositTokenName === 'SNO' && Date.now() < 1646510400000 ? (
+      {bank?.depositTokenName === 'WLRS' && Date.now() < 1646510400000 ? (
         <Alert
           variant="filled"
           severity="info"
@@ -59,6 +59,17 @@ const Bank: React.FC = () => {
       ) : (
         <></>
       )}
+      {
+        bank?.depositTokenName.endsWith('-USDC-LP')
+        ? (
+            <Alert variant="filled" severity="info" style={{ marginTop: '-25px', marginBottom: '35px' }}>
+              Unstaking now will incur a tax. To read about how much refer to our{' '}
+              <a style={{ color: '#fff' }} href="https://docs.frozenwalrus.finance/protocol-information/taxes">
+              documentation.
+              </a>
+            </Alert>
+          ) : null
+      }
       <Box>
         <Grid container justify="center" spacing={3} style={{ marginBottom: '50px' }}>
           <Grid item xs={12} md={2} lg={3} className={classes.gridItem}>
