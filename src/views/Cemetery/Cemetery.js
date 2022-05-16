@@ -65,7 +65,15 @@ const Cemetery = () => {
                   <Typography variant="h4" gutterBottom style={{marginTop: '20px', color: '5#A381A'}}>
                     Genesis Pools
                   </Typography>
-                  
+                  {
+                    config.masonryLaunchesAt.getTime() < new Date().getTime()
+                      ? (
+                          <Alert variant="filled" severity="error" >
+                            Genesis pools have ended. Please claim all rewards and remove funds from Genesis pools.
+                          </Alert>
+                        )
+                      : null
+                  }
                   <Grid container spacing={3} style={{marginTop: '20px'}}>
                     <GenesisCard />
                   </Grid>
