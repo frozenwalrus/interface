@@ -311,14 +311,14 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>WLRS-USDC LP</h2>
+              <h2>WLRS-USDC.e LP</h2>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
                 <TokenSymbol size={50} symbol="WLRS-USDC-LP" />
               </div>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
                   {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} WLRS /{' '}
-                  {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} USDC
+                  {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} USDC.e
                 </span>
               </Box>
               <Box>${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}</Box>
@@ -332,14 +332,14 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>WSHARE-USDC LP</h2>
+              <h2>WSHARE-USDC.e LP</h2>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
                 <TokenSymbol size={50} symbol="WSHARE-USDC-LP" />
               </div>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
                   {tshareLPStats?.tokenAmount ? tshareLPStats?.tokenAmount : '-.--'} WSHARE /{' '}
-                  {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} USDC
+                  {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} USDC.e
                 </span>
               </Box>
               <Box>${tshareLPStats?.priceOfOne ? tshareLPStats.priceOfOne : '-.--'}</Box>

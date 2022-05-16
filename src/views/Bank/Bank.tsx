@@ -45,7 +45,7 @@ const Bank: React.FC = () => {
     <>
       <PageHeader
         icon="🏦"
-        subtitle={`Deposit ${bank?.depositTokenName === 'USDC' || bank?.depositTokenName === 'USDT' ? bank?.depositTokenName + '.e' : bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
+        subtitle={`Deposit ${bank?.depositTokenName === 'USDC' || bank?.depositTokenName === 'USDT' ? bank?.depositTokenName + '.e' : bank?.depositTokenName.replace('USDC', 'USDC.e')} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
       {bank?.depositTokenName === 'WLRS' && Date.now() < 1646510400000 ? (

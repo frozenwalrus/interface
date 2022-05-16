@@ -143,7 +143,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: false,
   },
   WlrsUsdcLPWShareRewardPool: {
-    name: 'Earn WSHARE by WLRS-USDC LP',
+    name: 'Earn WSHARE by WLRS-USDC.e LP',
     poolId: 0,
     sectionInUI: 2,
     contract: 'WlrsUsdcLPWShareRewardPool',
@@ -154,7 +154,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: false,
   },
   WShareUsdcLPWShareRewardPool: {
-    name: 'Earn WSHARE by WSHARE-USDC LP',
+    name: 'Earn WSHARE by WSHARE-USDC.e LP',
     poolId: 1,
     sectionInUI: 2,
     contract: 'WShareUsdcLPWShareRewardPool',
@@ -165,7 +165,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: false,
   },
   SnoJoeLPRebate: {
-    name: 'Bond WLRS-USDC-LP for WLRS',
+    name: 'Bond WLRS-USDC.e LP for WLRS',
     poolId: 100,
     sectionInUI: 3,
     contract: 'TombAvaxLPHShareRewardPool',
@@ -176,7 +176,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: false,
   },
   SnoShareJoeLPRebate: {
-    name: 'Bond WSHARE-USDC-LP for WLRS',
+    name: 'Bond WSHARE-USDC.e LP for WLRS',
     poolId: 100,
     sectionInUI: 3,
     contract: 'TombAvaxLPHShareRewardPool',

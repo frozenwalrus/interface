@@ -24,14 +24,14 @@ const CemeteryCard = () => {
           >
             <div>
               <Typography variant="h5" component="h2">
-                WLRS-USDC-LP
+                WLRS-USDC.e LP
               </Typography>
               <TokenSymbol size={60} symbol="WLRS-USDC-LP" />
             </div>
             <div>
               <span style={{ fontSize: '23px' }}>
                 {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} WLRS /{' '}
-                {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} USDC
+                {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} USDC.e
               </span>
               <Box>${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}</Box>
               <span style={{ fontSize: '12px' }}>
@@ -69,14 +69,14 @@ const CemeteryCard = () => {
           >
             <div>
               <Typography variant="h5" component="h2">
-                WSHARE-USDC-LP
+                WSHARE-USDC.e LP
               </Typography>
               <TokenSymbol size={60} symbol="WSHARE-USDC-LP" />
             </div>
             <div>
               <span style={{ fontSize: '23px' }}>
                 {tshareLPStats?.tokenAmount ? tshareLPStats?.tokenAmount : '-.--'} WSHARE /{' '}
-                {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} USDC
+                {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} USDC.e
               </span>
 
               <Box>${tshareLPStats?.priceOfOne ? tshareLPStats.priceOfOne : '-.--'}</Box>

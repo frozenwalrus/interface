@@ -16,7 +16,7 @@ const GenLPCard = () => {
       <Card>
         <CardContent align="center">
           <Typography variant="h5" component="h2">
-            WLRS-USDC-LP
+            WLRS-USDC.e LP
           </Typography>
           <Box mt={2}>
             <TokenSymbol symbol="WLRS-USDC-LP" />
@@ -24,8 +24,8 @@ const GenLPCard = () => {
           <Box mt={2}></Box>
           <Box mt={2}>
             <span style={{ fontSize: '26px' }}>
-              {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} SNO /{' '}
-              {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} JOE
+              {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} WLRS /{' '}
+              {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} USDC.e
             </span>
           </Box>
           <Box>${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}</Box>
