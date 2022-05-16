@@ -113,7 +113,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         max={zappingTokenBalance}
         symbol={zappingToken}
       />
-      <Label text="Zap Estimations" color='black' />
+      {/* <Label text="Zap Estimations" color='black' />
       <StyledDescriptionText>
         {' '}
         {tokenName}: {Number(estimate.token1) / Number(ftmAmountPerLP)}
@@ -122,7 +122,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         {' '}
         ({Number(estimate.token0)} {FTM_TICKER} / {Number(estimate.token1)}{' '}
         {tokenName.startsWith(TOMB_TICKER) ? TOMB_TICKER : TSHARE_TICKER}){' '}
-      </StyledDescriptionText>
+      </StyledDescriptionText> */}
       <ModalActions>
         <Button
           color="primary"
