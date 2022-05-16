@@ -66,7 +66,7 @@ const Cemetery = () => {
                     Genesis Pools
                   </Typography>
                   {
-                    config.masonryLaunchesAt.getTime() < new Date().getTime()
+                    config.baseLaunchDate.getTime() + 48 * 60 * 60 * 1000 < new Date().getTime()
                       ? (
                           <Alert variant="filled" severity="error" >
                             Genesis pools have ended. Please claim all rewards and remove funds from Genesis pools.
