@@ -5,6 +5,8 @@ import Card from '../../components/Card';
 
 import TokenSymbol from '../../components/TokenSymbol';
 import useLpStats from '../../hooks/useLpStats';
+import useBank from '../../hooks/useBank';
+import useStatsForPool from '../../hooks/useStatsForPool';
 // import useCashStat from '../../hooks/useCashPriceInEstimatedTWAP.ts';
 
 const CemeteryCard = () => {
@@ -13,6 +15,13 @@ const CemeteryCard = () => {
   // const snoSnoShareLpStats = useLpStats('SNO-SNOSHARE-LP');
   const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
+
+  const tombBank = useBank('WlrsUsdcLPWShareRewardPool');
+  const tombStatsOnPool = useStatsForPool(tombBank);
+
+  const tShareBank = useBank('WShareUsdcLPWShareRewardPool');
+  const tShareStatsOnPool = useStatsForPool(tShareBank);
+
   // const snoSnoShareLPStats = useMemo(() => (snoSnoShareLpStats ? snoSnoShareLpStats : null), [snoSnoShareLpStats]);
   // const snoPrice = useCashStat();
   return (
@@ -36,7 +45,8 @@ const CemeteryCard = () => {
               <Box>${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}</Box>
               <span style={{ fontSize: '12px' }}>
                 Liquidity: ${tombLPStats?.totalLiquidity ? tombLPStats.totalLiquidity : '-.--'} <br />
-                Total supply: {tombLPStats?.totalSupply ? (Number(tombLPStats.totalSupply) < 1/10**4 ? (Number(tombLPStats.totalSupply) * 10**6).toFixed(4) + 'µ' : tombLPStats.totalSupply) : '-.--'}
+                Total supply: {tombLPStats?.totalSupply ? (Number(tombLPStats.totalSupply) < 1/10**4 ? (Number(tombLPStats.totalSupply) * 10**6).toFixed(4) + 'µ' : tombLPStats.totalSupply) : '-.--'} <br />
+                APR: {tombStatsOnPool?.yearlyAPR ? tombStatsOnPool?.yearlyAPR : '----.--'}%
               </span>
             </div>
           </CardContent>
@@ -81,9 +91,9 @@ const CemeteryCard = () => {
 
               <Box>${tshareLPStats?.priceOfOne ? tshareLPStats.priceOfOne : '-.--'}</Box>
               <span style={{ fontSize: '12px' }}>
-                Liquidity: ${tshareLPStats?.totalLiquidity ? tshareLPStats.totalLiquidity : '-.--'}
-                <br />
-                Total supply: {tshareLPStats?.totalSupply ? (Number(tshareLPStats.totalSupply) < 1/10**4 ? (Number(tshareLPStats.totalSupply) * 10**6).toFixed(4) + 'µ' : tshareLPStats.totalSupply) : '-.--'}
+                Liquidity: ${tshareLPStats?.totalLiquidity ? tshareLPStats.totalLiquidity : '-.--'} <br />
+                Total supply: {tshareLPStats?.totalSupply ? (Number(tshareLPStats.totalSupply) < 1/10**4 ? (Number(tshareLPStats.totalSupply) * 10**6).toFixed(4) + 'µ' : tshareLPStats.totalSupply) : '-.--'} <br />
+                APR: {tShareStatsOnPool?.yearlyAPR ? tShareStatsOnPool?.yearlyAPR : '----.--'}%
               </span>
             </div>
           </CardContent>
