@@ -80,7 +80,7 @@ const Bond: React.FC = () => {
     async (amount: string) => {
       const tx = await grapeFinance.sendTomb(amount, raffleAddress);
       addTransaction(tx, {
-        summary: `Send ${Number(amount).toFixed(2)} SNO to the raffle ${amount} `,
+        summary: `Send ${Number(amount).toFixed(2)} WLRS to the raffle ${amount} `,
       });
     },
     [grapeFinance, addTransaction],

@@ -62,7 +62,7 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
 
   function formatOutAmount() {
     const outAmount = getOutAmount();
-    return `Receiving: ${outAmount.toFixed(4)} SNO ($${(outAmount * rebateStats.tombPrice * ftmPrice).toFixed(2)})`;
+    return `Receiving: ${outAmount.toFixed(4)} WLRS ($${(outAmount * rebateStats.tombPrice * ftmPrice).toFixed(2)})`;
   }
 
   function formatInAmount() {
@@ -82,7 +82,7 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
       <StyledMaxText style={{ marginTop: '14px', color: 'white' }}>{formatInAmount()}</StyledMaxText>
       <StyledMaxText style={{ color: 'white' }}>{formatOutAmount()}</StyledMaxText>
       <StyledMaxText style={{ color: 'white' }}>
-        {rebateStats.tombAvailable > 0 ? `${rebateStats.tombAvailable.toFixed(4)} SNO Available` : 'Bond Sold Out'}
+        {rebateStats.tombAvailable > 0 ? `${rebateStats.tombAvailable.toFixed(4)} WLRS Available` : 'Bond Sold Out'}
       </StyledMaxText>
       <ModalActions>
         <Button
