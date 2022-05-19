@@ -88,7 +88,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
 
   return (
     <Modal>
-      <ModalTitle text={`Zap in ${tokenName}`} />
+      <ModalTitle text={`Zap in ${tokenName.replace('USDC', 'USDC.e')}`} />
 
       <StyledActionSpacer />
       <InputLabel style={{ color: 'black', marginBottom: '8px' }} id="label">
@@ -101,7 +101,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         id="select"
         value={zappingToken}
       >
-        <StyledMenuItem value={FTM_TICKER}>{FTM_TICKER}</StyledMenuItem>
+        <StyledMenuItem value={FTM_TICKER}>{'USDC.e'}</StyledMenuItem>
         <StyledMenuItem value={tokenName.startsWith(TOMB_TICKER) ? TOMB_TICKER : TSHARE_TICKER}>{tokenName.startsWith(TOMB_TICKER) ? TOMB_TICKER : TSHARE_TICKER}</StyledMenuItem>
         {/* Tomb as an input for zapping will be disabled due to issues occuring with the Gatekeeper system */}
         {/* <StyledMenuItem value={TOMB_TICKER}>TOMB</StyledMenuItem> */}
