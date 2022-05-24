@@ -92,7 +92,7 @@ const Masonry = () => {
                     <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>
                       WLRS Price<small> (TWAP)</small>
                     </h3>
-                    <h2 style={{ fontWeight: 'lighter' }}>{scalingFactor} USDC</h2>
+                    <h2 style={{ fontWeight: 'lighter' }}>{scalingFactor} USDC.e</h2>
                   </CardContent>
                 </Card>
               </Grid>

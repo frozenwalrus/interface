@@ -1120,21 +1120,21 @@ export class TombFinance {
   async zapIn(tokenName: string, lpName: string, amount: string): Promise<TransactionResponse> {
     const { zapper } = this.contracts;
     const lpToken = this.externalTokens[lpName];
-    if (tokenName === FTM_TICKER) {
+    /*if (tokenName === FTM_TICKER) {
       let overrides = {
         value: parseUnits(amount, 18),
       };
       return await zapper.zapIn(lpToken.address, SPOOKY_ROUTER_ADDR, this.myAccount, overrides);
-    } else {
-      const token = tokenName === TOMB_TICKER ? this.TOMB : this.TSHARE;
+    } else {*/
+      const token = tokenName === TOMB_TICKER ? this.TOMB : (tokenName === TSHARE_TICKER ? this.TSHARE : tokenName === FTM_TICKER ? this.FTM : null);
       return await zapper.zapInToken(
         token.address,
-        parseUnits(amount, 18),
+        parseUnits(amount, token.decimal),
         lpToken.address,
         SPOOKY_ROUTER_ADDR,
         this.myAccount,
       );
-    }
+    /*}*/
   }
   async swapTBondToTShare(tbondAmount: BigNumber): Promise<TransactionResponse> {
     const { TShareSwapper } = this.contracts;
@@ -1166,5 +1166,15 @@ export class TombFinance {
       // tsharePrice: tsharePriceBN.toString(),
       rateTSharePerTomb: rateTSharePerTombBN.toString(),
     };
+  }
+
+  async rebatesBond(token: string, amount: string): Promise<TransactionResponse> {
+    const { RebateTreasury } = this.contracts;
+    return await RebateTreasury.bond(token, amount);
+  }
+
+  async rebatesClaim(): Promise<TransactionResponse> {
+    const { RebateTreasury } = this.contracts;
+    return await RebateTreasury.claimRewards();
   }
 }

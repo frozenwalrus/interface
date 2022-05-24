@@ -62,16 +62,16 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
 
   function formatOutAmount() {
     const outAmount = getOutAmount();
-    return `Receiving: ${outAmount.toFixed(4)} WLRS ($${(outAmount * rebateStats.tombPrice * ftmPrice).toFixed(2)})`;
+    return `Receiving: ${outAmount.toFixed(4)} WLRS ($${(outAmount * rebateStats.tombPrice * ftmPrice).toFixed(4)})`;
   }
 
   function formatInAmount() {
-    return `Input: ${(+val).toFixed(4)} ${tokenName} ($${(+val * getAssetPrice(tokenName) * ftmPrice).toFixed(2)})`;
+    return `Input: ${(+val).toFixed(9)} ${tokenName.replace('USDC', 'USDC.e')} ($${(+val * getAssetPrice(tokenName) * ftmPrice).toFixed(4)})`;
   }
 
   return (
     <Modal>
-      <ModalTitle text={`Bond ${tokenName}`} />
+      <ModalTitle text={`Bond ${tokenName.replace('USDC', 'USDC.e')}`} />
       <TokenInput
         value={val}
         onSelectMax={handleSelectMax}
@@ -79,14 +79,14 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
         max={fullBalance}
         symbol={tokenName}
       />
-      <StyledMaxText style={{ marginTop: '14px', color: 'white' }}>{formatInAmount()}</StyledMaxText>
-      <StyledMaxText style={{ color: 'white' }}>{formatOutAmount()}</StyledMaxText>
-      <StyledMaxText style={{ color: 'white' }}>
+      <StyledMaxText style={{ marginTop: '14px', color: 'black' }}>{formatInAmount()}</StyledMaxText>
+      <StyledMaxText style={{ color: 'black' }}>{formatOutAmount()}</StyledMaxText>
+      <StyledMaxText style={{ color: 'black' }}>
         {rebateStats.tombAvailable > 0 ? `${rebateStats.tombAvailable.toFixed(4)} WLRS Available` : 'Bond Sold Out'}
       </StyledMaxText>
       <ModalActions>
         <Button
-          color={getOutAmount() < rebateStats.tombAvailable ? 'primary' : 'secondary'}
+          color={getOutAmount() < rebateStats.tombAvailable ? 'secondary' : 'primary'}
           variant="contained"
           disabled={getOutAmount() >= rebateStats.tombAvailable}
           onClick={() => onConfirm(+val)}

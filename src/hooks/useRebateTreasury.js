@@ -379,8 +379,8 @@ const ERC20ABI = [
 ];
 
 const web3 = new Web3('https://api.avax.network/ext/bc/C/rpc');
-const RebateTreasury = new web3.eth.Contract(RebateTreasuryABI, '0x395908aeb53d33A9B8ac35e148E9805D34A555D3');
-const Threeomb = new web3.eth.Contract(ERC20ABI, '0x1e5387046D2E3FBa4B7E3839d59c99338Cd42fea');
+const RebateTreasury = new web3.eth.Contract(RebateTreasuryABI, '0xB1c1bb7Ed164127Aee8c1690A70922d12FF0A737');
+const Threeomb = new web3.eth.Contract(ERC20ABI, '0x395908aeb53d33A9B8ac35e148E9805D34A555D3');
 
 const assetList = [
   '0x82845B52b53c80595bbF78129126bD3E6Fc2C1DF', // WLRS-USDC-PL
@@ -390,7 +390,7 @@ const assetList = [
 ];
 
 function useRebateTreasury() {
-  const [tombPrice, setTombPrice] = useState(0);
+  const [tombPrice, setTombPrice] = useState(1);
   const [tombAvailable, setTombAvailable] = useState(0);
   const [bondPremium, setBondPremium] = useState(0);
   const [bondVesting, setBondVesting] = useState(0);

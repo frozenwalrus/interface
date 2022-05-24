@@ -16,8 +16,12 @@ import { createGlobalStyle } from 'styled-components';
 import useBanks from '../../hooks/useBanks';
 import useRebateTreasury from '../../hooks/useRebateTreasury';
 import useTombStats from '../../hooks/useTombStats';
+import useRebates from '../../hooks/useRebates';
+
 import CemeteryImage from '../../assets/img/SVG_Icons_and_web_bg/bg.svg';
 import Card from '../../components/Card';
+
+import useTombFinance from '../../hooks/useTombFinance';
 
 const web3 = new Web3();
 const BN = (n) => new web3.utils.BN(n);
@@ -54,11 +58,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Cemetery = () => {
+  const tombFinance = useTombFinance();
   const classes = useStyles();
   const [banks] = useBanks();
   const { path } = useRouteMatch();
   const { account } = useWallet();
   const tombStats = useTombStats();
+  const { onClaim } = useRebates();
   const activeBanks = banks.filter((bank) => !bank.finished);
 
   const tombPriceInFTM = useMemo(() => (tombStats ? Number(tombStats.tokenInFtm).toFixed(4) : null), [tombStats]);
@@ -75,7 +81,7 @@ const Cemetery = () => {
 
   async function updateVesting() {
     if (!window.ethereum) return;
-    const address = (await window.ethereum.request({ method: 'eth_accounts' }))[0];
+    const address = tombFinance.myAccount;// (await window.ethereum.request({ method: 'eth_accounts' }))[0];
     if (!address) return;
 
     const claimable = await rebateStats.RebateTreasury.methods.claimableTomb(address).call();
@@ -86,18 +92,20 @@ const Cemetery = () => {
 
   async function claimTomb() {
     if (!window.ethereum) return;
-    const address = (await window.ethereum.request({ method: 'eth_accounts' }))[0];
+    const address = tombFinance.myAccount; // (await window.ethereum.request({ method: 'eth_accounts' }))[0];
     if (!address) return;
-    window.ethereum.request({
-      method: 'eth_sendTransaction',
-      params: [
-        {
-          from: address,
-          to: rebateStats.RebateTreasury._address,
-          data: rebateStats.RebateTreasury.methods.claimRewards().encodeABI(),
-        },
-      ],
-    });
+
+    onClaim();
+    // window.ethereum.request({
+    //   method: 'eth_sendTransaction',
+    //   params: [
+    //     {
+    //       from: address,
+    //       to: rebateStats.RebateTreasury._address,
+    //       data: rebateStats.RebateTreasury.methods.claimRewards().encodeABI(),
+    //     },
+    //   ],
+    // });
   }
 
   return (
@@ -123,7 +131,7 @@ const Cemetery = () => {
                         WLRS Price <small>(TWAP)</small>
                       </Typography>
                       <Typography variant="h6" component="p">
-                        {tombPriceInFTM ? tombPriceInFTM : '-.----'} USDC
+                        {tombPriceInFTM ? tombPriceInFTM : '-.----'} USDC.e
                       </Typography>
                     </CardContent>
                   </Card>

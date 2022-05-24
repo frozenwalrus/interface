@@ -11,7 +11,7 @@ const useZap = (bank: Bank) => {
     (zappingToken: string, tokenName: string, amount: string) => {
       handleTransactionReceipt(
         tombFinance.zapIn(zappingToken, tokenName, amount),
-        `Zap ${amount} in ${bank.depositTokenName}.`,
+        `Zap ${amount} in ${bank.depositTokenName.replace('USDC', 'USDC.e')}.`,
       );
     },
     [bank, tombFinance, handleTransactionReceipt],

@@ -3,6 +3,7 @@ import { Box, Button, Card, CardActions, CardContent } from '@material-ui/core';
 import useRebateTreasury from '../../hooks/useRebateTreasury';
 import useApprove, { ApprovalState } from '../../hooks/useApprove';
 import useModal from '../../hooks/useModal';
+import useRebates from '../../hooks/useRebates';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import DepositModal from './components/DepositModal';
 import useTombFinance from '../../hooks/useTombFinance';
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CemeteryCard = ({ bank }) => {
+  const { onBond } = useRebates();
   const tombFinance = useTombFinance();
   const classes = useStyles();
 
@@ -27,7 +29,7 @@ const CemeteryCard = ({ bank }) => {
 
   const [approveStatus, approve] = useApprove(
     tombFinance.externalTokens[bank.depositTokenName],
-    '0xf211F94Ec24344C00480Ada131bc51A219A96fb1',
+    '0xB1c1bb7Ed164127Aee8c1690A70922d12FF0A737',
   );
 
   const tokenBalance = useTokenBalance(tombFinance.externalTokens[bank.depositTokenName]);
@@ -37,23 +39,27 @@ const CemeteryCard = ({ bank }) => {
       max={tokenBalance}
       onConfirm={async (value) => {
         if (!window.ethereum) return;
-        const account = (await window.ethereum.request({ method: 'eth_accounts' }))[0];
+        const account = tombFinance.myAccount; //(await window.ethereum.request({ method: 'eth_accounts' }))[0];
         if (!account) return;
-        window.ethereum.request({
-          method: 'eth_sendTransaction',
-          params: [
-            {
-              from: account,
-              to: rebateStats.RebateTreasury._address,
-              data: rebateStats.RebateTreasury.methods
-                .bond(
-                  tombFinance.externalTokens[bank.depositTokenName].address,
-                  BN(Math.floor(value * 10000)).mul(BN(10).pow(BN(14))),
-                )
-                .encodeABI(),
-            },
-          ],
-        });
+
+        const amount = BN(Math.floor(value * 10000 * 10**12)).mul(BN(10).pow(BN(14))).div(BN(10).pow(BN(12))).toString();
+        onBond(tombFinance.externalTokens[bank.depositTokenName].address, amount);
+        // console.log(account, tombFinance.externalTokens[bank.depositTokenName].address, rebateStats.RebateTreasury._address);
+        // window.ethereum.request({
+        //   method: 'eth_sendTransaction',
+        //   params: [
+        //     {
+        //       from: account,
+        //       to: rebateStats.RebateTreasury._address,
+        //       data: rebateStats.RebateTreasury.methods
+        //         .bond(
+        //           tombFinance.externalTokens[bank.depositTokenName].address,
+        //           BN(Math.floor(value * 10000 * 10**12)).mul(BN(10).pow(BN(14))).div(BN(10).pow(BN(12))),
+        //         )
+        //         .encodeABI(),
+        //     },
+        //   ],
+        // });
       }}
       tokenName={bank.depositTokenName}
       token={rebateStats.assets.find(
@@ -83,20 +89,11 @@ const CemeteryCard = ({ bank }) => {
           >
             <TokenSymbol size={50} symbol={bank.depositTokenName} />
           </Box>
+          {/* <div className={classes.black}>
+            {bank.depositTokenName.replace('USDC', 'USDC.e')}
+          </div> */}
           <div className={classes.black}>
-            {bank.depositTokenName === 'WSHARE-USDC-LP'
-              ? 'WSHARE-USDC-LP'
-              : bank.depositTokenName === 'WLRS-USDC-LP'
-              ? 'WLRS-USDC LP'
-              : ''}
-          </div>
-          <div className={classes.black}>
-            Bond&nbsp;
-            {bank.depositTokenName === 'WSHARE-USDC-LP'
-              ? 'WSHARE-USDC-LP'
-              : bank.depositTokenName === 'WLRS-USDC-LP'
-              ? 'WLRS-USDC LP'
-              : ''}
+            Bond&nbsp;{bank.depositTokenName.replace('USDC', 'USDC.e')}
             <br />
             Earn WLRS
           </div>
@@ -112,9 +109,9 @@ const CemeteryCard = ({ bank }) => {
           >
             Approve{' '}
             {bank.depositTokenName === 'WSHARE-USDC-LP'
-              ? 'WSHARE-USDC-LP'
+              ? 'WSHARE-USDC.e LP'
               : bank.depositTokenName === 'WLRS-USDC-LP'
-              ? 'WLRS-USDC LP'
+              ? 'WLRS-USDC.e LP'
               : ''}
           </Button>
         ) : (
