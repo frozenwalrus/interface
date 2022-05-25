@@ -379,7 +379,7 @@ const ERC20ABI = [
 ];
 
 const web3 = new Web3('https://api.avax.network/ext/bc/C/rpc');
-const RebateTreasury = new web3.eth.Contract(RebateTreasuryABI, '0xB1c1bb7Ed164127Aee8c1690A70922d12FF0A737');
+const RebateTreasury = new web3.eth.Contract(RebateTreasuryABI, '0x242668533415aAe767Dc2144D451cda3F997ba09');
 const Threeomb = new web3.eth.Contract(ERC20ABI, '0x395908aeb53d33A9B8ac35e148E9805D34A555D3');
 
 const assetList = [

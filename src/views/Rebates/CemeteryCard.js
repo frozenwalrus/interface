@@ -29,7 +29,7 @@ const CemeteryCard = ({ bank }) => {
 
   const [approveStatus, approve] = useApprove(
     tombFinance.externalTokens[bank.depositTokenName],
-    '0xB1c1bb7Ed164127Aee8c1690A70922d12FF0A737',
+    '0x242668533415aAe767Dc2144D451cda3F997ba09',
   );
 
   const tokenBalance = useTokenBalance(tombFinance.externalTokens[bank.depositTokenName]);
@@ -42,7 +42,12 @@ const CemeteryCard = ({ bank }) => {
         const account = tombFinance.myAccount; //(await window.ethereum.request({ method: 'eth_accounts' }))[0];
         if (!account) return;
 
-        const amount = BN(Math.floor(value * 10000 * 10**12)).mul(BN(10).pow(BN(14))).div(BN(10).pow(BN(12))).toString();
+        let amountBN = BN(Math.floor(value * 10000 * 10**12).toString()).mul(BN(10).pow(BN(14))).div(BN(10).pow(BN(12)));
+        if (18 - tombFinance.externalTokens[bank.depositTokenName].decimal > 0) {
+          amountBN = amountBN.div(BN(10).pow(BN(18 - tombFinance.externalTokens[bank.depositTokenName].decimal)));
+        }
+
+        const amount = amountBN.toString();
         onBond(tombFinance.externalTokens[bank.depositTokenName].address, amount);
         // console.log(account, tombFinance.externalTokens[bank.depositTokenName].address, rebateStats.RebateTreasury._address);
         // window.ethereum.request({
