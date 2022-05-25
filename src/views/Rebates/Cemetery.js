@@ -162,7 +162,7 @@ const Cemetery = () => {
                       <CemeteryCard bank={bank} className={classes.gridCard} />
                     </Grid>
                   ))}
-                <Grid item xs={12} sm={8} md={6}>
+                <Grid item xs={12} sm={10} md={8}>
                   <Card>
                     <CardContent align="center">
                       <Typography variant="h5" component="p">
