@@ -208,6 +208,28 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 4,
     closedForStaking: false,
   },
+  PegLPNode: {
+    name: 'Generate WLRS-USDC LP with Nodes',
+    poolId: 0,
+    sectionInUI: 4,
+    contract: 'PegLPNode',
+    depositTokenName: 'WLRS-USDC-LP',
+    earnTokenName: 'WLRS-USDC-LP',
+    finished: false,
+    sort: 6,
+    closedForStaking: false
+   },
+   ShareLPNode: {
+    name: 'Generate WSHARE-USDC LP with Nodes',
+    poolId: 0,
+    sectionInUI: 4,
+    contract: 'ShareLPNode',
+    depositTokenName: 'WSHARE-USDC-LP',
+    earnTokenName: 'WSHARE-USDC-LP',
+    finished: false,
+    sort: 6,
+    closedForStaking: false
+   }
 };
 
 export default configurations[/*process.env.NODE_ENV || */'production'];
