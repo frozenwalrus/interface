@@ -76,7 +76,7 @@ const SnowyNode = () => {
                           <b style={{ color: '#fff', marginRight: '0px' }}>
                             {nodes[0].toString()}
                           </b> |  <b style={{ color: '#fff', marginRight: '0px' }}>
-                             ${(nodes[0] * (tokenPriceInDollars*getDisplayBalance(nodePrice, bank.depositToken.decimal, 1))).toFixed(0)}
+                             ${(nodes[0] * (tokenPriceInDollars*getDisplayBalance(nodePrice, 12, 1))).toFixed(0)}
                           </b>
                          
                         </>
@@ -90,7 +90,7 @@ const SnowyNode = () => {
               <Card className={classes.gridItem} style={{background: '#161414', borderRadius: '15px', height: '100px' }}>
                 <CardContent style={{textAlign: 'center'}}>
                   <Typography style={{color: '#5686d6'}}>Amount Claimed</Typography>
-                  <Typography>{(Number(userDetails.total_claims)/1e18).toFixed(2)} {bank.earnTokenName}</Typography>
+                  <Typography>{(Number(userDetails.total_claims)/1e18).toFixed(10)} </Typography>
                 </CardContent>
               </Card>
             </Grid>
@@ -98,7 +98,7 @@ const SnowyNode = () => {
               <Card className={classes.gridItem} style={{background: '#161414', borderRadius: '15px', height: '100px' }}>
                 <CardContent style={{textAlign: 'center'}}>
                   <Typography style={{color: '#5686d6'}}>Max Possible Pay</Typography>
-                  <Typography>{Number(max)/1e18} {bank.earnTokenName}</Typography>
+                  <Typography>{Number(max)/1e18} </Typography>
                 </CardContent>
               </Card>
             </Grid>
@@ -113,7 +113,7 @@ const SnowyNode = () => {
             <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
               <Card className={classes.gridItem} style={{background: '#161414', borderRadius: '15px', height: '100px' }}>
                 <CardContent style={{textAlign: 'center'}}>
-                  <Typography style={{color: '#5686d6'}}>Total {bank.earnTokenName} Nodes</Typography>
+                  <Typography style={{color: '#5686d6'}}>Total Nodes</Typography>
                   <Typography>{Number(total[0])}</Typography>
                 </CardContent>
               </Card>

@@ -74,7 +74,7 @@ const DepositModal = ({ bank, max, decimals, onConfirm, onDismiss, tokenName = '
         <div style={{ margin: 'auto auto' }}>{' '}</div>
       </div>
       } */}
-      {bank.sectionInUI !== 3 ? <><TokenInput
+      {bank.sectionInUI !== 4 ? <><TokenInput
         value={val}
         onSelectMax={handleSelectMax}
         onChange={handleChange}

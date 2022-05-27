@@ -3,15 +3,13 @@ import {Link} from 'react-router-dom';
 import {Box, Button, Card, CardActions, CardContent, Typography, Grid} from '@material-ui/core';
 import {useParams} from 'react-router-dom';
 import TokenSymbol from '../../components/TokenSymbol';
-import useBanks from '../../hooks/useBanks';
 import useStatsForPool from '../../hooks/useStatsForPool';
 import SwapVerticalCircleIcon from '@material-ui/icons/SwapVerticalCircle';
-
+import useBank from '../../hooks/useBank';
 
 const ShareLPCard = ({}) => {
-  const [banks] = useBanks();
-    const statsOnPool = 0;
-    //const statsOnPool = useStatsForPool(banks[6]);
+  const tombBank = useBank('ShareLPNode');
+  const statsOnPool = useStatsForPool(tombBank);
     
   return (
     <Grid item xs={12} md={4} lg={4}>

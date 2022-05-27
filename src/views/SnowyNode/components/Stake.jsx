@@ -37,7 +37,7 @@ const Stake = ({bank}) => {
     [stakedTokenPriceInDollars],
   );
   const earnedInDollars = (
-    Number(tokenPriceInDollars) * Number(getDisplayBalance(nodePrice, bank.depositToken.decimal))
+    Number(tokenPriceInDollars) * Number(getDisplayBalance(nodePrice, 12))
   ).toFixed(2);
   const {onStake} = useStake(bank);
 
@@ -66,7 +66,7 @@ const Stake = ({bank}) => {
              <TokenSymbol symbol={bank.depositTokenName} />
             </CardIcon>
             <Typography style={{textTransform: 'uppercase', color: '#fff'}}>
-              <Value value={getDisplayBalance(nodePrice, bank.depositToken.decimal, 0)} />
+              <Value value={getDisplayBalance(nodePrice, bank.depositToken.decimal, 8)} />
             </Typography>
 
             <Label text={`≈ $${earnedInDollars}`} />

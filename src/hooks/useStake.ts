@@ -11,7 +11,7 @@ const useStake = (bank: Bank) => {
 
   const handleStake = useCallback(
     (amount: string) => {
-      const amountBn = bank.sectionInUI !== 3 
+      const amountBn = bank.sectionInUI !== 4 
       ? parseUnits(amount, bank.depositToken.decimal)
       : BigNumber.from(amount);
       handleTransactionReceipt(

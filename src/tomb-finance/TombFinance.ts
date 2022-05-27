@@ -354,23 +354,17 @@ export class TombFinance {
           poolContract.dripRate(),
           poolContract.getDayDripEstimate(this.myAccount),
         ]);
-        const stakeAmount = Number(getDisplayBalance(tierAmount))
-        // const userStakePrice = Number(depositTokenPrice) * Number(getDisplayBalance(user.total_deposits))
-
+        const stakeAmount = Number(tierAmount)/1e18
+        
         const dailyDrip = totalPoints && +totalPoints > 0 
-          ? getDisplayBalance(poolBalance.mul(BigNumber.from(86400)).mul(points).div(totalPoints).div(dripRate)) 
+          ? (poolBalance.mul(BigNumber.from(86400)).mul(points).div(totalPoints).div(dripRate))/1e18
           : 0;
         const dailyDripAPR = (Number(dailyDrip) / stakeAmount) * 100;
         const yearlyDripAPR = (Number(dailyDrip) * 365 / stakeAmount) * 100;
-
         const dailyDripUser = Number(getDisplayBalance(dailyUserDrip));
         const yearlyDripUser = Number(dailyDripUser) * 365;
-        // const dailyDripUserPricePerYear = Number(empStat.priceInDollars) * Number(dailyDripUser);
-        // const yearlyDripUserPricePerYear = Number(empStat.priceInDollars) * Number(yearlyDripUser);
-        // const dailyDripUserAPR = (dailyDripUserPricePerYear / userStakePrice) * 100;
-        // const yearlyDripUserAPR = (yearlyDripUserPricePerYear / userStakePrice) * 100;
 
-        const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(totalBalance, depositToken.decimal));
+        const TVL = Number(depositTokenPrice) * Number(totalBalance)/1e12;
 
         return {
           userDailyBurst: dailyDripUser.toFixed(2).toString(),

@@ -27,7 +27,8 @@ const Harvest = ({bank}) => {
     () => (stakedTokenPriceInDollars ? stakedTokenPriceInDollars : null),
     [stakedTokenPriceInDollars],
   );
-  const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
+
+  const earnedInDollars = (Number(tokenPriceInDollars*1e6) * Number(earnings)).toFixed(2);
   const { onReward } = useHarvest(bank);
   const { onCompound } = useCompound(bank);
   return (
@@ -40,9 +41,9 @@ const Harvest = ({bank}) => {
            
             </CardIcon>
             <Typography style={{textTransform: 'uppercase', color: '#fff'}}>
-              <Value value={getDisplayBalance(earnings)} />
+              <Value value={(Number(earnings)/1e18).toFixed(10)} />
             </Typography>
-            <Label text={`≈ $${earnedInDollars}`} />
+            <Label text={`≈ $${(earnedInDollars/1e18).toFixed(2)}`} />
             <Typography style={{textTransform: 'uppercase', color: '#fff'}}>{`Earned`}</Typography>
           </StyledCardHeader>
           <StyledCardActions>
