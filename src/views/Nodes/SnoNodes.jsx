@@ -23,8 +23,8 @@ const SnoNodes = () => {
         <Route exact path={path}>
           <h2 style={{fontSize: '80px', textAlign: 'center'}}>NODES</h2>
           <Grid container spacing={3} style={{marginTop: '20px'}}>
-            <SnoCard />
             <FoxCard />
+            <SnoCard />      
           </Grid>
         </Route>
         <Route path={`${path}/:bankId`}>
