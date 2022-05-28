@@ -131,6 +131,9 @@ const Nav = () => {
               <Link color="textPrimary" to="/rebates" className={classes.link}>
                 Rebates
               </Link>
+              {/*<Link color="textPrimary" to="/nodes" className={classes.link}>
+                Nodes
+              </Link>*/}
               <Link color="textPrimary" to="/compound" className={classes.link}>
                 Compound
               </Link>
@@ -213,6 +216,9 @@ const Nav = () => {
                 <Link color="textPrimary" to="/rebates" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Rebates</div>
                 </Link>
+                {/*<Link color="textPrimary" to="/nodes" className={classes.link}>
+                  <div style={{ margin: '4px 20px' }}>Nodes</div>
+              </Link>*/}
                 <Link color="textPrimary" to="/compound" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Compound</div>
                 </Link>
