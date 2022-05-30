@@ -6,10 +6,11 @@ import SnoNode from '../SnowyNode';
 import SnoCard from './ShareLPCard';
 import FoxCard from './PegLPCard';
 import { createGlobalStyle } from 'styled-components';
-import MasonryImage from '../../assets/img/background.jpg';
+import HomeImage from '../../assets/img/SVG_Icons_and_web_bg/bg.svg';
+
 const BackgroundImage = createGlobalStyle`
   body, html {
-    background: url(${MasonryImage}) no-repeat !important;
+    background: url(${HomeImage}) no-repeat !important;
     background-size: cover !important;
   }
 `;
