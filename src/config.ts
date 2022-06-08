@@ -164,7 +164,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 2,
     closedForStaking: false,
   },
-  WlrsUsdcLPRebate: {
+  /*WlrsUsdcLPRebate: {
     name: 'Bond WLRS-USDC-LP for WLRS',
     poolId: 100,
     sectionInUI: 3,
@@ -185,7 +185,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     finished: false,
     sort: 2,
     closedForStaking: false,
-  },
+  },*/
   AvaxJoeLPRebate: {
     name: 'Bond AVAX for WLRS',
     poolId: 100,
