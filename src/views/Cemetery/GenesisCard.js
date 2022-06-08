@@ -8,7 +8,7 @@ import TokenSymbol from '../../components/TokenSymbol';
 const GenesisCard = () => {
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12} sm={3}>
+     {/* <Grid item xs={12} sm={3}>
         <Card>
           <CardContent align="center">
             <Typography variant="h5" component="h2">
@@ -103,7 +103,7 @@ const GenesisCard = () => {
             </Button>
           </CardActions>
         </Card>
-      </Grid>
+  </Grid>*/}
       <Grid item xs={12} sm={3}>
         <Card>
           <CardContent align="center">
@@ -177,7 +177,7 @@ const GenesisCard = () => {
         </Card>
       </Grid>
       <Grid item xs={12} sm={3}>
-        <Card>
+        {/*<Card>
           <CardContent align="center">
             <Typography variant="h5" component="h2">
               USDT.e
@@ -198,8 +198,8 @@ const GenesisCard = () => {
               Stake
             </Button>
           </CardActions>
-        </Card>
-      </Grid>
+</Card>*/}
+</Grid>
     </Grid>
   );
 };

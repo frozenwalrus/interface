@@ -33,7 +33,7 @@ const ShareLPCard = ({}) => {
               <TokenSymbol size={55} symbol={'WSHARE-USDC-LP'} />
             </Box>
             <Typography variant="h5" component="h2">
-            WSHARE-USDC LP Node
+            WSHARE-USDC.e LP Node
             </Typography>
             <Typography color="#322f32">
               Lock your WSHARE LP to earn daily yields<br></br>

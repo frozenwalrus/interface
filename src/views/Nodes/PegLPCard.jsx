@@ -33,7 +33,7 @@ const PegLPCard = ({}) => {
               <TokenSymbol size={55} symbol={'WLRS-USDC-LP'} />
             </Box>
             <Typography variant="h5" component="h2">
-            WLRS-USDC LP Node
+            WLRS-USDC.e LP Node
             </Typography>
             <Typography color="#322f32">
               Lock your WLRS LP to earn daily yields<br></br>
