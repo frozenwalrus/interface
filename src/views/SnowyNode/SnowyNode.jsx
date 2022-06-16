@@ -142,7 +142,19 @@ const SnowyNode = () => {
                   {<Stake bank={bank} />}
                   </StyledCardWrapper>
                 </StyledCardsWrapper>
+                {bank.depositTokenName === 'GRAPE-WLRS-LP' ?
+                <Card style={{borderRadius: '15px', marginTop: '20px'}}>
+                  <CardContent style={{background: 'linear-gradient(90deg, #8fbdeb 14%, #a2c8ee 100%)', borderRadius: '15px'}}>
+                    <StyledLink href={'https://traderjoexyz.com/pool/0x395908aeb53d33a9b8ac35e148e9805d34a555d3/0x5541d83efad1f281571b343977648b75d95cdac2'} rel="noopener noreferrer" target="_blank">
+                      <span style={{color: '#fff'}}>
+                        Provide liquidity for GRAPE-WLRS on Joe
+                      </span>     
+                    </StyledLink>
+                  </CardContent>
+                </Card> 
+                 : null }
               </StyledBoardroom>
+              
             </Box>
        
       </>
