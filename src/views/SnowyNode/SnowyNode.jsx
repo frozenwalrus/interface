@@ -36,7 +36,9 @@ const SnowyNode = () => {
   const bank = useBank(bankId);
   const { getNodeText } = useNodeText();
   const { account } = useWallet();
+  console.log(bank)
   const stakedTokenPriceInDollars = useStakedTokenPriceInDollars(bank.depositTokenName, bank.depositToken);
+
   const classes = useStyles();
   const [poolId, setPoolId] = useState(0);
   const LOCK_ID = 'LOCK_ID';
@@ -90,7 +92,7 @@ const SnowyNode = () => {
               <Card className={classes.gridItem} style={{background: '#161414', borderRadius: '15px', height: '100px' }}>
                 <CardContent style={{textAlign: 'center'}}>
                   <Typography style={{color: '#5686d6'}}>Amount Claimed</Typography>
-                  <Typography>{(Number(userDetails.total_claims)/1e18).toFixed(10)} </Typography>
+                  <Typography>{bank.depositTokenName === 'GRAPE-WLRS-LP' ? (Number(userDetails.total_claims)/1e18).toFixed(3) : (Number(userDetails.total_claims)/1e18).toFixed(10)} </Typography>
                 </CardContent>
               </Card>
             </Grid>

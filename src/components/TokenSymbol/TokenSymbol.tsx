@@ -22,6 +22,7 @@ import usdtLogoPNG from '../../assets/img/usdt.png';
 import usdcLogoPNG from '../../assets/img/USDC.png';
 import avaxLogoPNG from '../../assets/img/avax.png';
 import grapeLogoPNG from '../../assets/img/grape.png';
+import grapeWlrsLP from '../../assets/img/grape-wlrs.png';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -47,6 +48,7 @@ const logosBySymbol: { [title: string]: string } = {
   USDC: usdcLogoPNG,
   'WLRS-USDC-LP': tombFtmLpLogo,
   'WSHARE-USDC-LP': tshareFtmLpLogo,
+  'GRAPE-WLRS-LP': grapeWlrsLP,
   'SNO-SNOSHARE-LP': tshareFtmLpLogo,
 };
 
@@ -58,16 +60,20 @@ type LogoProps = {
 const TokenSymbol: React.FC<LogoProps> = ({ symbol, size = 90 }) => {
   if (!logosBySymbol[symbol]) {
     throw new Error(`Invalid Token Logo symbol: ${symbol}`);
+  }if(symbol === 'GRAPE-WLRS-LP'){
+    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={95} height={60} />;
+  }else{
+    return (
+      <img
+        src={logosBySymbol[symbol]}
+        alt={`${symbol} Logo`}
+        width={size}
+        height={size}
+        style={{ /*borderRadius: '50%'*/ }}
+      />
+    );
   }
-  return (
-    <img
-      src={logosBySymbol[symbol]}
-      alt={`${symbol} Logo`}
-      width={size}
-      height={size}
-      style={{ /*borderRadius: '50%'*/ }}
-    />
-  );
+  
 };
 
 export default TokenSymbol;

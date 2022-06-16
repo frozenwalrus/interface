@@ -41,7 +41,7 @@ const Harvest = ({bank}) => {
            
             </CardIcon>
             <Typography style={{textTransform: 'uppercase', color: '#fff'}}>
-              <Value value={(Number(earnings)/1e18).toFixed(10)} />
+              <Value value={bank.depositTokenName === 'GRAPE-WLRS-LP' ? (Number(earnings)/1e18).toFixed(4) : (Number(earnings)/1e18).toFixed(10)} />
             </Typography>
             <Label text={`≈ $${(earnedInDollars/1e18).toFixed(2)}`} />
             <Typography style={{textTransform: 'uppercase', color: '#fff'}}>{`Earned`}</Typography>

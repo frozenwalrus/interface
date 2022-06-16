@@ -472,7 +472,9 @@ export class TombFinance {
       tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true);
     } else if (tokenName === 'WSHARE-USDC-LP') {
       tokenPrice = await this.getLPTokenPrice(token, this.TSHARE, false);
-    } else {
+    } else if (tokenName === 'GRAPE-WLRS-LP') {
+      tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true);
+    }else {
       tokenPrice = await this.getTokenPriceFromPancakeswap(token);
       tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
     }
@@ -753,6 +755,9 @@ export class TombFinance {
         return await pool.getTotalRewards(account);
       }
       if (earnTokenName === 'WSHARE-USDC-LP' && poolName.includes('Node')) {
+        return await pool.getTotalRewards(account);
+      }
+      if (earnTokenName === 'GRAPE-WLRS-LP' && poolName.includes('Node')) {
         return await pool.getTotalRewards(account);
       }
       if (earnTokenName === 'WLRS') {

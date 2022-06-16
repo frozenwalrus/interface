@@ -27,6 +27,7 @@ const configurations: { [env: string]: Configuration } = {
       MIM: ['0x130966628846BFd36ff31a822705796e8cb8C18D', 18],
       'WLRS-USDC-LP': ['0x82845B52b53c80595bbF78129126bD3E6Fc2C1DF', 18],
       'WSHARE-USDC-LP': ['0x03d15E0451e54Eec95ac5AcB5B0a7ce69638c62A', 18],
+      'GRAPE-WLRS-LP': ['0xA3F24b18608606079a0317Cbe6Cda54CED931420', 18],
       'USDC-WAVAX-LP': ['0xA389f9430876455C36478DeEa9769B7Ca4E3DDB1', 18],
       'USDC-JOE-LP': ['0x67926d973cD8eE876aD210fAaf7DFfA99E414aCf', 18],
       'SNO-JOE-LP': ['0xe63b66a8cf7811525cd15dab15f17fb62aa5af2f', 18],
@@ -229,7 +230,18 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     finished: false,
     sort: 6,
     closedForStaking: false
-   }
+   },
+   LPWlrsNode: {
+    name: 'Generate GRAPE-WLRS LP with Nodes',
+    poolId: 0,
+    sectionInUI: 4,
+    contract: 'LPWlrsNode',
+    depositTokenName: 'GRAPE-WLRS-LP',
+    earnTokenName: 'GRAPE-WLRS-LP',
+    finished: false,
+    sort: 2,
+    closedForStaking: false,
+  }
 };
 
 export default configurations[/*process.env.NODE_ENV || */'production'];

@@ -66,7 +66,7 @@ const Stake = ({bank}) => {
              <TokenSymbol symbol={bank.depositTokenName} />
             </CardIcon>
             <Typography style={{textTransform: 'uppercase', color: '#fff'}}>
-              <Value value={getDisplayBalance(nodePrice, bank.depositToken.decimal, 8)} />
+              <Value value={bank.depositTokenName === 'GRAPE-WLRS-LP' ? getDisplayBalance(nodePrice, bank.depositToken.decimal, 0) : getDisplayBalance(nodePrice, bank.depositToken.decimal, 8)} />
             </Typography>
 
             <Label text={`≈ $${earnedInDollars}`} />
