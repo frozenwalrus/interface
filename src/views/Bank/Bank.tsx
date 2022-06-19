@@ -59,7 +59,7 @@ const Bank: React.FC = () => {
       ) : (
         <></>
       )}
-      {
+     {/* {
         bank?.depositTokenName.endsWith('-USDC-LP')
         ? (
             <Alert variant="filled" severity="info" style={{ marginTop: '-25px', marginBottom: '35px' }}>
@@ -69,7 +69,7 @@ const Bank: React.FC = () => {
               </a>
             </Alert>
           ) : null
-      }
+      }*/}
       <Box>
         <Grid container justify="center" spacing={3} style={{ marginBottom: '50px' }}>
           <Grid item xs={12} md={2} lg={3} className={classes.gridItem}>
