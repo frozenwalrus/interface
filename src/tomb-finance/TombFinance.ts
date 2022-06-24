@@ -386,10 +386,8 @@ export class TombFinance {
       bank.depositTokenName,
     );
 
-    let tokenPerHour = tokenPerSecond.mul(60).mul(60).mul(3).div(8);
-    if (bank.sectionInUI === 2 && bank.depositTokenName === 'WLRS') {
-      tokenPerHour = tokenPerHour.mul(3).div(5);
-    }
+    let tokenPerHour = tokenPerSecond.mul(60).mul(60);
+
     const totalRewardPricePerYear =
       Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24).mul(365)));
     const totalRewardPricePerDay = Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24)));
@@ -445,9 +443,9 @@ export class TombFinance {
 
     const rewardPerSecond = await poolContract.wSharePerSecond();
     if (depositTokenName.startsWith('WLRS')) {
-      return rewardPerSecond.mul(30000).div(50000).mul(3).div(2);
+      return rewardPerSecond.mul(30000).div(50000);
     } else {
-      return rewardPerSecond.mul(20000).div(50000).mul(3).div(2);
+      return rewardPerSecond.mul(20000).div(50000);
     }
   }
 
