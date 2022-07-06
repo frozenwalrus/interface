@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   label: {
     fontSize: '22px',
-    marginRight: '50px',
+    marginRight: '25px',
   },
   appBar: {
     color: '#e0e3bd',
