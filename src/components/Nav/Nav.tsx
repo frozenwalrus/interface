@@ -18,7 +18,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
-import logo from '../../assets/img/SVG_Icons_and_web_bg/WLRS-Icon-01.svg';
+import logo from 'https://svgshare.com/i/itH.svg';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -112,7 +112,7 @@ const Nav = () => {
                 style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
               >
                 <img alt="logo" className={classes.logo} src={logo} />
-                <div style={{ fontWeight: 900 }}>WALRUS</div>
+                <div style={{ fontWeight: 900 }}></div>
               </div>
             </Link>
             <Box style={{ width: 'auto !important', marginLeft: '3%' }}>
