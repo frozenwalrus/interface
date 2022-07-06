@@ -18,7 +18,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
-import logo from 'https://svgshare.com/i/itH.svg';
+import logo from '../../assets/img/SVG_Icons_and_web_bg/logo-v2.svg';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
