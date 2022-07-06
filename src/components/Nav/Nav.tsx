@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logo: {
-    width: 40,
+    width: 200,
     marginRight: '20px',
   },
   label: {
