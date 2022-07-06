@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logo: {
-    width: 200,
-    marginRight: '20px',
+    width: 275,
+    marginRight: '10px',
   },
   label: {
     fontSize: '22px',
