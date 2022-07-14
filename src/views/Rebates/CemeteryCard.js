@@ -117,6 +117,8 @@ const CemeteryCard = ({ bank }) => {
               ? 'WSHARE-USDC.e LP'
               : bank.depositTokenName === 'WLRS-USDC-LP'
               ? 'WLRS-USDC.e LP'
+              : bank.depositTokenName === 'WLRS-USDIBS-LP'
+              ? 'WLRS-USDibs LP'
               : ''}
           </Button>
         ) : (

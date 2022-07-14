@@ -12,15 +12,20 @@ import useStatsForPool from '../../hooks/useStatsForPool';
 const CemeteryCard = () => {
   const tombFtmLpStats = useLpStats('WLRS-USDC-LP');
   const tShareFtmLpStats = useLpStats('WSHARE-USDC-LP');
+  const tDibsFtmLpStats = useLpStats('WLRS-USDIBS-LP');
   // const snoSnoShareLpStats = useLpStats('SNO-SNOSHARE-LP');
   const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
+  const tDibsLpStats = useMemo(() => (tDibsFtmLpStats ? tDibsFtmLpStats : null), [tDibsFtmLpStats]);
 
   const tombBank = useBank('WlrsUsdcLPWShareRewardPool');
   const tombStatsOnPool = useStatsForPool(tombBank);
 
   const tShareBank = useBank('WShareUsdcLPWShareRewardPool');
   const tShareStatsOnPool = useStatsForPool(tShareBank);
+
+  const tDibsBank = useBank('WlrsUSDibsLPWShareRewardPool');
+  const tDibsStatsOnPool = useStatsForPool(tDibsBank);
 
   // const snoSnoShareLPStats = useMemo(() => (snoSnoShareLpStats ? snoSnoShareLpStats : null), [snoSnoShareLpStats]);
   // const snoPrice = useCashStat();
@@ -113,6 +118,59 @@ const CemeteryCard = () => {
               style={{ width: '150px', height: '45px', marginBottom: '5%' }}
               variant="contained"
               href="https://traderjoexyz.com/pool/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6#/"
+            >
+              Add Liquidity
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <Card>
+          <CardContent
+            style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center' }}
+          >
+            <div>
+              <Typography variant="h5" component="h2">
+                WLRS-USDibs LP
+              </Typography>
+              <TokenSymbol size={60} symbol="WLRS-USDIBS-LP" />
+            </div>
+            <div>
+              <span style={{ fontSize: '23px' }}>
+                {tDibsLpStats?.tokenAmount ? tDibsLpStats?.tokenAmount : '-.--'} WLRS /{' '}
+                {tDibsLpStats?.ftmAmount ? tDibsLpStats?.ftmAmount : '-.--'} USDibs
+              </span>
+
+              <Box>${tDibsLpStats?.priceOfOne ? tDibsLpStats.priceOfOne : '-.--'}</Box>
+              <span style={{ fontSize: '12px' }}>
+                Liquidity: ${tDibsLpStats?.totalLiquidity ? tDibsLpStats.totalLiquidity : '-.--'} <br />
+                Total supply:{' '}
+                {tDibsLpStats?.totalSupply
+                  ? Number(tDibsLpStats.totalSupply) < 1 / 10 ** 4
+                    ? (Number(tDibsLpStats.totalSupply) * 10 ** 6).toFixed(4) + 'µ'
+                    : tDibsLpStats.totalSupply
+                  : '-.--'}{' '}
+                <br />
+                APR: {tDibsStatsOnPool?.yearlyAPR && tDibsStatsOnPool?.yearlyAPR !== 'Infinity' ? tDibsStatsOnPool?.yearlyAPR : '----.--'}%
+              </span>
+            </div>
+          </CardContent>
+          <CardActions style={{ justifyContent: 'center' }}>
+            <Button
+              color="primary"
+              style={{ width: '150px', height: '45px', marginBottom: '5%' }}
+              variant="contained"
+              component={Link}
+              to={`/farms/WlrsUSDibsLPWShareRewardPool/`}
+            >
+              Farm
+            </Button>
+            <Button
+              color="primary"
+              target="_blank"
+              style={{ width: '150px', height: '45px', marginBottom: '5%' }}
+              variant="contained"
+              href="https://traderjoexyz.com/pool/0x0efa5328fefce96c8d10661bd97403764d477853/0x395908aeb53d33a9b8ac35e148e9805d34a555d3#/"
             >
               Add Liquidity
             </Button>

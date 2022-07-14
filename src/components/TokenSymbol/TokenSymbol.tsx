@@ -48,6 +48,7 @@ const logosBySymbol: { [title: string]: string } = {
   USDC: usdcLogoPNG,
   'WLRS-USDC-LP': tombFtmLpLogo,
   'WSHARE-USDC-LP': tshareFtmLpLogo,
+  'WLRS-USDIBS-LP': dibsLogoPNG,
   'GRAPE-WLRS-LP': grapeWlrsLP,
   'SNO-SNOSHARE-LP': tshareFtmLpLogo,
 };

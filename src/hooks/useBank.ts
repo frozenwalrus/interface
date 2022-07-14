@@ -33,6 +33,8 @@ const useBank = (contractName: ContractName): Bank => {
     return banks.find((bank) => bank.sectionInUI === 2 && bank.depositTokenName === 'WSHARE-USDC-LP');
   } else if (contractName === 'WlrsUsdcLPWShareRewardPool') {
     return banks.find((bank) => bank.sectionInUI === 2 && bank.depositTokenName === 'WLRS-USDC-LP');
+  } else if (contractName === 'WlrsUSDibsLPWShareRewardPool') {
+    return banks.find((bank) => bank.sectionInUI === 2 && bank.depositTokenName === 'WLRS-USDIBS-LP');
   } else {
     return null;
   }
