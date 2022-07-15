@@ -42,6 +42,7 @@ export class TombFinance {
   FOX: ERC20;
   DIBS: ERC20;
   GRAPE: ERC20;
+  USDIBS: ERC20;
 
   constructor(cfg: Configuration) {
     const { deployments, externalTokens } = cfg;
@@ -65,6 +66,7 @@ export class TombFinance {
     this.FOX = this.externalTokens['FOX'];
     this.DIBS = this.externalTokens['DIBS'];
     this.GRAPE = this.externalTokens['GRAPE'];
+    this.USDIBS = this.externalTokens['USDIBS'];
 
     // Uniswap V2 Pair
     this.TOMBWFTM_LP = new Contract(externalTokens['WLRS-USDC-LP'][0], IUniswapV2PairABI, provider);
@@ -155,6 +157,13 @@ export class TombFinance {
     //   ftmAmount = getDisplayBalance(ftmAmountBN, 18);
     //   ftmAmountInOneLP = Number(ftmAmount) / Number(lpTokenSupply);
     // }
+    if (name === 'WLRS-USDIBS-LP') {
+      tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
+      ftmAmountBN = await this.USDIBS.balanceOf(lpToken.address);
+      ftmAmount = getDisplayBalance(ftmAmountBN, 18);
+      ftmAmountInOneLP = Number(ftmAmount) / Number(lpTokenSupply);
+      liquidity = (Number(lpTokenSupply) * Number(lpTokenPrice)).toFixed(2).toString();
+    }
 
     return {
       tokenAmount: tokenAmountInOneLP.toFixed(2).toString(),
@@ -470,6 +479,8 @@ export class TombFinance {
       tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true);
     } else if (tokenName === 'WSHARE-USDC-LP') {
       tokenPrice = await this.getLPTokenPrice(token, this.TSHARE, false);
+    } else if (tokenName === 'WLRS-USDIBS-LP') {
+      tokenPrice = await this.getLPTokenPrice(token, this.TOMB, false);
     } else if (tokenName === 'GRAPE-WLRS-LP') {
       tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true);
     }else {
@@ -565,7 +576,7 @@ export class TombFinance {
     // const stat = isTomb === true ? await this.getTombStat() : await this.getShareStat();
     const stat = await this.getTokenStat(token.symbol);
     const priceOfToken = stat.priceInDollars;
-    const divider = ['WLRS', 'WSHARE', 'USDC', 'USDT'].includes(token.symbol) ? 10**6 : 1;
+    const divider = ['WLRS', 'WSHARE', 'USDC', 'USDT'].includes(token.symbol) && !['WLRS-USDIBS-LP'].includes(lpToken.symbol) ? 10 ** 6 : 1;
     const tokenInLP = Number(tokenSupply) / Number(totalSupply) / divider;  // NOTE: hot fix
     const tokenPrice = (Number(priceOfToken) * tokenInLP * 2) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
       .toString();
@@ -593,6 +604,8 @@ export class TombFinance {
         return this.getFoxStat();
       case 'GRAPE':
         return this.getGrapeStat();
+      case 'USDIBS':
+        return this.getUSDibsStat();
       default:
         throw new Error(`Unknown token name: ${tokenName}`);
     }
@@ -686,6 +699,21 @@ export class TombFinance {
     const priceInDollars = await this.getAvaxPriceFromPancakeswap();
     return {
       tokenInFtm: priceInDollars,
+      priceInDollars,
+      totalSupply: '0',
+      circulatingSupply: '0',
+    };
+  }
+
+  async getUSDibsStat(): Promise<TokenStat> {
+    const [priceInFTM, priceOfOneFTM] = await Promise.all([
+      this.getTokenPriceFromPancakeswap(this.USDIBS),
+      this.getUsdcStat(),
+    ]);
+
+    const priceInDollars = (Number(priceInFTM) * Number(priceOfOneFTM.tokenInFtm)).toFixed(12);
+    return {
+      tokenInFtm: priceInFTM,
       priceInDollars,
       totalSupply: '0',
       circulatingSupply: '0',
