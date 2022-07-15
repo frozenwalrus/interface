@@ -71,7 +71,6 @@ const Home = () => {
   const TVL = useTotalValueLocked();
   const tombFtmLpStats = useLpStats('WLRS-USDC-LP');
   const tShareFtmLpStats = useLpStats('WSHARE-USDC-LP');
-  const tDibsFtmLpStats = useLpStats('WLRS-USDIBS-LP');
   const tombStats = useTombStats();
   const tShareStats = usetShareStats();
   const tBondStats = useBondStats();
@@ -95,7 +94,6 @@ const Home = () => {
 
   const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
-  const tDibsLPStats = useMemo(() => (tDibsFtmLpStats ? tDibsFtmLpStats : null), [tDibsFtmLpStats]);
   const tombPriceInDollars = useMemo(
     () => (tombStats ? Number(tombStats.priceInDollars).toFixed(2) : null),
     [tombStats],
@@ -352,30 +350,6 @@ const Home = () => {
               </span>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Card>
-            <CardContent align="center">
-              <h2>WLRS-USDibs LP</h2>
-              <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol size={50} symbol="WLRS-USDIBS-LP" />
-              </div>
-              <Box mt={2}>
-                <span style={{ fontSize: '26px' }}>
-                  {tDibsLPStats?.tokenAmount ? tDibsLPStats?.tokenAmount : '-.--'} WLRS /{' '}
-                  {tDibsLPStats?.ftmAmount ? tDibsLPStats?.ftmAmount : '-.--'} USDibs
-                </span>
-              </Box>
-              <Box>${tDibsLPStats?.priceOfOne ? tDibsLPStats.priceOfOne : '-.--'}</Box>
-              <span style={{ fontSize: '12px' }}>
-                Liquidity: ${tDibsLPStats?.totalLiquidity ? tDibsLPStats.totalLiquidity : '-.--'}
-                <br />
-                Total supply: {tDibsLPStats?.totalSupply ? (Number(tDibsLPStats.totalSupply) < 1/10**4 ? (Number(tDibsLPStats.totalSupply) * 10**6).toFixed(4) + 'µ' : tDibsLPStats.totalSupply) : '-.--'}
-              </span>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6}>
         </Grid>
 
         <Grid item xs={12} sm={3}>
