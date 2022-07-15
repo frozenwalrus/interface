@@ -23,6 +23,7 @@ import usdcLogoPNG from '../../assets/img/USDC.png';
 import avaxLogoPNG from '../../assets/img/avax.png';
 import grapeLogoPNG from '../../assets/img/grape.png';
 import grapeWlrsLP from '../../assets/img/grape-wlrs.png';
+import wlrsUsdibsLP from '../../assets/img/wlrs-usdibs.png';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -48,7 +49,7 @@ const logosBySymbol: { [title: string]: string } = {
   USDC: usdcLogoPNG,
   'WLRS-USDC-LP': tombFtmLpLogo,
   'WSHARE-USDC-LP': tshareFtmLpLogo,
-  'WLRS-USDIBS-LP': dibsLogoPNG,
+  'WLRS-USDIBS-LP': wlrsUsdibsLP,
   'GRAPE-WLRS-LP': grapeWlrsLP,
   'SNO-SNOSHARE-LP': tshareFtmLpLogo,
 };

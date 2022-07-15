@@ -62,7 +62,7 @@ const Bank: React.FC = () => {
           severity="info"
           style={{ maxWidth: '400px', marginBottom: '20px', marginLeft: 'auto', marginRight: 'auto' }}
         >
-          Pool starts at 2:00 PM Eastern
+          Pool starts at 2:00 PM UTC
         </Alert>
       ) : (
         <></>
