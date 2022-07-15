@@ -452,7 +452,11 @@ export class TombFinance {
 
     const rewardPerSecond = await poolContract.wSharePerSecond();
     if (depositTokenName.startsWith('WLRS')) {
-      return rewardPerSecond.mul(30000).div(50000);
+      if (depositTokenName === 'WLRS-USDIBS-LP') {
+        return rewardPerSecond.mul(2100).div(50000);
+      } else {
+        return rewardPerSecond.mul(30000).div(50000);
+      }
     } else {
       return rewardPerSecond.mul(20000).div(50000);
     }
