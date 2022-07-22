@@ -27,7 +27,8 @@ const Pit = lazy(() => import('./views/Pit'));
 const Rebates = lazy(() => import('./views/Rebates'));
 // const Raffle = lazy(() => import('./views/Raffle'));
 const Compound = lazy(() => import('./views/Compound'));
-const Nodes = lazy(() => import('./views/Nodes'))
+const Nodes = lazy(() => import('./views/Nodes')); 
+const Landing = lazy(() => import('./views/Landing')); 
 
 const NoMatch = () => (
   <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -79,6 +80,9 @@ const App: React.FC = () => {
             </Route> */}
             <Route path="/compound">
               <Compound />
+            </Route>
+            <Route path="/landing">
+              <Landing />
             </Route>
             <Route path="*">
               <NoMatch />
