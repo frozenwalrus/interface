@@ -81,9 +81,10 @@ const App: React.FC = () => {
             <Route path="/compound">
               <Compound />
             </Route>
+            {/*
             <Route path="/landing">
-              <Landing />
-            </Route>
+              <Landing /> 
+          </Route> */}
             <Route path="*">
               <NoMatch />
             </Route>
