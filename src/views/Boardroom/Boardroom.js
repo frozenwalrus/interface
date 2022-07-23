@@ -46,6 +46,7 @@ const Boardroom = () => {
                       <Box mt={2}>
                         <TokenSymbol symbol="WLRS" />
                       </Box>
+                      <p style={{marginBottom: '0'}}>Stake WSHARE to earn $WLRS</p>
                     </CardContent>
                     <CardActions style={{ justifyContent: 'center' }}>
                       <Button
@@ -70,6 +71,7 @@ const Boardroom = () => {
                       <Box mt={2}>
                         <TokenSymbol symbol="NRWL" />
                       </Box>
+                      <p style={{marginBottom: '0'}}>Stake WSHARE to earn $NRWL</p>
                     </CardContent>
                     <CardActions style={{ justifyContent: 'center' }}>
                       <Button
