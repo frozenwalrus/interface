@@ -19,6 +19,8 @@ import useStatsForPool from '../../hooks/useStatsForPool';
 // import useTombFinance from '../../hooks/useTombFinance';
 import { Alert } from '@material-ui/lab';
 
+import config from '../../config';
+
 const useStyles = makeStyles((theme) => ({
   gridItem: {
     height: '100%',
@@ -48,7 +50,7 @@ const Bank: React.FC = () => {
         subtitle={`Deposit ${bank?.depositTokenName === 'USDC' || bank?.depositTokenName === 'USDT' ? bank?.depositTokenName + '.e' : bank?.depositTokenName.replace('USDC', 'USDC.e')} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
-      {bank?.depositTokenName === 'WLRS' && Date.now() < 1646510400000 ? (
+      {/* {bank?.depositTokenName === 'WLRS' && Date.now() < 1646510400000 ? (
         <Alert
           variant="filled"
           severity="info"
@@ -66,7 +68,20 @@ const Bank: React.FC = () => {
         </Alert>
       ) : (
         <></>
-      )}
+      )} */}
+      {
+        bank?.sectionInUI === 5 && Date.now() < config.nrwlLaunchDate.getTime()
+        ? (
+            <Alert
+              variant="filled"
+              severity="info"
+              style={{ maxWidth: '400px', marginBottom: '20px', marginLeft: 'auto', marginRight: 'auto' }}
+            >
+              Genesis pool starts on July 24th at 14:00 UTC. Pre-staking is open.
+            </Alert>
+          )
+        : <></>
+      }
      {/* {
         bank?.depositTokenName.endsWith('-USDC-LP')
         ? (

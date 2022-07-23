@@ -11,12 +11,12 @@ import IconButton from '../../../components/IconButton';
 import Label from '../../../components/Label';
 import Value from '../../../components/Value';
 import FlashOnIcon from '@material-ui/icons/FlashOn';
-import { ThemeContext } from 'styled-components';
 
 import useApprove, { ApprovalState } from '../../../hooks/useApprove';
 import useModal from '../../../hooks/useModal';
 import useStake from '../../../hooks/useStake';
 import useZap from '../../../hooks/useZap';
+import useZapNrwl from '../../../hooks/useZapNrwl';
 import useStakedBalance from '../../../hooks/useStakedBalance';
 import useStakedTokenPriceInDollars from '../../../hooks/useStakedTokenPriceInDollars';
 import useTokenBalance from '../../../hooks/useTokenBalance';
@@ -27,6 +27,7 @@ import { getDisplayBalance } from '../../../utils/formatBalance';
 import DepositModal from './DepositModal';
 import WithdrawModal from './WithdrawModal';
 import ZapModal from './ZapModal';
+import ZapModalNrwl from './ZapModalNrwl';
 import TokenSymbol from '../../../components/TokenSymbol';
 import { Bank } from '../../../tomb-finance';
 
@@ -50,6 +51,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
   const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(stakedBalance, bank.depositToken.decimal, bank.depositToken.decimal === 6 ? 3 : 9)) * multiplier).toFixed(2);
   const { onStake } = useStake(bank);
   const { onZap } = useZap(bank);
+  const { onZapNrwl } = useZapNrwl(bank);
   const { onWithdraw } = useWithdraw(bank);
 
   const [onPresentDeposit, onDismissDeposit] = useModal(
@@ -72,6 +74,18 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
         if (Number(amount) <= 0 || isNaN(Number(amount))) return;
         onZap(zappingToken, tokenName, amount);
         onDissmissZap();
+      }}
+      tokenName={bank.depositTokenName}
+    />,
+  );
+
+  const [onPresentZapNrwl, onDissmissZapNrwl] = useModal(
+    <ZapModalNrwl
+      decimals={bank.depositToken.decimal}
+      onConfirm={(zappingToken, tokenName, amount) => {
+        if (Number(amount) <= 0 || isNaN(Number(amount))) return;
+        onZapNrwl(zappingToken, tokenName, amount);
+        onDissmissZapNrwl();
       }}
       tokenName={bank.depositTokenName}
     />,
@@ -125,7 +139,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
                   <StyledActionSpacer />
                   {
                     // bank.depositTokenName !== 'WLRS-USDC-LP' &&  bank.depositTokenName !== 'WSHARE-USDC-LP' && bank.depositTokenName !== 'WLRS-USDIBS-LP'
-                    bank.depositTokenName !== 'WLRS-USDC-LP' &&  bank.depositTokenName !== 'WSHARE-USDC-LP'
+                    bank.depositTokenName !== 'WLRS-USDC-LP' && bank.depositTokenName !== 'WSHARE-USDC-LP'
                       ? null
                       : <IconButton
                           disabled={bank.closedForStaking}
@@ -133,6 +147,16 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
                         >
                           <FlashOnIcon style={{color: '#ccc'}} />
                         </IconButton>
+                  }
+                  {
+                    bank.depositTokenName === 'NRWL-YUSD-LP'
+                      ? <IconButton
+                          disabled={bank.closedForStaking}
+                          onClick={() => (bank.closedForStaking ? null : onPresentZapNrwl())}
+                        >
+                          <FlashOnIcon style={{color: '#ccc'}} />
+                        </IconButton>
+                      : null
                   }
                   <StyledActionSpacer />
                   <IconButton

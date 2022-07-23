@@ -3,6 +3,7 @@ import Page from '../../components/Page';
 import styled from 'styled-components';
 import HomeImage from '../../assets/img/SVG_Icons_and_web_bg/bg.svg';
 import AvaxLogo from '../../assets/img/USDC.png';
+import yusdLogo from '../../assets/img/yusd.png';
 import { createGlobalStyle } from 'styled-components';
 import CountUp from 'react-countup';
 import TokenSymbol from '../../components/TokenSymbol';
@@ -11,6 +12,7 @@ import useLpStats from '../../hooks/useLpStats';
 import useFantomPrice from '../../hooks/useFantomPrice.js';
 import useBondStats from '../../hooks/useBondStats';
 import usetShareStats from '../../hooks/usetShareStats';
+import useNrwlStats from '../../hooks/useNrwlStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 
 import { Box, Button, CardContent, Grid, Typography, useMediaQuery } from '@material-ui/core';
@@ -73,6 +75,7 @@ const Home = () => {
   const tShareFtmLpStats = useLpStats('WSHARE-USDC-LP');
   const tombStats = useTombStats();
   const tShareStats = usetShareStats();
+  const nrwlStats = useNrwlStats();
   const tBondStats = useBondStats();
   const tombFinance = useTombFinance();
   const { price: JOEPrice, marketCap: JOEMarketCap, priceChange: JOEPriceChange } = useFantomPrice();
@@ -91,40 +94,30 @@ const Home = () => {
     'https://traderjoexyz.com/trade?inputCurrency=0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664&outputCurrency=0x395908aeb53d33A9B8ac35e148E9805D34A555D3#/';
   const buyTShareAddress =
     'https://traderjoexyz.com/trade?inputCurrency=0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664&outputCurrency=0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6#/';
+  const buyNrwlAddress =
+    `https://www.swapsicle.io/swap?inputCurrency=0x111111111111ed1D73f860F57b2798b683f2d325&outputCurrency=${tombFinance.NRWL.address}`;
 
   const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
-  const tombPriceInDollars = useMemo(
-    () => (tombStats ? Number(tombStats.priceInDollars).toFixed(2) : null),
-    [tombStats],
-  );
+
+  const tombPriceInDollars = useMemo(() => (tombStats ? Number(tombStats.priceInDollars).toFixed(2) : null), [tombStats]);
   const tombPriceInFTM = useMemo(() => (tombStats ? Number(tombStats.tokenInFtm).toFixed(4) : null), [tombStats]);
   const tombCirculatingSupply = useMemo(() => (tombStats ? String(tombStats.circulatingSupply) : null), [tombStats]);
   const tombTotalSupply = useMemo(() => (tombStats ? String(tombStats.totalSupply) : null), [tombStats]);
 
-  const tSharePriceInDollars = useMemo(
-    () => (tShareStats ? Number(tShareStats.priceInDollars).toFixed(2) : null),
-    [tShareStats],
-  );
-  const tSharePriceInFTM = useMemo(
-    () => (tShareStats ? Number(tShareStats.tokenInFtm).toFixed(4) : null),
-    [tShareStats],
-  );
-  const tShareCirculatingSupply = useMemo(
-    () => (tShareStats ? String(tShareStats.circulatingSupply) : null),
-    [tShareStats],
-  );
+  const tSharePriceInDollars = useMemo(() => (tShareStats ? Number(tShareStats.priceInDollars).toFixed(2) : null), [tShareStats]);
+  const tSharePriceInFTM = useMemo(() => (tShareStats ? Number(tShareStats.tokenInFtm).toFixed(4) : null), [tShareStats]);
+  const tShareCirculatingSupply = useMemo(() => (tShareStats ? String(tShareStats.circulatingSupply) : null), [tShareStats]);
   const tShareTotalSupply = useMemo(() => (tShareStats ? String(tShareStats.totalSupply) : null), [tShareStats]);
 
-  const tBondPriceInDollars = useMemo(
-    () => (tBondStats ? Number(tBondStats.priceInDollars).toFixed(2) : null),
-    [tBondStats],
-  );
+  const nrwlPriceInDollars = useMemo(() => (nrwlStats ? Number(nrwlStats.priceInDollars).toFixed(2) : null), [nrwlStats]);
+  const nrwlPriceInFTM = useMemo(() => (nrwlStats ? Number(nrwlStats.tokenInFtm).toFixed(4) : null), [nrwlStats]);
+  const nrwlCirculatingSupply = useMemo(() => (nrwlStats ? String(nrwlStats.circulatingSupply) : null), [nrwlStats]);
+  const nrwlTotalSupply = useMemo(() => (nrwlStats ? String(nrwlStats.totalSupply) : null), [nrwlStats]);
+
+  const tBondPriceInDollars = useMemo(() => (tBondStats ? Number(tBondStats.priceInDollars).toFixed(2) : null), [tBondStats]);
   const tBondPriceInFTM = useMemo(() => (tBondStats ? Number(tBondStats.tokenInFtm).toFixed(4) : null), [tBondStats]);
-  const tBondCirculatingSupply = useMemo(
-    () => (tBondStats ? String(tBondStats.circulatingSupply) : null),
-    [tBondStats],
-  );
+  const tBondCirculatingSupply = useMemo(() => (tBondStats ? String(tBondStats.circulatingSupply) : null), [tBondStats]);
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
   const tombBalance = useTokenBalance(tombFinance.TOMB);
@@ -134,6 +127,10 @@ const Home = () => {
   const tShareBalance = useTokenBalance(tombFinance.TSHARE);
   const displayTShareBalance = useMemo(() => getDisplayBalance(tShareBalance), [tShareBalance]);
   const tShareBalanceInDollars = tSharePriceInDollars && tShareBalance ? (Number(tSharePriceInDollars) * tShareBalance.div('1000000000000000000').toNumber()).toFixed(2) : null;
+
+  const nrwlBalance = useTokenBalance(tombFinance.NRWL);
+  const displayNrwlBalance = useMemo(() => getDisplayBalance(nrwlBalance), [nrwlBalance]);
+  const nrwlBalanceInDollars = nrwlPriceInDollars && nrwlBalance ? (Number(nrwlPriceInDollars) * nrwlBalance.div('1000000000000000000').toNumber()).toFixed(2) : null;
 
   const tBondBalance = useTokenBalance(tombFinance.TBOND);
   const displayTBondBalance = useMemo(() => getDisplayBalance(tBondBalance), [tBondBalance]);
@@ -233,6 +230,48 @@ const Home = () => {
                         color="primary"
                         target="_blank"
                         href="https://snowtrace.io/address/0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6#code"
+                        variant="contained"
+                        style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                        className={classes.tokenButton}
+                      >
+                        Contract
+                      </Button>
+                    </div>
+                  </StyledBalance>
+                </StyledBalanceWrapper>
+                <StyledBalanceWrapper>
+                  <TokenSymbol symbol="NRWL" />
+                  <StyledBalance>
+                    <StyledValue>{displayNrwlBalance}</StyledValue>
+                    <Label text="NRWL available" variant="noraml" />
+                    <span style={{ fontSize: '15px', marginLeft: '2%' }}>
+                      (${nrwlBalanceInDollars ? nrwlBalanceInDollars : '-.----'})
+                    </span>
+                    <div className={classes.flex}>
+                      <Button
+                        color="primary"
+                        target="_blank"
+                        href={buyNrwlAddress}
+                        variant="contained"
+                        style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                        className={classes.tokenButton}
+                      >
+                        Buy
+                      </Button>
+                      <Button
+                        color="primary"
+                        target="_blank"
+                        href={`https://dexscreener.com/avalanche/${tombFinance.config.externalTokens['NRWL-YUSD-LP'][0]}`}
+                        variant="contained"
+                        style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                        className={classes.tokenButton}
+                      >
+                        Chart
+                      </Button>
+                      <Button
+                        color="primary"
+                        target="_blank"
+                        href={`https://snowtrace.io/address/${tombFinance.NRWL.address}#code`}
                         variant="contained"
                         style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
                         className={classes.tokenButton}
@@ -489,6 +528,50 @@ const Home = () => {
           <Card>
             <CardContent style={{ position: 'relative' }}>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
+                <TokenSymbol symbol="NRWL" size={50} />
+              </div>
+              <h2 align="center">NRWL</h2>
+              <p align="center">Current Price</p>
+              <Box align="center">
+                <span style={{ fontSize: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {nrwlPriceInFTM ? nrwlPriceInFTM : '-.----'}{' '}
+                  <img alt="logo" style={{ width: '30px', marginLeft: '6px' }} src={yusdLogo} />
+                </span>
+              </Box>
+              <Box align="center" marginBottom={3}>
+                <span style={{ fontSize: '16px' }}>${nrwlPriceInDollars ? nrwlPriceInDollars : '-.--'}</span>
+              </Box>
+              <Row>
+                <span style={{ fontSize: '14px' }}>
+                  Market Cap: <br />
+                  Circulating Supply: <br />
+                  Total Supply:
+                </span>
+                <span style={{ fontSize: '14px', textAlign: 'right' }}>
+                  ${(nrwlCirculatingSupply * nrwlPriceInDollars).toFixed(2)} <br />
+                  {nrwlCirculatingSupply} <br />
+                  {nrwlTotalSupply}
+                </span>
+              </Row>
+              <Box>
+                <Button
+                  color="primary"
+                  target="_blank"
+                  href={buyNrwlAddress}
+                  variant="contained"
+                  style={{ marginTop: '10px', borderRadius: '10px', width: '100%' }}
+                  className={classes.button}
+                >
+                  Purchase
+                </Button>
+              </Box>
+            </CardContent>
+          </Card>
+        </Grid>
+        {/* <Grid item xs={12} sm={3}>
+          <Card>
+            <CardContent style={{ position: 'relative' }}>
+              <div style={{ position: 'absolute', right: 5, top: 5 }}>
                 <TokenSymbol symbol="WBOND" size={50} />
               </div>
               <h2 align="center">WBOND</h2>
@@ -528,7 +611,7 @@ const Home = () => {
               </Box>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Page>
   );

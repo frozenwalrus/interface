@@ -123,7 +123,7 @@ const Nav = () => {
                 Farms
               </Link>
               <Link color="textPrimary" to="/boardroom" className={classes.link}>
-                Boardroom
+                Boardrooms
               </Link>
               <Link color="textPrimary" to="/bonds" className={classes.link}>
                 Bonds
@@ -208,7 +208,7 @@ const Nav = () => {
                   <div style={{ margin: '4px 20px' }}>Farms</div>
                 </Link>
                 <Link color="textPrimary" to="/boardroom" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>Boardroom</div>
+                  <div style={{ margin: '4px 20px' }}>Boardrooms</div>
                 </Link>
                 <Link color="textPrimary" to="/bonds" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Bonds</div>

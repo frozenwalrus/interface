@@ -18,6 +18,7 @@ import TokenSymbol from '../../../components/TokenSymbol';
 import { Bank } from '../../../tomb-finance';
 import useTombStats from '../../../hooks/useTombStats';
 import useShareStats from '../../../hooks/usetShareStats';
+import useNrwlStats from '../../../hooks/useNrwlStats';
 
 interface HarvestProps {
   bank: Bank;
@@ -28,9 +29,10 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const { onReward } = useHarvest(bank);
   const tombStats = useTombStats();
   const tShareStats = useShareStats();
+  const nrwlStats = useNrwlStats();
 
   const tokenName = bank.earnTokenName /*=== 'WSHARE' ? 'WSHARE' : 'WSHARE'*/;
-  const tokenStats = bank.earnTokenName === 'WSHARE' ? tShareStats : tombStats;
+  const tokenStats = bank.earnTokenName === 'WSHARE' ? tShareStats : (bank.earnTokenName === 'WLRS' ? tombStats : nrwlStats);
   const tokenPriceInDollars = useMemo(
     () => (tokenStats ? Number(tokenStats.priceInDollars).toFixed(2) : null),
     [tokenStats],

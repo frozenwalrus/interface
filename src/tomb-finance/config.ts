@@ -15,6 +15,9 @@ export type Configuration = {
   bondLaunchesAt: Date;
   masonryLaunchesAt: Date;
 
+  nrwlLaunchDate: Date;
+  nrwlBoardroomLaunchDate: Date;
+
   refreshInterval: number;
 };
 

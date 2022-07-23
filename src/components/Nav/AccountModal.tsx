@@ -18,8 +18,11 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const tshareBalance = useTokenBalance(tombFinance.TSHARE);
   const displayTshareBalance = useMemo(() => getDisplayBalance(tshareBalance), [tshareBalance]);
 
-  const tbondBalance = useTokenBalance(tombFinance.TBOND);
-  const displayTbondBalance = useMemo(() => getDisplayBalance(tbondBalance), [tbondBalance]);
+  const nrwlBalance = useTokenBalance(tombFinance.NRWL);
+  const displayNrwlBalance = useMemo(() => getDisplayBalance(nrwlBalance), [nrwlBalance]);
+
+  // const tbondBalance = useTokenBalance(tombFinance.TBOND);
+  // const displayTbondBalance = useMemo(() => getDisplayBalance(tbondBalance), [tbondBalance]);
 
   return (
     <Modal>
@@ -43,12 +46,20 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
         </StyledBalanceWrapper>
 
         <StyledBalanceWrapper>
+          <TokenSymbol symbol="NRWL" />
+          <StyledBalance>
+            <StyledValue>{displayNrwlBalance}</StyledValue>
+            <Label text="NRWL Available" />
+          </StyledBalance>
+        </StyledBalanceWrapper>
+
+        {/* <StyledBalanceWrapper>
           <TokenSymbol symbol="WBOND" />
           <StyledBalance>
             <StyledValue>{displayTbondBalance}</StyledValue>
             <Label text="WBOND Available" />
           </StyledBalance>
-        </StyledBalanceWrapper>
+        </StyledBalanceWrapper> */}
       </Balances>
     </Modal>
   );

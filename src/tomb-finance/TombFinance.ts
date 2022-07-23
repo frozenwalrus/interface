@@ -2,6 +2,19 @@ import axios from 'axios';
 // import { Fetcher, Route, Token } from '@uniswap/sdk';
 import { Fetcher as FetcherSpirit, Token as TokenSpirit } from '@traderjoe-xyz/sdk';
 import { Fetcher, Route, Token } from '@traderjoe-xyz/sdk';
+
+import {
+  Token as TokenSwapsicle,
+  Route as RouteSwapsicle,
+  Trade as TradeSwapsicle,
+  Pair as PairSwapsicle,
+  CurrencyAmount as CurrencyAmountSwapsicle,
+  TradeType as TradeTypeSwapsicle,
+} from '@bitgraphix/swapsicle-core-main-sdk';
+
+// const { Token, WETH9, CurrencyAmount, TradeType } = require('@bitgraphix/swapsicle-core-main-sdk')
+// const { Route, Trade, Pair } = require('@uniswap/v2-sdk')
+
 // import { Fetcher as FetcherSpirit, Token as TokenSpirit } from 'quickswap-sdk';
 // import { Fetcher, Route, Token } from 'quickswap-sdk';
 import { Configuration } from './config';
@@ -16,7 +29,7 @@ import IUniswapV2PairABI from './IUniswapV2Pair.abi.json';
 import { /*config,*/ bankDefinitions } from '../config';
 import moment from 'moment';
 import { parseUnits } from 'ethers/lib/utils';
-import { FTM_TICKER, SPOOKY_ROUTER_ADDR, TOMB_TICKER, TSHARE_TICKER } from '../utils/constants';
+import { FTM_TICKER, NRWL_TICKER, SPOOKY_ROUTER_ADDR, SWAPSICLE_ROUTER_ADDR, TOMB_TICKER, TSHARE_TICKER } from '../utils/constants';
 // import { CompareArrowsOutlined } from '@material-ui/icons';
 // import { CompareArrowsOutlined, CompassCalibrationOutlined } from '@material-ui/icons';
 /**
@@ -43,6 +56,10 @@ export class TombFinance {
   DIBS: ERC20;
   GRAPE: ERC20;
   USDIBS: ERC20;
+  
+  YUSD: ERC20;
+  NRWL: ERC20;
+  NBOND: ERC20;
 
   constructor(cfg: Configuration) {
     const { deployments, externalTokens } = cfg;
@@ -67,6 +84,10 @@ export class TombFinance {
     this.DIBS = this.externalTokens['DIBS'];
     this.GRAPE = this.externalTokens['GRAPE'];
     this.USDIBS = this.externalTokens['USDIBS'];
+
+    this.YUSD = this.externalTokens['YUSD'];
+    this.NRWL = this.externalTokens['NRWL'];
+    this.NBOND = this.externalTokens['NBOND'];
 
     // Uniswap V2 Pair
     this.TOMBWFTM_LP = new Contract(externalTokens['WLRS-USDC-LP'][0], IUniswapV2PairABI, provider);
@@ -171,6 +192,31 @@ export class TombFinance {
       priceOfOne: lpTokenPriceFixed,
       totalLiquidity: liquidity,
       totalSupply: Number(lpTokenSupply).toFixed(9).toString(),
+    };
+  }
+
+  async getLPStatNrwl(name: string): Promise<LPStat> {
+    const lpToken = this.externalTokens[name];
+    const lpTokenSupplyBN = await lpToken.totalSupply();
+    const lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, 18);
+    const token0 = this.NRWL;
+    const isDibs = true;
+    const tokenAmountBN = await token0.balanceOf(lpToken.address);
+    const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
+
+    const ftmAmountBN = await this.YUSD.balanceOf(lpToken.address);
+    const ftmAmount = getDisplayBalance(ftmAmountBN, 18);
+    const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
+    const ftmAmountInOneLP = Number(ftmAmount) / Number(lpTokenSupply);
+    const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isDibs);
+    const lpTokenPriceFixed = Number(lpTokenPrice).toFixed(2).toString();
+    const liquidity = (Number(lpTokenSupply) * Number(lpTokenPrice)).toFixed(2).toString();
+    return {
+      tokenAmount: tokenAmountInOneLP.toFixed(2).toString(),
+      ftmAmount: ftmAmountInOneLP.toFixed(2).toString(),
+      priceOfOne: lpTokenPriceFixed,
+      totalLiquidity: liquidity,
+      totalSupply: Number(lpTokenSupply).toFixed(2).toString(),
     };
   }
 
@@ -290,6 +336,22 @@ export class TombFinance {
     };
   }
 
+  async getBondStatNrwl(): Promise<TokenStat> {
+    const { NrwlTreasury } = this.contracts;
+    const tombStat = await this.getNrwlStat();
+    const bondTombRatioBN = await NrwlTreasury.getBondPremiumRate();
+    const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
+    const bondPriceInFTM = (Number(tombStat.tokenInFtm) * modifier).toFixed(2);
+    const priceOfTBondInDollars = (Number(tombStat.priceInDollars) * modifier).toFixed(2);
+    const supply = await this.NBOND.displayedTotalSupply();
+    return {
+      tokenInFtm: bondPriceInFTM,
+      priceInDollars: priceOfTBondInDollars,
+      totalSupply: supply,
+      circulatingSupply: supply,
+    };
+  }
+
   /**
    * @returns TokenStat for TSHARE
    * priceInFTM
@@ -332,14 +394,36 @@ export class TombFinance {
     };
   }
 
+  async getTombStatInEstimatedTWAPNrwl(): Promise<TokenStat> {
+    const { NrwlOracle } = this.contracts;
+    const expectedPrice = (await NrwlOracle.twap(this.NRWL.address, ethers.utils.parseEther('1')))/*.mul(10**12)*/;
+    const nrwlStats = await this.getNrwlStat();
+    return {
+      tokenInFtm: getDisplayBalance(expectedPrice),
+      priceInDollars: getDisplayBalance(expectedPrice),
+      totalSupply: nrwlStats.totalSupply,
+      circulatingSupply: nrwlStats.circulatingSupply,
+    };
+  }
+
   async getTombPriceInLastTWAP(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
     return Treasury.getWlrsUpdatedPrice();
   }
 
+  async getTombPriceInLastTWAPNrwl(): Promise<BigNumber> {
+    const { NrwlTreasury } = this.contracts;
+    return NrwlTreasury.getWlrsUpdatedPrice();
+  }
+
   async getBondsPurchasable(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
     return Treasury.getBurnableWlrsLeft();
+  }
+
+  async getBondsPurchasableNrwl(): Promise<BigNumber> {
+    const { NrwlTreasury } = this.contracts;
+    return NrwlTreasury.getBurnableWlrsLeft();
   }
 
   /**
@@ -450,6 +534,22 @@ export class TombFinance {
       return await poolContract.epocTombPerSecond(0);
     }
 
+    if (earnTokenName === 'NRWL') {
+      if (contractName.endsWith('GenesisNrwlRewardPool')) {
+        const rewardPerSecond = await poolContract.wlrsPerSecond();
+        return rewardPerSecond;
+      }
+
+      const poolStartTime = await poolContract.poolStartTime();
+      const startDateTime = new Date(poolStartTime.toNumber() * 1000);
+      const FOURTEEN_DAYS = 14 * 24 * 60 * 60 * 1000;
+      if (Date.now() - startDateTime.getTime() > FOURTEEN_DAYS) {
+        return await poolContract.epochTombPerSecond(1);
+      }
+
+      return await poolContract.epocTombPerSecond(0);
+    }
+
     const rewardPerSecond = await poolContract.wSharePerSecond();
     if (depositTokenName.startsWith('WLRS')) {
       if (depositTokenName === 'WLRS-USDIBS-LP') {
@@ -473,9 +573,13 @@ export class TombFinance {
   async getDepositTokenPriceInDollars(tokenName: string, token: ERC20) {
     let tokenPrice;
     const priceOfOneFtmInDollars = await this.getWFTMPriceFromPancakeswap();
-    if (tokenName === 'WLRS') {
+    if (tokenName === 'NRWL') {
+      tokenPrice = (await this.getNrwlStat()).priceInDollars;
+    } else if (tokenName === 'YUSD') {
+      tokenPrice = (await this.getYusdStat()).priceInDollars;
+    } else if (tokenName === 'WLRS') {
       tokenPrice = (await this.getTombStat()).priceInDollars;
-    } if (tokenName === 'WSHARE') {
+    } else if (tokenName === 'WSHARE') {
       tokenPrice = (await this.getShareStat()).priceInDollars;
     } else if (!tokenName.includes('-LP')) {
       tokenPrice = (await this.getTokenStat(tokenName)).priceInDollars;
@@ -487,7 +591,9 @@ export class TombFinance {
       tokenPrice = await this.getLPTokenPrice(token, this.TOMB, false);
     } else if (tokenName === 'GRAPE-WLRS-LP') {
       tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true);
-    }else {
+    } else if (tokenName === 'NRWL-YUSD-LP') {
+      tokenPrice = await this.getLPTokenPrice(token, this.NRWL, false);
+    } else {
       tokenPrice = await this.getTokenPriceFromPancakeswap(token);
       tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
     }
@@ -502,6 +608,11 @@ export class TombFinance {
   async getCurrentEpoch(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
     return Treasury.epoch();
+  }
+
+  async getCurrentEpochNrwl(): Promise<BigNumber> {
+    const { NrwlTreasury } = this.contracts;
+    return NrwlTreasury.epoch();
   }
 
   async getBondOraclePriceInLastTWAP(): Promise<BigNumber> {
@@ -519,6 +630,12 @@ export class TombFinance {
     return await Treasury.buyBonds(decimalToBalance(amount), treasuryTombPrice);
   }
 
+  async buyBondsNrwl(amount: string | number): Promise<TransactionResponse> {
+    const { NrwlTreasury } = this.contracts;
+    const treasuryTombPrice = await NrwlTreasury.getWlrsPrice();
+    return await NrwlTreasury.buyBonds(decimalToBalance(amount), treasuryTombPrice);
+  }
+
   /**
    * Redeem bonds for cash.
    * @param amount amount of bonds to redeem.
@@ -527,6 +644,12 @@ export class TombFinance {
     const { Treasury } = this.contracts;
     const priceForTomb = await Treasury.getWlrsPrice();
     return await Treasury.redeemBonds(decimalToBalance(amount), priceForTomb);
+  }
+
+  async redeemBondsNrwl(amount: string): Promise<TransactionResponse> {
+    const { NrwlTreasury } = this.contracts;
+    const priceForTomb = await NrwlTreasury.getWlrsPrice();
+    return await NrwlTreasury.redeemBonds(decimalToBalance(amount), priceForTomb);
   }
 
   async getTotalValueLocked(): Promise<Number> {
@@ -587,8 +710,63 @@ export class TombFinance {
     return tokenPrice;
   }
 
+  async getNrwlStat(): Promise<TokenStat> {
+    const { chainId } = this.config;
+    
+    const pairAddress = this.config.externalTokens['NRWL-YUSD-LP'][0];
+    const contract = new Contract(pairAddress, [
+      'function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast)',
+      'function token0() external view returns (address)',
+      'function token1() external view returns (address)'
+    ], this.provider);
+
+    const reserves = await contract.getReserves();
+    const token0Address = await contract.token0();
+    const token1Address = await contract.token1();
+
+    const { YUSD, NRWL } = this.config.externalTokens;
+    
+    const tokenA = new TokenSwapsicle(chainId, YUSD[0], YUSD[1]);
+    const tokenB = new TokenSwapsicle(chainId, NRWL[0], NRWL[1]);
+
+    const token0 = [tokenA, tokenB].find(token => token.address === token0Address);
+    const token1 = [tokenA, tokenB].find(token => token.address === token1Address);
+    const pair = new PairSwapsicle(
+      CurrencyAmountSwapsicle.fromRawAmount(token1, reserves.reserve1.toString()),
+      CurrencyAmountSwapsicle.fromRawAmount(token0, reserves.reserve0.toString()),
+    );
+
+    const route = new RouteSwapsicle([pair], tokenA, tokenB);
+    const tokenAmount = CurrencyAmountSwapsicle.fromRawAmount(tokenA, '1000000000000000000');
+    const trade = new TradeSwapsicle(route, tokenAmount, TradeTypeSwapsicle.EXACT_INPUT);
+    
+    const yusdStat = await this.getYusdStat();
+
+    const { NrwlYusdGenesisNrwlRewardPool, WlrsUsdcGenesisNrwlRewardPool, WshareUsdcGenesisNrwlRewardPool, WshareGenesisNrwlRewardPool } = this.contracts;
+    const supply = await this.NRWL.totalSupply();
+    const [supply1, supply2, supply3, supply4] = await Promise.all([
+      this.NRWL.balanceOf(NrwlYusdGenesisNrwlRewardPool.address),
+      this.NRWL.balanceOf(WlrsUsdcGenesisNrwlRewardPool.address),
+      this.NRWL.balanceOf(WshareGenesisNrwlRewardPool.address),
+      this.NRWL.balanceOf(WshareUsdcGenesisNrwlRewardPool.address),
+    ]);
+    const tombRewardPoolSupply = supply1.add(supply2).add(supply3).add(supply4);
+    const circulatingSupply = supply.sub(tombRewardPoolSupply);
+
+    return {
+      tokenInFtm: (1 / Number(trade.executionPrice.toSignificant(18))).toFixed(4),
+      priceInDollars: (1 / Number(trade.executionPrice.toSignificant(18)) * Number(yusdStat.priceInDollars)).toFixed(18),
+      totalSupply: getDisplayBalance(supply, this.NRWL.decimal, 0),
+      circulatingSupply: getDisplayBalance(circulatingSupply, this.NRWL.decimal, 0),
+    };
+  }
+
   async getTokenStat(tokenName: string): Promise<TokenStat> {
     switch(tokenName) {
+      case 'YUSD':
+        return this.getYusdStat();
+      case 'NRWL':
+        return this.getNrwlStat();
       case 'USDT':
         return this.getUsdtStat();
       case 'USDC':
@@ -613,6 +791,16 @@ export class TombFinance {
       default:
         throw new Error(`Unknown token name: ${tokenName}`);
     }
+  }
+
+  async getYusdStat(): Promise<TokenStat> {
+    const { data } = await axios('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=yusd-stablecoin');
+    return {
+      tokenInFtm: data[0].current_price,
+      priceInDollars: data[0].current_price,
+      totalSupply: '0',
+      circulatingSupply: '0',
+    };
   }
 
   async getUsdtStat(): Promise<TokenStat> {
@@ -792,6 +980,8 @@ export class TombFinance {
       }
       if (earnTokenName === 'WLRS') {
         return await pool.pendingWLRS(poolId, account);
+      } if (earnTokenName === 'NRWL') {
+        return await pool.pendingWLRS(poolId, account);
       } else {
         return await pool.pendingShare(poolId, account);
       }
@@ -866,6 +1056,13 @@ export class TombFinance {
       //throw new Error('you must unlock the wallet to continue.');
     }
     return this.contracts.Masonry;
+  }
+
+  currentMasonryNrwl(): Contract {
+    if (!this.masonryVersionOfUser) {
+      //throw new Error('you must unlock the wallet to continue.');
+    }
+    return this.contracts.NrwlBoardroom;
   }
 
   isOldMasonryMember(): boolean {
@@ -954,12 +1151,36 @@ export class TombFinance {
     return realAPR;
   }
 
+  async getMasonryAPRNrwl() {
+    const Masonry = this.currentMasonryNrwl();
+    const latestSnapshotIndex = await Masonry.latestSnapshotIndex();
+    const lastHistory = await Masonry.boardroomHistory(latestSnapshotIndex);
+
+    const lastRewardsReceived = lastHistory[1];
+
+    const TSHAREPrice = (await this.getShareStat()).priceInDollars;
+    const TOMBPrice = (await this.getNrwlStat()).priceInDollars;
+    const epochRewardsPerShare = lastRewardsReceived / 1e18;
+
+    //Mgod formula
+    const amountOfRewardsPerDay = epochRewardsPerShare * Number(TOMBPrice) * 4;
+    const masonrytShareBalanceOf = await this.TSHARE.balanceOf(Masonry.address);
+    const masonryTVL = Number(getDisplayBalance(masonrytShareBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
+    const realAPR = ((amountOfRewardsPerDay * 100) / masonryTVL) * 365;
+    return realAPR;
+  }
+
   /**
    * Checks if the user is allowed to retrieve their reward from the Masonry
    * @returns true if user can withdraw reward, false if they can't
    */
   async canUserClaimRewardFromMasonry(): Promise<boolean> {
     const Masonry = this.currentMasonry();
+    return await Masonry.canClaimReward(this.myAccount);
+  }
+
+  async canUserClaimRewardFromMasonryNrwl(): Promise<boolean> {
+    const Masonry = this.currentMasonryNrwl();
     return await Masonry.canClaimReward(this.myAccount);
   }
 
@@ -976,6 +1197,15 @@ export class TombFinance {
     return result;
   }
 
+  async canUserUnstakeFromMasonryNrwl(): Promise<boolean> {
+    const Masonry = this.currentMasonryNrwl();
+    const canWithdraw = await Masonry.canWithdraw(this.myAccount);
+    const stakedAmount = await this.getStakedSharesOnMasonryNrwl();
+    const notStaked = Number(getDisplayBalance(stakedAmount, this.TSHARE.decimal)) === 0;
+    const result = notStaked ? true : canWithdraw;
+    return result;
+  }
+
   async timeUntilClaimRewardFromMasonry(): Promise<BigNumber> {
     // const Masonry = this.currentMasonry();
     // const mason = await Masonry.members(this.myAccount);
@@ -987,6 +1217,11 @@ export class TombFinance {
     return await Masonry.totalSupply();
   }
 
+  async getTotalStakedInMasonryNrwl(): Promise<BigNumber> {
+    const Masonry = this.currentMasonryNrwl();
+    return await Masonry.totalSupply();
+  }
+
   async stakeShareToMasonry(amount: string): Promise<TransactionResponse> {
     if (this.isOldMasonryMember()) {
       throw new Error("you're using old boardroom. please withdraw and deposit the WSHARE again.");
@@ -995,8 +1230,21 @@ export class TombFinance {
     return await Masonry.stake(decimalToBalance(amount));
   }
 
+  async stakeShareToMasonryNrwl(amount: string): Promise<TransactionResponse> {
+    if (this.isOldMasonryMember()) {
+      throw new Error("you're using old boardroom. please withdraw and deposit the WSHARE again.");
+    }
+    const Masonry = this.currentMasonryNrwl();
+    return await Masonry.stake(decimalToBalance(amount));
+  }
+
   async getStakedSharesOnMasonry(): Promise<BigNumber> {
     const Masonry = this.currentMasonry();
+    return await Masonry.balanceOf(this.myAccount);
+  }
+
+  async getStakedSharesOnMasonryNrwl(): Promise<BigNumber> {
+    const Masonry = this.currentMasonryNrwl();
     return await Masonry.balanceOf(this.myAccount);
   }
 
@@ -1005,8 +1253,18 @@ export class TombFinance {
     return await Masonry.earned(this.myAccount);
   }
 
+  async getEarningsOnMasonryNrwl(): Promise<BigNumber> {
+    const Masonry = this.currentMasonryNrwl();
+    return await Masonry.earned(this.myAccount);
+  }
+
   async withdrawShareFromMasonry(amount: string): Promise<TransactionResponse> {
     const Masonry = this.currentMasonry();
+    return await Masonry.withdraw(decimalToBalance(amount));
+  }
+
+  async withdrawShareFromMasonryNrwl(amount: string): Promise<TransactionResponse> {
+    const Masonry = this.currentMasonryNrwl();
     return await Masonry.withdraw(decimalToBalance(amount));
   }
 
@@ -1015,8 +1273,18 @@ export class TombFinance {
     return await Masonry.claimReward();
   }
 
+  async harvestCashFromMasonryNrwl(): Promise<TransactionResponse> {
+    const Masonry = this.currentMasonryNrwl();
+    return await Masonry.claimReward();
+  }
+
   async exitFromMasonry(): Promise<TransactionResponse> {
     const Masonry = this.currentMasonry();
+    return await Masonry.exit();
+  }
+
+  async exitFromMasonryNrwl(): Promise<TransactionResponse> {
+    const Masonry = this.currentMasonryNrwl();
     return await Masonry.exit();
   }
 
@@ -1028,6 +1296,16 @@ export class TombFinance {
 
     return { from: prevAllocation, to: nextAllocation };
   }
+
+  async getTreasuryNextAllocationTimeNrwl(): Promise<AllocationTime> {
+    const { NrwlTreasury } = this.contracts;
+    const nextEpochTimestamp: BigNumber = await NrwlTreasury.nextEpochPoint();
+    const nextAllocation = new Date(nextEpochTimestamp.mul(1000).toNumber());
+    const prevAllocation = new Date(Date.now());
+
+    return { from: prevAllocation, to: nextAllocation };
+  }
+
   /**
    * This method calculates and returns in a from to to format
    * the period the user needs to wait before being allowed to claim
@@ -1041,6 +1319,34 @@ export class TombFinance {
     const mason = await Masonry.members(this.myAccount);
     const startTimeEpoch = mason.epochTimerStart;
     const period = await Treasury.PERIOD();
+    const periodInHours = period / 60 / 60; // 6 hours, period is displayed in seconds which is 21600
+    const rewardLockupEpochs = await Masonry.rewardLockupEpochs();
+    const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(rewardLockupEpochs);
+
+    const fromDate = new Date(Date.now());
+    if (targetEpochForClaimUnlock - currentEpoch <= 0) {
+      return { from: fromDate, to: fromDate };
+    } else if (targetEpochForClaimUnlock - currentEpoch === 1) {
+      const toDate = new Date(nextEpochTimestamp * 1000);
+      return { from: fromDate, to: toDate };
+    } else {
+      const toDate = new Date(nextEpochTimestamp * 1000);
+      const delta = targetEpochForClaimUnlock - currentEpoch - 1;
+      const endDate = moment(toDate)
+        .add(delta * periodInHours, 'hours')
+        .toDate();
+      return { from: fromDate, to: endDate };
+    }
+  }
+
+  async getUserClaimRewardTimeNrwl(): Promise<AllocationTime> {
+    const Masonry = this.currentMasonryNrwl();
+    const { NrwlTreasury } = this.contracts;
+    const nextEpochTimestamp = await Masonry.nextEpochPoint(); //in unix timestamp
+    const currentEpoch = await Masonry.epoch();
+    const mason = await Masonry.members(this.myAccount);
+    const startTimeEpoch = mason.epochTimerStart;
+    const period = await NrwlTreasury.PERIOD();
     const periodInHours = period / 60 / 60; // 6 hours, period is displayed in seconds which is 21600
     const rewardLockupEpochs = await Masonry.rewardLockupEpochs();
     const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(rewardLockupEpochs);
@@ -1079,6 +1385,34 @@ export class TombFinance {
     const fromDate = new Date(Date.now());
     const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(withdrawLockupEpochs);
     const stakedAmount = await this.getStakedSharesOnMasonry();
+    if (currentEpoch <= targetEpochForClaimUnlock && Number(stakedAmount) === 0) {
+      return { from: fromDate, to: fromDate };
+    } else if (targetEpochForClaimUnlock - currentEpoch === 1) {
+      const toDate = new Date(nextEpochTimestamp * 1000);
+      return { from: fromDate, to: toDate };
+    } else {
+      const toDate = new Date(nextEpochTimestamp * 1000);
+      const delta = targetEpochForClaimUnlock - Number(currentEpoch) - 1;
+      const endDate = moment(toDate)
+        .add(delta * PeriodInHours, 'hours')
+        .toDate();
+      return { from: fromDate, to: endDate };
+    }
+  }
+
+  async getUserUnstakeTimeNrwl(): Promise<AllocationTime> {
+    const Masonry = this.currentMasonryNrwl();
+    const { NrwlTreasury } = this.contracts;
+    const nextEpochTimestamp = await Masonry.nextEpochPoint();
+    const currentEpoch = await Masonry.epoch();
+    const mason = await Masonry.members(this.myAccount);
+    const startTimeEpoch = mason.epochTimerStart;
+    const period = await NrwlTreasury.PERIOD();
+    const PeriodInHours = period / 60 / 60;
+    const withdrawLockupEpochs = await Masonry.withdrawLockupEpochs();
+    const fromDate = new Date(Date.now());
+    const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(withdrawLockupEpochs);
+    const stakedAmount = await this.getStakedSharesOnMasonryNrwl();
     if (currentEpoch <= targetEpochForClaimUnlock && Number(stakedAmount) === 0) {
       return { from: fromDate, to: fromDate };
     } else if (targetEpochForClaimUnlock - currentEpoch === 1) {
@@ -1243,6 +1577,26 @@ export class TombFinance {
     /*}*/
     return [estimate[0] / 1e18, estimate[1] / 1e18];
   }
+
+  async estimateZapInNrwl(tokenName: string, lpName: string, amount: string): Promise<number[]> {
+    const { NrwlZap } = this.contracts;
+    const lpToken = this.externalTokens[lpName];
+    let estimate;
+    if (parseFloat(amount) === 0) {
+      return [0,0];
+    }
+
+    const token = tokenName === NRWL_TICKER ? this.NRWL : this.YUSD;
+    estimate = await NrwlZap.estimateZapInToken(
+      token.address,
+      lpToken.address,
+      SWAPSICLE_ROUTER_ADDR,
+      parseUnits(amount, 18),
+    );
+
+    return [estimate[0] / 1e18, estimate[1] / 1e18];
+  }
+
   async zapIn(tokenName: string, lpName: string, amount: string): Promise<TransactionResponse> {
     const { zapper } = this.contracts;
     const lpToken = this.externalTokens[lpName];
@@ -1262,6 +1616,22 @@ export class TombFinance {
       );
     /*}*/
   }
+
+  async zapInNrwl(tokenName: string, lpName: string, amount: string): Promise<TransactionResponse> {
+    const { NrwlZap } = this.contracts;
+    const lpToken = this.externalTokens[lpName];
+
+    const token = tokenName === NRWL_TICKER ? this.NRWL : this.YUSD;
+    // console.log(parseUnits(amount, token.decimal).toString(), NrwlZap.address, token.address, lpToken.address, SWAPSICLE_ROUTER_ADDR);
+    return await NrwlZap.zapInToken(
+      token.address,
+      parseUnits(amount, token.decimal),
+      lpToken.address,
+      SWAPSICLE_ROUTER_ADDR,
+      this.myAccount,
+    );
+  }
+
   async swapTBondToTShare(tbondAmount: BigNumber): Promise<TransactionResponse> {
     const { TShareSwapper } = this.contracts;
     return await TShareSwapper.swapTBondToTShare(tbondAmount);

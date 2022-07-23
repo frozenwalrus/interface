@@ -59,12 +59,12 @@ const Pit: React.FC = () => {
 
   return (
     <Switch>
-      <Page>
+      <>
         <BackgroundImage />
         {!!account ? (
           <>
             <Route exact path={path}>
-              <PageHeader icon={'🏦'} title="Purchase & Redeem Bonds" subtitle="Earn premiums upon redemption" />
+              <PageHeader icon={'🏦'} title="Purchase & Redeem WLRS Bonds" subtitle="Earn premiums upon redemption" />
             </Route>
             <StyledBond>
               <StyledCardWrapper>
@@ -114,7 +114,7 @@ const Pit: React.FC = () => {
         ) : (
           <UnlockWallet />
         )}
-      </Page>
+      </>
     </Switch>
   );
 };

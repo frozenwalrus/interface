@@ -12,7 +12,6 @@ import { Box, Card, CardContent, Typography, Grid } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
 import UnlockWallet from '../../components/UnlockWallet';
-import Page from '../../components/Page';
 
 import { getDisplayBalance } from '../../utils/formatBalance';
 import useCurrentEpoch from '../../hooks/useCurrentEpoch';
@@ -52,12 +51,12 @@ const Masonry = () => {
   const { to } = useTreasuryAllocationTimes();
 
   return (
-    <Page>
+    <>
       <BackgroundImage />
       {!!account ? (
         <>
           <Typography align="center" variant="h3" gutterBottom>
-            Boardroom
+            WLRS Boardroom
           </Typography>
           <Box mt={5}>
             <Grid container justify="center" spacing={3}>
@@ -146,7 +145,7 @@ const Masonry = () => {
       ) : (
         <UnlockWallet />
       )}
-    </Page>
+    </>
   );
 };
 

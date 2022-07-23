@@ -25,6 +25,11 @@ import grapeLogoPNG from '../../assets/img/grape.png';
 import grapeWlrsLP from '../../assets/img/grape-wlrs.png';
 import wlrsUsdibsLP from '../../assets/img/wlrs-usdibs.png';
 
+import yusdPNG from '../../assets/img/yusd.png';
+import nrwlSVG from '../../assets/img/nrwl.svg';
+import nbondSVG from '../../assets/img/nbond.svg';
+import nrwlYusdPNG from '../../assets/img/nrwl-yusd.png';
+
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
   //=====================
@@ -52,6 +57,11 @@ const logosBySymbol: { [title: string]: string } = {
   'WLRS-USDIBS-LP': wlrsUsdibsLP,
   'GRAPE-WLRS-LP': grapeWlrsLP,
   'SNO-SNOSHARE-LP': tshareFtmLpLogo,
+
+  YUSD: yusdPNG,
+  NRWL: nrwlSVG,
+  NBOND: nbondSVG,
+  'NRWL-YUSD-LP': nrwlYusdPNG,
 };
 
 type LogoProps = {

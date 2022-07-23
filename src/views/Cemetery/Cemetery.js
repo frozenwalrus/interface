@@ -10,6 +10,7 @@ import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 import CemeteryCard from './CemeteryCard';
 import GenesisCard from './GenesisCard';
+import NrwlGenesisCard from './NrwlGenesisCard';
 import CemeteryImage from '../../assets/img/SVG_Icons_and_web_bg/bg.svg';
 import { createGlobalStyle } from 'styled-components';
 
@@ -61,23 +62,50 @@ const Cemetery = () => {
                 </div>
               </Box>
 
-              <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
-                  <Typography variant="h4" gutterBottom style={{marginTop: '20px', color: '5#A381A'}}>
-                    Genesis Pools
-                  </Typography>
-                  {
-                    config.baseLaunchDate.getTime() + 48 * 60 * 60 * 1000 < new Date().getTime()
-                      ? (
-                          <Alert variant="filled" severity="error" >
-                            Genesis pools have ended. Please claim all rewards and remove funds from Genesis pools.
-                          </Alert>
-                        )
-                      : null
-                  }
-                  <Grid container spacing={3} style={{marginTop: '20px'}}>
-                    <GenesisCard />
-                  </Grid>
-                </div>
+              {/* <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
+                <Typography variant="h4" gutterBottom style={{marginTop: '20px', color: '5#A381A'}}>
+                  Genesis Pools
+                </Typography>
+                {
+                  config.baseLaunchDate.getTime() + 48 * 60 * 60 * 1000 < new Date().getTime()
+                    ? (
+                        <Alert variant="filled" severity="error" >
+                          Genesis pools have ended. Please claim all rewards and remove funds from Genesis pools.
+                        </Alert>
+                      )
+                    : null
+                }
+                <Grid container spacing={3} style={{marginTop: '20px'}}>
+                  <GenesisCard />
+                </Grid>
+              </div> */}
+
+              <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 5).length === 0}>
+                <Typography variant="h4" gutterBottom style={{marginTop: '50px', color: '5#A381A'}}>
+                  NRWL Genesis Pools
+                </Typography>
+                {
+                  config.nrwlLaunchDate.getTime() + 14 * 24 * 60 * 60 * 1000 < new Date().getTime()
+                    ? (
+                        <Alert variant="filled" severity="error" >
+                          NRWL Genesis pools have ended. Please claim all rewards and remove funds from Genesis pools.
+                        </Alert>
+                      )
+                    : null
+                }
+                {
+                  config.nrwlLaunchDate.getTime() > new Date().getTime()
+                    ? (
+                        <Alert variant="filled" severity="success">
+                          NRWL Genesis pools start on July 24th at 14:00 UTC. Pre-staking is open.
+                        </Alert>
+                      )
+                    : null
+                }
+                <Grid container spacing={3} style={{marginTop: '20px'}}>
+                  <NrwlGenesisCard />
+                </Grid>
+              </div>
             </Container>
           ) : (
             <UnlockWallet />
