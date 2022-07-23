@@ -148,7 +148,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
                           <FlashOnIcon style={{color: '#ccc'}} />
                         </IconButton>
                   }
-                  {
+                  {/* {
                     bank.depositTokenName === 'NRWL-YUSD-LP'
                       ? <IconButton
                           disabled={bank.closedForStaking}
@@ -157,7 +157,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
                           <FlashOnIcon style={{color: '#ccc'}} />
                         </IconButton>
                       : null
-                  }
+                  } */}
                   <StyledActionSpacer />
                   <IconButton
                     disabled={bank.closedForStaking}
