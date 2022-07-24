@@ -537,7 +537,16 @@ export class TombFinance {
     if (earnTokenName === 'NRWL') {
       if (contractName.endsWith('GenesisNrwlRewardPool')) {
         const rewardPerSecond = await poolContract.wlrsPerSecond();
-        return rewardPerSecond;
+          if (depositTokenName === 'WSHARE') {
+            return rewardPerSecond.mul(10000).div(100000); 
+          } else if (depositTokenName === 'NRWL-YUSD-LP') {
+            return rewardPerSecond.mul(40000).div(100000); 
+          } else if (depositTokenName === 'WLRS-USDC-LP') {
+            return rewardPerSecond.mul(30000).div(100000); 
+          } else if (depositTokenName === 'WSHARE-USDC-LP') {
+            return rewardPerSecond.mul(20000).div(100000); 
+          }
+        return rewardPerSecond.div(24);
       }
 
       const poolStartTime = await poolContract.poolStartTime();
@@ -547,7 +556,7 @@ export class TombFinance {
         return await poolContract.epochTombPerSecond(1);
       }
 
-      return await poolContract.epocTombPerSecond(0);
+      return await poolContract.epochTombPerSecond(0);
     }
 
     const rewardPerSecond = await poolContract.wSharePerSecond();
