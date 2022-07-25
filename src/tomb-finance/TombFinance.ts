@@ -84,14 +84,11 @@ export class TombFinance {
     this.DIBS = this.externalTokens['DIBS'];
     this.GRAPE = this.externalTokens['GRAPE'];
     this.USDIBS = this.externalTokens['USDIBS'];
-
     this.YUSD = this.externalTokens['YUSD'];
     this.NRWL = this.externalTokens['NRWL'];
     this.NBOND = this.externalTokens['NBOND'];
-
     // Uniswap V2 Pair
     this.TOMBWFTM_LP = new Contract(externalTokens['WLRS-USDC-LP'][0], IUniswapV2PairABI, provider);
-
     this.config = cfg;
     this.provider = provider;
   }
@@ -139,10 +136,8 @@ export class TombFinance {
       this.getTokenPriceFromPancakeswap(this.TOMB),
       this.getWFTMPriceFromPancakeswap(),
     ]);
-
     const tombCirculatingSupply = supply.sub(25000);
     const priceOfTombInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(18);
-
     return {
       tokenInFtm: priceInFTM,
       priceInDollars: priceOfTombInDollars,
@@ -164,7 +159,6 @@ export class TombFinance {
     let isTomb = name.startsWith('WLRS'); // name === 'WLRS-USDC-LP';
     let tokenAmountBN = await token0.balanceOf(lpToken.address);
     let tokenAmount = getDisplayBalance(tokenAmountBN, token0.decimal);
-
     let ftmAmountBN = await this.FTM.balanceOf(lpToken.address);
     let ftmAmount = getDisplayBalance(ftmAmountBN, this.FTM.decimal);
     let tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply) / 10**6;
@@ -203,7 +197,6 @@ export class TombFinance {
     const isDibs = true;
     const tokenAmountBN = await token0.balanceOf(lpToken.address);
     const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
-
     const ftmAmountBN = await this.YUSD.balanceOf(lpToken.address);
     const ftmAmount = getDisplayBalance(ftmAmountBN, 18);
     const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);

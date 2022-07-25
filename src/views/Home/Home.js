@@ -9,17 +9,16 @@ import CountUp from 'react-countup';
 import TokenSymbol from '../../components/TokenSymbol';
 import useTombStats from '../../hooks/useTombStats';
 import useLpStats from '../../hooks/useLpStats';
+import useLpStatsNrwl from '../../hooks/useLpStatsNrwl';
 import useFantomPrice from '../../hooks/useFantomPrice.js';
 import useBondStats from '../../hooks/useBondStats';
 import usetShareStats from '../../hooks/usetShareStats';
 import useNrwlStats from '../../hooks/useNrwlStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
-
 import { Box, Button, CardContent, Grid, Typography, useMediaQuery } from '@material-ui/core';
 import Card from '../../components/Card';
 // import tvl from '../../assets/img/tvl.svg';
 import tvl from '../../assets/img/TVL-Icon.png';
-
 import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
 import useTokenBalance from '../../hooks/useTokenBalance';
@@ -73,6 +72,7 @@ const Home = () => {
   const TVL = useTotalValueLocked();
   const tombFtmLpStats = useLpStats('WLRS-USDC-LP');
   const tShareFtmLpStats = useLpStats('WSHARE-USDC-LP');
+  const nrwlLpStats = useLpStatsNrwl('NRWL-YUSD-LP'); 
   const tombStats = useTombStats();
   const tShareStats = usetShareStats();
   const nrwlStats = useNrwlStats();
@@ -99,6 +99,8 @@ const Home = () => {
 
   const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
+  const nrwlLPStats = useMemo(() => (nrwlLpStats ? nrwlLpStats : null), [nrwlLpStats]);
+
 
   const tombPriceInDollars = useMemo(() => (tombStats ? Number(tombStats.priceInDollars).toFixed(2) : null), [tombStats]);
   const tombPriceInFTM = useMemo(() => (tombStats ? Number(tombStats.tokenInFtm).toFixed(4) : null), [tombStats]);
@@ -328,7 +330,19 @@ const Home = () => {
             }}
             gutterBottom
           >
-            Welcome to Walrus
+            Welcome to Frozen Walrus
+          </Typography>
+          <Typography
+            variant="h1"
+            style={{
+              fontWeight: 700,
+              textAlign: 'center',
+              fontSize: 24,
+              ...(!matches ? { fontSize: 24 } : {}),
+            }}
+            gutterBottom
+          >
+            Genesis Pools for NRWL are now <a href="https://app.frozenwalrus.finance/farms">open!</a> 
           </Typography>
           <Card>
             <CardContent
@@ -347,7 +361,7 @@ const Home = () => {
           </Card>
         </Grid>
 
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center">
               <h2>WLRS-USDC.e LP</h2>
@@ -368,7 +382,7 @@ const Home = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center">
               <h2>WSHARE-USDC.e LP</h2>
@@ -386,6 +400,28 @@ const Home = () => {
                 Liquidity: ${tshareLPStats?.totalLiquidity ? tshareLPStats.totalLiquidity : '-.--'}
                 <br />
                 Total supply: {tshareLPStats?.totalSupply ? (Number(tshareLPStats.totalSupply) < 1/10**4 ? (Number(tshareLPStats.totalSupply) * 10**6).toFixed(4) + 'µ' : tshareLPStats.totalSupply) : '-.--'}
+              </span>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Card>
+            <CardContent align="center">
+              <h2>NRWL-YUSD LP</h2>
+              <div style={{ position: 'absolute', right: 5, top: 5 }}>
+                <TokenSymbol size={50} symbol="WSHARE-USDC-LP" />
+              </div>
+              <Box mt={2}>
+                <span style={{ fontSize: '26px' }}>
+                  {nrwlLPStats?.tokenAmount ? nrwlLPStats?.tokenAmount : '-.--'} NRWL /{' '}
+                  {nrwlLPStats?.ftmAmount ? nrwlLPStats?.ftmAmount : '-.--'} YUSD
+                </span>
+              </Box>
+              <Box>${nrwlLPStats?.priceOfOne ? nrwlLPStats.priceOfOne : '-.--'}</Box>
+              <span style={{ fontSize: '12px' }}>
+                Liquidity: ${nrwlLPStats?.totalLiquidity ? nrwlLPStats.totalLiquidity : '-.--'}
+                <br />
+                Total supply: {nrwlLPStats?.totalSupply ? (Number(nrwlLPStats.totalSupply) < 1/10**4 ? (Number(nrwlLPStats.totalSupply) * 10**6).toFixed(4) + 'µ' : nrwlLPStats.totalSupply) : '-.--'}
               </span>
             </CardContent>
           </Card>
