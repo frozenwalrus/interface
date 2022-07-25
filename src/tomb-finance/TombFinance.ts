@@ -535,20 +535,27 @@ export class TombFinance {
     }
 
     if (earnTokenName === 'NRWL') {
-      if (contractName.endsWith('GenesisNrwlRewardPool')) {
+      if (contractName.endsWith('WlrsUsdcGenesisNrwlRewardPool')) {
         const rewardPerSecond = await poolContract.wlrsPerSecond();
-          if (depositTokenName === 'WSHARE') {
-            return rewardPerSecond.mul(10000).div(100000); 
-          } else if (depositTokenName === 'NRWL-YUSD-LP') {
-            return rewardPerSecond.mul(40000).div(100000); 
-          } else if (depositTokenName === 'WLRS-USDC-LP') {
-            return rewardPerSecond.mul(30000).div(100000); 
-          } else if (depositTokenName === 'WSHARE-USDC-LP') {
-            return rewardPerSecond.mul(20000).div(100000); 
-          }
         return rewardPerSecond.div(24);
       }
+      else if (contractName.endsWith('NrwlYusdGenesisNrwlRewardPool')) {
+        const rewardPerSecond = await poolContract.wlrsPerSecond();
+        return rewardPerSecond.div(24);
+      }
+      else if (contractName.endsWith('WshareUsdcGenesisNrwlRewardPool')) {
+        const rewardPerSecond = await poolContract.wlrsPerSecond();
+        return rewardPerSecond.div(24);
+      }
+      else if (contractName.endsWith('WshareGenesisNrwlRewardPool')) {
+        const rewardPerSecond = await poolContract.wlrsPerSecond();
+        return rewardPerSecond.div(24);
+      }
+    
 
+     
+  
+    
       const poolStartTime = await poolContract.poolStartTime();
       const startDateTime = new Date(poolStartTime.toNumber() * 1000);
       const FOURTEEN_DAYS = 14 * 24 * 60 * 60 * 1000;
