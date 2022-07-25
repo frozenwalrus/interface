@@ -24,7 +24,7 @@ import avaxLogoPNG from '../../assets/img/avax.png';
 import grapeLogoPNG from '../../assets/img/grape.png';
 import grapeWlrsLP from '../../assets/img/grape-wlrs.png';
 import wlrsUsdibsLP from '../../assets/img/wlrs-usdibs.png';
-
+import nrwlPNG from '../../assets/img/nrwl.png'; 
 import yusdPNG from '../../assets/img/yusd.png';
 import nrwlSVG from '../../assets/img/nrwl.svg';
 import nbondSVG from '../../assets/img/nbond.svg';
@@ -59,6 +59,7 @@ const logosBySymbol: { [title: string]: string } = {
   'SNO-SNOSHARE-LP': tshareFtmLpLogo,
 
   YUSD: yusdPNG,
+  NRWLPNG: nrwlPNG, 
   NRWL: nrwlSVG,
   NBOND: nbondSVG,
   'NRWL-YUSD-LP': nrwlYusdPNG,
