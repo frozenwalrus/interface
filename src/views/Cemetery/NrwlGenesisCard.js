@@ -30,6 +30,16 @@ const NrwlGenesisCard = () => {
             >
               Stake
             </Button>
+            <Button
+              color="primary"
+              size="small"
+              target="_blank"
+              style={{ width: '40%', height: '40px', marginBottom: '10%', textAlign: 'center' }}
+              variant="contained"
+              href="https://www.swapsicle.io/add/0x111111111111ed1D73f860F57b2798b683f2d325/0x501012893eE88976AB8B5289B7a78E307d5d9DCb"
+            >
+              Add Liquidity 
+            </Button>
           </CardActions>
         </Card>
       </Grid>
@@ -52,13 +62,23 @@ const NrwlGenesisCard = () => {
               component={Link}
               to={`/farms/WlrsUsdcGenesisNrwlRewardPool/`}
             >
-              Stake
+              Stake 
+            </Button>
+            <Button
+              color="primary"
+              size="small"
+              target="_blank"
+              style={{ width: '40%', height: '40px', marginBottom: '10%', textAlign: 'center' }}
+              variant="contained"
+              href="https://traderjoexyz.com/pool/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/0x395908aeb53d33A9B8ac35e148E9805D34A555D3#/"
+            >
+              Add Liquidity 
             </Button>
           </CardActions>
         </Card>
       </Grid>
       <Grid item xs={12} sm={3}>
-        <Card>
+        <Card >
           <CardContent align="center">
             <Typography variant="h5" component="h2">
               WSHARE-USDC.e LP
@@ -77,6 +97,16 @@ const NrwlGenesisCard = () => {
               to={`/farms/WshareUsdcGenesisNrwlRewardPool/`}
             >
               Stake
+              </Button>
+              <Button
+              color="primary"
+              size="small"
+              target="_blank"
+              style={{ width: '40%', height: '40px', marginBottom: '10%', textAlign: 'center' }}
+              variant="contained"
+              href="https://traderjoexyz.com/pool/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6#/"
+            >
+              Add Liquidity
             </Button>
           </CardActions>
         </Card>
@@ -101,6 +131,16 @@ const NrwlGenesisCard = () => {
               to={`/farms/WshareGenesisNrwlRewardPool/`}
             >
               Stake
+            </Button>
+            <Button
+              color="primary"
+              size="small"
+              target="_blank"
+              style={{ width: '40%', height: '40px', marginBottom: '10%', textAlign: 'center' }}
+              variant="contained"
+              href="https://traderjoexyz.com/trade?inputCurrency=0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664&outputCurrency=0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6#/"
+            >
+              Buy WSHARE
             </Button>
           </CardActions>
         </Card>
