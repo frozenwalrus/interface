@@ -36,53 +36,59 @@ const Boardroom = () => {
               <Typography align="center" variant="h2" style={{ marginTop: '10px', marginBottom: '30px' }}>
                 Boardrooms
               </Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={3}>
+              <Grid container spacing={3} style={{ justifyContent: "center" }}>
+                <Grid item xs={12} sm={4} >
                   <Card>
                     <CardContent align="center">
+                      <Typography variant="h2" component="h2">
+                         <b>Walrus</b>
+                      </Typography>
                       <Typography variant="h5" component="h2">
-                        WLRS
+                         <b>WLRS</b>
                       </Typography>
                       <Box mt={2}>
-                        <TokenSymbol symbol="WLRS" />
+                        <TokenSymbol symbol="WLRS" style={{ height: "100%"}} />
                       </Box>
-                      <p style={{marginBottom: '0'}}>Stake WSHARE to earn $WLRS</p>
+                      <p style={{marginBottom: '0', fontSize: "1.2rem", fontWeight: "600" }}> Stake WSHARE <br /> Earn WLRS</p>
                     </CardContent>
                     <CardActions style={{ justifyContent: 'center' }}>
                       <Button
                         color="primary"
-                        size="small"
-                        style={{ width: '200px', height: '40px', marginBottom: '10%' }}
+                        size="large"
+                        style={{ width: '200px', height: '40px', marginBottom: '10%', borderRadius: '10px' }}
                         variant="contained"
                         component={Link}
                         to={`/boardroom/wlrs`}
                       >
-                        View and Stake
+                      <b>  View and Stake </b>
                       </Button>
                     </CardActions>
                   </Card>
                 </Grid>
-                <Grid item xs={12} sm={3}>
+                <Grid item xs={12} sm={4}>
                   <Card>
                     <CardContent align="center">
+                      <Typography variant="h2" component="h2">
+                       <b> Narwhal</b>
+                      </Typography>
                       <Typography variant="h5" component="h2">
-                        NRWL
+                      <b>  NRWL</b>
                       </Typography>
                       <Box mt={2}>
-                        <TokenSymbol symbol="NRWL" />
+                      <TokenSymbol symbol="NRWL" />
                       </Box>
-                      <p style={{marginBottom: '0'}}>Stake WSHARE to earn $NRWL</p>
+                      <p style={{marginBottom: '0', fontSize: "1.2rem", fontWeight: "600" }}>Stake WSHARE<br /> Earn NRWL</p>
                     </CardContent>
                     <CardActions style={{ justifyContent: 'center' }}>
                       <Button
                         color="primary"
-                        size="small"
-                        style={{ width: '200px', height: '40px', marginBottom: '10%' }}
+                        size="large"
+                        style={{ width: '200px', height: '40px', marginBottom: '10%', borderRadius: '10px'}}
                         variant="contained"
                         component={Link}
                         to={`/boardroom/nrwl`}
                       >
-                        View and Stake
+                        <b>View and Stake </b>
                       </Button>
                     </CardActions>
                   </Card>
