@@ -136,7 +136,7 @@ const NrwlBoardroom = () => {
             <Grid container justify="center">
               <Box mt={3} style={{ width: '600px' }}>
                 <Alert variant="filled" severity="info">
-                  Earned NRWL can only be withdrawn after 4 epochs since deposit.
+                  Earned NRWL can only be withdrawn after 2 epochs since deposit.
                 </Alert>
               </Box>
             </Grid>
