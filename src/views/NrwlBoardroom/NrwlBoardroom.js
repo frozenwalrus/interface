@@ -70,93 +70,91 @@ const NrwlBoardroom = () => {
                 </Alert>
               </Box>
             )
-            : (
-                <Box mt={5}>
-                <Grid container justify="center" spacing={3}>
-                  <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                    <Card
-                      style={{ background: '#161414', borderRadius: '15px', height: '100px' }}
-                      className={classes.gridItem}
-                    >
-                      <CardContent>
-                        <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>Next Epoch</h3>
-                        <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                  <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                    <Card
-                      style={{ background: '#161414', borderRadius: '15px', height: '100px' }}
-                      className={classes.gridItem}
-                    >
-                      <CardContent align="center">
-                        <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>Current Epoch</h3>
-                        <h2 style={{ fontWeight: 'lighter' }}>{Number(currentEpoch)}</h2>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                  <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                    <Card
-                      style={{ background: '#161414', borderRadius: '15px', height: '100px' }}
-                      className={classes.gridItem}
-                    >
-                      <CardContent align="center">
-                        <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>
-                          NRWL Price<small> (TWAP)</small>
-                        </h3>
-                        <h2 style={{ fontWeight: 'lighter' }}>{scalingFactor} YUSD</h2>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                  <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                    <Card
-                      style={{ background: '#161414', borderRadius: '15px', height: '100px' }}
-                      className={classes.gridItem}
-                    >
-                      <CardContent align="center">
-                        <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>APR</h3>
-                        <h2 style={{ fontWeight: 'lighter' }}>{masonryAPR.toFixed(2)}%</h2>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                  <Grid item xs={12} md={2} lg={2}>
-                    <Card
-                      style={{ background: '#161414', borderRadius: '15px', height: '100px' }}
-                      className={classes.gridItem}
-                    >
-                      <CardContent align="center">
-                        <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>Shares Staked</h3>
-                        <h2 style={{ fontWeight: 'lighter' }}>{getDisplayBalance(totalStaked)}</h2>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                </Grid>
-
-                <Grid container justify="center">
-                  <Box mt={3} style={{ width: '600px' }}>
-                    <Alert variant="filled" severity="info">
-                      Earned NRWL can only be withdrawn after 2 epochs since deposit.
-                    </Alert>
-                  </Box>
-                </Grid>
-
-                <Box mt={4}>
-                  <StyledBoardroom>
-                    <StyledCardsWrapper>
-                      <StyledCardWrapper>
-                        <Harvest />
-                      </StyledCardWrapper>
-                      <Spacer />
-                      <StyledCardWrapper>
-                        <Stake />
-                      </StyledCardWrapper>
-                    </StyledCardsWrapper>
-                  </StyledBoardroom>
-                </Box>
-              </Box>
-            )
+            : null
           }
-          
+          <Box mt={5}>
+            <Grid container justify="center" spacing={3}>
+              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
+                <Card
+                  style={{ background: '#161414', borderRadius: '15px', height: '100px' }}
+                  className={classes.gridItem}
+                >
+                  <CardContent>
+                    <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>Next Epoch</h3>
+                    <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
+                <Card
+                  style={{ background: '#161414', borderRadius: '15px', height: '100px' }}
+                  className={classes.gridItem}
+                >
+                  <CardContent align="center">
+                    <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>Current Epoch</h3>
+                    <h2 style={{ fontWeight: 'lighter' }}>{Number(currentEpoch)}</h2>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
+                <Card
+                  style={{ background: '#161414', borderRadius: '15px', height: '100px' }}
+                  className={classes.gridItem}
+                >
+                  <CardContent align="center">
+                    <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>
+                      NRWL Price<small> (TWAP)</small>
+                    </h3>
+                    <h2 style={{ fontWeight: 'lighter' }}>{scalingFactor} YUSD</h2>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
+                <Card
+                  style={{ background: '#161414', borderRadius: '15px', height: '100px' }}
+                  className={classes.gridItem}
+                >
+                  <CardContent align="center">
+                    <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>APR</h3>
+                    <h2 style={{ fontWeight: 'lighter' }}>{masonryAPR.toFixed(2)}%</h2>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} md={2} lg={2}>
+                <Card
+                  style={{ background: '#161414', borderRadius: '15px', height: '100px' }}
+                  className={classes.gridItem}
+                >
+                  <CardContent align="center">
+                    <h3 style={{ textAlign: 'center', color: '#5686d6', fontSize: '18px' }}>Shares Staked</h3>
+                    <h2 style={{ fontWeight: 'lighter' }}>{getDisplayBalance(totalStaked)}</h2>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
+
+            <Grid container justify="center">
+              <Box mt={3} style={{ width: '600px' }}>
+                <Alert variant="filled" severity="info">
+                  Earned NRWL can only be withdrawn after 4 epochs since deposit.
+                </Alert>
+              </Box>
+            </Grid>
+
+            <Box mt={4}>
+              <StyledBoardroom>
+                <StyledCardsWrapper>
+                  <StyledCardWrapper>
+                    <Harvest />
+                  </StyledCardWrapper>
+                  <Spacer />
+                  <StyledCardWrapper>
+                    <Stake />
+                  </StyledCardWrapper>
+                </StyledCardsWrapper>
+              </StyledBoardroom>
+            </Box>
+          </Box>
         </>
       ) : (
         <UnlockWallet />
