@@ -409,7 +409,7 @@ const Home = () => {
             <CardContent align="center">
               <h2>NRWL-YUSD LP</h2>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol size={50} symbol="WSHARE-USDC-LP" />
+                <TokenSymbol size={50} symbol="NRWL-YUSD-LP" />
               </div>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
