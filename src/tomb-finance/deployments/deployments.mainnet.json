@@ -18048,7 +18048,7 @@
     ]
   },
   "NrwlOracle": {
-    "address": "0x2B920C112457d59D07B0352F218D427b18A822b6",
+    "address": "0x89Da9B662C2979546F93C12855bA89B8d6F77C11",
     "abi": [
       {
         "inputs": [
@@ -18453,7 +18453,7 @@
     ]
   },
   "NrwlTreasury": {
-    "address": "0x2F4ff238a03E018856C69f9baAc7f423Cc3D0629",
+    "address": "0x64cc69e81B91486cBD3000DE9176d359E3BC6B6A",
     "abi": [
       {
         "anonymous": false,
@@ -19781,7 +19781,7 @@
     ]
   },
   "NrwlBoardroom": {
-    "address": "0x4160d589B6Ea7122E099De5F31a53e5C4c065c89",
+    "address": "0xc06715dC67969C81069B0F91d95a611FEb3d526E",
     "abi": [
       {
         "anonymous": false,
