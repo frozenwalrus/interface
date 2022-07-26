@@ -464,7 +464,7 @@ export class TombFinance {
     const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
     const stakeInPool = (await depositToken.balanceOf(bank.address)).mul(bank.depositTokenName.endsWith('USDC-LP') ? 10**6 : 1);
     const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal, depositToken.decimal === 6 ? 3 : 9));
-    const stat = bank.earnTokenName === 'WLRS' ? await this.getTombStat() : await this.getShareStat();
+    const stat = bank.earnTokenName === 'WLRS' ? await this.getTombStat() : bank.earnTokenName === 'NRWL'? await this.getNrwlStat() : await this.getShareStat(); 
     const tokenPerSecond = await this.getTokenPerSecond(
       bank.earnTokenName,
       bank.contract,
@@ -473,7 +473,6 @@ export class TombFinance {
     );
 
     let tokenPerHour = tokenPerSecond.mul(60).mul(60);
-
     const totalRewardPricePerYear =
       Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24).mul(365)));
     const totalRewardPricePerDay = Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24)));
@@ -530,34 +529,30 @@ export class TombFinance {
     if (earnTokenName === 'NRWL') {
       if (contractName.endsWith('WlrsUsdcGenesisNrwlRewardPool')) {
         const rewardPerSecond = await poolContract.wlrsPerSecond();
-        return rewardPerSecond.div(24);
+        return rewardPerSecond;
       }
       else if (contractName.endsWith('NrwlYusdGenesisNrwlRewardPool')) {
         const rewardPerSecond = await poolContract.wlrsPerSecond();
-        return rewardPerSecond.div(24);
+        return rewardPerSecond;
       }
       else if (contractName.endsWith('WshareUsdcGenesisNrwlRewardPool')) {
         const rewardPerSecond = await poolContract.wlrsPerSecond();
-        return rewardPerSecond.div(24);
+        return rewardPerSecond;
       }
       else if (contractName.endsWith('WshareGenesisNrwlRewardPool')) {
         const rewardPerSecond = await poolContract.wlrsPerSecond();
-        return rewardPerSecond.div(24);
+        return rewardPerSecond;
       }
-    
-
-     
-  
     
       const poolStartTime = await poolContract.poolStartTime();
       const startDateTime = new Date(poolStartTime.toNumber() * 1000);
       const FOURTEEN_DAYS = 14 * 24 * 60 * 60 * 1000;
-      if (Date.now() - startDateTime.getTime() > FOURTEEN_DAYS) {
+       if (Date.now() - startDateTime.getTime() > FOURTEEN_DAYS) {
         return await poolContract.epochTombPerSecond(1);
       }
 
       return await poolContract.epochTombPerSecond(0);
-    }
+    } 
 
     const rewardPerSecond = await poolContract.wSharePerSecond();
     if (depositTokenName.startsWith('WLRS')) {
@@ -673,13 +668,11 @@ export class TombFinance {
         this.getDepositTokenPriceInDollars(bankInfo.depositTokenName, token),
         token.balanceOf(pool.address)
       ]);
-
       const value = Number(getDisplayBalance(tokenAmountInPool, token.decimal, 6)) * Number(tokenPrice);
       let poolValue = Number.isNaN(value) ? 0 : value;
       if (bankInfo.depositTokenName.endsWith('-USDC-LP')) {
         poolValue = poolValue * 10**6;
       }
-
       totalValue += poolValue;
     }
 
@@ -690,7 +683,6 @@ export class TombFinance {
       this.getShareStat(),
       this.TSHARE.balanceOf(this.currentMasonry().address)
     ]);
-
     const TSHAREPrice = shareStat.priceInDollars;
     const masonryTVL = Number(getDisplayBalance(masonrytShareBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
 
@@ -721,36 +713,28 @@ export class TombFinance {
 
   async getNrwlStat(): Promise<TokenStat> {
     const { chainId } = this.config;
-    
     const pairAddress = this.config.externalTokens['NRWL-YUSD-LP'][0];
     const contract = new Contract(pairAddress, [
       'function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast)',
       'function token0() external view returns (address)',
       'function token1() external view returns (address)'
     ], this.provider);
-
     const reserves = await contract.getReserves();
     const token0Address = await contract.token0();
     const token1Address = await contract.token1();
-
     const { YUSD, NRWL } = this.config.externalTokens;
-    
     const tokenA = new TokenSwapsicle(chainId, YUSD[0], YUSD[1]);
     const tokenB = new TokenSwapsicle(chainId, NRWL[0], NRWL[1]);
-
     const token0 = [tokenA, tokenB].find(token => token.address === token0Address);
     const token1 = [tokenA, tokenB].find(token => token.address === token1Address);
     const pair = new PairSwapsicle(
       CurrencyAmountSwapsicle.fromRawAmount(token1, reserves.reserve1.toString()),
       CurrencyAmountSwapsicle.fromRawAmount(token0, reserves.reserve0.toString()),
     );
-
     const route = new RouteSwapsicle([pair], tokenA, tokenB);
     const tokenAmount = CurrencyAmountSwapsicle.fromRawAmount(tokenA, '1000000000000000000');
     const trade = new TradeSwapsicle(route, tokenAmount, TradeTypeSwapsicle.EXACT_INPUT);
-    
     const yusdStat = await this.getYusdStat();
-
     const { NrwlYusdGenesisNrwlRewardPool, WlrsUsdcGenesisNrwlRewardPool, WshareUsdcGenesisNrwlRewardPool, WshareGenesisNrwlRewardPool } = this.contracts;
     const supply = await this.NRWL.totalSupply();
     const [supply1, supply2, supply3, supply4] = await Promise.all([

@@ -41,10 +41,10 @@ const Boardroom = () => {
                   <Card>
                     <CardContent align="center">
                       <Typography variant="h2" component="h2">
-                         <b>Walrus</b>
+                         Walrus
                       </Typography>
                       <Typography variant="h5" component="h2">
-                         <b>WLRS</b>
+                         WLRS
                       </Typography>
                       <Box mt={2}>
                         <TokenSymbol symbol="WLRS" style={{ height: "100%"}} />
@@ -69,10 +69,10 @@ const Boardroom = () => {
                   <Card>
                     <CardContent align="center">
                       <Typography variant="h2" component="h2">
-                       <b> Narwhal</b>
+                       Narwhal
                       </Typography>
                       <Typography variant="h5" component="h2">
-                      <b>  NRWL</b>
+                       NRWL
                       </Typography>
                       <Box mt={2}>
                       <TokenSymbol symbol="NRWL" />
