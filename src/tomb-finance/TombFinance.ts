@@ -555,14 +555,14 @@ export class TombFinance {
     } 
 
     const rewardPerSecond = await poolContract.wSharePerSecond();
-    if (depositTokenName.startsWith('WLRS')) {
-      if (depositTokenName === 'WLRS-USDIBS-LP') {
-        return rewardPerSecond.mul(2100).div(50000);
-      } else {
-        return rewardPerSecond.mul(30000).div(50000);
-      }
-    } else {
-      return rewardPerSecond.mul(20000).div(50000);
+    if (depositTokenName === 'WLRS-USDC-LP') {
+      return rewardPerSecond.mul(4500).div(10000); 
+    } else if (depositTokenName === 'WLRS-USDIBS-LP') {
+      return rewardPerSecond.mul(300).div(10000); 
+    } else if (depositTokenName === 'WSHARE-USDC-LP') {
+      return rewardPerSecond.mul(2700).div(10000); 
+    } else if (depositTokenName = 'NRWL-YUSD-LP') {
+      return rewardPerSecond.mul(2500).div(10000); 
     }
   }
 
