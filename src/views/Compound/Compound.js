@@ -28,17 +28,17 @@ const Compound = () => {
       <Grid
         container
         xs={12}
-        sm={10}
-        md={6}
+        sm={12}
         style={{
           ...(isMobile
             ? { margin: 'auto' }
             : {
                 marginLeft: 'auto',
                 marginRight: 'auto',
+                justifyContent: 'center', 
                 ...(heightBreakpoint
                   ? { marginTop: '7vh' }
-                  : { marginTop: '10vh' }),
+                  : { marginTop: '2vh' }),
               }),
         }}
       >
@@ -48,6 +48,7 @@ const Compound = () => {
             fontWeight: 'normal',
             width: '100%',
             textAlign: 'center',
+            alignItems: 'center', 
             color: black,
             marginBottom: 0,
           }}
@@ -60,8 +61,8 @@ const Compound = () => {
           your farms. Be sure to read their docs to assess risk.
         </p>
 
-        <Grid item container spacing={3} style={{ marginTop: '2rem' }}>
-          <Grid item xs={12} sm={6}>
+        <Grid item container spacing={4} style={{ marginTop: '2rem', justifyContent: 'center' }}>
+          <Grid item xs={12} sm={3}>
             <CompoundCard
               cardData={{
                 title: 'WLRS-USDC.e LP',
@@ -73,7 +74,7 @@ const Compound = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={3}>
             <CompoundCard
               cardData={{
                 title: 'WSHARE-USDC.e LP',
@@ -81,6 +82,17 @@ const Compound = () => {
               }}
               buttonProps={{
                 href: 'https://magik.farm/#/avax/vault/joe-wshare-usdc',
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <CompoundCard
+              cardData={{
+                title: 'NRWL-YUSD LP',
+                tokenSymbol: 'NRWL-YUSD-LP',
+              }}
+              buttonProps={{
+                href: 'https://magik.farm/#/avax/vault/joe-nrwl-yusd',
               }}
             />
           </Grid>
