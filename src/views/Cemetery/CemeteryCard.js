@@ -5,6 +5,7 @@ import Card from '../../components/Card';
 
 import TokenSymbol from '../../components/TokenSymbol';
 import useLpStats from '../../hooks/useLpStats';
+import useLpStatsNrwl from '../../hooks/useLpStatsNrwl';
 import useBank from '../../hooks/useBank';
 import useStatsForPool from '../../hooks/useStatsForPool';
 // import useCashStat from '../../hooks/useCashPriceInEstimatedTWAP.ts';
@@ -13,10 +14,12 @@ const CemeteryCard = () => {
   const tombFtmLpStats = useLpStats('WLRS-USDC-LP');
   const tShareFtmLpStats = useLpStats('WSHARE-USDC-LP');
   const tDibsFtmLpStats = useLpStats('WLRS-USDIBS-LP');
+  const nrwlFtmLpStats = useLpStatsNrwl('NRWL-YUSD-LP');
   // const snoSnoShareLpStats = useLpStats('SNO-SNOSHARE-LP');
   const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
   const tDibsLpStats = useMemo(() => (tDibsFtmLpStats ? tDibsFtmLpStats : null), [tDibsFtmLpStats]);
+  const nrwlLpStats = useMemo(() => (nrwlFtmLpStats ? nrwlFtmLpStats : null), [nrwlFtmLpStats]);
 
   const tombBank = useBank('WlrsUsdcLPWShareRewardPool');
   const tombStatsOnPool = useStatsForPool(tombBank);
@@ -26,6 +29,9 @@ const CemeteryCard = () => {
 
   const tDibsBank = useBank('WlrsUSDibsLPWShareRewardPool');
   const tDibsStatsOnPool = useStatsForPool(tDibsBank);
+
+  const nrwlBank = useBank('NrwlYusdLPWShareRewardPool');
+  const nrwlStatsOnPool = useStatsForPool(nrwlBank);
 
   // const snoSnoShareLPStats = useMemo(() => (snoSnoShareLpStats ? snoSnoShareLpStats : null), [snoSnoShareLpStats]);
   // const snoPrice = useCashStat();
@@ -118,6 +124,59 @@ const CemeteryCard = () => {
               style={{ width: '150px', height: '45px', marginBottom: '5%' }}
               variant="contained"
               href="https://traderjoexyz.com/pool/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6#/"
+            >
+              Add Liquidity
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <Card>
+          <CardContent
+            style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center' }}
+          >
+            <div>
+              <Typography variant="h5" component="h2">
+                NRWL-YUSD LP
+              </Typography>
+              <TokenSymbol size={60} symbol="NRWL-YUSD-LP" />
+            </div>
+            <div>
+              <span style={{ fontSize: '23px' }}>
+                {nrwlLpStats?.tokenAmount ? nrwlLpStats?.tokenAmount : '-.--'} NRWL /{' '}
+                {nrwlLpStats?.ftmAmount ? nrwlLpStats?.ftmAmount : '-.--'} YUSD
+              </span>
+
+              <Box>${nrwlLpStats?.priceOfOne ? nrwlLpStats.priceOfOne : '-.--'}</Box>
+              <span style={{ fontSize: '12px' }}>
+                Liquidity: ${nrwlLpStats?.totalLiquidity ? nrwlLpStats.totalLiquidity : '-.--'} <br />
+                Total supply:{' '}
+                {nrwlLpStats?.totalSupply
+                  ? Number(nrwlLpStats.totalSupply) < 1 / 10 ** 4
+                    ? (Number(nrwlLpStats.totalSupply) * 10 ** 6).toFixed(4) + 'µ'
+                    : nrwlLpStats.totalSupply
+                  : '-.--'}{' '}
+                <br />
+                APR: {nrwlStatsOnPool?.yearlyAPR && nrwlStatsOnPool?.yearlyAPR !== 'Infinity' ? nrwlStatsOnPool?.yearlyAPR : '----.--'}%
+              </span>
+            </div>
+          </CardContent>
+          <CardActions style={{ justifyContent: 'center' }}>
+            <Button
+              color="primary"
+              style={{ width: '150px', height: '45px', marginBottom: '5%' }}
+              variant="contained"
+              component={Link}
+              to={`/farms/NrwlYusdLPWShareRewardPool/`}
+            >
+              Farm
+            </Button>
+            <Button
+              color="primary"
+              target="_blank"
+              style={{ width: '150px', height: '45px', marginBottom: '5%' }}
+              variant="contained"
+              href="https://www.swapsicle.io/add/0x111111111111ed1D73f860F57b2798b683f2d325/0x501012893eE88976AB8B5289B7a78E307d5d9DCb"
             >
               Add Liquidity
             </Button>
