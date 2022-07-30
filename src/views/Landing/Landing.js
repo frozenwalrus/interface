@@ -7,6 +7,7 @@ import Slide from 'react-reveal/Slide';
 import { Zoom } from 'react-reveal'; 
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import CountUp from 'react-countup';
+import useAxios from 'axios-hooks'; 
 
 
 
@@ -14,7 +15,11 @@ const Landing = () => {
     const TVL = useTotalValueLocked();
     const [show, setShow]=React.useState(false); 
     const [show2, setShow2]=React.useState(true); 
-
+    const [{ data, loading, error }, refetch] = useAxios (
+      'https://openapi.debank.com/v1/user/total_balance?id=0x2ba4da735d3ce9177216102e9fdabae67e1ac524'
+    )
+    if (loading) return <p>Firing up the walrus...</p>
+    if (error) return <p>error! </p>; 
 
     return (
         <div className="app">
@@ -107,7 +112,7 @@ const Landing = () => {
           <Fade>
           <div className="stats-box-2">
             <span className="stats-title">Total Value Locked</span>
-            <CountUp style={{ fontSize: '50px', fontFamily: 'Medium' }} end={TVL} separator="," prefix="$" />
+            <CountUp style={{ fontSize: '4vw', fontFamily: 'Medium' }} end={TVL} separator="," prefix="$" />
           </div>
           </Fade>
           <Fade>
@@ -119,7 +124,13 @@ const Landing = () => {
           <Fade>
           <div className="stats-box-4">
             <span className="stats-title">Treasury Value</span>
-            <span className="stats-number">$650,000+</span>
+            <span> 
+              <CountUp
+                style={{fontSize: '4vw', fontFamily: 'Medium'  }} end={Number(data.total_usd_value, null)} separator="," prefix='$'>
+              </CountUp>
+
+              {/* ${Number(data.total_usd_value, null).toFixed(2)}</span> */} 
+              </span> 
           </div>
           </Fade>
           <Fade>
