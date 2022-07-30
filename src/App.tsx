@@ -30,7 +30,7 @@ const Rebates = lazy(() => import('./views/Rebates'));
 const Compound = lazy(() => import('./views/Compound'));
 const Nodes = lazy(() => import('./views/Nodes')); 
 const Landing = lazy(() => import('./views/Landing')); 
-// const Leaderboard = lazy(() => import('./views/leaderboard')); 
+const NodeLeaderboard = lazy(() => import('./views/NodeLeaderboard')); 
 
 const NoMatch = () => (
   <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -90,10 +90,10 @@ const App: React.FC = () => {
               <Landing />
             </Route>
             
-            {/*
-            <Route path="/nodeleaderboard">
-              <Leaderboard /> 
-          </Route>  */}
+            
+            <Route path="/leaderboard">
+              <NodeLeaderboard /> 
+          </Route>  
             <Route path="*">
               <NoMatch />
             </Route>

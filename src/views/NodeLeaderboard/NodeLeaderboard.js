@@ -11,7 +11,7 @@ const BackgroundImage = createGlobalStyle`
     background-size: cover !important;
   }
 `;
-const leaderboard = () => {
+const NodeLeaderboard = () => {
   return (
     <Page>
          <BackgroundImage />
@@ -21,4 +21,4 @@ const leaderboard = () => {
   );
 };
 
-export default leaderboard;
+export default NodeLeaderboard;
