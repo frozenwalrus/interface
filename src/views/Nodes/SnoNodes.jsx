@@ -35,7 +35,7 @@ const SnoNodes = () => {
           target="_blank"
           href={leaderboard}
           variant="contained"
-          style={{ marginTop: '5%', borderRadius: '15px', padding: '5px', width: '25%', fontSize: '1.2rem' }}
+          style={{ marginTop: '5%', borderRadius: '12px', padding: '5px', width: '25%', fontSize: '12px', textAlign: 'center' }}
         >
           Go To Leaderboard!
         </Button>
