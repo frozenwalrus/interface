@@ -1,1 +1,1 @@
-export { default } from './NodeLeaderboard';
+export { default } from './Leaderboard';
