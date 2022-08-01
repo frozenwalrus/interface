@@ -8,7 +8,11 @@ import FoxCard from './PegLPCard';
 import GrapeLPCard from './GrapeLPCard';
 import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/SVG_Icons_and_web_bg/bg.svg';
+import { Button } from '@material-ui/core';
 
+
+const leaderboard =
+'https://app.frozenwalrus.finance/leaderboard'
 const BackgroundImage = createGlobalStyle`
   body, html {
     background: url(${HomeImage}) no-repeat !important;
@@ -18,12 +22,24 @@ const BackgroundImage = createGlobalStyle`
 
 const SnoNodes = () => {
   const {path} = useRouteMatch();
+
   return (
     <Page>
          <BackgroundImage />
       <Switch>
         <Route exact path={path}>
-          <h2 style={{fontSize: '80px', textAlign: 'center'}}>NODES</h2>
+        <h2 style={{fontSize: '80px', textAlign: 'center'}}>NODES</h2>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <Button
+          color="primary"
+          target="_blank"
+          href={leaderboard}
+          variant="contained"
+          style={{ marginTop: '5%', borderRadius: '15px', padding: '5px', width: '25%', fontSize: '1.2rem' }}
+        >
+          Go To Leaderboard!
+        </Button>
+          </div>
           <Grid container spacing={3} style={{marginTop: '20px'}}>
             <FoxCard />
             <SnoCard />   
