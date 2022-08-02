@@ -332,7 +332,7 @@ const Home = () => {
           >
             Welcome to Frozen Walrus
           </Typography>
-          <Typography
+          {/* <Typography
             variant="h1"
             style={{
               fontWeight: 700,
@@ -343,7 +343,7 @@ const Home = () => {
             gutterBottom
           >
             Genesis Pools for NRWL are now <a href="https://app.frozenwalrus.finance/farms">open!</a> 
-          </Typography>
+          </Typography> */}
           <Card>
             <CardContent
               style={{ margin: '37px', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}
