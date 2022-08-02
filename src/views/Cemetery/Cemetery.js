@@ -85,13 +85,17 @@ const Cemetery = () => {
                   NRWL Genesis Pools
                 </Typography>
                 {
-                  config.nrwlLaunchDate.getTime() + 14 * 24 * 60 * 60 * 1000 < new Date().getTime()
+                  1659456000 * 1000 < new Date().getTime()
                     ? (
                         <Alert variant="filled" severity="error" >
                           NRWL Genesis pools have ended. Please claim all rewards and remove funds from Genesis pools.
                         </Alert>
                       )
-                    : null
+                    : (
+                        <Alert variant="filled" severity="error">
+                          The NRWL genesis pools will end on August 2nd at 16:00 UTC - Please claim your rewards and move your LP to the above share farms to continue earning. <b>Any rewards not claimed before the pools end will be lost.</b> <br/><br/><b>Please note:</b> LPs can be removed safely after this time, the lock applies to rewards only.
+                        </Alert>
+                      )
                 }
                 {
                   config.nrwlLaunchDate.getTime() > new Date().getTime()
