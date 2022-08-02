@@ -7278,7 +7278,7 @@
     ]
   },
   "zapper": {
-    "address": "0xD2Dc5688cF8E060392E0061b57A30Ba6961327D7",
+    "address": "0x958d9686682214799a1F814648a7f15cfb77f1e3",
     "abi": [
       {
         "inputs": [
@@ -20850,7 +20850,7 @@
     ]
   },
   "NrwlZap": {
-    "address": "0x26f4c35B691807E50024Ccbf09CE0d6e5f32191F",
+    "address": "0xa95a898F5d32E41B5D6752ccAF65C3d59c4F2795",
     "abi": [
       {
         "inputs": [
