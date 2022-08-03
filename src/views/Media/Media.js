@@ -2,7 +2,6 @@ import React from 'react';
 import Card from '../../components/Card';
 import styled from 'styled-components';
 import { useWallet } from 'use-wallet';
-import Stack from '@mui/material/Stack';
 import Row from '../../components/Row';
 import Column from '../../components/Column';
 

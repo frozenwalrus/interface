@@ -20,7 +20,10 @@ const Label: React.FC<LabelProps> = ({ text, variant = 'secondary', color: custo
       labelColor = '#F7F7F7'; //color.secondary.main;
     } else if (variant === 'normal') {
       labelColor = '#F7F7F7'; //color.grey[300];
+    } else if (variant === 'black') {
+      labelColor = '#000000'; //color.grey[300];
     }
+   
   }
   return <StyledLabel color={labelColor}>{text}</StyledLabel>;
 };
