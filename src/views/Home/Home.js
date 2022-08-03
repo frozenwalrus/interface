@@ -23,7 +23,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import { getDisplayBalance } from '../../utils/formatBalance';
-import WestIcon from '@mui/icons-material/West';
 import Label from '../../components/Label';
 
 const BackgroundImage = createGlobalStyle`
