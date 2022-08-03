@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useWallet } from 'use-wallet';
 import Row from '../../components/Row';
 import Column from '../../components/Column';
-
+import lhb from '../../assets/img/cutout_50.png'; 
 import { Box, Container, Typography, Grid, CardActions, CardContent, Button } from '@material-ui/core';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
@@ -31,7 +31,11 @@ return (
 <Page>
 <BackgroundImage />
   <Container maxWidth="lg">
-    <h2 align="center" style={{ fontSize: '3rem', marginBottom: '5%' }}>FROZEN WALRUS MEDIA</h2>
+    <h2 align="center" style={{ fontSize: '3rem', marginBottom: '5%' }}><img src={lhb} style={{height:'50px'}} /> 
+       FROZEN WALRUS MEDIA 
+    <img src={lhb} style={{height:'50px'}} />
+
+    </h2>
     <Grid container spacing={2} style={{ justifyContent: "center" }}>
     <Grid item xs={12} style={{ alignItems: 'center', marginBottom: '5%' }} >
         <Column>
