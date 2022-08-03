@@ -31,6 +31,8 @@ const Compound = lazy(() => import('./views/Compound'));
 const Nodes = lazy(() => import('./views/Nodes')); 
 const Landing = lazy(() => import('./views/Landing')); 
 const NodeLeaderboard = lazy(() => import('./views/NodeLeaderboard')); 
+const Videos = lazy(() => import('./views/Videos')); 
+
 
 const NoMatch = () => (
   <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -73,6 +75,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/nodes">
               <Nodes />
+            </Route>
+            <Route path="/videos">
+              <Videos />
             </Route>
             {/* <Route path="/sbs">
               <SBS />
