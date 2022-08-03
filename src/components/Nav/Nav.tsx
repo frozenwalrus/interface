@@ -137,6 +137,9 @@ const Nav = () => {
               <Link color="textPrimary" to="/compound" className={classes.link}>
                 Compound
               </Link>
+              <Link color="textPrimary" to="/media" className={classes.link}>
+                Media
+              </Link>
               <a
                 href="https://docs.frozenwalrus.finance/welcome"
                 target="_blank"
@@ -221,6 +224,9 @@ const Nav = () => {
                 </Link>
                 <Link color="textPrimary" to="/compound" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Compound</div>
+                </Link>
+                <Link color="textPrimary" to="/media" className={classes.link}>
+                  <div style={{ margin: '4px 20px' }}>Media</div>
                 </Link>
                 <a href="https://docs.frozenwalrus.finance/welcome" target="_blank" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Docs</div>
