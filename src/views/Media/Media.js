@@ -33,11 +33,26 @@ return (
   <Container maxWidth="lg">
     <h2 align="center" style={{ fontSize: '3rem', marginBottom: '5%' }}>FROZEN WALRUS MEDIA</h2>
     <Grid container spacing={2} style={{ justifyContent: "center" }}>
-
+    <Grid item xs={12} style={{ alignItems: 'center', marginBottom: '5%' }} >
+        <Column>
+        <Row style={{ justifyContent: 'center', marginBottom: '1%'}}>
+          <iframe  width="560" height="315" src="https://www.youtube.com/embed/DlTsAhF0OS4" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
+        </Row>
+        <Row style={{ justifyContent: 'center'}}>
+          <VideoCard>
+            <CardContent>
+              <h2 style={{ textAlign: 'center', fontSize: '1.4rem' }}><i>Getting Back on Track!</i></h2> 
+              <h2 style={{ textAlign: 'center', fontSize:'0.8rem' }}>
+                Frozen Walrus' fearless leader explains how the protocol returns to strength </h2>
+            </CardContent>
+          </VideoCard>
+        </Row>
+        </Column>
+      </Grid>
       <Grid item xs={12} style={{ alignItems: 'center', marginBottom: '5%' }} >
         <Column>
         <Row style={{ justifyContent: 'center', marginBottom: '1%'}}>
-          <iframe  width="560" height="315" src="https://www.youtube.com/embed/ZoBbwGTpfGE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
+          <iframe  width="560" height="315" src="https://www.youtube.com/embed/ZoBbwGTpfGE" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>
         </Row>
         <Row style={{ justifyContent: 'center'}}>
           <VideoCard>
@@ -54,7 +69,7 @@ return (
 
       <Grid item xs={12} style={{ alignItems: 'center', marginBottom: '5%' }} >
       <Row style={{ justifyContent: 'center', marginBottom: '1%'}}>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/cQzy04Ff1Os" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>                
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/cQzy04Ff1Os" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>                
         </Row> 
         <Row style={{ justifyContent: 'center' }}>
           <VideoCard>
@@ -69,7 +84,7 @@ return (
 
       <Grid item xs={12} style={{ alignItems: 'center', marginBottom: '5%' }}>
       <Row style={{ justifyContent: 'center', marginBottom: '1%'}}>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/cc-UAQDyLAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>                
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/cc-UAQDyLAg" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ></iframe>                
         </Row> 
         <Row style={{ justifyContent: 'center' }}>
           <VideoCard >
