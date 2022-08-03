@@ -25,7 +25,7 @@ const VideoCard = styled.div`
   color: #4b4453;
 `;
 
-const Videos = () => {
+const Media = () => {
   const { account } = useWallet();
 
 return (
@@ -88,4 +88,4 @@ return (
 );
 };
 
-export default Videos;
+export default Media;

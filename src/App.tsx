@@ -31,7 +31,7 @@ const Compound = lazy(() => import('./views/Compound'));
 const Nodes = lazy(() => import('./views/Nodes')); 
 const Landing = lazy(() => import('./views/Landing')); 
 const NodeLeaderboard = lazy(() => import('./views/NodeLeaderboard')); 
-const Videos = lazy(() => import('./views/Videos')); 
+const Media = lazy(() => import('./views/Media')); 
 
 
 const NoMatch = () => (
@@ -76,8 +76,8 @@ const App: React.FC = () => {
             <Route path="/nodes">
               <Nodes />
             </Route>
-            <Route path="/videos">
-              <Videos />
+            <Route path="/media">
+              <Media />
             </Route>
             {/* <Route path="/sbs">
               <SBS />
