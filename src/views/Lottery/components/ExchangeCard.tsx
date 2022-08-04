@@ -29,6 +29,12 @@ interface ExchangeCardProps {
   disabled?: boolean;
   disabledDescription?: string;
 }
+const BondCard = styled.div`
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 50px;
+  padding: 20px; 
+  color: #4b4453;
+`;
 
 const ExchangeCard: React.FC<ExchangeCardProps> = ({
   action,
@@ -58,10 +64,10 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
     />,
   );
   return (
-    <Card>
+    <BondCard >
       <CardContent>
         <StyledCardContentInner>
-          <StyledCardTitle>{`Send WLRS to enter the raffle`}</StyledCardTitle>
+          <StyledCardTitle>{`SEND WLRS TO ENTER THE LOTTERY`}</StyledCardTitle> 
           <StyledExchanger>
             <StyledToken>
               <StyledCardIcon>
@@ -76,29 +82,32 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
               className={disabled ? 'shinyButtonDisabled' : 'shinyButton'}
               onClick={onPresent}
               disabled={disabled}
+              style={{ padding: '1px', borderRadius: '8px', fontSize: '1rem', marginTop: '7%', width: '100%'}}
             >
               {disabledDescription || action}
             </Button>
           </StyledCardActions>
         </StyledCardContentInner>
       </CardContent>
-    </Card>
+    </BondCard>
   );
 };
 
 const StyledCardTitle = styled.div`
   align-items: center;
   display: flex;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-weight: 700;
-  height: 64px;
   justify-content: center;
+  text-align: center; 
   color: #000;
   margin-top: ${(props) => -props.theme.spacing[3]}px;
+  margin-bottom: 2%; 
 `;
 
 const StyledCardIcon = styled.div`
   background-color: #fff;
+  margin-top: '15px'; 
   width: 80px;
   height: 80px;
   border-radius: 36px;
@@ -111,7 +120,7 @@ const StyledCardIcon = styled.div`
 const StyledExchanger = styled.div`
   align-items: center;
   display: flex;
-  margin-bottom: ${(props) => props.theme.spacing[5]}px;
+  margin-bottom: 50px;
 `;
 
 const StyledExchangeArrow = styled.div`
@@ -126,6 +135,7 @@ const StyledToken = styled.div`
   display: flex;
   flex-direction: column;
   font-weight: 600;
+  margin-top: '10px'; 
 `;
 
 const StyledCardActions = styled.div`
@@ -137,6 +147,8 @@ const StyledCardActions = styled.div`
 
 const StyledDesc = styled.span`
   color: #000;
+  font-size: '1.2rem';
+  text-align: 'center'; 
 `;
 
 const StyledCardContentInner = styled.div`

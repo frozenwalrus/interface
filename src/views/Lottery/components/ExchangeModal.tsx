@@ -47,7 +47,7 @@ const ExchangeModal: React.FC<ExchangeModalProps> = ({
       />
       <Label text={description} />
       <ModalActions>
-        <Button text="Cancel" onClick={onDismiss} />
+        <Button text="Cancel" onClick={onDismiss}  />
         <Button text={action} onClick={() => onConfirm(val)} />
       </ModalActions>
     </Modal>

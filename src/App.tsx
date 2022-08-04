@@ -29,7 +29,7 @@ const Rebates = lazy(() => import('./views/Rebates'));
 // const Raffle = lazy(() => import('./views/Raffle'));
 const Compound = lazy(() => import('./views/Compound'));
 const Nodes = lazy(() => import('./views/Nodes')); 
-const Landing = lazy(() => import('./views/Landing')); 
+const Lottery = lazy(() => import('./views/Lottery')); 
 const NodeLeaderboard = lazy(() => import('./views/NodeLeaderboard')); 
 const Media = lazy(() => import('./views/Media')); 
 
@@ -91,8 +91,8 @@ const App: React.FC = () => {
             <Route path="/compound">
               <Compound />
             </Route>
-            <Route path="/landing">
-              <Landing />
+            <Route path="/lottery">
+              <Lottery />
             </Route>
             
             
