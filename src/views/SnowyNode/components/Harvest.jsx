@@ -27,7 +27,7 @@ const Harvest = ({bank}) => {
     () => (stakedTokenPriceInDollars ? stakedTokenPriceInDollars : null),
     [stakedTokenPriceInDollars],
   );
-
+  const dec = bank.depositTokenName === 'NRWL-YUSD-LP'? 1e24:1e18;
   const earnedInDollars = (Number(tokenPriceInDollars*1e6) * Number(earnings)).toFixed(2);
   const { onReward } = useHarvest(bank);
   const { onCompound } = useCompound(bank);
@@ -41,9 +41,9 @@ const Harvest = ({bank}) => {
            
             </CardIcon>
             <Typography style={{textTransform: 'uppercase', color: '#fff'}}>
-              <Value value={bank.depositTokenName === 'GRAPE-WLRS-LP' ? (Number(earnings)/1e18).toFixed(4) : (Number(earnings)/1e18).toFixed(10)} />
+              <Value value={bank.depositTokenName === 'GRAPE-WLRS-LP' || bank.depositTokenName === 'NRWL-YUSD-LP' ? (Number(earnings)/1e18).toFixed(4) : (Number(earnings)/1e18).toFixed(10)} />
             </Typography>
-            <Label text={`≈ $${(earnedInDollars/1e18).toFixed(2)}`} />
+            <Label text={`≈ $${(earnedInDollars/dec).toFixed(2)}`} />
             <Typography style={{textTransform: 'uppercase', color: '#fff'}}>{`Earned`}</Typography>
           </StyledCardHeader>
           <StyledCardActions>

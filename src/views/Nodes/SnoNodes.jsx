@@ -6,6 +6,7 @@ import SnoNode from '../SnowyNode';
 import SnoCard from './ShareLPCard';
 import FoxCard from './PegLPCard';
 import GrapeLPCard from './GrapeLPCard';
+import NrwlLPCard from './NrwlLPCard';
 import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/SVG_Icons_and_web_bg/bg.svg';
 import { Button } from '@material-ui/core';
@@ -42,7 +43,8 @@ const SnoNodes = () => {
           </div>
           <Grid container spacing={3} style={{marginTop: '20px'}}>
             <FoxCard />
-            <SnoCard />   
+            <SnoCard /> 
+            <NrwlLPCard />   
             <GrapeLPCard />     
           </Grid>
         </Route>

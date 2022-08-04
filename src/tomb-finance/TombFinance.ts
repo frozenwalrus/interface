@@ -479,7 +479,7 @@ export class TombFinance {
         const dailyDripUser = Number(getDisplayBalance(dailyUserDrip));
         const yearlyDripUser = Number(dailyDripUser) * 365;
 
-        const TVL = Number(depositTokenPrice) * Number(totalBalance)/1e12;
+        const TVL = bank.earnTokenName === 'NRWL-YUSD-LP'? (Number(depositTokenPrice) * Number(totalBalance)/1e18): (Number(depositTokenPrice) * Number(totalBalance)/1e12);
 
         return {
           userDailyBurst: dailyDripUser.toFixed(2).toString(),
@@ -998,6 +998,9 @@ export class TombFinance {
         return await pool.getTotalRewards(account);
       }
       if (earnTokenName === 'GRAPE-WLRS-LP' && poolName.includes('Node')) {
+        return await pool.getTotalRewards(account);
+      }
+      if (earnTokenName === 'NRWL-YUSD-LP' && poolName.includes('Node')) {
         return await pool.getTotalRewards(account);
       }
       if (earnTokenName === 'WLRS') {

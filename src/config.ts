@@ -273,6 +273,17 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 2,
     closedForStaking: false,
   },
+  LPNrwlNode: {
+    name: 'Generate NRWL-YUSD LP with Nodes',
+    poolId: 0,
+    sectionInUI: 4,
+    contract: 'LPNrwlNode',
+    depositTokenName: 'NRWL-YUSD-LP',
+    earnTokenName: 'NRWL-YUSD-LP',
+    finished: false,
+    sort: 2,
+    closedForStaking: false,
+  },
   NrwlYusdGenesisNrwlRewardPool: {
     name: 'Earn NRWL by NRWL-YUSD LP',
     poolId: 0,

@@ -40,7 +40,7 @@ const Stake = ({bank}) => {
     Number(tokenPriceInDollars) * Number(getDisplayBalance(nodePrice, 12))
   ).toFixed(2);
   const {onStake} = useStake(bank);
-
+console.log(earnedInDollars)
 
   const [onPresentDeposit, onDismissDeposit] = useModal(
     <DepositModal
@@ -66,10 +66,10 @@ const Stake = ({bank}) => {
              <TokenSymbol symbol={bank.depositTokenName} />
             </CardIcon>
             <Typography style={{textTransform: 'uppercase', color: '#fff'}}>
-              <Value value={bank.depositTokenName === 'GRAPE-WLRS-LP' ? getDisplayBalance(nodePrice, bank.depositToken.decimal, 0) : getDisplayBalance(nodePrice, bank.depositToken.decimal, 8)} />
+              <Value value={bank.depositTokenName === 'GRAPE-WLRS-LP' || bank.depositTokenName === 'NRWL-YUSD-LP' ? getDisplayBalance(nodePrice, bank.depositToken.decimal, 0) : getDisplayBalance(nodePrice, bank.depositToken.decimal, 8)} />
             </Typography>
 
-            <Label text={`≈ $${earnedInDollars}`} />
+           {bank.depositTokenName === 'NRWL-YUSD-LP' ? <Label text={`≈ $${(earnedInDollars/1e6).toFixed(2)}`} />: <Label text={`≈ $${earnedInDollars}`} />}
 
             <Typography style={{textTransform: 'uppercase', color: '#fff'}}>{`${'NODE'} COST`}</Typography>
 
