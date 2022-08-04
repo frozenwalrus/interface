@@ -218,30 +218,27 @@ export class TombFinance {
 
     return await tomb.transfer(recepient, decimalToBalance(amount));
   }
+  async sendNRWL(amount: string | number, recepient: string): Promise<TransactionResponse> {
+    const { NRWL } = this.contracts;
+
+    return await NRWL.transfer(recepient, decimalToBalance(amount));
+  }
 
   async getRaffleStat(account: string, raffleAddress: string): Promise<TokenStat> {
     let total = 0;
     const { tomb } = this.contracts;
-
     const priceInBTC = await this.getTokenPriceFromPancakeswap(this.TOMB);
-
     const balOfRaffle = await tomb.balanceOf(raffleAddress);
-
     const currentBlockNumber = await this.provider.getBlockNumber();
-
     const filterTo = tomb.filters.Transfer(account, raffleAddress);
-
     const startBlock = currentBlockNumber - 100000;
-
     let allEvents: any = [];
-
     for (let i = startBlock; i < currentBlockNumber; i += 2000) {
       const _startBlock = i;
       const _endBlock = Math.min(currentBlockNumber, i + 1999);
       const events = await tomb.queryFilter(filterTo, _startBlock, _endBlock);
       allEvents = [...allEvents, ...events];
     }
-
     if (allEvents.length !== 0 && account !== null) {
       for (let i = 0; i < allEvents.length; i++) {
         total = total + Number(allEvents[i].args.value);
@@ -256,6 +253,38 @@ export class TombFinance {
       priceInDollars: total.toString(),
       totalSupply: getDisplayBalance(balOfRaffle, 18, 0),
       circulatingSupply: raffleAddress.toString(),
+    };
+  }
+
+  async getnrwlRaffleStat(account: string, nrwlRaffleAddress: string): Promise<TokenStat> {
+    let total = 0;
+    const { NRWL } = this.contracts;
+    const priceInBTC = await this.getTokenPriceFromPancakeswap(this.NRWL);
+    const balOfNRWLRaffle = await NRWL.balanceOf(nrwlRaffleAddress);
+    const currentBlockNumber = await this.provider.getBlockNumber();
+    const filterTo = NRWL.filters.Transfer(account, nrwlRaffleAddress);
+    const startBlock = currentBlockNumber - 100000;
+    let allEvents: any = [];
+    for (let i = startBlock; i < currentBlockNumber; i += 2000) {
+      const _startBlock = i;
+      const _endBlock = Math.min(currentBlockNumber, i + 1999);
+      const events = await NRWL.queryFilter(filterTo, _startBlock, _endBlock);
+      allEvents = [...allEvents, ...events];
+    }
+    if (allEvents.length !== 0 && account !== null) {
+      for (let i = 0; i < allEvents.length; i++) {
+        total = total + Number(allEvents[i].args.value);
+      }
+      total = total / 1e18;
+    } else {
+      total = 0;
+    }
+
+    return {
+      tokenInFtm: priceInBTC.toString(),
+      priceInDollars: total.toString(),
+      totalSupply: getDisplayBalance(balOfNRWLRaffle, 18, 0),
+      circulatingSupply: nrwlRaffleAddress.toString(),
     };
   }
 

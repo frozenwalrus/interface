@@ -37,7 +37,6 @@ const LaunchCountdown: React.FC<LaunchCountdownProps> = ({ deadline, description
 };
 
 const StyledCard = styled.div`
-background: rgba(255, 255, 255, 0.5);
 border-radius: 20px;
   padding: 10px; 
   text-align: center; 
@@ -45,7 +44,6 @@ border-radius: 20px;
   margin: 0 auto;
   border: none;
   box-sizing: border-box;
-  box-shadow: 0px 3px 30px #d5d5d5a0;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -64,9 +62,10 @@ const StyledCountdownTitle = styled.p`
 `;
 
 const StyledCountdown = styled.p`
-  font-size: 1.0rem;
+  font-size: 1.2rem;
   color: #000000;
   margin: 0;
+  margin-bottom: 10px; 
 `;
 
 const StyledDescriptionButton = styled.button`

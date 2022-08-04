@@ -36,7 +36,7 @@ const BondCard = styled.div`
   color: #4b4453;
 `;
 
-const ExchangeCard: React.FC<ExchangeCardProps> = ({
+const ExchangeCardNRWL: React.FC<ExchangeCardProps> = ({
   action,
   fromToken,
   fromTokenName,
@@ -67,7 +67,7 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
     <BondCard >
       <CardContent>
         <StyledCardContentInner>
-          <StyledCardTitle>{`ENTER LOTTERY WITH WLRS`}</StyledCardTitle> 
+          <StyledCardTitle>{`ENTER LOTTERY WITH NRWL`}</StyledCardTitle> 
           <StyledExchanger>
             <StyledToken>
               <StyledCardIcon>
@@ -81,7 +81,7 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
             <Button
               className={disabled ? 'shinyButtonDisabled' : 'shinyButton'}
               onClick={onPresent}
-              disabled={disabled}
+              disabled={true}
               style={{ padding: '1px', borderRadius: '8px', fontSize: '1rem', marginTop: '7%', width: '100%'}}
             >
               {disabledDescription || action}
@@ -159,4 +159,4 @@ const StyledCardContentInner = styled.div`
   justify-content: space-between;
 `;
 
-export default ExchangeCard;
+export default ExchangeCardNRWL;
