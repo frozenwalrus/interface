@@ -57,18 +57,19 @@ const NodeLeaderboard = () => {
   </Grid>
 </Grid>
 
+
 <Grid container spacing={3} direction="row" style={{ display: 'flex', justifyContent: 'center'}} >
   <Grid  item xs={12} sm={12}>
     <HomeCard>
       <CardContent>
       <h2 style={{ fontSize: '32px', textAlign: 'center', marginBottom: '2%'}}>
        Weekly Winners! Week of July 24-31 <br /> </h2>
-       <h2 style={{ fontSize: '24px', textAlign: 'center', marginBottom: '2%'}}>
+     {/*  <h2 style={{ fontSize: '24px', textAlign: 'center', marginBottom: '2%'}}>
         These Frozen Walrus champions created at least one (1) WLRS-USDC or WSHARE-USDC node and 
         were randomly selected to receive one (1) WSHARE reward! 
-      </h2>
+  </h2> */}
       </CardContent>
-   
+   {/*
       <Grid container spacing={3} style={{ marginBottom: '5%'}} >
         <Grid direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
         <HomeCardPurple>
@@ -107,6 +108,8 @@ const NodeLeaderboard = () => {
          </HomeCardBlue>
         </Grid>
       </Grid>
+  */}
+  {/*
       <h2 style={{ fontSize: '24px', textAlign: 'center', marginBottom: '2%'}}>
         
         These two Frozen Walrus kings/queens created the most Nodes during this week's timespan and receive five (5) WSHARE as reward!</h2>
@@ -130,6 +133,7 @@ const NodeLeaderboard = () => {
          </HomeCardBlue>
         </Grid>
       </Grid>
+*/}
       </HomeCard>
   </Grid>
   <Grid  item xs={12} sm={12}>
@@ -141,7 +145,13 @@ const NodeLeaderboard = () => {
       </h2>
       </CardContent>
    
-      <Grid container spacing={3} >
+      <Grid container spacing={3} >   
+
+
+
+
+
+
         {/*
         <Grid direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
         <HomeCardPurple>
@@ -192,6 +202,9 @@ const NodeLeaderboard = () => {
 
 
 </Grid>
+
+
+
     {/* <h2 style={{ fontSize: '2rem', textAlign: 'center', marginBottom: '6%'}}>Leaderboard is updated weekly!</h2>  <br /> 
     <h2 style={{ fontSize: '2vw', textAlign: 'center', marginBottom: '3%'}}><u>UP AND COMER DIVISION: THIS WEEK (24-31 JULY)</u>  </h2>*/}
 
