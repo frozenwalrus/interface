@@ -46,9 +46,9 @@ const NodeLeaderboard = () => {
   <Grid  item xs={12} sm={8}>
     <HomeCardBlue>
       <CardContent>
-      <h2 style={{ fontSize: '2vw', textAlign: 'center', marginBottom: '10%'}}> 
+      <h2 style={{ fontSize: '32px', textAlign: 'center', marginBottom: '10%'}}> 
         Track the Node Leaderboard for Progress and Weekly Competition Updates! </h2>
-      <h2 style={{ fontSize: '1.5vw', textAlign: 'center', marginBottom: '2%'}}>
+      <h2 style={{ fontSize: '24px', textAlign: 'center', marginBottom: '2%'}}>
         Each week, WSHARE rewards are given to the top creator of WLRS-USDC and WSHARE-USDC nodes. 
         WSHARE rewards are also given out randomly amongst all Node creators. 
       </h2>
@@ -61,9 +61,9 @@ const NodeLeaderboard = () => {
   <Grid  item xs={12} sm={12}>
     <HomeCard>
       <CardContent>
-      <h2 style={{ fontSize: '2vw', textAlign: 'center', marginBottom: '2%'}}>
+      <h2 style={{ fontSize: '32px', textAlign: 'center', marginBottom: '2%'}}>
        Weekly Winners! Week of July 24-31 <br /> </h2>
-       <h2 style={{ fontSize: '2vw', textAlign: 'center', marginBottom: '2%'}}>
+       <h2 style={{ fontSize: '24px', textAlign: 'center', marginBottom: '2%'}}>
         These Frozen Walrus champions created at least one (1) WLRS-USDC or WSHARE-USDC node and 
         were randomly selected to receive one (1) WSHARE reward! 
       </h2>
@@ -72,8 +72,8 @@ const NodeLeaderboard = () => {
       <Grid container spacing={3} style={{ marginBottom: '5%'}} >
         <Grid direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
         <HomeCardPurple>
-          <h2 style={{ fontSize: '1.8vw', textAlign: 'center'}}><u>WLRS-USDC</u></h2>
-          <h2 style={{ fontSize: '1.3vw', textAlign: 'center', }}>
+          <h2 style={{ fontSize: '24px', textAlign: 'center'}}><u>WLRS-USDC</u></h2>
+          <h2 style={{ fontSize: '18px', textAlign: 'center', }}>
               0x2c7d8fbce6ae6b71009f292ada8ef55d91c7fedc
               0x695a5bcff6db9516f379921bc2162fcc9a8e1724
               0x5e538f163ae0ecbe146c909788612971f314f8f8
@@ -91,8 +91,8 @@ const NodeLeaderboard = () => {
         </Grid>
         <Grid spacing={6} direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
         <HomeCardBlue>
-        <h2 style={{ fontSize: '1.8vw', textAlign: 'center'}}><u>WSHARE-USDC</u></h2>
-        <h2 style={{ fontSize: '1.3vw', textAlign: 'center'}}>
+        <h2 style={{ fontSize: '24px', textAlign: 'center'}}><u>WSHARE-USDC</u></h2>
+        <h2 style={{ fontSize: '18px', textAlign: 'center'}}>
               0x68f077ed3a9c7c77dfbf83c8dd10f88c4d2a7443
               0x7eb99e397782e41bdd2231c149c754750820c233
               0x2d55f4cb478612e02af7c29a20d499d3265f51e0
@@ -107,14 +107,14 @@ const NodeLeaderboard = () => {
          </HomeCardBlue>
         </Grid>
       </Grid>
-      <h2 style={{ fontSize: '2vw', textAlign: 'center', marginBottom: '2%'}}>
+      <h2 style={{ fontSize: '24px', textAlign: 'center', marginBottom: '2%'}}>
         
         These two Frozen Walrus kings/queens created the most Nodes during this week's timespan and receive five (5) WSHARE as reward!</h2>
         <Grid container spacing={6} style={{ marginBottom: '5%'}} >
         <Grid direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
         <HomeCardPurple >
-          <h2 style={{ fontSize: '1.8vw', textAlign: 'center', marginTop:'10%'}}><u>WLRS-USDC</u></h2>
-          <h2 style={{ fontSize: '1.3vw', textAlign: 'center', marginBottom: '15%' }}>
+          <h2 style={{ fontSize: '24px', textAlign: 'center', marginTop:'10%'}}><u>WLRS-USDC</u></h2>
+          <h2 style={{ fontSize: '18px', textAlign: 'center', marginBottom: '15%' }}>
               0x000000000000000000000000000000000000000
             
           </h2>
@@ -122,8 +122,8 @@ const NodeLeaderboard = () => {
         </Grid>
         <Grid spacing={6} direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
         <HomeCardBlue>
-        <h2 style={{ fontSize: '1.8vw', textAlign: 'center', marginTop:'10%'}}><u>WSHARE-USDC</u></h2>
-        <h2 style={{ fontSize: '1.3vw', textAlign: 'center', marginBottom: '15%' }}>
+        <h2 style={{ fontSize: '24px', textAlign: 'center', marginTop:'10%'}}><u>WSHARE-USDC</u></h2>
+        <h2 style={{ fontSize: '18px', textAlign: 'center', marginBottom: '15%' }}>
         0x000000000000000000000000000000000000000
               
          </h2> 
@@ -142,11 +142,11 @@ const NodeLeaderboard = () => {
       </CardContent>
    
       <Grid container spacing={3} >
-        
+        {/*
         <Grid direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
         <HomeCardPurple>
-          <h2 style={{ fontSize: '1.8vw', textAlign: 'center'}}><u>WLRS-USDC</u></h2>
-          <h2 style={{ fontSize: '1.3vw', textAlign: 'center', }}>
+          <h2 style={{ fontSize: '24px', textAlign: 'center'}}><u>WLRS-USDC</u></h2>
+          <h2 style={{ fontSize: '18px', textAlign: 'center', }}>
               0x0000000000000000000000000000000000000000
               0x0000000000000000000000000000000000000000
               0x0000000000000000000000000000000000000000
@@ -156,9 +156,7 @@ const NodeLeaderboard = () => {
               0x0000000000000000000000000000000000000000
               0x0000000000000000000000000000000000000000
               0x0000000000000000000000000000000000000000
-              
-
-
+            
 
           </h2>
           </HomeCardPurple>
@@ -166,8 +164,8 @@ const NodeLeaderboard = () => {
         </Grid>
         <Grid spacing={6} direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
         <HomeCardBlue>
-        <h2 style={{ fontSize: '1.8vw', textAlign: 'center'}}><u>WSHARE-USDC</u></h2>
-        <h2 style={{ fontSize: '1.3vw', textAlign: 'center'}}>
+        <h2 style={{ fontSize: '24px', textAlign: 'center'}}><u>WSHARE-USDC</u></h2>
+        <h2 style={{ fontSize: '18px', textAlign: 'center'}}>
               0x0000000000000000000000000000000000000000
               0x0000000000000000000000000000000000000000
               0x0000000000000000000000000000000000000000
@@ -182,6 +180,7 @@ const NodeLeaderboard = () => {
          </h2> 
          </HomeCardBlue>
         </Grid>
+  */}
       </Grid>
       </HomeCard>
   </Grid>
