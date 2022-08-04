@@ -28,7 +28,7 @@ const SnoNodes = () => {
          <BackgroundImage />
       <Switch>
         <Route exact path={path}>
-        <h2 style={{fontSize: '80px', textAlign: 'center'}}>NODES</h2>
+        <h2 style={{fontSize: '6vw', textAlign: 'center'}}>NODES</h2>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <Button
           color="primary"
