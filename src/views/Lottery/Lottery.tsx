@@ -175,12 +175,8 @@ const Lottery: React.FC = () => {
           fromTokenName="WLRS"
           toToken={grapeFinance.TBOND}
           toTokenName="TBOND"
-          priceDesc={
-            Date.now() < endTime && Date.now() > startTime
-              ? 'LOTTERY IS OPEN! 5 WLRS = 1 ENTRY'
-              : 'LOTTERY IS PRESENTLY CLOSED'
-          }
-          disabled={Date.now() < endTime && Date.now() > startTime ? false : true}
+          priceDesc="5 WLRS = 1 ENTRY"
+            
           onExchange={handleBuyBonds}>
           </ExchangeCard>
       </StyledCardWrapper>
