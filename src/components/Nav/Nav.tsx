@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     width: 275,
-    marginRight: '10px',
+    marginRight: '5px',
   },
   label: {
     fontSize: '22px',
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     color: '#161D29',
     fontSize: '18px',
-    margin: '5%',
+    margin: '3%',
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Nav = () => {
-  const matches = useMediaQuery('(min-width:1200px)');
+  const matches = useMediaQuery('(min-width:1500px)');
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -115,7 +115,7 @@ const Nav = () => {
                 <div style={{ fontWeight: 900 }}></div>
               </div>
             </Link>
-            <Box style={{ width: 'auto !important', marginLeft: '3%' }}>
+            <Box style={{ width: 'auto !important', marginLeft: '0%' }}>
               <Link color="textPrimary" to="/" className={classes.link}>
                 Home
               </Link>
@@ -160,7 +160,7 @@ const Nav = () => {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginRight: '20px',
+                marginRight: '10px',
               }}
             >
               <AccountButton text="Connect" />
