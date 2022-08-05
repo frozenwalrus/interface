@@ -149,10 +149,10 @@ const Lottery: React.FC = () => {
     <BondCard>
     <h2 style={{ textAlign: 'center', marginBottom: '8%', marginTop: '2%', margin: '1%', 
             ...(isDesktop ? { fontSize: '2.5rem' } : { fontSize: '1.5rem'}) }}>
-            Win USDC by depositing Frozen Walrus tokens! 
+            Win USDC by depositing Frozen Walrus tokens!
     </h2>
-    <h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '2%', 
-            ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.2rem'}) }}>
+    <h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
+            ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
             Deposit your WLRS tokens below to gain eligibility to the Frozen Walrus Lottery. 
             5 WLRS tokens gains 1 entry to the Lottery. All entries must be submitted no later than 
             August 7, 2022 at 2100 UTC. <br /><br /> Winners will be announced here by August 8, 2022 at 2100 UTC. 
@@ -178,15 +178,15 @@ const Lottery: React.FC = () => {
       ></LaunchCountdown> </h2>
     )}
     </div> */}
-<h2 style={{ textAlign: 'center', marginBottom: '5%', marginTop: '5%', 
+<h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
             ...(isDesktop ? { fontSize: '1.5rem' } : { fontSize: '1.2rem'}) }}>
             Current WLRS price: ${tombPriceInDollars}
 </h2>
-<h2 style={{ textAlign: 'center',  marginBottom: '5%',
+<h2 style={{ textAlign: 'left',  marginBottom: '5%',
             ...(isDesktop ? { fontSize: '1.5rem' } : { fontSize: '1.2rem'}) }}>
             Total WLRS entered into lottery: ${raffleBals}
 </h2>
-<h2 style={{ textAlign: 'center',  marginBottom: '5%',
+<h2 style={{ textAlign: 'left',  marginBottom: '5%',
             ...(isDesktop ? { fontSize: '1.5rem' } : { fontSize: '1.2rem'}) }}>
             Your WLRS tokens entered into lottery: ${userBals}
 </h2>
@@ -203,7 +203,7 @@ const Lottery: React.FC = () => {
             </ExchangeCard>
 
     
-    <LotterySubText style={{ textAlign: 'center',  marginTop: '5%',
+    <LotterySubText style={{ textAlign: 'center',  marginTop: '5%', width:'95%', 
             ...(isDesktop ? { fontSize: '1.2rem' } : { fontSize: '1.0rem'}) }}>Your account: <br />
     
     {account}
