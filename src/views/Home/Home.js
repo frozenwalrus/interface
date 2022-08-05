@@ -178,7 +178,7 @@ const Home = () => {
             marginBottom:'4%', 
             marginTop: '2%', 
             ...(isDesktop ? { fontSize: '2.5vw' } : { fontSize: '2.5rem'}) }}>
-              MY BALANCES</h1>
+              My Balances</h1>
           <Balances>
             <StyledBalanceWrapper>
               <TokenSymbol symbol="TOMB" />
