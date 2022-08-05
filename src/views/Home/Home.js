@@ -89,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const matches = useMediaQuery('(min-width:600px)');
+  const isDesktop = useMediaQuery('(min-width:1000px)');
   const classes = useStyles();
   const TVL = useTotalValueLocked();
   const tombFtmLpStats = useLpStats('WLRS-USDC-LP');
@@ -172,14 +173,21 @@ const Home = () => {
     <Grid item sm={12} md={6}>
       <HomeCard>
         <CardContent style={{ position: 'relative' }}>
-            <h1 style={{ textAlign: 'center', marginBottom:'4%', marginTop: '2%', fontSize: '2em' }}>MY BALANCE</h1>
+            <h1 style=
+            {{ textAlign: 'center', 
+            marginBottom:'4%', 
+            marginTop: '2%', 
+            ...(isDesktop ? { fontSize: '2.5vw' } : { fontSize: '2.5rem'}) }}>
+              MY BALANCES</h1>
           <Balances>
             <StyledBalanceWrapper>
               <TokenSymbol symbol="TOMB" />
               <StyledBalance>
                 <StyledValue>{displayTombBalance}</StyledValue>
-                <h2 style={{ fontSize: '1.0rem', marginLeft: '2%', fontWeight: '400'  }}>WLRS</h2> 
-                <span style={{ fontSize: '1.0rem', marginLeft: '2%',  }}>
+                <h2 style={{ marginLeft: '2%', fontWeight: '900',
+                     ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.5rem'}) }}>  
+                  WLRS</h2> 
+                <span style={{ fontWeight: '400', marginLeft: '2%', ...(isDesktop ? { fontSize: '1.1rem' } : { fontSize: '1.2rem'})  }}>
                   (${tombBalanceInDollars ? tombBalanceInDollars : '-.----'}) 
                 </span>
                 <div className={classes.flex}>
@@ -220,8 +228,9 @@ const Home = () => {
               <TokenSymbol symbol="WSHARE" />
               <StyledBalance>
                 <StyledValue>{displayTShareBalance}</StyledValue>
-                <h2 style={{ fontSize: '1.0rem', marginLeft: '2%', fontWeight: '400'  }}>WSHARE </h2>
-                <span style={{ fontSize: '1.0rem', marginLeft: '2%',  }}>
+                <h2 style={{ marginLeft: '2%', fontWeight: '900',
+                     ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.5rem'}) }}>  WSHARE </h2>
+                <span style={{ fontWeight: '400', marginLeft: '2%', ...(isDesktop ? { fontSize: '1.1rem' } : { fontSize: '1.2rem'})  }}>
                   (${tShareBalanceInDollars ? tShareBalanceInDollars : '-.----'})
                 </span>
                 <div className={classes.flex}>
@@ -262,8 +271,9 @@ const Home = () => {
               <TokenSymbol symbol="NRWL" />
               <StyledBalance>
                 <StyledValue>{displayNrwlBalance}</StyledValue>
-                <h2 style={{ fontSize: '1.0rem', marginLeft: '2%', fontWeight: '400'  }}>NRWL </h2>
-                <span style={{ fontSize: '1.0rem', marginLeft: '2%',  }}>
+                <h2 style={{ marginLeft: '2%', fontWeight: '900',
+                     ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.5rem'}) }}>  NRWL </h2>
+                <span style={{ fontWeight: '400', marginLeft: '2%', ...(isDesktop ? { fontSize: '1.1rem' } : { fontSize: '1.2rem'})  }}>
                 (${nrwlBalanceInDollars ? nrwlBalanceInDollars : '-.----'})
                 </span>
                 <div className={classes.flex}>
@@ -304,8 +314,9 @@ const Home = () => {
               <TokenSymbol symbol="WBOND" />
               <StyledBalance>
                 <StyledValue>{displayTBondBalance}</StyledValue>
-                <h2 style={{ fontSize: '1.0rem', marginLeft: '2%', fontWeight: '400'  }}>WBOND </h2>
-                <span style={{ fontSize: '1.0rem', marginLeft: '2%',  }}>
+                <h2 style={{ marginLeft: '2%', fontWeight: '900',
+                     ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.5rem'}) }}>  WBOND </h2>
+                <span style={{ fontWeight: '400', marginLeft: '2%', ...(isDesktop ? { fontSize: '1.1rem' } : { fontSize: '1.2rem'})  }}>
                   (${tBondBalanceInDollars ? tBondBalanceInDollars : '-.----'})
                 </span>
                 <div className={classes.flex}>
@@ -333,6 +344,18 @@ const Home = () => {
             </StyledBalanceWrapper>
           </Balances>
         </CardContent>
+        <Typography
+        variant="h1"
+        style={{
+          fontWeight: 700,
+          textAlign: 'center',
+          fontSize: '1.0rem',
+          ...(isDesktop ? { fontSize: '1.1rem' } : { fontSize: '2.5vw'}),
+        }}
+        gutterBottom
+      >
+        Utilize the Buy links here to avoid front-running bots.
+      </Typography> 
       </HomeCard>
     </Grid>
 
@@ -342,27 +365,14 @@ const Home = () => {
         style={{
           fontWeight: 900,
           textAlign: 'center',
-          fontSize: 50,
-          ...(!matches ? { fontSize: 36 } : {}),
+          ...(isDesktop ? { fontSize: '4vw' } : { fontSize: '6vw'}),
         }}
         gutterBottom
       >
         Welcome to Frozen Walrus! 
       </Typography>
       
-      <Typography
-        variant="h1"
-        style={{
-          fontWeight: 700,
-          textAlign: 'center',
-          fontSize: '1.0rem',
-          ...(!matches ? { fontSize: 24 } : {}),
-        }}
-        gutterBottom
-      >
-        To avoid front-running transactions, we recommend purchasing Frozen Walrus assets via Bogged through the Buy links 
-        on the left. 
-      </Typography> 
+      
       <HomeCard>
         <CardContent
           style={{ margin: '37px', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}
@@ -703,6 +713,7 @@ const StyledBalanceWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin: 1%;
+  margin-bottom: 3%; 
 `;
 
 export default Home;

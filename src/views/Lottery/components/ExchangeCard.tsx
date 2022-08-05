@@ -64,10 +64,9 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
     />,
   );
   return (
-    <BondCard >
       <CardContent>
         <StyledCardContentInner>
-          <StyledCardTitle>{`ENTER LOTTERY WITH WLRS`}</StyledCardTitle> 
+          <StyledCardTitle>{``}</StyledCardTitle> 
           <StyledExchanger>
             <StyledToken>
               <StyledCardIcon>
@@ -82,14 +81,13 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
               className={disabled ? 'shinyButtonDisabled' : 'shinyButton'}
               onClick={onPresent}
               disabled={disabled}
-              style={{ padding: '1px', borderRadius: '8px', fontSize: '1rem', marginTop: '7%', width: '100%'}}
+              style={{ padding: '10px', borderRadius: '20px', fontSize: '1rem', marginTop: '7%', width: '100%'}}
             >
               {disabledDescription || action}
             </Button>
           </StyledCardActions>
         </StyledCardContentInner>
       </CardContent>
-    </BondCard>
   );
 };
 
