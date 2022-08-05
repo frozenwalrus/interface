@@ -24,6 +24,12 @@ border-radius: 50px;
 padding: 20px; 
 color: #4b4453;
 `;
+const HomeCardDBlue = styled.div`
+background: rgba(217, 238, 254, 0.9);
+border-radius: 50px;
+padding: 20px; 
+color: #4b4453;
+`;
 const HomeCard = styled.div`
   background: rgba(255, 255, 255, 0.5);
   border-radius: 50px;
@@ -196,26 +202,26 @@ const matches = useMediaQuery('(min-width:1000px)');
 
 
   <>
-  <h2 style={{fontSize: '6vw', textAlign: 'center', marginBottom: '0%',}}>FROZEN WALRUS</h2> <br /> 
-    <h2 style={{fontSize: '3vw', textAlign: 'center', marginBottom: '4%',}}>NODE LEADERBOARD</h2>
+  <h2 style={{fontSize: '36px', textAlign: 'center', marginBottom: '0%',}}>FROZEN WALRUS</h2> <br /> 
+    <h2 style={{fontSize: '32px', textAlign: 'center', marginBottom: '4%',}}>NODE LEADERBOARD</h2>
 
 
 <Grid container spacing={3} direction="column" style={{ display: 'flex', alignItems: 'center'}} >
 
     <Grid  item xs={12} sm={8}>
-      <HomeCardBlue>
+      <HomeCardDBlue>
         <CardContent>
         
         
-        <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '5%'}}> 
+        <h2 style={{ fontSize: '22px', textAlign: 'center', marginBottom: '5%', width: '100%'}}> 
           Track the Node Leaderboard for Progress and Weekly Competition Updates! </h2>
-        <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '2%'}}>
+        <h2 style={{ fontSize: '18px', textAlign: 'center', marginBottom: '2%'}}>
           Each week, WSHARE rewards are given to the top creator of WLRS-USDC and WSHARE-USDC nodes. 
           WSHARE rewards are also given out randomly amongst all Node creators. 
         </h2>
           
         </CardContent>
-      </HomeCardBlue>
+      </HomeCardDBlue>
     </Grid>
 </Grid>
 
@@ -226,17 +232,17 @@ const matches = useMediaQuery('(min-width:1000px)');
           <CardContent>
           <h2 style={{ fontSize: '24px', textAlign: 'center', marginBottom: '2%'}}>
               Weekly Winners! Week of July 24-31 <br /> </h2>
-          <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '2%'}}>
+          <h2 style={{ fontSize: '18px', textAlign: 'center', marginBottom: '4%'}}>
               These Frozen Walrus champions created at least one (1) WLRS-USDC or WSHARE-USDC node and 
               were randomly selected to receive one (1) WSHARE reward! 
           </h2> 
           </CardContent>
         
           <Grid container spacing={3} style={{ marginBottom: '5%'}} >
-            <Grid direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
+            <Grid direction="column" item xs={12} style={{ display: 'flex', alignItems: 'center' }}> 
               <HomeCardPurple style={{ width: '90%' }} >
-                  <h2 style={{ fontSize: '16px', textAlign: 'center'}}><u>WLRS-USDC</u></h2>
-                  <h2 style={{ fontSize: '16px', textAlign: 'center', }}>
+                  <h2 style={{ fontSize: '20px', textAlign: 'center'}}><u>WLRS-USDC</u></h2>
+                  <h2 style={{ fontSize: '20px', textAlign: 'center', }}>
                       cc9a8e1724<br />
                       043b72a8d5<br />
                       041e086f26<br />
@@ -245,42 +251,42 @@ const matches = useMediaQuery('(min-width:1000px)');
                   </h2>
               </HomeCardPurple>
             </Grid>
-            <Grid spacing={6} direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
-              <HomeCardBlue style={{ width: '90%'}}>
-                <h2 style={{ fontSize: '16px', textAlign: 'center'}}><u>WSHARE-USDC</u></h2>
-                <h2 style={{ fontSize: '16px', textAlign: 'center'}}>
+            <Grid spacing={6} direction="column" item xs={12} style={{ display: 'flex', alignItems: 'center' }}> 
+              <HomeCardDBlue style={{ width: '90%'}}>
+                <h2 style={{ fontSize: '20px', textAlign: 'center'}}><u>WSHARE-USDC</u></h2>
+                <h2 style={{ fontSize: '20px', textAlign: 'center'}}>
                       750820c233<br />
                       33734003d8<br />
                       21cbf49580<br />
                       dfa032030d<br />
                       aa01c47a79<br />
                 </h2> 
-              </HomeCardBlue>
+              </HomeCardDBlue>
             </Grid>
         </Grid>
     
-        <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '2%'}}>  
+        <h2 style={{ fontSize: '18px', textAlign: 'center', marginBottom: '2%'}}>  
           These two Frozen Walrus kings/queens created the most Nodes during this week's timespan and receive five (5) WSHARE as reward!</h2>
           
           <Grid container spacing={6} style={{ marginBottom: '5%'}} >
             
-            <Grid direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
-              <HomeCardPurple style={{ width: '90%' }} >
-                <h2 style={{ fontSize: '16px', textAlign: 'center', marginTop:'10%'}}><u>WLRS-USDC</u></h2>
-                <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '15%' }}>
+            <Grid direction="column" item xs={12} style={{ display: 'flex', alignItems: 'center' }}> 
+              <HomeCardPurple style={{ width: '80%' }} >
+                <h2 style={{ fontSize: '20px', textAlign: 'center', marginTop:'5%'}}><u>WLRS-USDC</u></h2>
+                <h2 style={{ fontSize: '20px', textAlign: 'center', marginBottom: '5%' }}>
                 e67E1ac524: 140
                
                 </h2>
                 </HomeCardPurple>
             </Grid>
 
-            <Grid spacing={6} direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
-              <HomeCardBlue style={{ width: '90%'}}>
-                <h2 style={{ fontSize: '16px', textAlign: 'center', marginTop:'10%'}}><u>WSHARE-USDC</u></h2>
-                <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '15%' }}>
+            <Grid spacing={6} direction="column" item xs={12} style={{ display: 'flex', alignItems: 'center' }}> 
+              <HomeCardDBlue style={{ width: '80%'}}>
+                <h2 style={{ fontSize: '20px', textAlign: 'center', marginTop:'5%'}}><u>WSHARE-USDC</u></h2>
+                <h2 style={{ fontSize: '20px', textAlign: 'center', marginBottom: '5%' }}>
                 e88EeB6141: 435 
                 </h2> 
-              </HomeCardBlue>
+              </HomeCardDBlue>
             </Grid>
         </Grid>
 
@@ -291,17 +297,17 @@ const matches = useMediaQuery('(min-width:1000px)');
       <CardContent>
       <h2 style={{ fontSize: '24px', textAlign: 'center', marginBottom: '2%'}}>
        All-Time Leaderboard<br /> </h2>
-       <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '2%'}}>
+       <h2 style={{ fontSize: '20px', textAlign: 'center', marginBottom: '2%'}}>
         God Tier Node Creators 
         </h2>
       
       </CardContent>
    
       <Grid container spacing={3} >   
-        <Grid direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
+        <Grid direction="column" item xs={12} style={{ display: 'flex', alignItems: 'center' }}> 
         <HomeCardPurple style={{  width: '90%'}}>
-          <h2 style={{ fontSize: '16px', textAlign: 'center'}}><u>WLRS-USDC</u></h2>
-          <h2 style={{ fontSize: '16px', textAlign: 'center', justifyContent: 'space-between' }}>
+          <h2 style={{ fontSize: '20px', textAlign: 'center'}}><u>WLRS-USDC</u></h2>
+          <h2 style={{ fontSize: '20px', textAlign: 'center', justifyContent: 'space-between' }}>
            
               C2D1057909: 959 <br />
               e67E1ac524:	790 <br />
@@ -320,10 +326,10 @@ const matches = useMediaQuery('(min-width:1000px)');
           </HomeCardPurple>
 
         </Grid>
-        <Grid spacing={6} direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
-        <HomeCardBlue style={{ width: '90%'}}>
-        <h2 style={{ fontSize: '16px', textAlign: 'center'}}><u>WSHARE-USDC</u></h2>
-        <h2 style={{ fontSize: '16px', textAlign: 'center', justifyContent: 'space-between' }}>
+        <Grid spacing={6} direction="column" item xs={12} style={{ display: 'flex', alignItems: 'center' }}> 
+        <HomeCardDBlue style={{ width: '90%'}}>
+        <h2 style={{ fontSize: '20px', textAlign: 'center'}}><u>WSHARE-USDC</u></h2>
+        <h2 style={{ fontSize: '20px', textAlign: 'center', justifyContent: 'space-between' }}>
             e88EeB6141:	435 <br />
             73D80768fD:	198 <br />
             6597f3d3d7:	115 <br />
@@ -335,7 +341,7 @@ const matches = useMediaQuery('(min-width:1000px)');
             F6dAE48e0c:	080 <br />
             F4D7F6F5e6:	076 <br />
          </h2> 
-         </HomeCardBlue>
+         </HomeCardDBlue>
         </Grid>
       </Grid>
       </HomeCard>
