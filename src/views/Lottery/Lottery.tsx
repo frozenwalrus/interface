@@ -139,7 +139,7 @@ const Lottery: React.FC = () => {
           <div>
             <h2 style={{ textAlign: 'center', marginBottom: '1%', 
             ...(isDesktop ? { fontSize: '5rem' } : { fontSize: '4rem'})}}>
-            FROZEN WALRUS <br /> LOTTERY 
+            LOTTERY 
             </h2>
             
           </div>
