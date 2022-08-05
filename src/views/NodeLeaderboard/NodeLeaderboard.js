@@ -47,9 +47,9 @@ const NodeLeaderboard = () => {
     <Grid  item xs={12} sm={8}>
       <HomeCardBlue>
         <CardContent>
-        <h2 style={{ fontSize: '1.5vw', textAlign: 'center', marginBottom: '10%'}}> 
+        <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '5%'}}> 
           Track the Node Leaderboard for Progress and Weekly Competition Updates! </h2>
-        <h2 style={{ fontSize: '1.2vw', textAlign: 'center', marginBottom: '2%'}}>
+        <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '2%'}}>
           Each week, WSHARE rewards are given to the top creator of WLRS-USDC and WSHARE-USDC nodes. 
           WSHARE rewards are also given out randomly amongst all Node creators. 
         </h2>
@@ -63,9 +63,9 @@ const NodeLeaderboard = () => {
     <Grid  item xs={12} sm={12}>
       <HomeCard>
           <CardContent>
-          <h2 style={{ fontSize: '3vw', textAlign: 'center', marginBottom: '2%'}}>
+          <h2 style={{ fontSize: '24px', textAlign: 'center', marginBottom: '2%'}}>
               Weekly Winners! Week of July 24-31 <br /> </h2>
-          <h2 style={{ fontSize: '1.5vw', textAlign: 'center', marginBottom: '2%'}}>
+          <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '2%'}}>
               These Frozen Walrus champions created at least one (1) WLRS-USDC or WSHARE-USDC node and 
               were randomly selected to receive one (1) WSHARE reward! 
           </h2> 
@@ -74,8 +74,8 @@ const NodeLeaderboard = () => {
           <Grid container spacing={3} style={{ marginBottom: '5%'}} >
             <Grid direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
               <HomeCardPurple style={{ width: '90%' }} >
-                  <h2 style={{ fontSize: '1.5vw', textAlign: 'center'}}><u>WLRS-USDC</u></h2>
-                  <h2 style={{ fontSize: '1.2vw', textAlign: 'center', }}>
+                  <h2 style={{ fontSize: '16px', textAlign: 'center'}}><u>WLRS-USDC</u></h2>
+                  <h2 style={{ fontSize: '16px', textAlign: 'center', }}>
                       cc9a8e1724<br />
                       043b72a8d5<br />
                       041e086f26<br />
@@ -86,8 +86,8 @@ const NodeLeaderboard = () => {
             </Grid>
             <Grid spacing={6} direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
               <HomeCardBlue style={{ width: '90%'}}>
-                <h2 style={{ fontSize: '1.5vw', textAlign: 'center'}}><u>WSHARE-USDC</u></h2>
-                <h2 style={{ fontSize: '1.2vw', textAlign: 'center'}}>
+                <h2 style={{ fontSize: '16px', textAlign: 'center'}}><u>WSHARE-USDC</u></h2>
+                <h2 style={{ fontSize: '16px', textAlign: 'center'}}>
                       750820c233<br />
                       33734003d8<br />
                       21cbf49580<br />
@@ -98,15 +98,15 @@ const NodeLeaderboard = () => {
             </Grid>
         </Grid>
     
-        <h2 style={{ fontSize: '1.2vw', textAlign: 'center', marginBottom: '2%'}}>  
+        <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '2%'}}>  
           These two Frozen Walrus kings/queens created the most Nodes during this week's timespan and receive five (5) WSHARE as reward!</h2>
           
           <Grid container spacing={6} style={{ marginBottom: '5%'}} >
             
             <Grid direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
               <HomeCardPurple style={{ width: '90%' }} >
-                <h2 style={{ fontSize: '1.5vw', textAlign: 'center', marginTop:'10%'}}><u>WLRS-USDC</u></h2>
-                <h2 style={{ fontSize: '1.2vw', textAlign: 'center', marginBottom: '15%' }}>
+                <h2 style={{ fontSize: '16px', textAlign: 'center', marginTop:'10%'}}><u>WLRS-USDC</u></h2>
+                <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '15%' }}>
                 e67E1ac524: 140
                
                 </h2>
@@ -115,8 +115,8 @@ const NodeLeaderboard = () => {
 
             <Grid spacing={6} direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
               <HomeCardBlue style={{ width: '90%'}}>
-                <h2 style={{ fontSize: '1.5vw', textAlign: 'center', marginTop:'10%'}}><u>WSHARE-USDC</u></h2>
-                <h2 style={{ fontSize: '1.2vw', textAlign: 'center', marginBottom: '15%' }}>
+                <h2 style={{ fontSize: '16px', textAlign: 'center', marginTop:'10%'}}><u>WSHARE-USDC</u></h2>
+                <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '15%' }}>
                 e88EeB6141: 435 
                 </h2> 
               </HomeCardBlue>
@@ -128,9 +128,9 @@ const NodeLeaderboard = () => {
   <Grid  item xs={12} sm={12}>
     <HomeCard>
       <CardContent>
-      <h2 style={{ fontSize: '3.0vw', textAlign: 'center', marginBottom: '2%'}}>
+      <h2 style={{ fontSize: '24px', textAlign: 'center', marginBottom: '2%'}}>
        All-Time Leaderboard<br /> </h2>
-       <h2 style={{ fontSize: '1.5vw', textAlign: 'center', marginBottom: '2%'}}>
+       <h2 style={{ fontSize: '16px', textAlign: 'center', marginBottom: '2%'}}>
         God Tier Node Creators 
         </h2>
       
@@ -139,8 +139,8 @@ const NodeLeaderboard = () => {
       <Grid container spacing={3} >   
         <Grid direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
         <HomeCardPurple style={{  width: '90%'}}>
-          <h2 style={{ fontSize: '1.5vw', textAlign: 'center'}}><u>WLRS-USDC</u></h2>
-          <h2 style={{ fontSize: '1.2vw', textAlign: 'center', justifyContent: 'space-between' }}>
+          <h2 style={{ fontSize: '16px', textAlign: 'center'}}><u>WLRS-USDC</u></h2>
+          <h2 style={{ fontSize: '16px', textAlign: 'center', justifyContent: 'space-between' }}>
            
               C2D1057909: 959 <br />
               e67E1ac524:	790 <br />
@@ -161,8 +161,8 @@ const NodeLeaderboard = () => {
         </Grid>
         <Grid spacing={6} direction="column" item xs={6} style={{ display: 'flex', alignItems: 'center' }}> 
         <HomeCardBlue style={{ width: '90%'}}>
-        <h2 style={{ fontSize: '1.5vw', textAlign: 'center'}}><u>WSHARE-USDC</u></h2>
-        <h2 style={{ fontSize: '1.2vw', textAlign: 'center', justifyContent: 'space-between' }}>
+        <h2 style={{ fontSize: '16px', textAlign: 'center'}}><u>WSHARE-USDC</u></h2>
+        <h2 style={{ fontSize: '16px', textAlign: 'center', justifyContent: 'space-between' }}>
             e88EeB6141:	435 <br />
             73D80768fD:	198 <br />
             6597f3d3d7:	115 <br />
