@@ -2,14 +2,29 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Button, CardActions, CardContent, Typography, Grid } from '@material-ui/core';
 import Card from '../../components/Card';
-
 import TokenSymbol from '../../components/TokenSymbol';
 import useLpStats from '../../hooks/useLpStats';
 import useLpStatsNrwl from '../../hooks/useLpStatsNrwl';
 import useBank from '../../hooks/useBank';
 import useStatsForPool from '../../hooks/useStatsForPool';
 // import useCashStat from '../../hooks/useCashPriceInEstimatedTWAP.ts';
+import styled from 'styled-components';
 
+const HomeCardPurple = styled.div`
+  background: rgba(214, 211, 242, 0.9);
+  border-radius: 50px;
+  box-shadow: 6px 6px 12px black; 
+  padding: 20px; 
+  color: #4b4453;
+`;
+const HomeCardBlue = styled.div`
+  background: rgba(217, 238, 254, 0.95);
+  border-radius: 50px;
+  box-shadow: 6px 6px 12px black; 
+  padding: 20px; 
+  color: #4b4453;
+   
+`;
 const CemeteryCard = () => {
   const tombFtmLpStats = useLpStats('WLRS-USDC-LP');
   const tShareFtmLpStats = useLpStats('WSHARE-USDC-LP');
@@ -38,7 +53,7 @@ const CemeteryCard = () => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={6}>
-        <Card>
+        <HomeCardBlue>
           <CardContent
             style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center' }}
           >
@@ -49,7 +64,7 @@ const CemeteryCard = () => {
               <TokenSymbol size={60} symbol="WLRS-USDC-LP" />
             </div>
             <div>
-              <span style={{ fontSize: '23px' }}>
+              <span style={{ fontSize: '20px' }}>
                 {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} WLRS /{' '}
                 {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} USDC.e
               </span>
@@ -64,7 +79,7 @@ const CemeteryCard = () => {
           <CardActions style={{ justifyContent: 'center' }}>
             <Button
               color="primary"
-              style={{ width: '150px', height: '45px', marginBottom: '5%' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
               variant="contained"
               component={Link}
               to={`/farms/WlrsUsdcLPWShareRewardPool/`}
@@ -74,28 +89,28 @@ const CemeteryCard = () => {
             <Button
               color="primary"
               target="_blank"
-              style={{ width: '150px', height: '45px', marginBottom: '5%' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
               variant="contained"
               href="https://traderjoexyz.com/pool/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/0x395908aeb53d33A9B8ac35e148E9805D34A555D3#/"
             >
               Add Liquidity
             </Button>
           </CardActions>
-        </Card>
+        </HomeCardBlue>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <Card>
+        <HomeCardPurple>
           <CardContent
             style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center' }}
           >
             <div>
-              <Typography variant="h5" component="h2">
+              <Typography variant="h5" component="h2" style={{ marginLeft:'-8px'}} >
                 WSHARE-USDC.e LP
               </Typography>
               <TokenSymbol size={60} symbol="WSHARE-USDC-LP" />
             </div>
             <div>
-              <span style={{ fontSize: '23px' }}>
+              <span style={{ fontSize: '19px',}}>
                 {tshareLPStats?.tokenAmount ? tshareLPStats?.tokenAmount : '-.--'} WSHARE /{' '}
                 {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} USDC.e
               </span>
@@ -111,7 +126,7 @@ const CemeteryCard = () => {
           <CardActions style={{ justifyContent: 'center' }}>
             <Button
               color="primary"
-              style={{ width: '150px', height: '45px', marginBottom: '5%' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
               variant="contained"
               component={Link}
               to={`/farms/WShareUsdcLPWShareRewardPool/`}
@@ -121,17 +136,17 @@ const CemeteryCard = () => {
             <Button
               color="primary"
               target="_blank"
-              style={{ width: '150px', height: '45px', marginBottom: '5%' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
               variant="contained"
               href="https://traderjoexyz.com/pool/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6#/"
             >
               Add Liquidity
             </Button>
           </CardActions>
-        </Card>
+        </HomeCardPurple>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <Card>
+        <HomeCardPurple>
           <CardContent
             style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center' }}
           >
@@ -142,7 +157,7 @@ const CemeteryCard = () => {
               <TokenSymbol size={60} symbol="NRWL-YUSD-LP" />
             </div>
             <div>
-              <span style={{ fontSize: '23px' }}>
+              <span style={{ fontSize: '20px' }}>
                 {nrwlLpStats?.tokenAmount ? nrwlLpStats?.tokenAmount : '-.--'} NRWL /{' '}
                 {nrwlLpStats?.ftmAmount ? nrwlLpStats?.ftmAmount : '-.--'} YUSD
               </span>
@@ -164,7 +179,7 @@ const CemeteryCard = () => {
           <CardActions style={{ justifyContent: 'center' }}>
             <Button
               color="primary"
-              style={{ width: '150px', height: '45px', marginBottom: '5%' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
               variant="contained"
               component={Link}
               to={`/farms/NrwlYusdLPWShareRewardPool/`}
@@ -174,17 +189,17 @@ const CemeteryCard = () => {
             <Button
               color="primary"
               target="_blank"
-              style={{ width: '150px', height: '45px', marginBottom: '5%' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
               variant="contained"
               href="https://www.swapsicle.io/add/0x111111111111ed1D73f860F57b2798b683f2d325/0x501012893eE88976AB8B5289B7a78E307d5d9DCb"
             >
               Add Liquidity
             </Button>
           </CardActions>
-        </Card>
+        </HomeCardPurple>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <Card>
+        <HomeCardBlue>
           <CardContent
             style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center' }}
           >
@@ -195,7 +210,7 @@ const CemeteryCard = () => {
               <TokenSymbol size={60} symbol="WLRS-USDIBS-LP" />
             </div>
             <div>
-              <span style={{ fontSize: '23px' }}>
+              <span style={{ fontSize: '20px' }}>
                 {tDibsLpStats?.tokenAmount ? tDibsLpStats?.tokenAmount : '-.--'} WLRS /{' '}
                 {tDibsLpStats?.ftmAmount ? tDibsLpStats?.ftmAmount : '-.--'} USDibs
               </span>
@@ -217,7 +232,7 @@ const CemeteryCard = () => {
           <CardActions style={{ justifyContent: 'center' }}>
             <Button
               color="primary"
-              style={{ width: '150px', height: '45px', marginBottom: '5%' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
               variant="contained"
               component={Link}
               to={`/farms/WlrsUSDibsLPWShareRewardPool/`}
@@ -227,14 +242,14 @@ const CemeteryCard = () => {
             <Button
               color="primary"
               target="_blank"
-              style={{ width: '150px', height: '45px', marginBottom: '5%' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
               variant="contained"
               href="https://traderjoexyz.com/pool/0x0efa5328fefce96c8d10661bd97403764d477853/0x395908aeb53d33a9b8ac35e148e9805d34a555d3#/"
             >
               Add Liquidity
             </Button>
           </CardActions>
-        </Card>
+        </HomeCardBlue>
       </Grid>
       {/* <Grid item xs={12} sm={6}>
         <Card>
@@ -248,7 +263,7 @@ const CemeteryCard = () => {
               <TokenSymbol symbol="WLRS-WSHARE-LP" size={60} />
             </div>
             <div>
-              <span style={{ fontSize: '23px' }}>
+              <span style={{ fontSize: '20px' }}>
                 {snoSnoShareLPStats?.ftmAmount ? snoSnoShareLPStats?.ftmAmount : '-.--'} WLRS /{' '}
                 {snoSnoShareLPStats?.tokenAmount ? snoSnoShareLPStats?.tokenAmount : '-.--'} WSHARE
               </span>

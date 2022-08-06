@@ -3,16 +3,14 @@ import { useWallet } from 'use-wallet';
 import { Route, Switch, useRouteMatch, Link } from 'react-router-dom';
 import Masonry from '../Masonry';
 import NrwlBoardroom from '../NrwlBoardroom';
-
+import styled from 'styled-components';
 import TokenSymbol from '../../components/TokenSymbol';
 import Card from '../../components/Card';
-import { Box, Container, Typography, Grid, CardActions, CardContent, Button } from '@material-ui/core';
-
+import { Box, Container, Typography, Grid, CardActions, CardContent, Button, useMediaQuery } from '@material-ui/core';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 import CemeteryImage from '../../assets/img/SVG_Icons_and_web_bg/bg.svg';
 import { createGlobalStyle } from 'styled-components';
-
 
 
 const BackgroundImage = createGlobalStyle`
@@ -21,10 +19,27 @@ const BackgroundImage = createGlobalStyle`
     background-size: cover !important;
   }
 `;
+const HomeCardPurple = styled.div`
+  background: rgba(214, 211, 242, 0.9);
+  border-radius: 50px;
+  box-shadow: 6px 6px 12px black; 
+  padding: 20px; 
+  color: #4b4453;
+`;
+const HomeCardBlue = styled.div`
+  background: rgba(217, 238, 254, 0.95);
+  border-radius: 50px;
+  box-shadow: 6px 6px 12px black; 
+  padding: 20px; 
+  color: #4b4453;
+   
+`;
 
 const Boardroom = () => {
   const { path } = useRouteMatch();
   const { account } = useWallet();
+  const isDesktop = useMediaQuery('(min-width:600px)');
+
 
   return (
     <Switch>
@@ -33,16 +48,20 @@ const Boardroom = () => {
           <BackgroundImage />
           {!!account ? (
             <Container maxWidth="lg">
-              <Typography align="center" variant="h2" style={{ marginTop: '10px', marginBottom: '30px' }}>
-                Boardrooms
-              </Typography>
+              <h2 style={{
+                    textAlign: 'center', marginBottom: '10px', 
+                    ...(isDesktop ? { fontSize: '5rem' } : { fontSize: '3rem'}) }}>  
+                    BOARDROOMS</h2>
+              
               <Grid container spacing={3} style={{ justifyContent: "center" }}>
                 <Grid item xs={12} sm={4} >
-                  <Card>
+                  <HomeCardBlue>
                     <CardContent align="center">
-                      <Typography variant="h2" component="h2">
-                         Walrus
-                      </Typography>
+                    <h2 style={{
+                    textAlign: 'center', marginBottom: '1px', 
+                    ...(isDesktop ? { fontSize: '2.5rem' } : { fontSize: '2rem'}) }}>  
+                    WALRUS</h2>   
+                         
                       <Typography variant="h5" component="h2">
                          WLRS
                       </Typography>
@@ -63,14 +82,15 @@ const Boardroom = () => {
                       <b>  View and Stake </b>
                       </Button>
                     </CardActions>
-                  </Card>
+                  </HomeCardBlue>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <Card>
+                  <HomeCardPurple>
                     <CardContent align="center">
-                      <Typography variant="h2" component="h2">
-                       Narwhal
-                      </Typography>
+                    <h2 style={{
+                    textAlign: 'center', marginBottom: '1px', 
+                    ...(isDesktop ? { fontSize: '2.5rem' } : { fontSize: '2rem'}) }}>  
+                    NARWHAL</h2>
                       <Typography variant="h5" component="h2">
                        NRWL
                       </Typography>
@@ -91,7 +111,7 @@ const Boardroom = () => {
                         <b>View and Stake </b>
                       </Button>
                     </CardActions>
-                  </Card>
+                  </HomeCardPurple>
                 </Grid> 
               </Grid>
             </Container>

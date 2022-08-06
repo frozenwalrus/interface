@@ -61,7 +61,7 @@ const SnoNodes = () => {
           Go To Leaderboard!
         </Button>
           </div>
-          <Grid container spacing={3} style={{marginTop: '20px'}}>
+          <Grid container spacing={3} style={{marginTop: '20px', justifyContent:'center'}}>
             <WlrsCard />
             <SnoCard /> 
             <NrwlLPCard />   

@@ -2,10 +2,8 @@ import React from 'react';
 import { useWallet } from 'use-wallet';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import Bank from '../Bank';
-
 import { Alert } from '@material-ui/lab';
-import { Box, Container, Typography, Grid } from '@material-ui/core';
-
+import { Box, Container, Typography, Grid, useMediaQuery } from '@material-ui/core';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 import CemeteryCard from './CemeteryCard';
@@ -13,9 +11,9 @@ import GenesisCard from './GenesisCard';
 import NrwlGenesisCard from './NrwlGenesisCard';
 import CemeteryImage from '../../assets/img/SVG_Icons_and_web_bg/bg.svg';
 import { createGlobalStyle } from 'styled-components';
-
 import useBanks from '../../hooks/useBanks';
 import config from '../../config';
+import styled from 'styled-components';
 
 const BackgroundImage = createGlobalStyle`
   body {
@@ -24,11 +22,14 @@ const BackgroundImage = createGlobalStyle`
   }
 `;
 
+
 const Cemetery = () => {
   const [banks] = useBanks();
   const { path } = useRouteMatch();
   const { account } = useWallet();
   const activeBanks = banks.filter((bank) => !bank.finished);
+  const isDesktop = useMediaQuery('(min-width:600px)');
+
   return (
     <Switch>
       <Page>
@@ -36,19 +37,19 @@ const Cemetery = () => {
           <BackgroundImage />
           {!!account ? (
             <Container maxWidth="lg">
-              <Typography align="center" variant="h2" style={{ marginTop: '-30px' }}>
-                Farms
-              </Typography>
-
+               <h2 style={{
+                textAlign: 'center', 
+                ...(isDesktop ? { fontSize: '5rem' } : { fontSize: '4rem'}) }}>  
+                  FARMS</h2>
               <Box mt={5}>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
                   <Typography
                     align="center"
                     variant="h4"
                     gutterBottom
-                    style={{ marginTop: '-25px', marginBottom: '35px' }}
-                  >
-                    WSHARE Pools
+                    style={{ marginTop: '-25px', marginBottom: '50px', 
+                    ...(isDesktop ? { fontSize: '2rem' } : { fontSize: '1.5rem'}) }}> 
+                    Deposit LPs to earn WShare 
                   </Typography>
                   {/* <Alert variant="filled" severity="info" style={{ marginTop: '-25px', marginBottom: '35px' }}>
                     All below pools have ended. Please unstake and stake at{' '}
@@ -81,14 +82,15 @@ const Cemetery = () => {
               </div> */}
 
               <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 5).length === 0}>
-                <Typography variant="h4" gutterBottom style={{marginTop: '50px', color: '5#A381A'}}>
+                <Typography variant="h4" gutterBottom style={{marginTop: '10%', color: '5#A381A', textAlign: 'center' }}>
                   NRWL Genesis Pools
                 </Typography>
                 {
                   1659456000 * 1000 < new Date().getTime()
                     ? (
                         <Alert variant="filled" severity="error" >
-                          NRWL Genesis pools have ended. Please claim all rewards and remove funds from Genesis pools.
+                          NRWL Genesis pools have ended and will soon be removed from the site. 
+                          Please claim all rewards and remove funds from Genesis pools immediately. 
                         </Alert>
                       )
                     : (
@@ -106,7 +108,7 @@ const Cemetery = () => {
                       )
                     : null
                 }
-                <Grid container spacing={3} style={{marginTop: '20px'}}>
+                <Grid container spacing={3} style={{marginTop: '10px', marginBottom: '20px'}}>
                   <NrwlGenesisCard />
                 </Grid>
               </div>

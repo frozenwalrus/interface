@@ -24,6 +24,21 @@ const BondCard = styled.div`
   padding: 20px; 
   color: #4b4453;
 `;
+const HomeCardPurple = styled.div`
+  background: rgba(214, 211, 242, 0.9);
+  border-radius: 50px;
+  box-shadow: 6px 6px 12px black; 
+  padding: 20px; 
+  color: #4b4453;
+`;
+const HomeCardBlue = styled.div`
+  background: rgba(217, 238, 254, 0.95);
+  border-radius: 50px;
+  box-shadow: 6px 6px 12px black; 
+  padding: 20px; 
+  color: #4b4453;
+   
+`;
 const StyledLink = styled.a`
   font-weight: 700;
   text-decoration: none;
@@ -46,7 +61,7 @@ return (
       <Grid container spacing={3} >
       <Grid item xs={12} sm={3} />
         <Grid item xs={12} sm={3} >
-          <BondCard >
+          <HomeCardBlue >
             <CardContent align="center">
               <h2 style={{ fontSize: '2rem', marginBottom: '2%'}} >
                 WBOND
@@ -75,10 +90,10 @@ return (
                 View and Stake
               </Button>
             </CardActions>
-          </BondCard>
+          </HomeCardBlue>
         </Grid>
         <Grid item xs={12} sm={3}>
-        <BondCard >
+        <HomeCardPurple >
             <CardContent align="center">
             <h2 style={{ fontSize: '2rem', marginBottom: '2%'}} >
               NBOND 
@@ -108,7 +123,7 @@ return (
                 View and Stake
               </Button>
             </CardActions>
-          </BondCard>
+          </HomeCardPurple>
         </Grid> 
         <Grid item xs={12} sm={3} />
 
