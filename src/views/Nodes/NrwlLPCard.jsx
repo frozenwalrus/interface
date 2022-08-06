@@ -32,7 +32,7 @@ const PegLPCard = ({}) => {
               <TokenSymbol size={55} symbol={'NRWL-YUSD-LP'} />
             </Box>
             <Typography variant="h5" component="h2">
-            NRWL LP Node
+            NRWL-YUSD LP Node
             </Typography>
             <Typography color="#322f32">
               Lock your NRWL LP to earn daily yields<br></br>
