@@ -184,11 +184,11 @@ const Lottery: React.FC = () => {
 </h2>
 <h2 style={{ textAlign: 'left',  marginBottom: '5%',
             ...(isDesktop ? { fontSize: '1.5rem' } : { fontSize: '1.2rem'}) }}>
-            Total WLRS entered into lottery: ${raffleBals}
+            Total WLRS entered into lottery: {raffleBals}
 </h2>
 <h2 style={{ textAlign: 'left',  marginBottom: '5%',
             ...(isDesktop ? { fontSize: '1.5rem' } : { fontSize: '1.2rem'}) }}>
-            Your WLRS tokens entered into lottery: ${userBals}
+            Your WLRS tokens entered into lottery: {userBals}
 </h2>
 
      <ExchangeCard
