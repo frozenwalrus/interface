@@ -201,16 +201,16 @@ const Lottery: React.FC = () => {
             onExchange={handleBuyBonds}>
             </ExchangeCard>
 
-    
+            <h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
+            ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
+    <i>The first inaugural Frozen Walrus has now closed. Winners will be announced here no later than August 8, 2022 at 2100 UTC. 
+            First prize wins 2500 USDC. Second prize wins 500 USDC. Third prize wins 250 USDC.</i> </h2>
     <LotterySubText style={{ textAlign: 'center',  marginTop: '5%', width:'95%', 
             ...(isDesktop ? { fontSize: '1.2rem' } : { fontSize: '1.0rem'}) }}>Your account: <br />
     
     {account}
     </LotterySubText>
-    <h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
-            ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
-    <i>The first inaugural Frozen Walrus has now closed. Winners will be announced here no later than August 8, 2022 at 2100 UTC. 
-            First prize wins 2500 USDC. Second prize wins 500 USDC. Third prize wins 250 USDC.</i> </h2>
+    
     </BondCard>
   </Grid>  
   
