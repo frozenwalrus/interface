@@ -74,7 +74,7 @@ const Boardroom = () => {
                       <Button
                         color="primary"
                         size="large"
-                        style={{ width: '200px', height: '40px', marginBottom: '10%', borderRadius: '10px' }}
+                        style={{ width: '200px', height: '40px', marginBottom: '10%', borderRadius: '10px', boxShadow: '4px 4px 12px black' }}
                         variant="contained"
                         component={Link}
                         to={`/boardroom/wlrs`}
@@ -103,7 +103,7 @@ const Boardroom = () => {
                       <Button
                         color="primary"
                         size="large"
-                        style={{ width: '200px', height: '40px', marginBottom: '10%', borderRadius: '10px'}}
+                        style={{ width: '200px', height: '40px', marginBottom: '10%', borderRadius: '10px', boxShadow: '4px 4px 12px black'}}
                         variant="contained"
                         component={Link}
                         to={`/boardroom/nrwl`}

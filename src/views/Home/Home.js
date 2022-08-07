@@ -199,7 +199,8 @@ const Home = () => {
                     target="_blank"
                     href={buyTombAddress}
                     variant="contained"
-                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%', boxShadow: '4px 4px 12px black' 
+                  }}
                     className={classes.tokenButton}
                   >
                     Buy
@@ -209,7 +210,7 @@ const Home = () => {
                     target="_blank"
                     href="https://dexscreener.com/avalanche/0x82845B52b53c80595bbF78129126bD3E6Fc2C1DF"
                     variant="contained"
-                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%', boxShadow: '4px 4px 12px black' }}
                     className={classes.tokenButton}
                   >
                     Chart
@@ -219,7 +220,7 @@ const Home = () => {
                     target="_blank"
                     href="https://snowtrace.io/address/0x395908aeb53d33A9B8ac35e148E9805D34A555D3#code"
                     variant="contained"
-                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%', boxShadow: '4px 4px 12px black' }}
                     className={classes.tokenButton}
                   >
                     Contract
@@ -242,7 +243,7 @@ const Home = () => {
                     target="_blank"
                     href={buyTShareAddress}
                     variant="contained"
-                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%', boxShadow: '4px 4px 12px black' }}
                     className={classes.tokenButton}
                   >
                     Buy
@@ -252,7 +253,7 @@ const Home = () => {
                     target="_blank"
                     href="https://dexscreener.com/avalanche/0x03d15E0451e54Eec95ac5AcB5B0a7ce69638c62A"
                     variant="contained"
-                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%', boxShadow: '4px 4px 12px black' }}
                     className={classes.tokenButton}
                   >
                     Chart
@@ -262,7 +263,7 @@ const Home = () => {
                     target="_blank"
                     href="https://snowtrace.io/address/0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6#code"
                     variant="contained"
-                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%', boxShadow: '4px 4px 12px black' }}
                     className={classes.tokenButton}
                   >
                     Contract
@@ -285,7 +286,7 @@ const Home = () => {
                     target="_blank"
                     href={buyNrwlAddress}
                     variant="contained"
-                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%', boxShadow: '4px 4px 12px black' }}
                     className={classes.tokenButton}
                   >
                     Buy
@@ -295,7 +296,7 @@ const Home = () => {
                     target="_blank"
                     href={`https://dexscreener.com/avalanche/${tombFinance.config.externalTokens['NRWL-YUSD-LP'][0]}`}
                     variant="contained"
-                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%', boxShadow: '4px 4px 12px black' }}
                     className={classes.tokenButton}
                   >
                     Chart
@@ -305,7 +306,7 @@ const Home = () => {
                     target="_blank"
                     href={`https://snowtrace.io/address/${tombFinance.NRWL.address}#code`}
                     variant="contained"
-                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%', boxShadow: '4px 4px 12px black' }}
                     className={classes.tokenButton}
                   >
                     Contract
@@ -327,7 +328,7 @@ const Home = () => {
                     color="primary"
                     href="/bonds"
                     variant="contained"
-                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%', boxShadow: '4px 4px 12px black' }}
                     className={classes.tokenButton}
                   >
                     Bond
@@ -337,7 +338,7 @@ const Home = () => {
                     target="_blank"
                     href="https://snowtrace.io/address/0xa8cFe8b4e8632cF551692Ddf78B97Ff4784dF14a#code"
                     variant="contained"
-                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%' }}
+                    style={{ marginTop: '10px', borderRadius: '10px', width: '27%', marginRight: '5%', boxShadow: '4px 4px 12px black' }}
                     className={classes.tokenButton}
                   >
                     Contract
@@ -495,7 +496,7 @@ const Home = () => {
               target="_blank"
               href={'https://traderjoexyz.com/trade?outputCurrency=0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664#/'}
               variant="contained"
-              style={{ marginTop: '10px', borderRadius: '10px', width: '100%' }}
+              style={{ marginTop: '10px', borderRadius: '10px', width: '100%', boxShadow: '4px 4px 12px black' }}
               className={classes.button}
             >
               Purchase
@@ -542,7 +543,7 @@ const Home = () => {
               target="_blank"
               href={buyTombAddress}
               variant="contained"
-              style={{ marginTop: '10px', borderRadius: '10px', width: '100%' }}
+              style={{ marginTop: '10px', borderRadius: '10px', width: '100%', boxShadow: '4px 4px 12px black' }}
               className={classes.button}
             >
               Purchase
@@ -586,7 +587,7 @@ const Home = () => {
               target="_blank"
               href={buyTShareAddress}
               variant="contained"
-              style={{ marginTop: '10px', borderRadius: '10px', width: '100%' }}
+              style={{ marginTop: '10px', borderRadius: '10px', width: '100%', boxShadow: '4px 4px 12px black' }}
               className={classes.button}
             >
               Purchase
@@ -630,7 +631,7 @@ const Home = () => {
               target="_blank"
               href={buyNrwlAddress}
               variant="contained"
-              style={{ marginTop: '10px', borderRadius: '10px', width: '100%' }}
+              style={{ marginTop: '10px', borderRadius: '10px', width: '100%', boxShadow: '4px 4px 12px black' }}
               className={classes.button}
             >
               Purchase

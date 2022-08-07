@@ -79,7 +79,7 @@ const CemeteryCard = () => {
           <CardActions style={{ justifyContent: 'center' }}>
             <Button
               color="primary"
-              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
               variant="contained"
               component={Link}
               to={`/farms/WlrsUsdcLPWShareRewardPool/`}
@@ -89,7 +89,7 @@ const CemeteryCard = () => {
             <Button
               color="primary"
               target="_blank"
-              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
               variant="contained"
               href="https://traderjoexyz.com/pool/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/0x395908aeb53d33A9B8ac35e148E9805D34A555D3#/"
             >
@@ -126,7 +126,7 @@ const CemeteryCard = () => {
           <CardActions style={{ justifyContent: 'center' }}>
             <Button
               color="primary"
-              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
               variant="contained"
               component={Link}
               to={`/farms/WShareUsdcLPWShareRewardPool/`}
@@ -136,7 +136,7 @@ const CemeteryCard = () => {
             <Button
               color="primary"
               target="_blank"
-              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
               variant="contained"
               href="https://traderjoexyz.com/pool/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6#/"
             >
@@ -179,7 +179,7 @@ const CemeteryCard = () => {
           <CardActions style={{ justifyContent: 'center' }}>
             <Button
               color="primary"
-              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
               variant="contained"
               component={Link}
               to={`/farms/NrwlYusdLPWShareRewardPool/`}
@@ -189,7 +189,7 @@ const CemeteryCard = () => {
             <Button
               color="primary"
               target="_blank"
-              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
               variant="contained"
               href="https://www.swapsicle.io/add/0x111111111111ed1D73f860F57b2798b683f2d325/0x501012893eE88976AB8B5289B7a78E307d5d9DCb"
             >
@@ -232,7 +232,7 @@ const CemeteryCard = () => {
           <CardActions style={{ justifyContent: 'center' }}>
             <Button
               color="primary"
-              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
               variant="contained"
               component={Link}
               to={`/farms/WlrsUSDibsLPWShareRewardPool/`}
@@ -242,7 +242,7 @@ const CemeteryCard = () => {
             <Button
               color="primary"
               target="_blank"
-              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px' }}
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
               variant="contained"
               href="https://traderjoexyz.com/pool/0x0efa5328fefce96c8d10661bd97403764d477853/0x395908aeb53d33a9b8ac35e148e9805d34a555d3#/"
             >

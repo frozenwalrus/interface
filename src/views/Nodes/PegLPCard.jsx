@@ -51,7 +51,7 @@ const PegLPCard = ({}) => {
           </Box>
         </CardContent>
         <CardActions style={{justifyContent: 'flex-end'}}>
-          <Button className="shinyButtonSecondary" style={{background: '#5686d6', padding: '5px', borderRadius: '15px'}} component={Link} to={'/nodes/PegLPNode'}>
+          <Button className="shinyButtonSecondary" style={{background: '#5686d6', padding: '5px', borderRadius: '15px', boxShadow: '4px 6px 12px black'}} component={Link} to={'/nodes/PegLPNode'}>
             Stake
           </Button>
         </CardActions>
