@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     color: '#161D29',
     fontSize: '18px',
-    margin: '3%',
+    margin: '2.5%',
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Nav = () => {
-  const matches = useMediaQuery('(min-width:1500px)');
+  const matches = useMediaQuery('(min-width:1000px)');
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
