@@ -35,17 +35,20 @@ const HomeCard = styled.div`
   background: rgba(255, 255, 255, 0.5);
   border-radius: 50px;
   padding: 20px; 
+  box-shadow: 6px 6px 12px black; 
   color: #4b4453;
 `;
 const HomeCardBlue = styled.div`
   background: rgba(217, 238, 254, 0.75);
-  border-radius: 50px;
+  border-radius: 50px;  
+  box-shadow: 6px 6px 12px black; 
   padding: 20px; 
   color: #4b4453;
 `;
 const HomeCardPurple = styled.div`
-  background: rgba(214, 211, 242, 0.4);
+  background: rgba(214, 211, 242, 0.6);
   border-radius: 50px;
+  box-shadow: 6px 6px 12px black; 
   padding: 20px; 
   color: #4b4453;
 `;
