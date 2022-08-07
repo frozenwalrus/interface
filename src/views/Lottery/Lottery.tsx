@@ -154,9 +154,8 @@ const Lottery: React.FC = () => {
     <h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
             ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
             Deposit your WLRS tokens below to gain eligibility to the Frozen Walrus Lottery. 
-            5 WLRS tokens gains 1 entry to the Lottery. All entries must be submitted no later than 
-            August 7, 2022 at 2100 UTC. <br /><br /> Winners will be announced here by August 8, 2022 at 2100 UTC. 
-            First prize wins 2500 USDC. Second prize wins 500 USDC. Third prize wins 250 USDC. 
+            5 WLRS tokens gains 1 entry to the Lottery.<br /> 
+             
     </h2>
     {/*   <div>             {Date.now() > endTime ? (
                <h2 style={{ fontSize: '3rem', textAlign: 'center' }}>Lottery Closed</h2>
@@ -198,7 +197,7 @@ const Lottery: React.FC = () => {
             toToken={grapeFinance.TBOND}
             toTokenName="TBOND"
             priceDesc="5 WLRS = 1 ENTRY"
-              
+            disabled
             onExchange={handleBuyBonds}>
             </ExchangeCard>
 
@@ -208,6 +207,10 @@ const Lottery: React.FC = () => {
     
     {account}
     </LotterySubText>
+    <h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
+            ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
+    <i>The first inaugural Frozen Walrus has now closed. Winners will be announced here no later than August 8, 2022 at 2100 UTC. 
+            First prize wins 2500 USDC. Second prize wins 500 USDC. Third prize wins 250 USDC.</i> </h2>
     </BondCard>
   </Grid>  
   
