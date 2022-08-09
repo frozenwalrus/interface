@@ -94,8 +94,8 @@ const PegPoolInfo: React.FC<{
                  
                   <Button
                     color="primary"
-                    
-                    disabled={!pegPool.depositsEnabled}
+                    disabled
+                    // disabled={!pegPool.depositsEnabled}
                     onClick={approve}
                     fullWidth={true}
                   >
@@ -104,8 +104,8 @@ const PegPoolInfo: React.FC<{
                 ) : (
                   <Button
                     className="tokenButton"
-                    
-                    disabled={!pegPool.depositsEnabled}
+                    disabled 
+                   //  disabled={!pegPool.depositsEnabled}
                     onClick={onPresentDeposit}
                     fullWidth={true}
                   >
