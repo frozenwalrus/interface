@@ -34,7 +34,7 @@ const PCP: React.FC = () => {
         <Route exact path={path}>
         <BackgroundImage />
           <div>
-          <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>PEG CAMPAIGN POOL</h2>
+          <h2 style={{ textAlign: 'center', fontSize: '3rem' }}>PEG CAMPAIGN POOL</h2>
           </div>
           {!!account ? (
             <Container maxWidth="xl">

@@ -48,7 +48,7 @@ const SnoNodes = () => {
         <Route exact path={path}>
         <h2 style={{
         textAlign: 'center', 
-        ...(isDesktop ? { fontSize: '5rem' } : { fontSize: '4rem'}) }}>  
+        ...(isDesktop ? { fontSize: '3rem' } : { fontSize: '2rem'}) }}>  
           NODES</h2>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <Button

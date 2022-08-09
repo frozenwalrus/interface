@@ -50,7 +50,7 @@ const Boardroom = () => {
             <Container maxWidth="lg">
               <h2 style={{
                     textAlign: 'center', marginBottom: '10px', 
-                    ...(isDesktop ? { fontSize: '5rem' } : { fontSize: '3rem'}) }}>  
+                    ...(isDesktop ? { fontSize: '3rem' } : { fontSize: '2rem'}) }}>  
                     BOARDROOMS</h2>
               
               <Grid container spacing={3} style={{ justifyContent: "center" }}>
@@ -59,7 +59,7 @@ const Boardroom = () => {
                     <CardContent align="center">
                     <h2 style={{
                     textAlign: 'center', marginBottom: '1px', 
-                    ...(isDesktop ? { fontSize: '2.5rem' } : { fontSize: '2rem'}) }}>  
+                    ...(isDesktop ? { fontSize: '2.0rem' } : { fontSize: '1.8rem'}) }}>  
                     WALRUS</h2>   
                          
                       <Typography variant="h5" component="h2">
@@ -89,7 +89,7 @@ const Boardroom = () => {
                     <CardContent align="center">
                     <h2 style={{
                     textAlign: 'center', marginBottom: '1px', 
-                    ...(isDesktop ? { fontSize: '2.5rem' } : { fontSize: '2rem'}) }}>  
+                    ...(isDesktop ? { fontSize: '2rem' } : { fontSize: '1.8rem'}) }}>  
                     NARWHAL</h2>
                       <Typography variant="h5" component="h2">
                        NRWL

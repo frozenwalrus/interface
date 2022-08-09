@@ -51,8 +51,8 @@ const matches = useMediaQuery('(min-width:1000px)');
   <BackgroundImage />
   {matches ? (
   <>
-    <h2 style={{fontSize: '6vw', textAlign: 'center', marginBottom: '0%',}}>FROZEN WALRUS</h2> <br /> 
-    <h2 style={{fontSize: '3vw', textAlign: 'center', marginBottom: '4%',}}>NODE LEADERBOARD</h2>
+    <h2 style={{fontSize: '3rem', textAlign: 'center', marginBottom: '0%',}}>FROZEN WALRUS</h2> <br /> 
+    <h2 style={{fontSize: '2rem', textAlign: 'center', marginBottom: '4%',}}>NODE LEADERBOARD</h2>
 
 
 <Grid container spacing={3} direction="column" style={{ display: 'flex', alignItems: 'center'}} >

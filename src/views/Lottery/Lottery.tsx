@@ -138,7 +138,7 @@ const Lottery: React.FC = () => {
           <>
           <div>
             <h2 style={{ textAlign: 'center', marginBottom: '1%', 
-            ...(isDesktop ? { fontSize: '5rem' } : { fontSize: '4rem'})}}>
+            ...(isDesktop ? { fontSize: '3rem' } : { fontSize: '2rem'})}}>
             LOTTERY 
             </h2>
             
@@ -148,7 +148,7 @@ const Lottery: React.FC = () => {
 <Grid alignItems='center' item xs={12} sm={9} style={{ width: '100%'}}>
     <BondCard>
     <h2 style={{ textAlign: 'center', marginBottom: '8%', marginTop: '2%', margin: '1%', 
-            ...(isDesktop ? { fontSize: '2.5rem' } : { fontSize: '1.5rem'}) }}>
+            ...(isDesktop ? { fontSize: '2.rem' } : { fontSize: '1.3rem'}) }}>
             Win USDC by depositing Frozen Walrus tokens!
     </h2>
     <h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 

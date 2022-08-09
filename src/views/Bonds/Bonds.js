@@ -55,7 +55,7 @@ return (
       <BackgroundImage />
       {!!account ? (
     <Container maxWidth="lg">
-      <h2 align="center" style={{ fontSize: '70px', marginBottom: '5%' }}>BONDS</h2>
+      <h2 align="center" style={{ fontSize: '3rem', marginBottom: '5%' }}>BONDS</h2>
       
       
       <Grid container spacing={3} >

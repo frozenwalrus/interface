@@ -39,7 +39,7 @@ const Cemetery = () => {
             <Container maxWidth="lg">
                <h2 style={{
                 textAlign: 'center', 
-                ...(isDesktop ? { fontSize: '5rem' } : { fontSize: '4rem'}) }}>  
+                ...(isDesktop ? { fontSize: '3rem' } : { fontSize: '2rem'}) }}>  
                   FARMS</h2>
               <Box mt={5}>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
@@ -48,7 +48,7 @@ const Cemetery = () => {
                     variant="h4"
                     gutterBottom
                     style={{ marginTop: '-25px', marginBottom: '50px', 
-                    ...(isDesktop ? { fontSize: '2rem' } : { fontSize: '1.5rem'}) }}> 
+                    ...(isDesktop ? { fontSize: '1.8rem' } : { fontSize: '1.4rem'}) }}> 
                     Deposit LPs to earn WShare 
                   </Typography>
                   {/* <Alert variant="filled" severity="info" style={{ marginTop: '-25px', marginBottom: '35px' }}>

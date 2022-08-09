@@ -1705,19 +1705,19 @@ export class TombFinance {
 
 async getPegPool(): Promise<PegPool> {
   const contract = this.contracts.PegPool;
-  const usdc = new ERC20('0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', this.signer, 'USDC');
+  const busd = new ERC20('0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', this.signer, 'USDC');
   const [depositsEnabled, totalDepositTokenAmount, userInfo, approval] = await Promise.all([
     contract.depositsEnabled(),
     contract.totalDepositTokenAmount(),
     this.getPegPoolUserInfo(),
-    usdc.allowance(this.myAccount, contract.address),
+    busd.allowance(this.myAccount, contract.address),
   ]);
 
   return {
     depositsEnabled,
     totalDesposits: Number(formatEther(totalDepositTokenAmount)).toFixed(2),
     depositTokenName: 'USDC',
-    depositToken: usdc,
+    depositToken: busd,
     userInfo,
     approved: approval.gt(0),
   };
