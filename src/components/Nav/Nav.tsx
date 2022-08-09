@@ -228,15 +228,17 @@ const Nav = () => {
                 <Link color="textPrimary" to="/nodes" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Nodes</div>
                 </Link>
-                <Link color="textPrimary" to="/lottery" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>Lottery</div>
-                </Link>
                 <Link color="textPrimary" to="/pcp" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>PCP</div>
                 </Link>
+                <Link color="textPrimary" to="/lottery" className={classes.link}>
+                  <div style={{ margin: '4px 20px' }}>Lottery</div>
+                </Link>
+                
                 <Link color="textPrimary" to="/compound" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Compound</div>
                 </Link>
+                
                 <Link color="textPrimary" to="/media" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Media</div>
                 </Link>
