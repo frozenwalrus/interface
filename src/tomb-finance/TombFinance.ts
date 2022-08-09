@@ -18,7 +18,7 @@ import {
 // import { Fetcher as FetcherSpirit, Token as TokenSpirit } from 'quickswap-sdk';
 // import { Fetcher, Route, Token } from 'quickswap-sdk';
 import { Configuration } from './config';
-import { ContractName, TokenStat, AllocationTime, LPStat, Bank, PoolStats, TShareSwapperStat } from './types';
+import { ContractName, TokenStat, AllocationTime, LPStat, Bank, PoolStats, TShareSwapperStat, PegPoolToken, PegPool, PegPoolUserInfo, ExtinctionRewardToken } from './types';
 import { BigNumber, Contract, ethers, EventFilter } from 'ethers';
 import { decimalToBalance } from './ether-utils';
 import { TransactionResponse } from '@ethersproject/providers';
@@ -29,6 +29,7 @@ import IUniswapV2PairABI from './IUniswapV2Pair.abi.json';
 import { /*config,*/ bankDefinitions } from '../config';
 import moment from 'moment';
 import { parseUnits } from 'ethers/lib/utils';
+import { commify, formatEther } from 'ethers/lib/utils';
 import { FTM_TICKER, NRWL_TICKER, SPOOKY_ROUTER_ADDR, SWAPSICLE_ROUTER_ADDR, TOMB_TICKER, TSHARE_TICKER } from '../utils/constants';
 // import { CompareArrowsOutlined } from '@material-ui/icons';
 // import { CompareArrowsOutlined, CompassCalibrationOutlined } from '@material-ui/icons';
@@ -1697,5 +1698,102 @@ export class TombFinance {
   async rebatesClaim(): Promise<TransactionResponse> {
     const { RebateTreasury } = this.contracts;
     return await RebateTreasury.claimRewards();
-  }
+  };
+
+
+// Peg Pool
+
+async getPegPool(): Promise<PegPool> {
+  const contract = this.contracts.PegPool;
+  const usdc = new ERC20('0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', this.signer, 'USDC');
+  const [depositsEnabled, totalDepositTokenAmount, userInfo, approval] = await Promise.all([
+    contract.depositsEnabled(),
+    contract.totalDepositTokenAmount(),
+    this.getPegPoolUserInfo(),
+    usdc.allowance(this.myAccount, contract.address),
+  ]);
+
+  return {
+    depositsEnabled,
+    totalDesposits: Number(formatEther(totalDepositTokenAmount)).toFixed(2),
+    depositTokenName: 'USDC',
+    depositToken: usdc,
+    userInfo,
+    approved: approval.gt(0),
+  };
 }
+
+async getPegPoolUserInfo(): Promise<PegPoolUserInfo> {
+  const amount: BigNumber = await this.contracts.PegPool.userInfo(this.myAccount);
+  return {
+    amountDeposited: getDisplayBalance(amount),
+    isDeposited: amount.gt(0),
+    amountDepositedBN: amount,
+  };
+}
+
+async getPegPoolPendingRewards(): Promise<PegPoolToken[]> {
+  const tokenMap: {
+    [key: string]: {
+      name: string;
+      pair: string;
+      injection: number;
+    };
+  } = {
+    '0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6': {
+      name: 'WSHARE',
+      pair: '0x03d15E0451e54Eec95ac5AcB5B0a7ce69638c62A',
+      injection: 0,
+    },
+    '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664': {
+      name: 'USDC',
+      pair: '0x82845B52b53c80595bbF78129126bD3E6Fc2C1DF',
+      injection: 0,
+    },
+  };
+
+  const [tks, tokens] = await Promise.all([
+    this.contracts.PegPool.getRewardTokens(),
+    this.contracts.PegPool.pendingRewards(this.myAccount),
+  ]);
+  const addresses = tokens[0];
+  const amounts = tokens[1];
+  const rewards: PegPoolToken[] = [];
+
+  for (let i = 0; i < addresses.length; i++) {
+    const info = tokenMap[addresses[i]];
+    rewards.push({
+      token: new ERC20(addresses[i], this.provider.getSigner(), info.name),
+      name: info.name,
+      pairAddress: info.pair,
+      amount: Number(formatEther(amounts[i])).toFixed(8),
+      pendingValueBN: amounts[i],
+      rewardPerBlock: Number(formatEther(tks[i].rewardPerBlock)),
+      canCompound: info.name != 'AALTO',
+    });
+  }
+
+  return rewards;
+}
+
+async depositPegPool(amount: BigNumber) {
+  return this.contracts.PegPool.deposit(amount);
+}
+
+async compoundRewardsPegPool() {
+  return this.contracts.PegPool.compound();
+}
+
+async compoundTokenPegPool() {
+  return this.contracts.PegPool.compound();
+}
+
+async withdrawPegPool(amount: BigNumber) {
+  return this.contracts.PegPool.withdraw(amount);
+}
+
+async claimPegPool() {
+  return this.contracts.PegPool.claim();
+}
+}
+

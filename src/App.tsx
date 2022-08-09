@@ -32,6 +32,7 @@ const Nodes = lazy(() => import('./views/Nodes'));
 const Lottery = lazy(() => import('./views/Lottery')); 
 const NodeLeaderboard = lazy(() => import('./views/NodeLeaderboard')); 
 const Media = lazy(() => import('./views/Media')); 
+const PCP = lazy(() => import('./views/PCP')); 
 
 
 const NoMatch = () => (
@@ -94,8 +95,9 @@ const App: React.FC = () => {
             <Route path="/lottery">
               <Lottery />
             </Route>
-            
-            
+            <Route path="/pcp">
+              <PCP /> 
+          </Route> 
             <Route path="/leaderboard">
               <NodeLeaderboard /> 
           </Route>  
