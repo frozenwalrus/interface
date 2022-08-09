@@ -11,8 +11,6 @@ import TokenSymbol from '../../components/TokenSymbol';
 import CemeteryImage from '../../assets/img/SVG_Icons_and_web_bg/bg.svg';
 import { createGlobalStyle } from 'styled-components';
 
-
-
 const TITLE = 'ames.defi | Peg Pool';
 
 const BackgroundImage = createGlobalStyle`
@@ -71,7 +69,8 @@ const PCP: React.FC = () => {
                     </Grid>              
                   </Grid>
                     <h2 style={{ marginTop: '20px', textAlign: 'center'  }}>
-                      Withdrawal fees are based on TWAP, with fees decreasing the closer WLRS is to peg. 
+                      Withdrawal fees are based on TWAP, with fees decreasing the closer WLRS is to peg. Read about 
+                      the Peg Campaign Pool <a href="https://docs.frozenwalrus.finance/protocol-information/pcp-campaign">here! </a>
                       </h2>
 
                     <h2
