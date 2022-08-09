@@ -594,6 +594,9 @@ export class TombFinance {
     } else if (depositTokenName = 'NRWL-YUSD-LP') {
       return rewardPerSecond.mul(1000).div(10000); 
     }
+      else if (depositTokenName = 'WBOND') {
+        return rewardPerSecond.mul(1000).div(10000); 
+    }
   }
 
   /**

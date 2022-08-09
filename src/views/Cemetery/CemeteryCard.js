@@ -7,6 +7,10 @@ import useLpStats from '../../hooks/useLpStats';
 import useLpStatsNrwl from '../../hooks/useLpStatsNrwl';
 import useBank from '../../hooks/useBank';
 import useStatsForPool from '../../hooks/useStatsForPool';
+import useBondStats from '../../hooks/useBondStats';
+import useTombFinance from '../../hooks/useTombFinance';
+import { getDisplayBalance } from '../../utils/formatBalance';
+import useTokenBalance from '../../hooks/useTokenBalance';
 // import useCashStat from '../../hooks/useCashPriceInEstimatedTWAP.ts';
 import styled from 'styled-components';
 
@@ -35,6 +39,7 @@ const CemeteryCard = () => {
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
   const tDibsLpStats = useMemo(() => (tDibsFtmLpStats ? tDibsFtmLpStats : null), [tDibsFtmLpStats]);
   const nrwlLpStats = useMemo(() => (nrwlFtmLpStats ? nrwlFtmLpStats : null), [nrwlFtmLpStats]);
+  const tombFinance = useTombFinance();
 
   const tombBank = useBank('WlrsUsdcLPWShareRewardPool');
   const tombStatsOnPool = useStatsForPool(tombBank);
@@ -47,6 +52,16 @@ const CemeteryCard = () => {
 
   const nrwlBank = useBank('NrwlYusdLPWShareRewardPool');
   const nrwlStatsOnPool = useStatsForPool(nrwlBank);
+  const tBondStats = useBondStats();
+
+  const tBondPriceInFTM = useMemo(() => (tBondStats ? Number(tBondStats.tokenInFtm).toFixed(4) : null), [tBondStats]);
+  const tBondCirculatingSupply = useMemo(() => (tBondStats ? String(tBondStats.circulatingSupply) : null), [tBondStats]);
+  const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
+  const tBondBalance = useTokenBalance(tombFinance.TBOND);
+  const displayTBondBalance = useMemo(() => getDisplayBalance(tBondBalance), [tBondBalance]);
+  const tBondPriceInDollars = useMemo(() => (tBondStats ? Number(tBondStats.priceInDollars).toFixed(2) : null), [tBondStats]);
+  const tBondBalanceInDollars = tBondPriceInDollars && displayTBondBalance ? (Number(tBondPriceInDollars) * tBondBalance.div('1000000000000000000').toNumber()).toFixed(2) : null;
+
 
   // const snoSnoShareLPStats = useMemo(() => (snoSnoShareLpStats ? snoSnoShareLpStats : null), [snoSnoShareLpStats]);
   // const snoPrice = useCashStat();
@@ -251,6 +266,59 @@ const CemeteryCard = () => {
           </CardActions>
         </HomeCardBlue>
       </Grid>
+       {/* <Grid item xs={12} sm={6}>
+        <HomeCardBlue>
+          <CardContent
+            style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center' }}
+          >
+            <div>
+              <Typography variant="h5" component="h2">
+                WBOND
+              </Typography>
+              <TokenSymbol size={60} symbol="WBOND" />
+            </div>
+            <div>
+              <span style={{ fontSize: '20px' }}>
+              ${tBondPriceInDollars} WBOND
+              </span>
+
+              <Box></Box>
+              <span style={{ fontSize: '12px' }}>
+                Liquidity: ${tDibsLpStats?.totalLiquidity ? tDibsLpStats.totalLiquidity : '-.--'} <br />
+                Total supply:{' '}
+                {tDibsLpStats?.totalSupply
+                  ? Number(tDibsLpStats.totalSupply) < 1 / 10 ** 4
+                    ? (Number(tDibsLpStats.totalSupply) * 10 ** 6).toFixed(4) + 'µ'
+                    : tDibsLpStats.totalSupply
+                  : '-.--'}{' '}
+                <br />
+                APR: {tDibsStatsOnPool?.yearlyAPR && tDibsStatsOnPool?.yearlyAPR !== 'Infinity' ? tDibsStatsOnPool?.yearlyAPR : '----.--'}%
+              </span>
+            </div>
+          </CardContent>
+          <CardActions style={{ justifyContent: 'center' }}>
+            <Button
+              color="primary"
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
+              variant="contained"
+              component={Link}
+              to={`/farms/WBondWShareRewardPool/`}
+            >
+              Farm
+            </Button>
+            <Button
+              color="primary"
+              target="_blank"
+              style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
+              variant="contained"
+              href="https://traderjoexyz.com/pool/0x0efa5328fefce96c8d10661bd97403764d477853/0x395908aeb53d33a9b8ac35e148e9805d34a555d3#/"
+            >
+              Add Liquidity
+            </Button>
+          </CardActions>
+        </HomeCardBlue>
+      </Grid>
+                */}
       {/* <Grid item xs={12} sm={6}>
         <Card>
           <CardContent
