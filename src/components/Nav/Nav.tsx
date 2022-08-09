@@ -231,7 +231,7 @@ const Nav = () => {
                 <Link color="textPrimary" to="/lottery" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Lottery</div>
                 </Link>
-                <Link color="textPrimary" to="/lottery" className={classes.link}>
+                <Link color="textPrimary" to="/pcp" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>PCP</div>
                 </Link>
                 <Link color="textPrimary" to="/compound" className={classes.link}>
