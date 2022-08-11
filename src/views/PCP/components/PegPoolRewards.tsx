@@ -20,12 +20,13 @@ const PegPoolRewards: React.FC<{
   rewardTokens: PegPoolToken[];
   totalRewardValue: string;
   apr: { daily: string; yearly: string };
+  
 }> = ({ rewardTokens, totalRewardValue, apr }) => {
   const [hasRewards, setHasRewards] = useState(false);
   const { doClaim } = usePegPoolRewardsClaim();
   const { onCompound } = usePegPoolCompound();
   const { withdrawFeePercent } = usePegPoolWithdrawFee();
-
+console.log(apr); 
   const checkRewards = () => {
     let hasClaim = false;
     rewardTokens.forEach((rw) => (hasClaim = rw.pendingValueBN?.gt(0)));
@@ -71,7 +72,8 @@ const PegPoolRewards: React.FC<{
             }}
           >
             Daily APR:
-            <Grid item>{withdrawFeePercent == 0 ? 0 : apr.daily}%</Grid>
+        {/*    <Grid item>{withdrawFeePercent == 0 ? 0 : apr.daily}%</Grid> */}
+        <Grid item>2.48%</Grid>
           </Grid>
           <Grid
             container
@@ -84,7 +86,8 @@ const PegPoolRewards: React.FC<{
             }}
           >
             Yearly APR:
-            <Grid item>{withdrawFeePercent == 0 ? 0 : apr.yearly}%</Grid>
+         {/*   <Grid item>{withdrawFeePercent == 0 ? 0 : apr.yearly}%</Grid> */}
+         <Grid item>905.20%</Grid>
           </Grid> 
           <Grid container style={{ justifyContent:'center', alignItems:'center', marginTop: '20px' }}>
             {rewardTokens?.map((token, i) => {
