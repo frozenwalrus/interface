@@ -154,7 +154,7 @@ console.log(apr);
                           disabled={!hasRewards}
                           onClick={onCompound}
                         >
-                          Compound
+                          Claim
                         </Button>
                       </Grid>
                     </Grid>
