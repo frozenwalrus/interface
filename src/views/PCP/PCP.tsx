@@ -89,7 +89,7 @@ const PCP: React.FC = () => {
       </h2> 
   <h2 style={{ textTransform: 'capitalize', fontSize: '2rem', marginTop: '20px', textAlign: 'center' }}>
   
-      Total Value Locked: ${pegPool.totalDesposits}
+      Total Value Locked: ${Number(pegPool.totalDesposits)}
         </h2> 
   </div>
   </HomeCard>
