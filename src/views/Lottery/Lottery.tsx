@@ -172,7 +172,7 @@ const Lottery: React.FC = () => {
         ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
       <i>How does it work?  <br /></i>
         Deposit WLRS to be eligible to win USDC prizes. The current price of WLRS is ${tombPriceInDollars} 
-        and 5 WLRS = 1 Lottery entry. Winners are randomly selected! 
+        &nbsp;and 5 WLRS = 1 Lottery entry. Winners are randomly selected! 
         
 </h2>
 </HomeCardBlue>
