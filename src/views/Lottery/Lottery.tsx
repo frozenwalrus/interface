@@ -153,16 +153,18 @@ const Lottery: React.FC = () => {
 <Grid container justify="center" spacing={3}  >
 <Grid alignItems='center' item xs={10} style={{ width: '70%'}}>
 <BondCard>
-<h2 style={{ textAlign: 'center', marginBottom: '2%', marginTop: '2%', margin: '1%', 
-        ...(isDesktop ? { fontSize: '2.rem' } : { fontSize: '1.3rem'}) }}>
-        Win USDC by depositing Frozen Walrus tokens!
+<h2 style={{ textAlign: 'center', marginBottom: '8%', marginTop: '2%', margin: '1%', textTransform: 'capitalize', 
+        ...(isDesktop ? { fontSize: '2.0rem' } : { fontSize: '1.5rem'}) }}>
+        WIN USDC BY DEPOSITING FROZEN WALRUS TOKENS! <br /><br />
 </h2>
-<h2 style={{ textAlign: 'center',  marginBottom: '5%',
-        ...(isDesktop ? { fontSize: '1.5rem' } : { fontSize: '1.2rem'}) }}>
-        Total WLRS tokens entered into lottery: {Number(raffleBals)} <br /> 
+<h2 style={{ textAlign: 'center',  marginBottom: '3%',
+        ...(isDesktop ? { fontSize: '1.4rem' } : { fontSize: '1.1rem'}) }}>
+        TOTAL WLRS tokens entered: {Number(raffleBals)} <br />
+        TOTAL Lottery entries: {Number((raffleBals))/(5)} <br /> <br />
+
        {/* Total Lottery entries: {Number(raffleBals)} <br /> */}
-        Your WLRS tokens entered into the lottery: {Number(userBals)} <br /> 
-   {/*     Your Lottery entries: {Number(userBals)} <br /> */}
+        Your WLRS tokens entered: {Number(userBals)} <br /> 
+        Your Lottery entries: {Number((userBals))/(5)} <br /> 
         </h2>
 </BondCard>
 </Grid>
