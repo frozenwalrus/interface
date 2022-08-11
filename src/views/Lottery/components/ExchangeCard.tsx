@@ -54,6 +54,7 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
     <ExchangeModal
       title={action}
       description={priceDesc}
+      
       max={balance}
       onConfirm={(value) => {
         onExchange(value);
@@ -70,12 +71,13 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
           <StyledExchanger>
             <StyledToken>
               <StyledCardIcon>
-                <TokenSymbol symbol={fromToken.symbol} size={75} />
+                <TokenSymbol symbol={fromToken.symbol} size={120} />
               </StyledCardIcon>
               {/*<Label text={fromTokenName} color="#000" />*/}
             </StyledToken>
           </StyledExchanger>
           <StyledDesc>{priceDesc}</StyledDesc>
+
           <StyledCardActions>
             <Button
               className={disabled ? 'shinyButtonDisabled' : 'shinyButton'}
@@ -100,7 +102,7 @@ const StyledCardTitle = styled.div`
   text-align: center; 
   color: #000;
   margin-top: ${(props) => -props.theme.spacing[3]}px;
-  margin-bottom: 2%; 
+  margin-bottom: 1%; 
 `;
 
 const StyledCardIcon = styled.div`
@@ -118,7 +120,7 @@ const StyledCardIcon = styled.div`
 const StyledExchanger = styled.div`
   align-items: center;
   display: flex;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 `;
 
 const StyledExchangeArrow = styled.div`

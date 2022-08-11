@@ -28,8 +28,24 @@ const BackgroundImage = createGlobalStyle`
   }
 `;
 const BondCard = styled.div`
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.65);
   border-radius: 50px;
+  box-shadow: 6px 6px 12px black; 
+  padding: 20px; 
+  color: #4b4453;
+`;
+
+const HomeCardBlue = styled.div`
+  background: rgba(217, 238, 254, 0.75);
+  border-radius: 50px;  
+  box-shadow: 6px 6px 12px black; 
+  padding: 20px; 
+  color: #4b4453;
+`;
+const HomeCardPurple = styled.div`
+  background: rgba(214, 211, 242, 0.6);
+  border-radius: 50px;
+  box-shadow: 6px 6px 12px black; 
   padding: 20px; 
   color: #4b4453;
 `;
@@ -42,15 +58,6 @@ const LotterySubText = styled.h2`
   text-align: center; 
   font-size: 1.2rem; 
 `; 
-const LotterySubText1 = styled.h2`
-  text-align: center; 
-  font-size: 1.0rem; 
-`; 
-const LotterySubText2 = styled.h2`
-  text-align: justify; 
-  font-size: 1.2rem; 
-`; 
-
 const useStyles = makeStyles((theme) => ({
   footer: {
     position: 'absolute',
@@ -131,118 +138,142 @@ const Lottery: React.FC = () => {
 
 
   return (
-    <Switch>
-      <Page>
-        <BackgroundImage />
-        {!!account ? (
-          <>
-          <div>
-            <h2 style={{ textAlign: 'center', marginBottom: '1%', 
-            ...(isDesktop ? { fontSize: '3rem' } : { fontSize: '2rem'})}}>
-            LOTTERY 
-            </h2>
-            
-          </div>
+<Switch>
+  <Page>
+    <BackgroundImage />
+    {!!account ? (
+      <>
+      <div>
+        <h2 style={{ textAlign: 'center', marginBottom: '1%', 
+        ...(isDesktop ? { fontSize: '3rem' } : { fontSize: '2rem'})}}>
+        LOTTERY 
+        </h2>
+      </div>
 
 <Grid container justify="center" spacing={3}  >
-<Grid alignItems='center' item xs={12} sm={9} style={{ width: '100%'}}>
-    <BondCard>
-    <h2 style={{ textAlign: 'center', marginBottom: '8%', marginTop: '2%', margin: '1%', 
-            ...(isDesktop ? { fontSize: '2.rem' } : { fontSize: '1.3rem'}) }}>
-            Win USDC by depositing Frozen Walrus tokens!
-    </h2>
-    <h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
-            ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
-            Deposit your WLRS tokens below to gain eligibility to the Frozen Walrus Lottery. 
-            5 WLRS tokens gains 1 entry to the Lottery.<br /> 
-             
-    </h2>
-    {/*   <div>             {Date.now() > endTime ? (
-               <h2 style={{ fontSize: '3rem', textAlign: 'center' }}>Lottery Closed</h2>
-              ) : (
-                <h2 style={{ fontSize: '3rem', textAlign: 'center' }}>Lottery Open</h2>
-              )}  
-              {Date.now() < startTime ? (
-      <LaunchCountdown
-        deadline={startDate}
-        description={'Lottery Starts In'}
-        descriptionLink={''}
-      ></LaunchCountdown>
-    ) : (
-      <h2>
-      <LaunchCountdown
-        deadline={endDate}
-        description={''}
-        descriptionLink={''}
-      ></LaunchCountdown> </h2>
-    )}
-    </div> */}
+<Grid alignItems='center' item xs={10} style={{ width: '70%'}}>
+<BondCard>
+<h2 style={{ textAlign: 'center', marginBottom: '2%', marginTop: '2%', margin: '1%', 
+        ...(isDesktop ? { fontSize: '2.rem' } : { fontSize: '1.3rem'}) }}>
+        Win USDC by depositing Frozen Walrus tokens!
+</h2>
+<h2 style={{ textAlign: 'left',  marginBottom: '5%', marginLeft: '10%',
+        ...(isDesktop ? { fontSize: '1.5rem' } : { fontSize: '1.2rem'}) }}>
+        Total WLRS tokens entered into lottery: {Number(raffleBals)} <br /> 
+        Total Lottery entries: {Number(raffleBals)} <br />
+        Your WLRS tokens entered into the lottery: {Number(userBals)} <br /> 
+        Your Lottery entries: {Number(userBals)} <br /> 
+        </h2>
+</BondCard>
+</Grid>
+<Grid alignItems='center' item xs={12} sm={4}>
+<HomeCardBlue>
 <h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
-            ...(isDesktop ? { fontSize: '1.5rem' } : { fontSize: '1.2rem'}) }}>
-            Current WLRS price: ${tombPriceInDollars}
+        ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
+      <i>How does it work?  <br /></i>
+        Deposit WLRS to be eligible to win USDC prizes. The current price of WLRS is ${tombPriceInDollars} 
+        and 5 WLRS = 1 Lottery entry. Winners are randomly selected! 
+        
 </h2>
-<h2 style={{ textAlign: 'left',  marginBottom: '5%',
-            ...(isDesktop ? { fontSize: '1.5rem' } : { fontSize: '1.2rem'}) }}>
-            Total WLRS entered into lottery: {raffleBals}
-</h2>
-<h2 style={{ textAlign: 'left',  marginBottom: '5%',
-            ...(isDesktop ? { fontSize: '1.5rem' } : { fontSize: '1.2rem'}) }}>
-            Your WLRS tokens entered into lottery: {userBals}
-</h2>
+</HomeCardBlue>
+</Grid>
 
-     <ExchangeCard
-            action="Enter Lottery"
-            fromToken={grapeFinance.TOMB}
-            fromTokenName="WLRS"
-            toToken={grapeFinance.TBOND}
-            toTokenName="TBOND"
-            priceDesc="5 WLRS = 1 ENTRY"
-            disabled
-            onExchange={handleBuyBonds}>
-            </ExchangeCard>
+<Grid alignItems='center' item xs={12} sm={4}>
+<HomeCardPurple>
+<h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
+        ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
 
-            <h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
-            ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
-    <i>The first inaugural Frozen Walrus has now closed. Winners will be announced here no later than August 8, 2022 at 2100 UTC. 
-            First prize wins 2500 USDC. Second prize wins 500 USDC. Third prize wins 250 USDC.</i> </h2>
-    <LotterySubText style={{ textAlign: 'center',  marginTop: '5%', width:'95%', 
-            ...(isDesktop ? { fontSize: '1.2rem' } : { fontSize: '1.0rem'}) }}>Your account: <br />
-    
-    {account}
-    </LotterySubText>
-    
+      <i>What are current prizes?<br /></i>
+      The second Frozen Walrus will be opening soon and prizes announced in advance here.  <br />
+      </h2>
+</HomeCardPurple>
+</Grid>
+
+<Grid alignItems='center' item xs={12} sm={4}>
+<HomeCardBlue>
+<h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
+        ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
+      <i>How do I enter? <br /> </i>
+      Click the "Enter Lottery" button below and send at least 5 WLRS. 5 WLRS = 1 Lottery entry.The more 
+      entries you have, the greater your chances are to win!  
+      
+</h2>
+</HomeCardBlue>
+</Grid>
+
+<Grid item xs={12} sm={6}>
+  <BondCard>
+  <ExchangeCard
+        action="Enter Lottery"
+        fromToken={grapeFinance.TOMB}
+        fromTokenName="WLRS"
+        toToken={grapeFinance.TBOND}
+        toTokenName="TBOND"
+        priceDesc="SEND ME TO THE LOTTERY"
+        disabled
+        onExchange={handleBuyBonds}>
+        </ExchangeCard>
+        <LotterySubText style={{ textAlign: 'center',  marginTop: '5%', width:'95%', 
+        ...(isDesktop ? { fontSize: '1.2rem' } : { fontSize: '1.0rem'}) }}>Your account: <br />
+
+{account}
+</LotterySubText>
     </BondCard>
-  </Grid>  
+        <h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
+        ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
+<i>The first inaugural Frozen Walrus has concluded and winners notified!   
+        First prize won 2500 USDC. Second prize won 500 USDC. Third prize won 250 USDC.</i> </h2>
+</Grid>
+
+
   
+
+{/*   <div>             {Date.now() > endTime ? (
+            <h2 style={{ fontSize: '3rem', textAlign: 'center' }}>Lottery Closed</h2>
+          ) : (
+            <h2 style={{ fontSize: '3rem', textAlign: 'center' }}>Lottery Open</h2>
+          )}  
+          {Date.now() < startTime ? (
+  <LaunchCountdown
+    deadline={startDate}
+    description={'Lottery Starts In'}
+    descriptionLink={''}
+  ></LaunchCountdown>
+) : (
+  <h2>
+  <LaunchCountdown
+    deadline={endDate}
+    description={''}
+    descriptionLink={''}
+  ></LaunchCountdown> </h2>
+)}
+</div> */}
+
 
 {/*
-  <Grid direction="row" container spacing={3} item xs={12} sm={6}  style={{ height: '100%', justifyContent: 'space-between', alignItems: 'center', marginRight:'1%' }}>
-      
-  </Grid>*/}
-  {/*
-  <Grid container spacing={3} direction="row" item  xs={12} sm={6}  md={3}  style={{ height: '100%', justifyContent: 'space-between', alignItems: 'center', }}>
-      <StyledCardWrapper>
-        <ExchangeCardNRWL
-          action="Enter Lottery"
-          fromToken={grapeFinance.NRWL}
-          fromTokenName="NRWL"
-          toToken={grapeFinance.TBOND}
-          toTokenName="TBOND"
-          priceDesc="5 NRWL = 1 ENTRY"
-            
-          onExchange={handleBuyBondsNRWL}>
-          </ExchangeCardNRWL>
-      </StyledCardWrapper>
-  </Grid>
-  */}
-  
+<Grid container spacing={3} direction="row" item  xs={12} sm={6}  md={3}  style={{ height: '100%', justifyContent: 'space-between', alignItems: 'center', }}>
+  <StyledCardWrapper>
+    <ExchangeCardNRWL
+      action="Enter Lottery"
+      fromToken={grapeFinance.NRWL}
+      fromTokenName="NRWL"
+      toToken={grapeFinance.TBOND}
+      toTokenName="TBOND"
+      priceDesc="5 NRWL = 1 ENTRY"
+        
+      onExchange={handleBuyBondsNRWL}>
+      </ExchangeCardNRWL>
+  </StyledCardWrapper>
 </Grid>
-          </>
-        ) : (
-          <UnlockWallet />
-        )}
-      </Page>
-    </Switch>
+*/}
+
+</Grid>
+      </>
+    ) : (
+      <UnlockWallet />
+    )}
+  </Page>
+</Switch>
   );
 };
 
