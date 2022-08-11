@@ -157,12 +157,12 @@ const Lottery: React.FC = () => {
         ...(isDesktop ? { fontSize: '2.rem' } : { fontSize: '1.3rem'}) }}>
         Win USDC by depositing Frozen Walrus tokens!
 </h2>
-<h2 style={{ textAlign: 'left',  marginBottom: '5%', marginLeft: '10%',
+<h2 style={{ textAlign: 'center',  marginBottom: '5%',
         ...(isDesktop ? { fontSize: '1.5rem' } : { fontSize: '1.2rem'}) }}>
         Total WLRS tokens entered into lottery: {Number(raffleBals)} <br /> 
-        Total Lottery entries: {Number(raffleBals)} <br />
+       {/* Total Lottery entries: {Number(raffleBals)} <br /> */}
         Your WLRS tokens entered into the lottery: {Number(userBals)} <br /> 
-        Your Lottery entries: {Number(userBals)} <br /> 
+   {/*     Your Lottery entries: {Number(userBals)} <br /> */}
         </h2>
 </BondCard>
 </Grid>
@@ -210,7 +210,7 @@ const Lottery: React.FC = () => {
         toToken={grapeFinance.TBOND}
         toTokenName="TBOND"
         priceDesc="SEND ME TO THE LOTTERY"
-        disabled
+       disabled
         onExchange={handleBuyBonds}>
         </ExchangeCard>
         <LotterySubText style={{ textAlign: 'center',  marginTop: '5%', width:'95%', 
