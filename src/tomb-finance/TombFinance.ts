@@ -28,7 +28,7 @@ import { getDefaultProvider } from '../utils/provider';
 import IUniswapV2PairABI from './IUniswapV2Pair.abi.json';
 import { /*config,*/ bankDefinitions } from '../config';
 import moment from 'moment';
-import { parseUnits } from 'ethers/lib/utils';
+import { formatUnits, parseUnits } from 'ethers/lib/utils';
 import { commify, formatEther } from 'ethers/lib/utils';
 import { FTM_TICKER, NRWL_TICKER, SPOOKY_ROUTER_ADDR, SWAPSICLE_ROUTER_ADDR, TOMB_TICKER, TSHARE_TICKER } from '../utils/constants';
 // import { CompareArrowsOutlined } from '@material-ui/icons';
@@ -1772,7 +1772,7 @@ async getPegPoolPendingRewards(): Promise<PegPoolToken[]> {
       token: new ERC20(addresses[i], this.provider.getSigner(), info.name),
       name: info.name,
       pairAddress: info.pair,
-      amount: Number(formatEther(amounts[i])).toFixed(8),
+      amount: Number(formatUnits(amounts[i])).toFixed(8),
       pendingValueBN: amounts[i],
       rewardPerBlock: Number(formatEther(tks[i].rewardPerBlock)),
       canCompound: info.name != 'AALTO',

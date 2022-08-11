@@ -263,7 +263,7 @@ const CemeteryCard = () => {
           </CardActions>
         </HomeCardBlue>
       </Grid>
-      {/*
+      
         <Grid item xs={12} sm={6}>
         <HomeCardBlue>
           <CardContent
@@ -310,7 +310,7 @@ const CemeteryCard = () => {
             </Button>
           </CardActions>
         </HomeCardBlue>
-                </Grid> */}
+                </Grid> 
                 
       {/* <Grid item xs={12} sm={6}>
         <Card>
