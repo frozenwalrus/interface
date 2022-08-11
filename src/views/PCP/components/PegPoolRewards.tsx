@@ -59,6 +59,7 @@ const PegPoolRewards: React.FC<{
               </h2>
             </Grid>
           </Grid>
+          {/*
           <Grid
             container
             
@@ -84,7 +85,7 @@ const PegPoolRewards: React.FC<{
           >
             Yearly APR:
             <Grid item>{withdrawFeePercent == 0 ? 0 : apr.yearly}%</Grid>
-          </Grid>
+          </Grid> */}
           <Grid container style={{ justifyContent:'center', alignItems:'center', marginTop: '20px' }}>
             {rewardTokens?.map((token, i) => {
               return (
