@@ -37,7 +37,14 @@ const usePegPoolRewards = (pegPool: PegPool) => {
         totalDollarValuePerYear += amountPerYear;
       });
 
-      const daily = (totalDollarValuePerDay / Number(pegPool.totalDesposits)) * 100;
+      const dailyTrimmed = Number(
+        Number(pegPool.totalDesposits).toFixed(2)
+      )
+      const perDay = Number(
+        totalDollarValuePerDay.toFixed(2)
+      )
+      const daily = (perDay / dailyTrimmed) * 100;
+      console.log(daily)
       const yearly = (totalDollarValuePerYear / Number(pegPool.totalDesposits)) * 100;
 
       setApr({
@@ -52,6 +59,7 @@ const usePegPoolRewards = (pegPool: PegPool) => {
       let totalValue = 0;
       for (const token of tokens) {
         const priceInfo = await getDexPriceFromPair('avalanche', token.pairAddress);
+        console.log(priceInfo); 
         token.currentPrice = priceInfo.priceUI;
         token.currentPriceNum = priceInfo.priceNum;
         const pendingValue = priceInfo.priceNum * Number(token.amount);
