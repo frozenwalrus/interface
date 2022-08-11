@@ -72,8 +72,7 @@ console.log(apr);
             }}
           >
             Daily APR:
-        {/*    <Grid item>{withdrawFeePercent == 0 ? 0 : apr.daily}%</Grid> */}
-        <Grid item>2.118%</Grid>
+        <Grid item>{withdrawFeePercent == 0 ? 0 : apr.daily}%</Grid> 
           </Grid>
           <Grid
             container
@@ -86,8 +85,7 @@ console.log(apr);
             }}
           >
             Yearly APR:
-         {/*   <Grid item>{withdrawFeePercent == 0 ? 0 : apr.yearly}%</Grid> */}
-         <Grid item>773.140%</Grid>
+         <Grid item>{withdrawFeePercent == 0 ? 0 : apr.yearly}%</Grid> 
           </Grid> 
           <Grid container style={{ justifyContent:'center', alignItems:'center', marginTop: '20px' }}>
             {rewardTokens?.map((token, i) => {

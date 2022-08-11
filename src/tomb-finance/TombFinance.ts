@@ -1721,7 +1721,7 @@ async getPegPool(): Promise<PegPool> {
 
   return {
     depositsEnabled,
-    totalDesposits: Number(formatEther(totalDepositTokenAmount)).toFixed(2),
+    totalDesposits: Number(formatUnits(totalDepositTokenAmount, 6)).toFixed(2),
     depositTokenName: 'USDC',
     depositToken: busd,
     userInfo,
