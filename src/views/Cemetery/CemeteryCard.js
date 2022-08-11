@@ -304,9 +304,9 @@ const CemeteryCard = () => {
               target="_blank"
               style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
               variant="contained"
-              href="https://traderjoexyz.com/pool/0x0efa5328fefce96c8d10661bd97403764d477853/0x395908aeb53d33a9b8ac35e148e9805d34a555d3#/"
+              href="https://app.frozenwalrus.finance/bonds"
             >
-              Add Liquidity
+              Buy Bond 
             </Button>
           </CardActions>
         </HomeCardBlue>
