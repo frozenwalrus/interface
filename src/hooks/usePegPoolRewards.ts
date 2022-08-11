@@ -33,18 +33,29 @@ const usePegPoolRewards = (pegPool: PegPool) => {
         const dollarValuePerBlock = rpb * tk.currentPriceNum;
         const amountPerDay = dollarValuePerBlock * BSC_BLOCK_A_DAY;
         totalDollarValuePerDay += amountPerDay;
+        console.log(amountPerDay)
         const amountPerYear = amountPerDay * 365;
         totalDollarValuePerYear += amountPerYear;
+        console.log(amountPerYear); 
       });
 
       const dailyTrimmed = Number(
-        Number(pegPool.totalDesposits).toFixed(2)
+        Number(pegPool.totalDesposits).toFixed(8)
       )
+      console.log(dailyTrimmed)
+      
       const perDay = Number(
-        totalDollarValuePerDay.toFixed(2)
+        totalDollarValuePerDay.toFixed(8)
       )
+      console.log(perDay)
+
+      const balanceOfPool = Number(
+        Number(pegPool.totalDesposits).toFixed(8))
+      console.log(balanceOfPool)
+
       const daily = (perDay / dailyTrimmed) * 100;
-      console.log(daily)
+      console.log(daily) 
+      
       const yearly = (totalDollarValuePerYear / Number(pegPool.totalDesposits)) * 100;
 
       setApr({
