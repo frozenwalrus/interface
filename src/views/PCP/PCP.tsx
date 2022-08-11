@@ -86,11 +86,11 @@ const PCP: React.FC = () => {
   <h2 style={{ marginTop: '20px', textAlign: 'center'  }}>
       Withdrawal fees are based on TWAP, with fees decreasing the closer WLRS is to peg. Read about 
       the Peg Campaign Pool <StyledLink href="https://docs.frozenwalrus.finance/protocol-information/pcp-campaign">here! </StyledLink>
-      </h2>
+      </h2> {/*
   <h2 style={{ textTransform: 'capitalize', fontSize: '2rem', marginTop: '20px', textAlign: 'center' }}>
   
       Total Value Locked: ${pegPool.totalDesposits}
-  </h2>
+        </h2> */}
   </div>
   </HomeCard>
   <div
