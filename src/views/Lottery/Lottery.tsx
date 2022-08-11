@@ -184,7 +184,7 @@ const Lottery: React.FC = () => {
         ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
 
       <i>What are current prizes?<br /></i>
-      The second Frozen Walrus will be opening soon and prizes announced in advance here.  <br />
+      The next Lottery opens 11 August at 1900 UTC and runs until 17 August at 1900 UTC. Three winners will be selected, earning $1000 USDC each!  <br />
       </h2>
 </HomeCardPurple>
 </Grid>
@@ -194,7 +194,7 @@ const Lottery: React.FC = () => {
 <h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
         ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
       <i>How do I enter? <br /> </i>
-      Click the "Enter Lottery" button below and send at least 5 WLRS. 5 WLRS = 1 Lottery entry.The more 
+      Click the "Enter Lottery" button below and send at least 5 WLRS. 5 WLRS = 1 Lottery entry. The more 
       entries you have, the greater your chances are to win!  
       
 </h2>
