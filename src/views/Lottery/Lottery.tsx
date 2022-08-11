@@ -221,10 +221,12 @@ const Lottery: React.FC = () => {
 {account}
 </LotterySubText>
     </BondCard>
+
+    {/*
         <h2 style={{ textAlign: 'left', marginBottom: '5%', marginTop: '5%', 
         ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
 <i>The first inaugural Frozen Walrus has concluded and winners notified!   
-        First prize won 2500 USDC. Second prize won 500 USDC. Third prize won 250 USDC.</i> </h2>
+    First prize won 2500 USDC. Second prize won 500 USDC. Third prize won 250 USDC.</i> </h2> */}
 </Grid>
 
 
