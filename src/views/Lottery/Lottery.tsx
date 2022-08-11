@@ -210,7 +210,7 @@ const Lottery: React.FC = () => {
         toToken={grapeFinance.TBOND}
         toTokenName="TBOND"
         priceDesc="SEND ME TO THE LOTTERY"
-       disabled
+       
         onExchange={handleBuyBonds}>
         </ExchangeCard>
         <LotterySubText style={{ textAlign: 'center',  marginTop: '5%', width:'95%', 
