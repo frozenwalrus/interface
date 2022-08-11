@@ -814,6 +814,8 @@ export class TombFinance {
         return this.getGrapeStat();
       case 'USDIBS':
         return this.getUSDibsStat();
+      case 'WBOND':
+        return this.getUSDibsStat();
       default:
         throw new Error(`Unknown token name: ${tokenName}`);
     }
@@ -922,6 +924,7 @@ export class TombFinance {
       circulatingSupply: '0',
     };
   }
+  
 
   async getUSDibsStat(): Promise<TokenStat> {
     const [priceInFTM, priceOfOneFTM] = await Promise.all([
@@ -1708,7 +1711,7 @@ export class TombFinance {
 
 async getPegPool(): Promise<PegPool> {
   const contract = this.contracts.PegPool;
-  const busd = new ERC20('0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', this.signer, 'USDC');
+  const busd = new ERC20('0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', this.signer, 'USDC', 6);
   const [depositsEnabled, totalDepositTokenAmount, userInfo, approval] = await Promise.all([
     contract.depositsEnabled(),
     contract.totalDepositTokenAmount(),
@@ -1729,7 +1732,7 @@ async getPegPool(): Promise<PegPool> {
 async getPegPoolUserInfo(): Promise<PegPoolUserInfo> {
   const amount: BigNumber = await this.contracts.PegPool.userInfo(this.myAccount);
   return {
-    amountDeposited: getDisplayBalance(amount),
+    amountDeposited: getDisplayBalance(amount, 6),
     isDeposited: amount.gt(0),
     amountDepositedBN: amount,
   };
@@ -1748,9 +1751,9 @@ async getPegPoolPendingRewards(): Promise<PegPoolToken[]> {
       pair: '0x03d15E0451e54Eec95ac5AcB5B0a7ce69638c62A',
       injection: 0,
     },
-    '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664': {
-      name: 'USDC',
-      pair: '0x82845B52b53c80595bbF78129126bD3E6Fc2C1DF',
+    '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7': {
+      name: 'WAVAX',
+      pair: '0xA389f9430876455C36478DeEa9769B7Ca4E3DDB1',
       injection: 0,
     },
   };

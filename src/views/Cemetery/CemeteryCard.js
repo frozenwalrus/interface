@@ -54,13 +54,10 @@ const CemeteryCard = () => {
   const nrwlStatsOnPool = useStatsForPool(nrwlBank);
   const tBondStats = useBondStats();
 
-  const tBondPriceInFTM = useMemo(() => (tBondStats ? Number(tBondStats.tokenInFtm).toFixed(4) : null), [tBondStats]);
-  const tBondCirculatingSupply = useMemo(() => (tBondStats ? String(tBondStats.circulatingSupply) : null), [tBondStats]);
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
-  const tBondBalance = useTokenBalance(tombFinance.TBOND);
-  const displayTBondBalance = useMemo(() => getDisplayBalance(tBondBalance), [tBondBalance]);
   const tBondPriceInDollars = useMemo(() => (tBondStats ? Number(tBondStats.priceInDollars).toFixed(2) : null), [tBondStats]);
-  const tBondBalanceInDollars = tBondPriceInDollars && displayTBondBalance ? (Number(tBondPriceInDollars) * tBondBalance.div('1000000000000000000').toNumber()).toFixed(2) : null;
+  const tbondBank = useBank('WBondWShareRewardPool');
+  const tBondStatsonPool = useStatsForPool(tbondBank);
 
 
   // const snoSnoShareLPStats = useMemo(() => (snoSnoShareLpStats ? snoSnoShareLpStats : null), [snoSnoShareLpStats]);
@@ -266,7 +263,8 @@ const CemeteryCard = () => {
           </CardActions>
         </HomeCardBlue>
       </Grid>
-       {/* <Grid item xs={12} sm={6}>
+      {/*
+        <Grid item xs={12} sm={6}>
         <HomeCardBlue>
           <CardContent
             style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center' }}
@@ -284,15 +282,10 @@ const CemeteryCard = () => {
 
               <Box></Box>
               <span style={{ fontSize: '12px' }}>
-                Liquidity: ${tDibsLpStats?.totalLiquidity ? tDibsLpStats.totalLiquidity : '-.--'} <br />
                 Total supply:{' '}
-                {tDibsLpStats?.totalSupply
-                  ? Number(tDibsLpStats.totalSupply) < 1 / 10 ** 4
-                    ? (Number(tDibsLpStats.totalSupply) * 10 ** 6).toFixed(4) + 'µ'
-                    : tDibsLpStats.totalSupply
-                  : '-.--'}{' '}
+                {tBondTotalSupply} 
                 <br />
-                APR: {tDibsStatsOnPool?.yearlyAPR && tDibsStatsOnPool?.yearlyAPR !== 'Infinity' ? tDibsStatsOnPool?.yearlyAPR : '----.--'}%
+                APR: {tBondStatsonPool?.yearlyAPR && tBondStatsonPool?.yearlyAPR !== 'Infinity' ? tBondStatsonPool?.yearlyAPR : '----.--'}%
               </span>
             </div>
           </CardContent>
@@ -317,8 +310,8 @@ const CemeteryCard = () => {
             </Button>
           </CardActions>
         </HomeCardBlue>
-      </Grid>
-                */}
+                </Grid> */}
+                
       {/* <Grid item xs={12} sm={6}>
         <Card>
           <CardContent

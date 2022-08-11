@@ -16,7 +16,6 @@ const HomeCardPurple = styled.div`
   padding: 20px; 
   color: #4b4453;
 `;
-
 const PegPoolRewards: React.FC<{
   rewardTokens: PegPoolToken[];
   totalRewardValue: string;
@@ -38,17 +37,11 @@ const PegPoolRewards: React.FC<{
       doClaim();
     }
   };
-
   useEffect(() => {
     if (rewardTokens?.length) {
       checkRewards();
     }
   }, [rewardTokens]);
-
-  const labels = {
-    fontWeight: 700,
-    color: black, 
-  };
 
   return (
     <HomeCardPurple >

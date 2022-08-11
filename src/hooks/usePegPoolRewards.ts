@@ -51,7 +51,7 @@ const usePegPoolRewards = (pegPool: PegPool) => {
 
       let totalValue = 0;
       for (const token of tokens) {
-        const priceInfo = await getDexPriceFromPair('bsc', token.pairAddress);
+        const priceInfo = await getDexPriceFromPair('avalanche', token.pairAddress);
         token.currentPrice = priceInfo.priceUI;
         token.currentPriceNum = priceInfo.priceNum;
         const pendingValue = priceInfo.priceNum * Number(token.amount);

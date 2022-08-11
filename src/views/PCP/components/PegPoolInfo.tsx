@@ -16,6 +16,7 @@ import WithdrawModal from '../../Bank/components/WithdrawModal';
 import { useMediaQuery } from '@material-ui/core';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
+import { formatEther } from 'ethers/lib/utils';
 
 
 const HomeCardBlue = styled.div`
@@ -33,11 +34,11 @@ const PegPoolInfo: React.FC<{
   apr: { daily: string; yearly: string };
 }> = ({ pegPool, rewardTokens, totalRewardValue, apr }) => {
   const tokenBalance = useTokenBalance(pegPool.depositToken);
-
   const { onDeposit } = usePegPoolDeposit(pegPool);
   const { onWithdraw } = usePegPoolWithdraw(pegPool);
   const [approveStatus, approve] = usePegPoolApprove(pegPool);
   const { withdrawFeePercent } = usePegPoolWithdrawFee();
+ // console.log(pegPool.depositToken)
   const [onPresentDeposit, onDismissDeposit] = useModal(
     <DepositModal
       max={tokenBalance}
@@ -94,8 +95,8 @@ const PegPoolInfo: React.FC<{
                  
                   <Button
                     color="primary"
-                    disabled
-                    // disabled={!pegPool.depositsEnabled}
+                    
+                    disabled={!pegPool.depositsEnabled}
                     onClick={approve}
                     fullWidth={true}
                   >
@@ -104,8 +105,8 @@ const PegPoolInfo: React.FC<{
                 ) : (
                   <Button
                     className="tokenButton"
-                    disabled 
-                   //  disabled={!pegPool.depositsEnabled}
+                     
+                   disabled={!pegPool.depositsEnabled}
                     onClick={onPresentDeposit}
                     fullWidth={true}
                   >

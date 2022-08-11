@@ -12,7 +12,7 @@ const usePegPoolWithdraw = (pool: PegPool) => {
 
   const handleWithdraw = useCallback(
     async (amount: string) => {
-      const amountBn = parseUnits(amount);
+      const amountBn = parseUnits(amount, 6);
       handleTransactionReceipt(
         bombFinance.withdrawPegPool(amountBn).then(async (tx) => {
           await refreshPool();

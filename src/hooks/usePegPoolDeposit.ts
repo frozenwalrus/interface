@@ -12,7 +12,7 @@ const usePegPoolDeposit = (pool: PegPool) => {
 
   const handleDeposit = useCallback(
     async (amount: string) => {
-      const amountBn = parseUnits(amount);
+      const amountBn = parseUnits(amount, pool.depositToken.decimal);
       handleTransactionReceipt(
         bombFinance.depositPegPool(amountBn).then((tx) => {
           refreshPool();

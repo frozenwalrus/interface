@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const DEXSCREENER_PAIR_BASE_URL = 'https://api.dexscreener.io/latest/dex/pairs/';
 
-export async function getDexPairInfo(chainSymbol: 'bsc', pairAddress: string) {
+export async function getDexPairInfo(chainSymbol: 'avalanche', pairAddress: string) {
   try {
     const req = await axios.get(`${DEXSCREENER_PAIR_BASE_URL}${chainSymbol}/${pairAddress}`);
     return req.data;
@@ -11,7 +11,7 @@ export async function getDexPairInfo(chainSymbol: 'bsc', pairAddress: string) {
   }
 }
 
-export async function getDexPriceFromPair(chainSymbol: 'bsc', pairAddress: string) {
+export async function getDexPriceFromPair(chainSymbol: 'avalanche', pairAddress: string) {
   try {
     const req = await axios.get(`${DEXSCREENER_PAIR_BASE_URL}${chainSymbol}/${pairAddress}`);
     if (req.data.pair) {

@@ -25,12 +25,18 @@ import useTokenBalance from '../../hooks/useTokenBalance';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import Label from '../../components/Label';
 
+
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) no-repeat !important;
     background-size: cover !important;
   }
 `;
+const StyledLink = styled.a`
+  font-weight: 700;
+  text-decoration: none;
+  color: ${(props) => props.theme.color.primary.main};`; 
+
 const HomeCard = styled.div`
   background: rgba(255, 255, 255, 0.5);
   border-radius: 50px;
@@ -375,6 +381,9 @@ const Home = () => {
       >
         Welcome to Frozen Walrus! 
       </Typography>
+      <h2 style={{ textAlign: 'center', marginBottom: '5%', marginTop: '5%', 
+      ...(isDesktop ? { fontSize: '1.8rem' } : { fontSize: '1.5rem'}) }}>
+        The Peg Campaign Pool is now <StyledLink href="http://app.frozenwalrus.finance/pcp">open</StyledLink>! </h2>
       
       
       <HomeCard>
