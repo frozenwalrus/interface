@@ -37,11 +37,9 @@ const Sbs: React.FC = () => {
   const tombFinance = useTombFinance();
   const [tbondAmount, setTbondAmount] = useState('');
   const [tshareAmount, setTshareAmount] = useState('');
-
   const [approveStatus, approve] = useApprove(tombFinance.TBOND, tombFinance.contracts.TShareSwapper.address);
   const { onSwapTShare } = useSwapTBondToTShare();
   const tshareSwapperStat = useTShareSwapperStats(account);
-
   const tshareBalance = useMemo(
     () => (tshareSwapperStat ? Number(tshareSwapperStat.tshareBalance) : 0),
     [tshareSwapperStat],

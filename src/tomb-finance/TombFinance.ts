@@ -18,7 +18,9 @@ import {
 // import { Fetcher as FetcherSpirit, Token as TokenSpirit } from 'quickswap-sdk';
 // import { Fetcher, Route, Token } from 'quickswap-sdk';
 import { Configuration } from './config';
-import { ContractName, TokenStat, AllocationTime, LPStat, Bank, PoolStats, TShareSwapperStat, PegPoolToken, PegPool, PegPoolUserInfo, ExtinctionRewardToken } from './types';
+import { ContractName, TokenStat, AllocationTime, LPStat, Bank, PoolStats, TShareSwapperStat, 
+  PegPoolToken, PegPool, PegPoolUserInfo, ExtinctionRewardToken, 
+Pegasaurus, PegasaurusToken, PegasaurusUserInfo } from './types';
 import { BigNumber, Contract, ethers, EventFilter } from 'ethers';
 import { decimalToBalance } from './ether-utils';
 import { TransactionResponse } from '@ethersproject/providers';
@@ -618,6 +620,8 @@ export class TombFinance {
       tokenPrice = (await this.getTombStat()).priceInDollars;
     } else if (tokenName === 'WSHARE') {
       tokenPrice = (await this.getShareStat()).priceInDollars;
+    } else if (tokenName === 'WBOND') {
+      tokenPrice = (await this.getBondStat()).priceInDollars;
     } else if (!tokenName.includes('-LP')) {
       tokenPrice = (await this.getTokenStat(tokenName)).priceInDollars;
     } else if (tokenName === 'WLRS-USDC-LP') {
@@ -1800,6 +1804,99 @@ async withdrawPegPool(amount: BigNumber) {
 
 async claimPegPool() {
   return this.contracts.PegPool.claim();
+}
+// pegasaurus
+async getPegasaurus(): Promise<Pegasaurus> {
+  const contract = this.contracts.Pegasaurus;
+  const pair = new ERC20('0x82845B52b53c80595bbF78129126bD3E6Fc2C1DF', this.signer, 'WLRS-USDC-LP', 18);
+  const [depositsEnabled, totalDepositTokenAmount, userInfo, approval] = await Promise.all([
+    contract.depositsEnabled(),
+    contract.totalDepositTokenAmount(),
+    this.getPegasaurusUserInfo(),
+    pair.allowance(this.myAccount, contract.address),
+  ]);
+
+  return {
+    depositsEnabled,
+    totalDesposits: Number(formatUnits(totalDepositTokenAmount, 18)).toFixed(2),
+    depositTokenName: 'WLRS-USDC-LP',
+    depositToken: pair,
+    userInfo,
+    approved: approval.gt(0),
+  };
+}
+
+async getPegasaurusUserInfo(): Promise<PegasaurusUserInfo> {
+  const amount: BigNumber = await this.contracts.Pegasaurus.userInfo(this.myAccount);
+  return {
+    amountDeposited: getDisplayBalance(amount, 18),
+    isDeposited: amount.gt(0),
+    amountDepositedBN: amount,
+  };
+}
+
+async getPegasaurusPendingRewards(): Promise<PegasaurusToken[]> {
+  const tokenMap: {
+    [key: string]: {
+      name: string;
+      pair: string;
+      injection: number;
+    };
+  } = {
+    '0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6': {
+      name: 'WSHARE',
+      pair: '0x03d15E0451e54Eec95ac5AcB5B0a7ce69638c62A',
+      injection: 0,
+    },
+    '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7': {
+      name: 'WAVAX',
+      pair: '0xA389f9430876455C36478DeEa9769B7Ca4E3DDB1',
+      injection: 0,
+    },
+  };
+
+  const [tks, tokens] = await Promise.all([
+    this.contracts.Pegasaurus.getRewardTokens(),
+    this.contracts.Pegasaurus.pendingRewards(this.myAccount),
+  ]);
+  const addresses = tokens[0];
+  const amounts = tokens[1];
+  const rewards: PegasaurusToken[] = [];
+
+  for (let i = 0; i < addresses.length; i++) {
+    const info = tokenMap[addresses[i]];
+    rewards.push({
+      token: new ERC20(addresses[i], this.provider.getSigner(), info.name),
+      name: info.name,
+      pairAddress: info.pair,
+      amount: Number(formatUnits(amounts[i])).toFixed(8),
+      pendingValueBN: amounts[i],
+      rewardPerBlock: Number(formatEther(tks[i].rewardPerBlock)),
+      canCompound: info.name != 'AALTO',
+    });
+  }
+
+  return rewards;
+}
+
+async depositPegasaurus(amount: BigNumber) {
+  return this.contracts.Pegasaurus.deposit(amount);
+}
+
+async compoundRewardsPegasaurus() {
+  return this.contracts.Pegasaurus.compound();
+}
+
+async compoundTokenPegasaurus() {
+  return this.contracts.Pegasaurus.compound();
+}
+
+async withdrawPegasaurus(amount: BigNumber) {
+  return this.contracts.Pegasaurus.withdraw(amount);
+}
+
+async claimPegasaurus() {
+  return this.contracts.Pegasaurus.claim();
 }
 }
 

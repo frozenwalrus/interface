@@ -23,7 +23,13 @@ import useNrwlStats from '../../../hooks/useNrwlStats';
 interface HarvestProps {
   bank: Bank;
 }
-
+const HomeCardPurple = styled.div`
+  background: linear-gradient(180deg, rgba(217,237,254,1) 0%, rgba(214,211,242,1) 33%, rgba(186,185,212, 1) 100%);
+  border-radius: 50px;
+  box-shadow: 6px 6px 12px black; 
+  padding: 20px; 
+  color: #4b4453;
+`;
 const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const earnings = useEarnings(bank.contract, bank.earnTokenName, bank.poolId);
   const { onReward } = useHarvest(bank);
@@ -40,18 +46,18 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
   const { onRedeem } = useRedeem(bank);
   return (
-    <Card>
+    <HomeCardPurple>
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
             <TokenSymbol symbol={bank.earnToken.symbol} size={100} />
             <Value value={getDisplayBalance(earnings)} />
-            <Label color="#777" text={`≈ $${earnedInDollars}`} />
-            <Label color="#777" text={`${tokenName} Earned`} />
+            <Label color="rgba(74, 68, 82)" text={`≈ $${earnedInDollars}`} />
+            <Label color="rgba(74, 68, 82)" text={`${tokenName} Earned`} />
           </StyledCardHeader>
           <StyledCardActions>
             <Button
-              style={{ borderRadius: '15px', width: '250px' }}
+              style={{ borderRadius: '15px', width: '240px', boxShadow: '6px 6px 12px black' }}
               onClick={onReward}
               disabled={earnings.eq(0)}
               color="primary"
@@ -61,7 +67,7 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
             </Button>
           </StyledCardActions>
           <Button
-            style={{ borderRadius: '15px', marginTop: '10px', width: '250px' }}
+            style={{ borderRadius: '15px', marginTop: '10px', width: '240px', boxShadow: '6px 6px 12px black' }}
             onClick={onRedeem}
             color="primary"
             variant="contained"
@@ -70,7 +76,7 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
           </Button>
         </StyledCardContentInner>
       </CardContent>
-    </Card>
+    </HomeCardPurple>
   );
 };
 

@@ -64,6 +64,14 @@ export interface PegPool {
   userInfo?: PegPoolUserInfo;
   approved: boolean;
 }
+export interface Pegasaurus {
+  depositsEnabled: boolean;
+  totalDesposits: string;
+  depositToken: ERC20;
+  depositTokenName: string;
+  userInfo?: PegasaurusUserInfo;
+  approved: boolean;
+}
 
 export interface PegPoolToken {
   name: string;
@@ -78,8 +86,26 @@ export interface PegPoolToken {
   rewardPerBlock: number;
   canCompound: boolean;
 }
+export interface PegasaurusToken {
+  name: string;
+  token: ERC20;
+  pairAddress: string;
+  amount?: string;
+  image?: string;
+  pendingValue?: string;
+  pendingValueBN?: BigNumber;
+  currentPrice?: string;
+  currentPriceNum?: number;
+  rewardPerBlock: number;
+  canCompound: boolean;
+}
 
 export interface PegPoolUserInfo {
+  amountDeposited: string;
+  amountDepositedBN: BigNumber;
+  isDeposited: boolean;
+}
+export interface PegasaurusUserInfo {
   amountDeposited: string;
   amountDepositedBN: BigNumber;
   isDeposited: boolean;

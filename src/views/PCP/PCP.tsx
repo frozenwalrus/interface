@@ -11,6 +11,8 @@ import TokenSymbol from '../../components/TokenSymbol';
 import CemeteryImage from '../../assets/img/SVG_Icons_and_web_bg/bg.svg';
 import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
+import PegasaurusInfo from './components/PegasaurusInfo';
+import usePegasaurus from '../../hooks/usePegasaurus';
 
 const TITLE = 'ames.defi | Peg Pool';
 
@@ -37,6 +39,7 @@ const PCP: React.FC = () => {
   const { account } = useWallet();
   const { path } = useRouteMatch();
   const { pegPool } = usePegPool();
+  const { Pegasaurus } = usePegasaurus(); 
   const { rewardTokens, totalRewardValue, apr } = usePegPoolRewards(pegPool);
 
   return (
@@ -45,7 +48,7 @@ const PCP: React.FC = () => {
     <Route exact path={path}>
     <BackgroundImage />
       <div>
-         <h2 style={{ textAlign: 'center', fontSize: '3rem' }}>PEG CAMPAIGN POOL</h2>
+         <h2 style={{ textAlign: 'center', fontSize: '2.5rem' }}>PEG CAMPAIGN POOL</h2>
       </div>
       {!!account ? (
         <Container maxWidth="xl">
@@ -53,7 +56,7 @@ const PCP: React.FC = () => {
           
           {pegPool && rewardTokens && (
                 
-<Box mt={5}>
+<Box mt={3}>
   <HomeCard>
   <Grid container style={{ justifyContent: 'center', alignItems: 'center' }} >
         <Grid item>
@@ -61,11 +64,11 @@ const PCP: React.FC = () => {
         </Grid>
   </Grid>
   <div>
-        <h2 style={{ textTransform: 'none', fontSize: '2.0rem', fontWeight: 'bold', marginTop: '20px', 
+        <h2 style={{ textTransform: 'none', fontSize: '2.0rem', fontWeight: 'bold', marginTop: '10px', 
         textAlign: 'center' }}>
           WLRS Peg Campaign Pool! <br /> 
         </h2>
-        <h2 style={{ textTransform: 'none', fontSize: '1.5rem', fontWeight: 'bold', marginTop: '20px', 
+        <h2 style={{ textTransform: 'none', fontSize: '1.5rem', fontWeight: 'bold', marginTop: '10px', 
         textAlign: 'center' }}>
         Deposit USDC.e and get WSHARE and AVAX Rewards
         </h2>
@@ -74,7 +77,7 @@ const PCP: React.FC = () => {
         container
         spacing={2}
         style={{
-          marginTop: '15px',
+          marginTop: '5px',
           justifyContent: 'center' }} >               
         <Grid item>
           <TokenSymbol size={72} symbol={'WSHARE'} />
@@ -103,6 +106,16 @@ const PCP: React.FC = () => {
         apr={apr}
       />
     </div>
+ {/*   <div
+      style={{
+        marginTop: '35px',}} >
+      <PegasaurusInfo
+        Pegasaurus={Pegasaurus}
+        rewardTokens={rewardTokens}
+        totalRewardValue={totalRewardValue}
+        apr={apr}
+      />
+      </div> */}
 </Box>
 )}
     </Container>

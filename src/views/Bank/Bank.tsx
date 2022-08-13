@@ -29,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+const TopTile = styled.div`
+background: rgba(49, 75, 119, 1); 
+border-radius: 50px;  
+box-shadow: 6px 6px 12px black; 
+padding: 20px; 
+`;
 
 const Bank: React.FC = () => {
   useEffect(() => window.scrollTo(0, 0));
@@ -95,44 +101,51 @@ const Bank: React.FC = () => {
       }*/}
       <Box>
         <Grid container justify="center" spacing={3} style={{ marginBottom: '50px' }}>
-          <Grid item xs={12} md={2} lg={3} className={classes.gridItem}>
-            <Card style={{ background: '#161414', borderRadius: '15px', height: '120px' }} className={classes.gridItem}>
+          <Grid item xs={12} sm={4} lg={3} className={classes.gridItem}>
+            <TopTile className={classes.gridItem}>
               <CardContent style={{ textAlign: 'center' }}>
-                <h3 style={{ color: '#5686d6' }}>APR</h3>
-                <h2 style={{ fontWeight: 'lighter' }}>{bank.closedForStaking || statsOnPool?.yearlyAPR === 'Infinity' ? '0.00' : statsOnPool?.yearlyAPR}%</h2>
+                <h3 style={{ color: 'white' }}>APR</h3>
+                <h2 style={{ color: 'white', fontWeight: 'lighter' }}>{bank.closedForStaking || statsOnPool?.yearlyAPR === 'Infinity' ? '0.00' : statsOnPool?.yearlyAPR}%</h2>
               </CardContent>
-            </Card>
+            </TopTile>
           </Grid>
-          <Grid item xs={12} md={2} lg={3} className={classes.gridItem}>
-            <Card style={{ background: '#161414', borderRadius: '15px', height: '120px' }} className={classes.gridItem}>
+          <Grid item xs={12} sm={4} lg={3} className={classes.gridItem}>
+          <TopTile className={classes.gridItem}>
               <CardContent style={{ textAlign: 'center' }}>
-                <h3 style={{ color: '#5686d6' }}>Daily APR</h3>
-                <h2 style={{ fontWeight: 'lighter' }}>{bank.closedForStaking || statsOnPool?.dailyAPR === 'Infinity' ? '0.00' : statsOnPool?.dailyAPR}%</h2>
+                <h3 style={{ color: 'white' }}>DAILY APR</h3>
+                <h2 style={{ color: 'white', fontWeight: 'lighter' }}>{bank.closedForStaking || statsOnPool?.dailyAPR === 'Infinity' ? '0.00' : statsOnPool?.dailyAPR}%</h2>
               </CardContent>
-            </Card>
+            </TopTile>
           </Grid>
-          <Grid item xs={12} md={2} lg={3} className={classes.gridItem}>
-            <Card style={{ background: '#161414', borderRadius: '15px', height: '120px' }} className={classes.gridItem}>
+          <Grid item xs={12} sm={4} lg={3} className={classes.gridItem}>
+          <TopTile className={classes.gridItem}>
               <CardContent style={{ textAlign: 'center' }}>
-                <h3 style={{ color: '#5686d6' }}>TVL</h3>
-                <h2 style={{ fontWeight: 'lighter' }}>${statsOnPool?.TVL}</h2>
+                <h3 style={{ color: 'white' }}>TVL</h3>
+                <h2 style={{ color: 'white', fontWeight: 'lighter' }}>${statsOnPool?.TVL}</h2>
               </CardContent>
-            </Card>
+            </TopTile>
           </Grid>
         </Grid>
       </Box>
-      <Box mt={12}>
+<Grid container spacing={3} style={{marginTop: '10%', 
+      justifyContent: 'center', alignContent: 'center', 
+      alignItems: 'center'}}>
+  <Grid item xs={12} lg={3} style={{marginRight: '2%', width: '90%'}}>
+    <StyledBank>
+        <StyledCardWrapper>
+          <Harvest bank={bank} />
+        </StyledCardWrapper>
+    </StyledBank>
+  </Grid>
+
+  <Grid item xs={12} lg={3} style={{marginLeft: '2%', width: '90%'}}>
         <StyledBank>
-          <StyledCardsWrapper>
             <StyledCardWrapper>
-              <Harvest bank={bank} />
+              <Stake bank={bank} />
             </StyledCardWrapper>
-            <Spacer />
-            <StyledCardWrapper>{<Stake bank={bank} />}</StyledCardWrapper>
-          </StyledCardsWrapper>
-          <Spacer size="lg" />
         </StyledBank>
-      </Box>
+      </Grid>
+    </Grid>
     </>
   ) : !bank ? (
     <BankNotFound />

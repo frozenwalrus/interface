@@ -199,7 +199,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   WBondWShareRewardPool: {
     name: 'Earn WSHARE with WBOND',
     poolId: 6,
-    sectionInUI: 2,
+    sectionInUI: 0,
     contract: 'WBondWShareRewardPool',
     depositTokenName: 'WBOND',
     earnTokenName: 'WSHARE',
