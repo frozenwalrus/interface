@@ -171,6 +171,13 @@ console.log(apr);
               >
                 Claim All
               </Button>
+              <i>
+              <h2 style={{marginTop: '5%', fontSize: '0.8rem'}}>
+                Rewards can be claimed at all times with no fees. Should you experience an issue claiming, 
+                it is likely due to the PCP contract awaiting refill of reward funds. Deposits are safe and 
+                rewards continue accumulating so please continue to check back in! 
+              </h2>
+              </i>
             </Grid>
           </Grid>
         </Box>
