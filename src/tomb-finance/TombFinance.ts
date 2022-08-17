@@ -819,7 +819,7 @@ export class TombFinance {
       case 'USDIBS':
         return this.getUSDibsStat();
       case 'WBOND':
-        return this.getUSDibsStat();
+        return this.getBondStat();
       default:
         throw new Error(`Unknown token name: ${tokenName}`);
     }
@@ -1782,10 +1782,8 @@ async getPegPoolPendingRewards(): Promise<PegPoolToken[]> {
       canCompound: info.name != 'AALTO',
     });
   }
-
   return rewards;
 }
-
 async depositPegPool(amount: BigNumber) {
   return this.contracts.PegPool.deposit(amount);
 }
@@ -1808,19 +1806,19 @@ async claimPegPool() {
 // pegasaurus
 async getPegasaurus(): Promise<Pegasaurus> {
   const contract = this.contracts.Pegasaurus;
-  const pair = new ERC20('0x82845B52b53c80595bbF78129126bD3E6Fc2C1DF', this.signer, 'WLRS-USDC-LP', 18);
+  const busd = new ERC20('0x82845B52b53c80595bbF78129126bD3E6Fc2C1DF', this.signer, 'WLRS-USDC-LP', 18);
   const [depositsEnabled, totalDepositTokenAmount, userInfo, approval] = await Promise.all([
     contract.depositsEnabled(),
     contract.totalDepositTokenAmount(),
     this.getPegasaurusUserInfo(),
-    pair.allowance(this.myAccount, contract.address),
+    busd.allowance(this.myAccount, contract.address),
   ]);
 
   return {
     depositsEnabled,
-    totalDesposits: Number(formatUnits(totalDepositTokenAmount, 18)).toFixed(2),
+    totalDesposits: Number(formatUnits(totalDepositTokenAmount, 18)).toFixed(12),
     depositTokenName: 'WLRS-USDC-LP',
-    depositToken: pair,
+    depositToken: busd,
     userInfo,
     approved: approval.gt(0),
   };

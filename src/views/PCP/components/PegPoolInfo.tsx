@@ -34,6 +34,7 @@ const PegPoolInfo: React.FC<{
   apr: { daily: string; yearly: string };
 }> = ({ pegPool, rewardTokens, totalRewardValue, apr }) => {
   const tokenBalance = useTokenBalance(pegPool.depositToken);
+  console.log(pegPool.depositToken)
   const { onDeposit } = usePegPoolDeposit(pegPool);
   const { onWithdraw } = usePegPoolWithdraw(pegPool);
   const [approveStatus, approve] = usePegPoolApprove(pegPool);

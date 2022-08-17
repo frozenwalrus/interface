@@ -1,13 +1,20 @@
 import { Box, Button, Card, CardContent, Typography, Grid } from '@material-ui/core';
 import ReactTooltip from 'react-tooltip';
 import React, { useEffect, useState } from 'react';
-import { PegPoolToken } from '../../../tomb-finance/types';
 import TokenSymbol from '../../../components/TokenSymbol';
+
+import { black } from '../../../theme/colors';
+import styled from 'styled-components';
+
+import { PegasaurusToken } from '../../../tomb-finance/types';
 import usePegPoolCompound from '../../../hooks/usePegPoolCompound';
 import usePegPoolRewardsClaim from '../../../hooks/usePegPoolRewardsClaim';
 import usePegPoolWithdrawFee from '../../../hooks/usePegPoolWithdrawFee';
-import { black } from '../../../theme/colors';
-import styled from 'styled-components';
+
+import usePegasaurusCompound from '../../../hooks/Pegasaurus/usePegasaurusCompound';
+import usePegasaurusRewardsClaim from '../../../hooks/Pegasaurus/usePegasaurusRewardsClaim';
+import usePegasaurusWithdrawFee from '../../../hooks/Pegasaurus/usePegasaurusWithdrawFee';
+
 
 const HomeCardPurple = styled.div`
   background: rgba(214, 211, 242, 0.8);
@@ -16,16 +23,16 @@ const HomeCardPurple = styled.div`
   padding: 20px; 
   color: #4b4453;
 `;
-const PegPoolRewards: React.FC<{
-  rewardTokens: PegPoolToken[];
+const PegasaurusRewards: React.FC<{
+  rewardTokens: PegasaurusToken[];
   totalRewardValue: string;
   apr: { daily: string; yearly: string };
   
 }> = ({ rewardTokens, totalRewardValue, apr }) => {
   const [hasRewards, setHasRewards] = useState(false);
-  const { doClaim } = usePegPoolRewardsClaim();
-  const { onCompound } = usePegPoolCompound();
-  const { withdrawFeePercent } = usePegPoolWithdrawFee();
+  const { doClaim } = usePegasaurusRewardsClaim();
+  const { onCompound } = usePegasaurusCompound();
+  const { withdrawFeePercent } = usePegasaurusWithdrawFee();
 console.log(apr); 
   const checkRewards = () => {
     let hasClaim = false;
@@ -179,4 +186,4 @@ console.log(apr);
   );
 };
 
-export default PegPoolRewards;
+export default PegasaurusRewards;

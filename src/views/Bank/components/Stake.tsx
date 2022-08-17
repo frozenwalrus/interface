@@ -164,7 +164,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
                           disabled={bank.closedForStaking}
                           onClick={() => (bank.closedForStaking ? null : onPresentZapNrwl())}
                         >
-                          <FlashOnIcon style={{color: 'rgba(49, 75, 119)'}} />
+                          <FlashOnIcon style={{color: '#ccc'}} />
                         </IconButton>
                       : null
                   }

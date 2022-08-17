@@ -3,21 +3,21 @@ import { Box, Button, Grid, Card, CardContent, Typography } from '@material-ui/c
 import useModal from '../../../hooks/useModal';
 import DepositModal from '../../Bank/components/DepositModal';
 import useTokenBalance from '../../../hooks/useTokenBalance';
-import usePegPoolDeposit from '../../../hooks/usePegPoolDeposit';
-import { Pegasaurus, PegasaurusToken, PegPool, PegPoolToken } from '../../../tomb-finance/types';
+import { Pegasaurus, PegasaurusToken } from '../../../tomb-finance/types';
 import { ApprovalState } from '../../../hooks/useApprove';
-import PegPoolRewards from './PegPoolRewards';
-import usePegPoolApprove from '../../../hooks/usePegPoolApproval';
 import TokenSymbol from '../../../components/TokenSymbol';
-import usePegPoolWithdrawFee from '../../../hooks/usePegPoolWithdrawFee';
 import { Skeleton } from '@material-ui/lab';
-import usePegPoolWithdraw from '../../../hooks/usePegPoolWithdraw';
 import WithdrawModal from '../../Bank/components/WithdrawModal';
 import { useMediaQuery } from '@material-ui/core';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { formatEther } from 'ethers/lib/utils';
 
+import PegasaurusRewards from './PegasaurusRewards'; 
+import usePegasaurusDeposit from '../../../hooks/Pegasaurus/usePegasaurusDeposit';
+import usePegasaurusApprove from '../../../hooks/Pegasaurus/usePegasaurusApproval';
+import usePegasaurusWithdrawFee from '../../../hooks/Pegasaurus/usePegasaurusWithdrawFee'; 
+import usePegasaurusWithdraw from '../../../hooks/Pegasaurus/usePegasaurusWithdraw'; 
 
 const HomeCardBlue = styled.div`
   background: rgba(217, 238, 254, 0.95);
@@ -32,13 +32,16 @@ const PegasaurusInfo: React.FC<{
   rewardTokens: PegasaurusToken[];
   totalRewardValue: string;
   apr: { daily: string; yearly: string };
+
 }> = ({ Pegasaurus, rewardTokens, totalRewardValue, apr }) => {
-  const tokenBalance = useTokenBalance(Pegasaurus.depositToken);
-  const { onDeposit } = usePegPoolDeposit(Pegasaurus);
-  const { onWithdraw } = usePegPoolWithdraw(Pegasaurus);
-  const [approveStatus, approve] = usePegPoolApprove(Pegasaurus);
-  const { withdrawFeePercent } = usePegPoolWithdrawFee();
- // console.log(pegPool.depositToken)
+
+  const tokenBalance  = useTokenBalance(Pegasaurus.depositToken);
+  console.log(Pegasaurus.depositToken)
+  const { onDeposit } = usePegasaurusDeposit(Pegasaurus);
+  const { onWithdraw } = usePegasaurusWithdraw(Pegasaurus);
+  const [approveStatus, approve] = usePegasaurusApprove(Pegasaurus);
+  const { withdrawFeePercent } = usePegasaurusWithdrawFee();
+  console.log(Pegasaurus.depositToken)
   const [onPresentDeposit, onDismissDeposit] = useModal(
     <DepositModal
       max={tokenBalance}
@@ -51,6 +54,9 @@ const PegasaurusInfo: React.FC<{
       tokenName={Pegasaurus.depositTokenName}
     />,
   );
+  console.log(Pegasaurus.depositTokenName)
+  console.log(Pegasaurus.depositToken.decimal)
+
   
   const useStyles = makeStyles((theme) => ({
     tokenButton: {
@@ -82,7 +88,7 @@ const PegasaurusInfo: React.FC<{
               <Grid container style={{ marginTop: '1px',  justifyContent:'space-between' }}>
                 <Grid item xs={6}>
                     
-                    <TokenSymbol size={60} symbol={'USDC'} />
+                    <TokenSymbol size={60} symbol={'WLRS-USDC-LP'} />
                      
                 </Grid>
                 <Grid item xs={6}>
@@ -140,7 +146,7 @@ const PegasaurusInfo: React.FC<{
       </Grid>
 
       <Grid item>
-        {rewardTokens && <PegPoolRewards rewardTokens={rewardTokens} totalRewardValue={totalRewardValue} apr={apr} />}
+        {rewardTokens && <PegasaurusRewards rewardTokens={rewardTokens} totalRewardValue={totalRewardValue} apr={apr} />}
       </Grid>
     </Grid>
   );

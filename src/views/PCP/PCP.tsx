@@ -4,15 +4,19 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { Box, Container, Typography, Grid, Card, CardContent } from '@material-ui/core';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
-import PegPoolInfo from './components/PegPoolInfo';
-import usePegPool from '../../hooks/usePegPool';
-import usePegPoolRewards from '../../hooks/usePegPoolRewards';
 import TokenSymbol from '../../components/TokenSymbol';
 import CemeteryImage from '../../assets/img/SVG_Icons_and_web_bg/bg.svg';
 import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
+
+import PegPoolInfo from './components/PegPoolInfo';
+import usePegPool from '../../hooks/usePegPool';
+import usePegPoolRewards from '../../hooks/usePegPoolRewards';
+
+import usePegasaurus from '../../hooks/Pegasaurus/usePegasaurus';
 import PegasaurusInfo from './components/PegasaurusInfo';
-import usePegasaurus from '../../hooks/usePegasaurus';
+import usePegasaurusRewards from '../../hooks/Pegasaurus/usePegasaurusRewards'; 
+
 
 const TITLE = 'ames.defi | Peg Pool';
 
@@ -41,6 +45,8 @@ const PCP: React.FC = () => {
   const { pegPool } = usePegPool();
   const { Pegasaurus } = usePegasaurus(); 
   const { rewardTokens, totalRewardValue, apr } = usePegPoolRewards(pegPool);
+  const { rewardTokensPS2, totalRewardValuePS2, aprPS2 } = usePegasaurusRewards(Pegasaurus);
+
 
   return (
 <Switch>
@@ -106,16 +112,17 @@ const PCP: React.FC = () => {
         apr={apr}
       />
     </div>
- {/*   <div
+    {/*
+    <div
       style={{
         marginTop: '35px',}} >
       <PegasaurusInfo
         Pegasaurus={Pegasaurus}
-        rewardTokens={rewardTokens}
-        totalRewardValue={totalRewardValue}
-        apr={apr}
+        rewardTokens={rewardTokensPS2}
+        totalRewardValue={totalRewardValuePS2}
+        apr={aprPS2}
       />
-      </div> */}
+      </div>  */}
 </Box>
 )}
     </Container>

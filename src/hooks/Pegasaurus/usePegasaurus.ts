@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Pegasaurus } from '../tomb-finance/types';
-import useTombFinance from './useTombFinance';
-import useRefresh from './useRefresh';
+import { Pegasaurus } from '../../tomb-finance/types';
+import useTombFinance from '../useTombFinance';
+import useRefresh from '../useRefresh';
 
 const usePegasaurus = () => {
   const bombFinance = useTombFinance();
