@@ -214,11 +214,12 @@ const Lottery: React.FC = () => {
         toToken={grapeFinance.TBOND}
         toTokenName="TBOND"
         priceDesc="SEND ME TO THE LOTTERY"
-       
+       disabled
         onExchange={handleBuyBonds}>
         </ExchangeCard>
         <LotterySubText style={{ textAlign: 'center',  marginTop: '5%', width:'95%', 
-        ...(isDesktop ? { fontSize: '1.2rem' } : { fontSize: '1.0rem'}) }}>Your account: <br />
+        ...(isDesktop ? { fontSize: '1.2rem' } : { fontSize: '1.0rem'}) }}>The Frozen Walrus lottery is now closed. Winners 
+        will be announced shortly! <br /> <br /> Your account: <br />
 
 {account}
 </LotterySubText>
