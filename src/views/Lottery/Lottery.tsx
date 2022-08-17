@@ -164,7 +164,9 @@ const Lottery: React.FC = () => {
 
        {/* Total Lottery entries: {Number(raffleBals)} <br /> */}
         Your WLRS tokens entered: {Number(userBals)} <br /> 
-        Your Lottery entries: {Number((userBals))/(5)} <br /> 
+        Your Lottery entries: {Number((userBals))/(5)} <br /> <br />
+        Should you have any issues 
+      sending WLRS via the modal below, you can send WLRS directly to the Lottery address, found <a href="https://snowtrace.io/address/0x4b8d4EAe1Bff52113d7DA8a7103e6fF9f2611A86">here!</a>
         </h2>
 </BondCard>
 </Grid>
@@ -186,7 +188,7 @@ const Lottery: React.FC = () => {
         ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
 
       <i>What are current prizes?<br /></i>
-      The next Lottery opens 11 August at 1900 UTC and runs until 17 August at 1900 UTC. Three winners will be selected, earning $1000 USDC each!  <br />
+      The next Lottery opens 11 August at 1900 UTC and runs until 17 August at 1900 UTC. Three winners will be selected, earning $1000 USDC each! <br />
       </h2>
 </HomeCardPurple>
 </Grid>
@@ -197,7 +199,7 @@ const Lottery: React.FC = () => {
         ...(isDesktop ? { fontSize: '1.3rem' } : { fontSize: '1.1rem'}) }}>
       <i>How do I enter? <br /> </i>
       Click the "Enter Lottery" button below and send at least 5 WLRS. 5 WLRS = 1 Lottery entry. The more 
-      entries you have, the greater your chances are to win!  
+      entries you have, the greater your chances are to win! 
       
 </h2>
 </HomeCardBlue>
