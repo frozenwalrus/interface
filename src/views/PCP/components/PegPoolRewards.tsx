@@ -151,7 +151,7 @@ console.log(apr);
                       <Grid item>
                         <Button
                           className={hasRewards ? 'shinyButtonSecondary' : 'shinyButtonDisabled'}
-                          disabled={!hasRewards}
+                       //   disabled={!hasRewards}
                           onClick={onCompound}
                         >
                           Claim
@@ -166,7 +166,7 @@ console.log(apr);
               <Button
                 className={hasRewards ? 'shinyButtonSecondary' : 'shinyButtonDisabled'}
                 fullWidth={true}
-                disabled={!hasRewards}
+            //    disabled={!hasRewards}
                 onClick={handleClaim}
               >
                 Claim All
