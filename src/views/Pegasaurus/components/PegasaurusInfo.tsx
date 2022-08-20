@@ -101,8 +101,8 @@ const PegasaurusInfo: React.FC<{
                  
                   <Button
                     color="primary"
-                    
-                    disabled={!Pegasaurus.depositsEnabled}
+                    disabled
+                 //   disabled={!Pegasaurus.depositsEnabled}
                     onClick={approve}
                     fullWidth={true}
                   >
@@ -111,8 +111,8 @@ const PegasaurusInfo: React.FC<{
                 ) : (
                   <Button
                     className="tokenButton"
-                     
-                   disabled={!Pegasaurus.depositsEnabled}
+                     disabled
+             //      disabled={!Pegasaurus.depositsEnabled}
                     onClick={onPresentDeposit}
                     fullWidth={true}
                   >
