@@ -57,6 +57,7 @@ const usePegPoolRewards = (pegPool: PegPool) => {
       console.log(daily) 
       
       const yearly = (totalDollarValuePerYear / Number(pegPool.totalDesposits)) * 100;
+      console.log(yearly)
 
       setApr({
         daily: ethers.utils.commify(Number.isFinite(daily) ? daily.toFixed(2) : '0'),

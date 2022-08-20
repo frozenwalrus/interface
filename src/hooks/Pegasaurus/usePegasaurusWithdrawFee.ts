@@ -18,7 +18,7 @@ const usePegasaurusWithdrawFee = () => {
         return;
       }
 
-      const brackets = [1.25, 1.2, 1.15, 1.10, 1.05, 1.00, 0.9, 0.8, 0.7];
+      const brackets = [1.25, 1.2, 1.15, 1.10, 1.05, 1.00, 0.9, 0.8, 0.7, 0.6];
       for (let i = 0; i < brackets.length; i++) {
         if (twapNum >= brackets[i]) {
           setWithdrawFeePercent(Number(((1.25 - brackets[i]) * 100).toFixed(2)));

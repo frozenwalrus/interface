@@ -18,7 +18,7 @@ const usePegasaurusDeposit = (pool: Pegasaurus) => {
           refreshPool();
           return tx;
         }),
-        `Deposit ${Number(amount).toFixed(2)} ${pool.depositTokenName} to pool`,
+        `Deposit ${Number(amount).toFixed(8)} ${pool.depositTokenName} to pool`,
       );
     },
     [pool, bombFinance, handleTransactionReceipt],

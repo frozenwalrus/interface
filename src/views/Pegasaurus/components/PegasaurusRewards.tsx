@@ -7,9 +7,6 @@ import { black } from '../../../theme/colors';
 import styled from 'styled-components';
 
 import { PegasaurusToken } from '../../../tomb-finance/types';
-import usePegPoolCompound from '../../../hooks/usePegPoolCompound';
-import usePegPoolRewardsClaim from '../../../hooks/usePegPoolRewardsClaim';
-import usePegPoolWithdrawFee from '../../../hooks/usePegPoolWithdrawFee';
 
 import usePegasaurusCompound from '../../../hooks/Pegasaurus/usePegasaurusCompound';
 import usePegasaurusRewardsClaim from '../../../hooks/Pegasaurus/usePegasaurusRewardsClaim';

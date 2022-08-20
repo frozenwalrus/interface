@@ -41,7 +41,7 @@ const PegasaurusInfo: React.FC<{
   const { onWithdraw } = usePegasaurusWithdraw(Pegasaurus);
   const [approveStatus, approve] = usePegasaurusApprove(Pegasaurus);
   const { withdrawFeePercent } = usePegasaurusWithdrawFee();
-  console.log(Pegasaurus.depositToken)
+  // console.log(Pegasaurus.withdrawFeePercent)
   const [onPresentDeposit, onDismissDeposit] = useModal(
     <DepositModal
       max={tokenBalance}
@@ -93,7 +93,9 @@ const PegasaurusInfo: React.FC<{
                 </Grid>
                 <Grid item xs={6}>
                 <h2 style={{ textAlign: 'center', }}> Your Deposits:</h2>
-                  <h2 style={{ textAlign: 'right' }} > {Pegasaurus.userInfo?.amountDeposited}</h2>
+                  <h2 style={{ textAlign: 'right' }} > 
+                  {(Number(Pegasaurus.userInfo?.amountDeposited) * 10**6).toFixed(8)  + 'µ'}
+                  </h2>
                 </Grid>
               </Grid>
               <Grid container  style={{ marginTop: '20px', justifyContent:'center', alignItems: 'center' }}>
@@ -101,8 +103,8 @@ const PegasaurusInfo: React.FC<{
                  
                   <Button
                     color="primary"
-                    disabled
-                 //   disabled={!Pegasaurus.depositsEnabled}
+                    
+                    disabled={!Pegasaurus.depositsEnabled}
                     onClick={approve}
                     fullWidth={true}
                   >
@@ -111,8 +113,8 @@ const PegasaurusInfo: React.FC<{
                 ) : (
                   <Button
                     className="tokenButton"
-                     disabled
-             //      disabled={!Pegasaurus.depositsEnabled}
+                     
+                   disabled={!Pegasaurus.depositsEnabled}
                     onClick={onPresentDeposit}
                     fullWidth={true}
                   >

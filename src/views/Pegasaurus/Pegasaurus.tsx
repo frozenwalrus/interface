@@ -96,7 +96,7 @@ console.log(Pegasaurus)
       </h2> 
   <h2 style={{ textTransform: 'capitalize', fontSize: '2rem', marginTop: '20px', textAlign: 'center' }}>
   
-      Total Value Locked: ${Number(Pegasaurus.totalDesposits)}
+      Total Value Locked: ${Number(Pegasaurus.totalDesposits) * 10**6}
         </h2> 
   </div>
   </HomeCard>

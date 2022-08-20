@@ -39,24 +39,27 @@ const usePegasaurusRewards = (Pegasaurus: Pegasaurus) => {
         console.log(amountPerYear); 
       });
 
-      const dailyTrimmed = Number(
-        Number(Pegasaurus.totalDesposits).toFixed(8)
-      )
+      const dailyTrimmed = 
+        Number(Number(Pegasaurus.totalDesposits))
       console.log(dailyTrimmed)
       
+      const dailyTrimmed2 = 
+      Number(Number(dailyTrimmed)  * 10**6).toFixed(8)
+      console.log(dailyTrimmed2)
+    
       const perDay = Number(
-        totalDollarValuePerDay.toFixed(8)
-      )
+        totalDollarValuePerDay.toFixed(8))
       console.log(perDay)
 
       const balanceOfPool = Number(
-        Number(Pegasaurus.totalDesposits).toFixed(8))
+        Number(Number(Pegasaurus.totalDesposits)* 10**6).toFixed(8))
       console.log(balanceOfPool)
-
-      const daily = (perDay / dailyTrimmed) * 100;
-      console.log(daily) 
-      
-      const yearly = (totalDollarValuePerYear / Number(Pegasaurus.totalDesposits)) * 100;
+// balance of pool and daily trimmed 2 are the same 
+    //  const daily = (perDay / Number(dailyTrimmed2)) * 100;
+    // console.log(daily) 
+    const daily = ((totalDollarValuePerYear / Number(balanceOfPool)) * 100) / 365;
+ //   const yearly = (totalDollarValuePerYear / Number(Pegasaurus.totalDesposits)) * 100;
+    const yearly = (totalDollarValuePerYear / Number(balanceOfPool)) * 100;
 
       setAprPS2({
         daily: ethers.utils.commify(Number.isFinite(daily) ? daily.toFixed(2) : '0'),

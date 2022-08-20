@@ -13,9 +13,6 @@ import PegPoolInfo from './components/PegPoolInfo';
 import usePegPool from '../../hooks/usePegPool';
 import usePegPoolRewards from '../../hooks/usePegPoolRewards';
 
-import usePegasaurus from '../../hooks/Pegasaurus/usePegasaurus';
-import PegasaurusInfo from './components/PegasaurusInfo';
-import usePegasaurusRewards from '../../hooks/Pegasaurus/usePegasaurusRewards'; 
 
 
 const TITLE = 'ames.defi | Peg Pool';
@@ -43,10 +40,7 @@ const PCP: React.FC = () => {
   const { account } = useWallet();
   const { path } = useRouteMatch();
   const { pegPool } = usePegPool();
-  const { Pegasaurus } = usePegasaurus(); 
   const { rewardTokens, totalRewardValue, apr } = usePegPoolRewards(pegPool);
-  const { rewardTokensPS2, totalRewardValuePS2, aprPS2 } = usePegasaurusRewards(Pegasaurus);
-console.log(Pegasaurus)
 
   return (
 <Switch>
@@ -76,7 +70,7 @@ console.log(Pegasaurus)
         </h2>
         <h2 style={{ textTransform: 'none', fontSize: '1.5rem', fontWeight: 'bold', marginTop: '10px', 
         textAlign: 'center' }}>
-        Deposit USDC.e and get WSHARE and AVAX Rewards
+        Deposit USDC.e and get AVAX Rewards
         </h2>
 
     <Grid
@@ -85,9 +79,7 @@ console.log(Pegasaurus)
         style={{
           marginTop: '5px',
           justifyContent: 'center' }} >               
-        <Grid item>
-          <TokenSymbol size={72} symbol={'WSHARE'} />
-        </Grid>
+        
         <Grid item>
           <TokenSymbol size={72} symbol={'WAVAX'} />
         </Grid>              
@@ -112,20 +104,7 @@ console.log(Pegasaurus)
         apr={apr}
       />
   </div> 
-    
-   {/*
-    <div
-      style={{
-        marginTop: '35px',}} >
-      <PegasaurusInfo
-        Pegasaurus={Pegasaurus}
-        rewardTokens={rewardTokensPS2}
-        totalRewardValue={totalRewardValuePS2}
-        apr={aprPS2}
-      />
-      </div>  
-      */}
-
+      
 </Box>
 )}
     </Container>

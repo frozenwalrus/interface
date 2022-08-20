@@ -39,5 +39,4 @@ const usePegPoolWithdrawFee = () => {
 
   return { withdrawFeePercent };
 };
-
 export default usePegPoolWithdrawFee;

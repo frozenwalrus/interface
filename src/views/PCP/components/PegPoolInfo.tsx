@@ -40,6 +40,7 @@ const PegPoolInfo: React.FC<{
   const [approveStatus, approve] = usePegPoolApprove(pegPool);
   const { withdrawFeePercent } = usePegPoolWithdrawFee();
  // console.log(pegPool.depositToken)
+ console.log(withdrawFeePercent)
   const [onPresentDeposit, onDismissDeposit] = useModal(
     <DepositModal
       max={tokenBalance}
