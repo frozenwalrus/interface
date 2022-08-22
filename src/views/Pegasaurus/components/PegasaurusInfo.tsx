@@ -25,7 +25,6 @@ const HomeCardBlue = styled.div`
   box-shadow: 6px 6px 12px black; 
   padding: 20px; 
   color: #4b4453;
-  height: 25vw; 
 `;
 const PegasaurusInfo: React.FC<{
   Pegasaurus: Pegasaurus;

@@ -25,7 +25,6 @@ const HomeCardBlue = styled.div`
   box-shadow: 6px 6px 12px black; 
   padding: 20px; 
   color: #4b4453;
-  height: 100%; 
    
 `;
 const PegPoolInfo: React.FC<{
@@ -145,7 +144,7 @@ const PegPoolInfo: React.FC<{
         </HomeCardBlue>
       </Grid>
 
-      <Grid item>
+      <Grid item xs={12} sm={6} lg={4}>
         {rewardTokens && <PegPoolRewards rewardTokens={rewardTokens} totalRewardValue={totalRewardValue} apr={apr} />}
       </Grid>
     </Grid>
