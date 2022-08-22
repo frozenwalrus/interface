@@ -145,14 +145,14 @@ console.log(apr);
               );
             })}
             <Grid container style={{ marginTop: '30px' }}>
-              <Button
+            {/*  <Button
                 className={hasRewards ? 'shinyButtonSecondary' : 'shinyButtonDisabled'}
                 fullWidth={true}
             //    disabled={!hasRewards}
                 onClick={handleClaim}
               >
                 Claim All
-              </Button>
+          </Button> */}
               <i>
               <h2 style={{marginTop: '2%', fontSize: '0.8rem'}}>
                 Rewards can be claimed at all times with no fees. Should you experience an issue claiming, 
