@@ -19,6 +19,7 @@ const HomeCardPurple = styled.div`
   box-shadow: 6px 6px 12px black; 
   padding: 20px; 
   color: #4b4453;
+  height: 25vw; 
 `;
 const PegasaurusRewards: React.FC<{
   rewardTokens: PegasaurusToken[];
@@ -49,49 +50,31 @@ console.log(apr);
   }, [rewardTokens]);
 
   return (
+    <Grid container spacing={3} style={{ justifyContent: 'center', alignItems: 'center',  }}>
+    <Grid item xs={12} sm={12}>
     <HomeCardPurple >
       <CardContent>
-        <Box style={{ width: '376px' }}>
-          <Grid container>
-            <Grid item xs={12}>
-              <h2 style={{textAlign: 'center', color: 'black',  }}>
-                Your Total Rewards
+      <h2 style={{textAlign: 'center', marginBottom: '8%' }}> CLAIM REWARDS</h2>
+      
+        <Grid container style={{ marginTop: '1px',  justifyContent:'center', alignItems: 'center', }}>   
+        <div  style={{ justifyContent: 'center', alignItems:'center'}}>
+                      <TokenSymbol size={72} symbol={'WSHARE'} /> <br />
+                     
+                </div>        
+          <Grid item xs={12} style={{ marginTop: '10px'}}>
+              <h2 style={{ textAlign: 'center', fontSize: '0.8 rem' }}> Your Total Rewards:</h2> 
+              <h2 style={{ textAlign: 'center', fontSize: '24px', }} >
+              ${totalRewardValue}
               </h2>
-            </Grid>
-            <Grid item xs={12}>
-              <h2 style={{ textAlign: 'center', fontSize: '24px', color: 'black' }} >
-                ${totalRewardValue}
-              </h2>
-            </Grid>
           </Grid>
-          
-          <Grid
-            container
-            
-            style={{
-              fontWeight: 500,
-              color: black, 
-              marginTop: '15px',
-              justifyContent:'space-between'
-            }}
-          >
-            Daily APR:
-        <Grid item>{withdrawFeePercent == 0 ? 0 : apr.daily}%</Grid> 
+        </Grid>
+        <Grid container style={{ marginTop: '10px', justifyContent:'space-between'}}>
+          <Grid item xs={12} style={{ marginTop: '5px'}}>
+            <h2 style={{ textAlign:'center', fontSize: '1rem' }}> Daily APR: {withdrawFeePercent == 0 ? 0 : apr.daily}% </h2> 
+            <h2  style={{ textAlign:'center', fontSize: '1rem' }}> Yearly APR: {withdrawFeePercent == 0 ? 0 : apr.yearly}% </h2> 
           </Grid>
-          <Grid
-            container
-            
-            style={{
-              fontWeight: 500,
-              marginTop: '5px',
-              justifyContent:'space-between', 
-              color: 'black', 
-            }}
-          >
-            Yearly APR:
-         <Grid item>{withdrawFeePercent == 0 ? 0 : apr.yearly}%</Grid> 
-          </Grid> 
-          <Grid container style={{ justifyContent:'center', alignItems:'center', marginTop: '20px' }}>
+        </Grid>
+        <Grid container style={{ justifyContent:'center', alignItems:'center', marginTop: '5px' }}>
             {rewardTokens?.map((token, i) => {
               return (
                 <Grid
@@ -99,10 +82,10 @@ console.log(apr);
                   key={i} 
                   style= {{justifyContent:'space-between', 
                   alignItems:'center', color: black, 
-                  marginTop:'35px' }}
+                  marginTop:'15px' }}
                 >
                   <Grid item xs={1}>
-                    <TokenSymbol size={45} symbol={token.name} />
+                    <TokenSymbol size={38} symbol={token.name} />
                   </Grid>
                   <Grid item xs={1}>
                     <Typography
@@ -129,40 +112,7 @@ console.log(apr);
                     <h2 style={{ textAlign: 'right', fontSize: '20px' }}> {token.amount}</h2>
                     <h2  style={{ textAlign: 'right', fontSize: '20px'}}> ${token.pendingValue}</h2>
                   </Grid>
-                  {token.canCompound && (
-                    <Grid container  style={{ marginTop: '5px', justifyContent:'flex-end'}}>
-                      <Grid item>
-                        <span
-                          style={{
-                            display: 'inline-block',
-                            margin: '4px',
-                            border: '1px solid black',
-                            borderRadius: '50%',
-                            height: '15px',
-                            width: '15px',
-                            background: 'lightgray',
-                            textAlign: 'center',
-                            fontSize: '12px',
-                            cursor: 'pointer',
-                          }}
-                          data-tip="*Compound deposit result subject to DEX fees/slippage"
-                        >
-                          !
-                        </span>
-
-                        <ReactTooltip />
-                      </Grid>
-                      <Grid item>
-                        <Button
-                          className={hasRewards ? 'shinyButtonSecondary' : 'shinyButtonDisabled'}
-                          disabled={!hasRewards}
-                          onClick={onCompound}
-                        >
-                          Claim
-                        </Button>
-                      </Grid>
-                    </Grid>
-                  )}
+                  
                 </Grid>
               );
             })}
@@ -173,13 +123,14 @@ console.log(apr);
                 disabled={!hasRewards}
                 onClick={handleClaim}
               >
-                Claim All
+                Claim 
               </Button>
             </Grid>
           </Grid>
-        </Box>
       </CardContent>
     </HomeCardPurple>
+  </Grid>
+  </Grid>
   );
 };
 

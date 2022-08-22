@@ -13,20 +13,36 @@ import { getDisplayBalance } from '../../utils/formatBalance';
 import useTokenBalance from '../../hooks/useTokenBalance';
 // import useCashStat from '../../hooks/useCashPriceInEstimatedTWAP.ts';
 import styled from 'styled-components';
+import usePegasaurus from '../../hooks/Pegasaurus/usePegasaurus';
+import usePegasaurusRewards from '../../hooks/Pegasaurus/usePegasaurusRewards';
 
 const HomeCardPurple = styled.div`
   background: rgba(214, 211, 242, 0.9);
   border-radius: 50px;
-  box-shadow: 6px 6px 12px black; 
-  padding: 20px; 
+  box-shadow: 0px 0px 18px black; 
+  padding: 25px; 
   color: #4b4453;
+  height: 15vw; 
 `;
 const HomeCardBlue = styled.div`
   background: rgba(217, 238, 254, 0.95);
   border-radius: 50px;
-  box-shadow: 6px 6px 12px black; 
+  box-shadow: 0px 0px 18px black; 
+  padding: 25px; 
+  color: #4b4453;
+  height: 15vw; 
+   
+`;
+const HomeCardPegasaurus = styled.div`
+  background: rgba(217, 238, 254, 0.95);
+  border-radius: 50px;
+  box-shadow:
+  0 0 8px 3px #fff,  /* inner white */
+  0 0 12px 7px #a97ddb, /* middle magenta */
+  0 0 16px 11px #0ff; /* outer cyan */
   padding: 20px; 
   color: #4b4453;
+  height: 15vw; 
    
 `;
 const CemeteryCard = () => {
@@ -42,6 +58,8 @@ const CemeteryCard = () => {
   const tombFinance = useTombFinance();
   const tombBank = useBank('WlrsUsdcLPWShareRewardPool');
   const tombStatsOnPool = useStatsForPool(tombBank);
+  const { Pegasaurus } = usePegasaurus(); 
+  const { rewardTokensPS2, totalRewardValuePS2, aprPS2 } = usePegasaurusRewards(Pegasaurus);
 
   const tShareBank = useBank('WShareUsdcLPWShareRewardPool');
   const tShareStatsOnPool = useStatsForPool(tShareBank);
@@ -108,6 +126,52 @@ const CemeteryCard = () => {
       </CardActions>
     </HomeCardBlue>
   </Grid>
+<Grid item xs={12} md={4} lg={4}>
+    <HomeCardPegasaurus>
+      <CardContent mt={0}
+        style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center' }} >
+        <div>
+       
+        <Typography variant="h5" component="h2">
+          PEG DEFENDER <br />
+            WLRS-USDC.e LP
+          </Typography>
+          <TokenSymbol size={60} symbol="WLRS-USDC-LP" />
+        </div>
+        <div>
+          
+          <span style={{ fontSize: '18px' }}>
+            {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} WLRS /{' '}
+            {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} USDC.e
+          </span>
+  
+          <Box>${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}</Box>
+          <span style={{ fontSize: '12px' }}>
+            APR: {aprPS2?.yearlyAPR ? aprPS2?.yearlyAPR : '----.--'}%
+          </span>
+        </div>
+      </CardContent>
+      <CardActions style={{ justifyContent: 'center' }}>
+        <Button
+          color="primary"
+          style={{ width: '150px', height: '45px', marginBottom: '2%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
+          variant="contained"
+          component={Link}
+          to={`/pegdefender`}
+        >
+          Farm
+        </Button>
+        <Button
+          color="primary"
+          target="_blank"
+          style={{ width: '150px', height: '45px', marginBottom: '2%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
+          variant="contained"
+          href="https://traderjoexyz.com/pool/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/0x395908aeb53d33A9B8ac35e148E9805D34A555D3#/" >
+          Add Liquidity
+        </Button>
+      </CardActions>
+    </HomeCardPegasaurus>
+  </Grid>
 
   <Grid item xs={12} md={4} lg={4}>
     <HomeCardBlue>
@@ -158,7 +222,7 @@ const CemeteryCard = () => {
   </Grid>
 
   <Grid item xs={12} md={4} lg={4}>
-    <HomeCardBlue>
+    <HomeCardPurple>
       <CardContent
         style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center' }}
       >
@@ -208,11 +272,10 @@ const CemeteryCard = () => {
           Add Liquidity
         </Button>
       </CardActions>
-    </HomeCardBlue>
+    </HomeCardPurple>
   </Grid>
 
   
-  <Grid item xs={12} md={2} />
 
   <Grid item xs={12} md={4} lg={4}>
     <HomeCardPurple>
@@ -316,7 +379,6 @@ const CemeteryCard = () => {
       </CardActions>
     </HomeCardPurple>
   </Grid> 
-  <Grid item xs={12} md={2} />
 
             
   {/* <Grid item xs={12} sm={6}>

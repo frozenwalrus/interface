@@ -12,6 +12,7 @@ import usePegasaurus from '../../hooks/Pegasaurus/usePegasaurus';
 import PegasaurusInfo from './components/PegasaurusInfo';
 import usePegasaurusRewards from '../../hooks/Pegasaurus/usePegasaurusRewards'; 
 import tvl from '../../assets/img/tvl.png'; 
+import { AlignCenter } from 'react-feather';
 
 
 const TITLE = 'ames.defi | Peg Pool';
@@ -34,9 +35,42 @@ border-radius: 50px;
   box-shadow: 6px 6px 12px black; 
   color: #4b4453;
 `;
- const Element = styled.div`
-  flex-direction: column;
-`; 
+const HomeCardPurple = styled.div`
+  background: rgba(214, 211, 242, 0.8);
+  border-radius: 50px;
+  box-shadow: 6px 6px 12px black; 
+  padding: 20px; 
+  color: #4b4453;
+`;
+
+const HomeCardBlue = styled.div`
+  background: rgba(217, 238, 254, 0.95);
+  border-radius: 50px;
+  box-shadow: 6px 6px 12px black; 
+  padding: 20px; 
+  color: #4b4453;
+`;
+
+const HomeCardPegasaurus = styled.div`
+background: rgba(217, 238, 254, 0.95);
+border-radius: 50px;
+box-shadow: 0px 0px 12px black; 
+padding: 20px; 
+color: #4b4453;
+   
+`;
+
+const HomeCardPegasaurus2 = styled.div`
+background: rgba(217, 238, 254, 0.95);
+border-radius: 50px;
+box-shadow:
+0 0 8px 3px #fff,  /* inner white */
+0 0 12px 7px #f0f, /* middle magenta */
+0 0 16px 11px #0ff; /* outer cyan */
+padding: 20px; 
+color: #4b4453;
+   
+`;
 
 
 const Pegasaurus: React.FC = () => {
@@ -52,54 +86,48 @@ console.log(Pegasaurus)
   <Page>
     <Route exact path={path}>
     <BackgroundImage />
-       
-         <h2 style={{ textAlign: 'center', fontSize: '2.5rem' }}>PEG DEFENDER </h2>
-         
+         <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '5px' }}>PEG DEFENDER </h2>
       {!!account ? (
         <Container maxWidth="xl">
           <div></div>
           
           {Pegasaurus && rewardTokensPS2 &&  (
                 
-<Box mt={3}>
-  <HomeCard>
-  <Grid container style={{ justifyContent: 'center', alignItems: 'center' }} >
-        <Grid item>
-          <TokenSymbol size={120} symbol={'WLRS'} />
-        </Grid>
-  </Grid>
-  <div>
-        <h2 style={{ textTransform: 'none', fontSize: '2.0rem', fontWeight: 'bold', marginTop: '10px', 
+<Grid container spacing={3} direction="column" style= {{alignItems: "center", justifyContent: "center", marginTop:"2px"}} >
+  <Grid item xs={12} lg={7} style={{alignItems: "center", justifyContent: "center"}}>
+    <HomeCard>
+    <Grid container spacing={2} style= {{marginTop: '5px', justifyContent: 'center'}}>           
+      <Grid item>
+        <TokenSymbol size={100} symbol={'WLRS-USDC-LP'} />
+      </Grid>            
+    </Grid>
+    <div>
+        <h2 style={{ textTransform: 'none', fontSize: '1.5rem', fontWeight: 'bold', marginTop: '5px', 
         textAlign: 'center' }}>
           WLRS Peg Defender! <br /> 
         </h2>
-       
-        <h2 style={{ textTransform: 'none', fontSize: '1.5rem', fontWeight: 'bold', marginTop: '10px', 
+        <h2 style={{ textTransform: 'none', fontSize: '1.3rem', marginTop: '5px', 
         textAlign: 'center' }}>
         Deposit WLRS-USDC-LP and earn WSHARE Rewards
         </h2>
 
-    <Grid
-        container
-        spacing={2}
-        style={{
-          marginTop: '5px',
-          justifyContent: 'center' }} >               
-        <Grid item>
+    <Grid container spacing={2} style={{marginTop: '5px', justifyContent: 'center', alignItems: 'center' }} >               
+        <Grid item style={{ textAlign:'center', alignItems: 'center', justifyContent: 'center'}}>
           <TokenSymbol size={72} symbol={'WSHARE'} />
-        </Grid>
-                
-  </Grid>
-  <h2 style={{ marginTop: '20px', textAlign: 'center'  }}>
-      Withdrawal fees are based on TWAP. Fees decrease the higher WLRS price goes, ceasing at 1.25 TWAP. Read about the general principles of
-      the Peg Campaign Pool <StyledLink href="https://docs.frozenwalrus.finance/protocol-information/pcp-campaign">here! </StyledLink>
-      </h2> 
-  <h2 style={{ textTransform: 'capitalize', fontSize: '2rem', marginTop: '20px', textAlign: 'center' }}>
-  
-      Total Value Locked: ${Number(Pegasaurus.totalDesposits) * 10**6}
+        </Grid>        
+    </Grid>
+    <h2 style={{ marginTop: '12px', textAlign: 'center', fontSize: '1.0rem',   }}>
+        Withdrawal fees are based on TWAP. Fees decrease as WLRS increases, and are eliminated at 1.25 TWAP. More information 
+        will be included in our documentation before the Peg Defender is opened! 
         </h2> 
+    <h2 style={{ textTransform: 'capitalize', fontSize: '1.5rem', marginTop: '15px', textAlign: 'center' }}>
+      Total Value Locked: ${Number(Pegasaurus.totalDesposits) * 10**6}
+    </h2> 
   </div>
   </HomeCard>
+</Grid>
+
+<Grid container spacing={3} style={{alignItems: 'center', justifyContent: 'center',  }}>
     <div
       style={{
         marginTop: '35px',}} >
@@ -110,9 +138,9 @@ console.log(Pegasaurus)
         apr={aprPS2}
       />
       </div>  
-      
+</Grid>
 
-</Box>
+</Grid>
 )}
     </Container>
           ) : (

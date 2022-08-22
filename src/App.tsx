@@ -33,7 +33,7 @@ const Lottery = lazy(() => import('./views/Lottery'));
 const NodeLeaderboard = lazy(() => import('./views/NodeLeaderboard')); 
 const Media = lazy(() => import('./views/Media')); 
 const PCP = lazy(() => import('./views/PCP')); 
-const Pegasaurus = lazy(() => import('./views/Pegasaurus')); 
+const PegDefender = lazy(() => import('./views/Pegasaurus')); 
 
 
 
@@ -100,8 +100,8 @@ const App: React.FC = () => {
             <Route path="/pcp">
               <PCP /> 
           </Route> 
-          <Route path="/pegasaurus">
-              <Pegasaurus /> 
+          <Route path="/pegdefender">
+              <PegDefender /> 
           </Route>
             <Route path="/leaderboard">
               <NodeLeaderboard /> 
