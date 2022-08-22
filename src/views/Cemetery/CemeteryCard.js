@@ -22,7 +22,6 @@ const HomeCardPurple = styled.div`
   box-shadow: 0px 0px 18px black; 
   padding: 25px; 
   color: #4b4453;
-  height: 15vw; 
 `;
 const HomeCardBlue = styled.div`
   background: rgba(217, 238, 254, 0.95);
@@ -30,7 +29,6 @@ const HomeCardBlue = styled.div`
   box-shadow: 0px 0px 18px black; 
   padding: 25px; 
   color: #4b4453;
-  height: 15vw; 
    
 `;
 const HomeCardPegasaurus = styled.div`
@@ -42,7 +40,6 @@ const HomeCardPegasaurus = styled.div`
   0 0 16px 11px #0ff; /* outer cyan */
   padding: 20px; 
   color: #4b4453;
-  height: 15vw; 
    
 `;
 const CemeteryCard = () => {

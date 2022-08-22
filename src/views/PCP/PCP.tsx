@@ -1,14 +1,13 @@
 import React from 'react';
 import { useWallet } from 'use-wallet';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { Box, Container, Typography, Grid, Card, CardContent } from '@material-ui/core';
+import { Box, Container, Typography, Grid, Card, CardContent, useMediaQuery } from '@material-ui/core';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 import TokenSymbol from '../../components/TokenSymbol';
 import CemeteryImage from '../../assets/img/SVG_Icons_and_web_bg/bg.svg';
 import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
-
 import PegPoolInfo from './components/PegPoolInfo';
 import usePegPool from '../../hooks/usePegPool';
 import usePegPoolRewards from '../../hooks/usePegPoolRewards';
@@ -47,53 +46,48 @@ const PCP: React.FC = () => {
   <Page>
     <Route exact path={path}>
     <BackgroundImage />
-      <div>
-         <h2 style={{ textAlign: 'center', fontSize: '2.5rem' }}>PEG CAMPAIGN POOL</h2>
-      </div>
+    <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '5px' }}>PEG CAMPAIGN POOL </h2>
       {!!account ? (
         <Container maxWidth="xl">
           <div></div>
           
           {pegPool && rewardTokens &&  (
                 
-<Box mt={3}>
+<Grid container spacing={3} direction="column" style= {{alignItems: "center", justifyContent: "center", marginTop:"2px"}} >
+<Grid item xs={12} lg={7} style={{alignItems: "center", justifyContent: "center"}}>
   <HomeCard>
-  <Grid container style={{ justifyContent: 'center', alignItems: 'center' }} >
-        <Grid item>
-          <TokenSymbol size={120} symbol={'WLRS'} />
-        </Grid>
+  <Grid container spacing={2} style= {{marginTop: '5px', justifyContent: 'center'}}>           
+      <Grid item>
+          <TokenSymbol size={100} symbol={'WLRS'} />
+      </Grid>
   </Grid>
   <div>
         <h2 style={{ textTransform: 'none', fontSize: '2.0rem', fontWeight: 'bold', marginTop: '10px', 
         textAlign: 'center' }}>
           WLRS Peg Campaign Pool! <br /> 
         </h2>
-        <h2 style={{ textTransform: 'none', fontSize: '1.5rem', fontWeight: 'bold', marginTop: '10px', 
+        <h2 style={{ textTransform: 'none', fontSize: '1.3rem', marginTop: '5px', 
         textAlign: 'center' }}>
         Deposit USDC.e and get AVAX Rewards
         </h2>
 
-    <Grid
-        container
-        spacing={2}
-        style={{
-          marginTop: '5px',
-          justifyContent: 'center' }} >               
-        
-        <Grid item>
-          <TokenSymbol size={72} symbol={'WAVAX'} />
+        <Grid container spacing={2} style={{marginTop: '5px', justifyContent: 'center', alignItems: 'center' }} >               
+          <Grid item style={{ textAlign:'center', alignItems: 'center', justifyContent: 'center'}}>
+            <TokenSymbol size={72} symbol={'WAVAX'} />
         </Grid>              
   </Grid>
-  <h2 style={{ marginTop: '20px', textAlign: 'center'  }}>
+  <h2 style={{ marginTop: '12px', textAlign: 'center', fontSize: '1.0rem',   }}>
       Withdrawal fees are based on TWAP, with fees decreasing the closer WLRS is to peg. Read about 
       the Peg Campaign Pool <StyledLink href="https://docs.frozenwalrus.finance/protocol-information/pcp-campaign">here! </StyledLink>
       </h2> 
-  <h2 style={{ textTransform: 'capitalize', fontSize: '2rem', marginTop: '20px', textAlign: 'center' }}>
-  
+      <h2 style={{ textTransform: 'capitalize', fontSize: '1.5rem', marginTop: '15px', textAlign: 'center' }}>  
       Total Value Locked: ${Number(pegPool.totalDesposits)}
-        </h2> 
+      </h2> 
   </div>
   </HomeCard>
+</Grid>
+
+<Grid container spacing={3} style={{alignItems: 'center', justifyContent: 'center',  }}>
    <div
      style={{
         marginTop: '35px',}} >
@@ -104,8 +98,9 @@ const PCP: React.FC = () => {
         apr={apr}
       />
   </div> 
-      
-</Box>
+  </Grid>
+   
+</Grid>
 )}
     </Container>
           ) : (

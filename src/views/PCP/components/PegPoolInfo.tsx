@@ -25,6 +25,7 @@ const HomeCardBlue = styled.div`
   box-shadow: 6px 6px 12px black; 
   padding: 20px; 
   color: #4b4453;
+  height: 100%; 
    
 `;
 const PegPoolInfo: React.FC<{
@@ -56,11 +57,15 @@ const PegPoolInfo: React.FC<{
   
   const useStyles = makeStyles((theme) => ({
     tokenButton: {
-        fontSize: '1.2rem',
-        padding: '5px', 
+        fontSize: '1.0rem',
+        padding: '6px', 
         borderRadius: '12px !important', 
+        backgroundColor: '#4b4453'
       },
   }));
+
+ const classes = useStyles(); 
+
 
   const [onPresentWithdraw, onDismissWithdraw] = useModal(
     <WithdrawModal
@@ -76,28 +81,28 @@ const PegPoolInfo: React.FC<{
   );
 
   return (
-    <Grid container style={{ justifyContent: 'space-evenly' }}>
-      <Grid item>
+    <Grid container spacing={3} style={{ justifyContent: 'center', alignItems: 'center',  }}>
+      <Grid item xs={12} sm={6} lg={4}>
         <HomeCardBlue >
           <CardContent>
-            <Box style={{ width: '376px' }}>
-              <Grid container style={{ marginTop: '1px',  justifyContent:'space-between' }}>
-                <Grid item xs={6}>
-                    
-                    <TokenSymbol size={60} symbol={'USDC'} />
-                     
-                </Grid>
-                <Grid item xs={6}>
-                <h2 style={{ textAlign: 'center', }}> Your Deposits:</h2>
-                  <h2 style={{ textAlign: 'right' }} > {pegPool.userInfo?.amountDeposited}</h2>
-                </Grid>
+          <h2 style={{textAlign: 'center', marginBottom: '8%' }}> DEPOSIT USDCe </h2>
+
+          <Grid container style={{ marginTop: '10px',  justifyContent:'center', alignItems: 'center', }}>
+                <div  style={{ justifyContent: 'center', alignItems:'center'}}>
+                      <TokenSymbol size={72} symbol={'USDC'} />
+                </div>     
+
+              <Grid item xs={12} style={{ marginTop: '10px'}}>
+                  <h2 style={{ textAlign: 'center', }}> Your Deposits:</h2>
+                  <h2 style={{ textAlign: 'center' }} > 
+                      {pegPool.userInfo?.amountDeposited}</h2>
               </Grid>
-              <Grid container  style={{ marginTop: '20px', justifyContent:'center', alignItems: 'center' }}>
+          </Grid>
+              
+          <Grid container  style={{ marginTop: '20px', justifyContent:'center', alignItems: 'center' }}>
                 {approveStatus != ApprovalState.APPROVED ? (
-                 
                   <Button
-                    color="primary"
-                    
+                    className={classes.tokenButton}                    
                     disabled={!pegPool.depositsEnabled}
                     onClick={approve}
                     fullWidth={true}
@@ -106,7 +111,7 @@ const PegPoolInfo: React.FC<{
                   </Button>
                 ) : (
                   <Button
-                    className="tokenButton"
+                    className={classes.tokenButton}
                      
                    disabled={!pegPool.depositsEnabled}
                     onClick={onPresentDeposit}
@@ -124,7 +129,7 @@ const PegPoolInfo: React.FC<{
                 </h2>
 
                 <Button
-                  className={pegPool.userInfo?.isDeposited ? 'shinyButtonSecondary' : 'shinyButtonDisabled'}
+                  className={pegPool.userInfo?.isDeposited ? 'classes.tokenButton' : 'shinyButtonDisabled'}
                   fullWidth={true}
                   
                   disabled={!pegPool.userInfo?.isDeposited}
@@ -136,7 +141,6 @@ const PegPoolInfo: React.FC<{
                   You will receive WLRS-USDC.e LP tokens when you withdraw
                 </h2>
               </Grid>
-            </Box>
           </CardContent>
         </HomeCardBlue>
       </Grid>
