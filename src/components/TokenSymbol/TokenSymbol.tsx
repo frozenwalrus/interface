@@ -29,7 +29,12 @@ import yusdPNG from '../../assets/img/yusd.png';
 import nrwlSVG from '../../assets/img/nrwl.svg';
 import nbondSVG from '../../assets/img/nbond.svg';
 import nrwlYusdPNG from '../../assets/img/nrwl-yusd.png';
-
+import newwalrus from '../../assets/New/newwalrus.png'; 
+import newnrwl from '../../assets/New/newnrwl.png'; 
+import newwshare from '../../assets/New/newwshare.png'; 
+import shareLP from '../../assets/New/newwshareLP.png'; 
+import walrusLP from '../../assets/New/newWLRSUSDC.png'; 
+import nrwlLP from '../../assets/New/NRWLYUSD.png'; 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
   //=====================
@@ -57,12 +62,17 @@ const logosBySymbol: { [title: string]: string } = {
   'WLRS-USDIBS-LP': wlrsUsdibsLP,
   'GRAPE-WLRS-LP': grapeWlrsLP,
   'SNO-SNOSHARE-LP': tshareFtmLpLogo,
-
   YUSD: yusdPNG,
   NRWLPNG: nrwlPNG, 
   NRWL: nrwlSVG,
   NBOND: nbondSVG,
   'NRWL-YUSD-LP': nrwlYusdPNG,
+  NWLRS: newwalrus, 
+  NNRWL: newnrwl, 
+  NWSHARE: newwshare, 
+  NWSHARELP: shareLP, 
+  NWLRSLP: walrusLP, 
+  NNRWLLP: nrwlLP, 
 };
 
 type LogoProps = {
