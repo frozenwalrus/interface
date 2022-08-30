@@ -1475,7 +1475,11 @@ export class TombFinance {
     } else if (assetName === 'WSHARE') {
       asset = this.TSHARE;
       assetUrl = 'https://gateway.pinata.cloud/ipfs/QmSkdqbueZTKDjb2oqKo6bEcn6qenA9Z6iiSNR1omHGVZx';
-    } else if (assetName === 'WBOND') {
+    } else if (assetName === 'NRWL') {
+      asset = this.NRWL;
+     // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmSkdqbueZTKDjb2oqKo6bEcn6qenA9Z6iiSNR1omHGVZx';
+    }
+    else if (assetName === 'WBOND') {
       asset = this.TBOND;
       assetUrl = 'https://gateway.pinata.cloud/ipfs/QmVCNLxo6vRUr3qCaNHJPwVL7jMGBf18FSa65zkeaHSbua';
     }
