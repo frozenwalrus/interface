@@ -42,8 +42,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
   return (
     <React.Fragment>
-{/*    <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}> */}
-<TableRow>
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -64,7 +63,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box style={{ margin:'1px' }}>
+            <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
                 History
               </Typography>
@@ -110,8 +109,7 @@ const rows = [
 
 export default function FarmTable() {
   return (
-
-  <TableContainer>
+    <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
@@ -132,5 +130,3 @@ export default function FarmTable() {
     </TableContainer>
   );
 }
-
- 
