@@ -11,7 +11,8 @@ import styled from 'styled-components';
 import PegPoolInfo from './components/PegPoolInfo';
 import usePegPool from '../../hooks/usePegPool';
 import usePegPoolRewards from '../../hooks/usePegPoolRewards';
-
+import CountUp from 'react-countup';
+import useAxios from 'axios-hooks'; 
 
 
 const TITLE = 'ames.defi | Peg Pool';
@@ -40,7 +41,11 @@ const PCP: React.FC = () => {
   const { path } = useRouteMatch();
   const { pegPool } = usePegPool();
   const { rewardTokens, totalRewardValue, apr } = usePegPoolRewards(pegPool);
-
+ {/* const [{ data, loading, error }, refetch] = useAxios (
+    'https://openapi.debank.com/v1/user/total_balance?id=0x2ba4da735d3ce9177216102e9fdabae67e1ac524'
+  )
+  if (loading) return <p>Firing up the walrus...</p>
+ if (error) return <p>error! </p>; */}
   return (
 <Switch>
   <Page>
@@ -83,6 +88,7 @@ const PCP: React.FC = () => {
       <h2 style={{ textTransform: 'capitalize', fontSize: '1.5rem', marginTop: '15px', textAlign: 'center' }}>  
       Total Value Locked: ${Number(pegPool.totalDesposits)}
       </h2> 
+      
   </div>
   </HomeCard>
 </Grid>
