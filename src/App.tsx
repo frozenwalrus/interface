@@ -34,8 +34,6 @@ const NodeLeaderboard = lazy(() => import('./views/NodeLeaderboard'));
 const Media = lazy(() => import('./views/Media')); 
 const PCP = lazy(() => import('./views/PCP')); 
 const PegDefender = lazy(() => import('./views/Pegasaurus')); 
-const NewHome = lazy(() => import('./views/HomeBase')); 
-
 
 
 
@@ -108,9 +106,6 @@ const App: React.FC = () => {
             <Route path="/leaderboard">
               <NodeLeaderboard /> 
           </Route>  
-          <Route path="/newhome">
-              <NewHome /> 
-            </Route>  
             <Route path="*">
               <NoMatch />
             </Route>
