@@ -736,15 +736,21 @@ export class TombFinance {
    */
   async getLPTokenPrice(lpToken: ERC20, token: ERC20, isTomb: boolean): Promise<string> {
     const totalSupply = getFullDisplayBalance(await lpToken.totalSupply(), lpToken.decimal);
+    console.log(totalSupply) // 0.424748198
+
     //Get amount of tokenA
     const tokenSupply = getFullDisplayBalance(await token.balanceOf(lpToken.address), token.decimal);
+    console.log(tokenSupply) // 771165 
     // const stat = isTomb === true ? await this.getTombStat() : await this.getShareStat();
     const stat = await this.getTokenStat(token.symbol);
     const priceOfToken = stat.priceInDollars;
+    console.log(priceOfToken) // 0.36 - wlrs correct 
     const divider = ['WLRS', 'WSHARE', 'USDC', 'USDT'].includes(token.symbol) && !['WLRS-USDIBS-LP'].includes(lpToken.symbol) ? 10 ** 6 : 1;
-    const tokenInLP = Number(tokenSupply) / Number(totalSupply) / divider;  // NOTE: hot fix
+    const tokenInLP = Number(tokenSupply) / Number(totalSupply) / divider; 
+    console.log(tokenInLP) // NOTE: hot fix 1.8155826389045446
     const tokenPrice = (Number(priceOfToken) * tokenInLP * 2) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
       .toString();
+      console.log(tokenPrice)
     return tokenPrice;
   }
 

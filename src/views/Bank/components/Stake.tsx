@@ -122,7 +122,8 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
             <TokenSymbol symbol={bank.depositToken.symbol} size={100} />
             <Value value={'' + (stakedBalanceNumber < 1/10**4 ? (stakedBalanceNumber * 10**6).toFixed(4) + 'µ' : stakedBalanceNumber)} /> 
             <Label color="rgba(74, 68, 82)" text={`≈ $${earnedInDollars}`} />
-            <Label color="rgba(74, 68, 82)" text={`${bank.depositTokenName === 'USDC' || bank.depositTokenName === 'USDT' ? bank.depositTokenName + '.e' : bank.depositTokenName.replace('USDC', 'USDC.e')} Staked`} />
+            <Label color="rgba(74, 68, 82)" text={`${bank.depositTokenName === 'USDC' || bank.depositTokenName === 'USDT' ? 
+            bank.depositTokenName + '.e' : bank.depositTokenName.replace('USDC', 'USDC.e')} Staked`} />
           </StyledCardHeader>
           <StyledCardActions>
             {approveStatus !== ApprovalState.APPROVED ? (
