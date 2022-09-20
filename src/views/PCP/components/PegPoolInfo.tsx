@@ -123,7 +123,7 @@ const PegPoolInfo: React.FC<{
 
               <Grid container style={{ marginTop: '20px', justifyContent:'center'  }}>
                 <h2 style={{ fontSize:'14px'}}>
-                  Current TWAP withdraw fee ={' 24% '}
+                  Current TWAP withdraw fee ={' 18% '}
             {/*      {withdrawFeePercent || withdrawFeePercent == 0 ? withdrawFeePercent : <Skeleton />}% */}
                 </h2>
 
