@@ -112,7 +112,7 @@ const PegPoolInfo: React.FC<{
                   <Button
                     className={classes.tokenButton}
                      
-                   disabled={!pegPool.depositsEnabled}
+                   disabled
                     onClick={onPresentDeposit}
                     fullWidth={true}
                   >
@@ -131,7 +131,7 @@ const PegPoolInfo: React.FC<{
                   className={pegPool.userInfo?.isDeposited ? 'classes.tokenButton' : 'shinyButtonDisabled'}
                   fullWidth={true}
                   
-                  disabled={!pegPool.userInfo?.isDeposited}
+                  disabled
                   onClick={onPresentWithdraw}
                 >
                   Withdraw
