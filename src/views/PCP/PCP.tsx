@@ -69,25 +69,25 @@ const PCP: React.FC = () => {
   <div>
         <h2 style={{ textTransform: 'none', fontSize: '2.0rem', fontWeight: 'bold', marginTop: '10px', 
         textAlign: 'center' }}>
-          WLRS Peg Campaign Pool! <br /> 
+          WLRS Peg Campaign Pool is now closed <br /> 
         </h2>
-        <h2 style={{ textTransform: 'none', fontSize: '1.3rem', marginTop: '5px', 
+        {/* <h2 style={{ textTransform: 'none', fontSize: '1.3rem', marginTop: '5px', 
         textAlign: 'center' }}>
         Deposit USDC.e and get WSHARE Rewards
-        </h2>
+        </h2> */}
 
         <Grid container spacing={2} style={{marginTop: '5px', justifyContent: 'center', alignItems: 'center' }} >               
           <Grid item style={{ textAlign:'center', alignItems: 'center', justifyContent: 'center'}}>
             <TokenSymbol size={72} symbol={'WSHARE'} />
         </Grid>              
   </Grid>
-  <h2 style={{ marginTop: '12px', textAlign: 'center', fontSize: '1.0rem',   }}>
+  {/* <h2 style={{ marginTop: '12px', textAlign: 'center', fontSize: '1.0rem',   }}>
       Withdrawal fees are now static and will be adjusted downward over next several weeks as the Peg 
       Campaign Pool concludes.   
       </h2> 
       <h2 style={{ textTransform: 'capitalize', fontSize: '1.5rem', marginTop: '15px', textAlign: 'center' }}>  
       Total Deposited To-Date: ${Number(pegPool.totalDesposits)}
-      </h2> 
+      </h2>  */}
       
   </div>
   </HomeCard>

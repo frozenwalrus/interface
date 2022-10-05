@@ -84,7 +84,7 @@ const PegPoolInfo: React.FC<{
       <Grid item xs={12} sm={6} lg={4}>
         <HomeCardBlue >
           <CardContent>
-          <h2 style={{textAlign: 'center', marginBottom: '8%' }}> DEPOSIT USDCe </h2>
+          <h2 style={{textAlign: 'center', marginBottom: '8%' }}> DEPOSITS CLOSED </h2>
 
           <Grid container style={{ marginTop: '10px',  justifyContent:'center', alignItems: 'center', }}>
                 <div  style={{ justifyContent: 'center', alignItems:'center'}}>
@@ -92,14 +92,15 @@ const PegPoolInfo: React.FC<{
                 </div>     
 
               <Grid item xs={12} style={{ marginTop: '10px'}}>
-                  <h2 style={{ textAlign: 'center', }}> Your Deposits:</h2>
-                  <h2 style={{ textAlign: 'center' }} > 
-                      {pegPool.userInfo?.amountDeposited}</h2>
+                  <h2 style={{ textAlign: 'center', fontSize: '1.1rem' }}> All deposits have been 
+                  airdropped to investors in form of USDC.e and WLRS </h2>
+                  {/* <h2 style={{ textAlign: 'center' }} > 
+                      {pegPool.userInfo?.amountDeposited}</h2> */}
               </Grid>
           </Grid>
               
           <Grid container  style={{ marginTop: '20px', justifyContent:'center', alignItems: 'center' }}>
-                {approveStatus != ApprovalState.APPROVED ? (
+                {/* {approveStatus != ApprovalState.APPROVED ? (
                   <Button
                     className={classes.tokenButton}                    
                     disabled={!pegPool.depositsEnabled}
@@ -118,16 +119,16 @@ const PegPoolInfo: React.FC<{
                   >
                     {pegPool.depositsEnabled ? 'Deposit' : 'Above Peg'}
                   </Button>
-                )}
+                )} */}
               </Grid>
 
               <Grid container style={{ marginTop: '20px', justifyContent:'center'  }}>
-                <h2 style={{ fontSize:'14px'}}>
-                  Current TWAP withdraw fee ={' 12% '}
+                {/* <h2 style={{ fontSize:'14px'}}> */}
+                  {/* Current TWAP withdraw fee ={' 12% '} */}
             {/*      {withdrawFeePercent || withdrawFeePercent == 0 ? withdrawFeePercent : <Skeleton />}% */}
-                </h2>
+                {/* </h2> */}
 
-                <Button
+                {/* <Button
                   className={pegPool.userInfo?.isDeposited ? 'classes.tokenButton' : 'shinyButtonDisabled'}
                   fullWidth={true}
                   
@@ -135,10 +136,10 @@ const PegPoolInfo: React.FC<{
                   onClick={onPresentWithdraw}
                 >
                   Withdraw
-                </Button>
-                <h2 style={{ fontSize:'14px', textAlign: 'center', marginTop: '10%'}}>
+                </Button> */}
+                {/* <h2 style={{ fontSize:'14px', textAlign: 'center', marginTop: '10%'}}>
                   You will receive WLRS-USDC.e LP tokens when you withdraw
-                </h2>
+                </h2> */}
               </Grid>
           </CardContent>
         </HomeCardBlue>
