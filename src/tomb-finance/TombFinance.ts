@@ -72,7 +72,15 @@ export class TombFinance {
     // loads contracts from deployments
     this.contracts = {};
     for (const [name, deployment] of Object.entries(deployments)) {
-      this.contracts[name] = new Contract(deployment.address, deployment.abi, provider);
+      if (this.isCustomFarm(deployment.address)) {
+        this.contracts[name] = new Contract(
+          deployment.address,
+          '[{"inputs":[{"internalType":"address","name":"token_","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnerSet","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"changeOwner","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"claimRewards","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"depositRewards","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"emergencyWithdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"shareholder","type":"address"}],"name":"pendingShare","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"reward","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"token","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"userInfo","outputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"totalExcluded","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token_","type":"address"}],"name":"withdrawForeignToken","outputs":[],"stateMutability":"nonpayable","type":"function"}]',
+          provider
+        );
+      } else {
+        this.contracts[name] = new Contract(deployment.address, deployment.abi, provider);
+      }
     }
     this.externalTokens = {};
     for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
@@ -138,6 +146,24 @@ export class TombFinance {
 
     const [supply, priceInFTM, priceOfOneFTM] = await Promise.all([
       this.TOMB.totalSupply(),
+      this.getTokenPriceFromPancakeswap(this.TOMB),
+      this.getWFTMPriceFromPancakeswap(),
+    ]);
+    const tombCirculatingSupply = supply.sub(25000);
+    const priceOfTombInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(18);
+    return {
+      tokenInFtm: priceInFTM,
+      priceInDollars: priceOfTombInDollars,
+      totalSupply: getDisplayBalance(supply, this.TOMB.decimal, 0),
+      circulatingSupply: getDisplayBalance(tombCirculatingSupply, this.TOMB.decimal, 0),
+    };
+  }
+
+  async getXWalrusStat(): Promise<TokenStat> {
+    // const { TombFtmRewardPool, TombFtmLpTombRewardPool, TombFtmLpTombRewardPoolOld } = this.contracts;
+
+    const [supply, priceInFTM, priceOfOneFTM] = await Promise.all([
+      this.XWLRS.totalSupply(),
       this.getTokenPriceFromPancakeswap(this.TOMB),
       this.getWFTMPriceFromPancakeswap(),
     ]);
@@ -535,6 +561,9 @@ export class TombFinance {
     poolContract: Contract,
     depositTokenName: string,
   ) {
+    if (this.isCustomFarm(poolContract.address)) {
+      return BigNumber.from('0');
+    }
     if (earnTokenName === 'WLRS') {
       if (contractName.endsWith('GenesisRewardPool')) {
         const rewardPerSecond = await poolContract.wlrsPerSecond();
@@ -833,7 +862,7 @@ export class TombFinance {
       case 'WBOND':
         return this.getBondStat();
         case 'XWLRS':
-        return this.getTombStat();
+        return this.getXWalrusStat();
       default:
         throw new Error(`Unknown token name: ${tokenName}`);
     }
@@ -1016,6 +1045,10 @@ export class TombFinance {
   ): Promise<BigNumber> {
     const pool = this.contracts[poolName];
     try {
+      if (this.isCustomFarm(pool.address)) {
+        console.log('IS CUSTOM FARM');
+        return await pool.pendingShare(account);
+      }
       if (earnTokenName === 'WLRS-USDC-LP' && poolName.includes('Node')) {
         return await pool.getTotalRewards(account);
       }
@@ -1044,12 +1077,19 @@ export class TombFinance {
   async stakedBalanceOnBank(poolName: ContractName, poolId: Number, account = this.myAccount): Promise<BigNumber> {
     const pool = this.contracts[poolName];
     try {
+      if (this.isCustomFarm(pool.address)) {
+        return await pool.balanceOf(account);
+      }
       let userInfo = await pool.userInfo(poolId, account);
       return await userInfo.amount;
     } catch (err) {
       console.error(`Failed to call balanceOf() on pool ${pool.address}: ${err.stack}`);
       return BigNumber.from(0);
     }
+  }
+
+  isCustomFarm = (poolAddress: string): boolean => {
+    return poolAddress === '0x1472bA4257Fe551274bC46d09F826ab7979dE43a';
   }
 
   /**
@@ -1060,7 +1100,9 @@ export class TombFinance {
    */
    async stake(poolName: ContractName, poolId: Number, sectionInUI: Number, amount: BigNumber): Promise<TransactionResponse> {
     const pool = this.contracts[poolName];
-
+    if (this.isCustomFarm(pool.address)) {
+      return await pool.deposit(amount);
+    }
     return sectionInUI !== 4 
       ? await pool.deposit(poolId, amount)
       : await pool.create(poolId, amount);
@@ -1074,6 +1116,9 @@ export class TombFinance {
    */
   async unstake(poolName: ContractName, poolId: Number, amount: BigNumber): Promise<TransactionResponse> {
     const pool = this.contracts[poolName];
+    if (this.isCustomFarm(pool.address)) {
+      return await pool.withdraw(amount);
+    }
     return await pool.withdraw(poolId, amount);
   }
 
@@ -1082,6 +1127,9 @@ export class TombFinance {
    */
    async harvest(poolName: ContractName, poolId: Number, sectionInUI: Number): Promise<TransactionResponse> {
     const pool = this.contracts[poolName];
+    if (this.isCustomFarm(pool.address)) {
+      return await pool.claimRewards();
+    }
     //By passing 0 as the amount, we are asking the contract to only redeem the reward and not the currently staked token
     return sectionInUI !== 4
     ? await pool.withdraw(poolId, 0)
@@ -1093,6 +1141,10 @@ export class TombFinance {
    */
   async exit(poolName: ContractName, poolId: Number, account = this.myAccount): Promise<TransactionResponse> {
     const pool = this.contracts[poolName];
+    if (this.isCustomFarm(pool.address)) {
+      let balance = await pool.balanceOf(account);
+      return await pool.withdraw(balance);
+    }
     let userInfo = await pool.userInfo(poolId, account);
     return await pool.withdraw(poolId, userInfo.amount);
   }
