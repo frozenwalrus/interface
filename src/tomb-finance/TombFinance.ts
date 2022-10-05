@@ -619,21 +619,20 @@ export class TombFinance {
 
     const rewardPerSecond = await poolContract.wSharePerSecond();
     if (depositTokenName === 'WLRS-USDC-LP') {
-      return rewardPerSecond.mul(5500).div(10000); 
+      return rewardPerSecond.mul(4500).div(10000); 
     } else if (depositTokenName === 'WLRS-USDIBS-LP') {
-      return rewardPerSecond.mul(300).div(10000); 
+      return rewardPerSecond.mul(0).div(10000); 
     } else if (depositTokenName === 'WSHARE-USDC-LP') {
-      return rewardPerSecond.mul(2200).div(10000); 
+      return rewardPerSecond.mul(300).div(10000); 
     } else if (depositTokenName = 'NRWL-YUSD-LP') {
       return rewardPerSecond.mul(1000).div(10000); 
     }
       else if (depositTokenName = 'WBOND') {
         return rewardPerSecond.mul(1000).div(10000); 
-    } else if (depositTokenName === 'WLRS-USDIBS-LP') {
+    } else if (depositTokenName === 'XWLRS') {
         return rewardPerSecond.mul(3200).div(10000); 
     }
   }
-
   /**
    * Method to calculate the tokenPrice of the deposited asset in a pool/bank
    * If the deposited token is an LP it will find the price of its pieces
