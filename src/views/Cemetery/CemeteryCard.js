@@ -15,6 +15,7 @@ import useTokenBalance from '../../hooks/useTokenBalance';
 import styled from 'styled-components';
 import usePegasaurus from '../../hooks/Pegasaurus/usePegasaurus';
 import usePegasaurusRewards from '../../hooks/Pegasaurus/usePegasaurusRewards';
+import Row from '../../components/Row';
 
 const HomeCardPurple = styled.div`
   background: rgba(214, 211, 242, 0.9);
@@ -40,6 +41,7 @@ const HomeCardPegasaurus = styled.div`
   0 0 16px 11px #0ff; /* outer cyan */
   padding: 20px; 
   color: #4b4453;
+  margin: 10px; 
    
 `;
 const CemeteryCard = () => {
@@ -84,10 +86,10 @@ const CemeteryCard = () => {
       <CardContent
         style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center' }} >
         <div>
-          <Typography variant="h5" component="h2">
-            WLRS-USDC.e LP
-          </Typography>
-          <TokenSymbol size={60} symbol="WLRS-USDC-LP" />
+              <Typography variant="h5" component="h2">
+                WLRS-USDC.e LP
+              </Typography>
+              <TokenSymbol size={60} symbol="WLRS-USDC-LP" />
         </div>
         <div>
           <span style={{ fontSize: '20px' }}>
@@ -126,20 +128,19 @@ const CemeteryCard = () => {
 <Grid item xs={12} md={4} lg={4}>
     <HomeCardPegasaurus>
       <CardContent mt={0}
-        style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center' }} >
-        <div>
-       
-        <Typography variant="h5" component="h2">
-          PEG DEFENDER <br />
-            WLRS-USDC.e LP
-          </Typography>
-          <TokenSymbol size={60} symbol="WLRS-USDC-LP" />
+        style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center', marginBottom: '10px' }} >
+        <div style={{ width: '100%', marginBottom: '5%'}}>
+            <Typography variant="h5" component="h2">
+              XWLRS  
+              
+              </Typography>
+            <TokenSymbol size={60} symbol="XWLRS" />
         </div>
-        <div>
-          
+        <div style={{ marginBottom: '10px', }}>
+          <span style={{ fontSize: '18px'}}>Price of WLRS: 
+          </span>
           <span style={{ fontSize: '18px' }}>
-            {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} WLRS /{' '}
-            {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} USDC.e
+          ${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}
           </span>
   
           <Box>${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}</Box>
@@ -154,7 +155,7 @@ const CemeteryCard = () => {
           style={{ width: '150px', height: '45px', marginBottom: '2%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
           variant="contained"
           component={Link}
-          to={`/pegdefender`}
+          to={`/farms/XWLRSShareRewardPool/`}
         >
           Farm
         </Button>
@@ -163,7 +164,56 @@ const CemeteryCard = () => {
           target="_blank"
           style={{ width: '150px', height: '45px', marginBottom: '2%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
           variant="contained"
-          href="https://traderjoexyz.com/pool/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/0x395908aeb53d33A9B8ac35e148E9805D34A555D3#/" >
+          href="https://xwlrs.frozenwalrus.finance/
+          " >
+          Mint xWLRS 
+        </Button>
+      </CardActions>
+    </HomeCardPegasaurus>
+  </Grid>
+
+  <Grid item xs={12} md={4} lg={4}>
+    <HomeCardPegasaurus>
+      <CardContent
+        style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', textAlign: 'center' }}
+      >
+        <div>
+          <Typography variant="h5" component="h2" style={{ marginLeft:'-8px'}} >
+            WSHARE-USDC.e LP, earning WLRS
+          </Typography>
+          <TokenSymbol size={60} symbol="WSHARE-USDC-LP" />
+        </div>
+        <div>
+          <span style={{ fontSize: '19px',}}>
+            {tshareLPStats?.tokenAmount ? tshareLPStats?.tokenAmount : '-.--'} WSHARE /{' '}
+            {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} USDC.e
+          </span>
+
+          <Box>${tshareLPStats?.priceOfOne ? tshareLPStats.priceOfOne : '-.--'}</Box>
+          <span style={{ fontSize: '12px' }}>
+            Liquidity: ${tshareLPStats?.totalLiquidity ? tshareLPStats.totalLiquidity : '-.--'} <br />
+            Total supply: {tshareLPStats?.totalSupply ? (Number(tshareLPStats.totalSupply) < 1/10**4 ? (Number(tshareLPStats.totalSupply) * 10**6).toFixed(4) + 'µ' : tshareLPStats.totalSupply) : '-.--'} <br />
+            APR: {tShareStatsOnPool?.yearlyAPR ? tShareStatsOnPool?.yearlyAPR : '----.--'}%
+          </span>
+        </div>
+      </CardContent>
+      <CardActions style={{ justifyContent: 'center' }}>
+        <Button
+          color="primary"
+          style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
+          variant="contained"
+          component={Link}
+          to={`/farms/WShareUSDCWLRSRewardPool/`}
+        >
+          Farm
+        </Button>
+        <Button
+          color="primary"
+          target="_blank"
+          style={{ width: '150px', height: '45px', marginBottom: '5%', padding: '5px', borderRadius: '10px', boxShadow: '4px 6px 12px black' }}
+          variant="contained"
+          href="https://traderjoexyz.com/pool/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6#/"
+        >
           Add Liquidity
         </Button>
       </CardActions>

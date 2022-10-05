@@ -63,6 +63,7 @@ export class TombFinance {
   YUSD: ERC20;
   NRWL: ERC20;
   NBOND: ERC20;
+  XWLRS: ERC20; 
 
   constructor(cfg: Configuration) {
     const { deployments, externalTokens } = cfg;
@@ -90,6 +91,7 @@ export class TombFinance {
     this.YUSD = this.externalTokens['YUSD'];
     this.NRWL = this.externalTokens['NRWL'];
     this.NBOND = this.externalTokens['NBOND'];
+    this.XWLRS = this.externalTokens['XWLRS']; 
     // Uniswap V2 Pair
     this.TOMBWFTM_LP = new Contract(externalTokens['WLRS-USDC-LP'][0], IUniswapV2PairABI, provider);
     this.config = cfg;
@@ -598,6 +600,8 @@ export class TombFinance {
     }
       else if (depositTokenName = 'WBOND') {
         return rewardPerSecond.mul(1000).div(10000); 
+    } else if (depositTokenName === 'WLRS-USDIBS-LP') {
+        return rewardPerSecond.mul(3200).div(10000); 
     }
   }
 
@@ -634,6 +638,8 @@ export class TombFinance {
       tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true);
     } else if (tokenName === 'NRWL-YUSD-LP') {
       tokenPrice = await this.getLPTokenPrice(token, this.NRWL, false);
+    } else if (tokenName === 'XWLRS') {
+      tokenPrice = await this.getLPTokenPrice(token, this.TOMB, false);
     } else {
       tokenPrice = await this.getTokenPriceFromPancakeswap(token);
       tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
@@ -826,6 +832,8 @@ export class TombFinance {
         return this.getUSDibsStat();
       case 'WBOND':
         return this.getBondStat();
+        case 'XWLRS':
+        return this.getTombStat();
       default:
         throw new Error(`Unknown token name: ${tokenName}`);
     }

@@ -29,6 +29,7 @@ import yusdPNG from '../../assets/img/yusd.png';
 import nrwlSVG from '../../assets/img/nrwl.svg';
 import nbondSVG from '../../assets/img/nbond.svg';
 import nrwlYusdPNG from '../../assets/img/nrwl-yusd.png';
+import xWLRS from '../../assets/img/xWLRS.png'; 
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -63,6 +64,7 @@ const logosBySymbol: { [title: string]: string } = {
   NRWL: nrwlSVG,
   NBOND: nbondSVG,
   'NRWL-YUSD-LP': nrwlYusdPNG,
+  XWLRS: xWLRS, 
 };
 
 type LogoProps = {

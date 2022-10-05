@@ -134,6 +134,14 @@ const Nav = () => {
               <Link color="textPrimary" to="/nodes" className={classes.link}>
                 Nodes
               </Link>
+              <a
+                href="https://xwlrs.frozenwalrus.finance/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={classes.link}
+              >
+                XWLRS
+              </a>
               <Link color="textPrimary" to="/lottery" className={classes.link}>
                 Lottery
               </Link>
@@ -154,6 +162,9 @@ const Nav = () => {
               >
                 Docs
               </a>
+              
+
+              
             </Box>
             <div
               style={{
@@ -231,6 +242,9 @@ const Nav = () => {
                 <Link color="textPrimary" to="/pcp" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>PCP</div>
                 </Link>
+                <a href=" https://xwlrs.frozenwalrus.finance/" target="_blank" className={classes.link}>
+                  <div style={{ margin: '4px 20px' }}>XWLRS</div>
+                </a>
                 <Link color="textPrimary" to="/lottery" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Lottery</div>
                 </Link>
@@ -245,6 +259,9 @@ const Nav = () => {
                 <a href="https://docs.frozenwalrus.finance/welcome" target="_blank" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Docs</div>
                 </a>
+               
+
+               
                 <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <AccountButton text="Connect" />
                 </ListItem>
