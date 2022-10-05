@@ -381,11 +381,11 @@ const Home = () => {
       >
         Welcome to Frozen Walrus! 
       </Typography>
-      <h2 style={{ textAlign: 'center', marginBottom: '5%', marginTop: '5%', 
+      {/* <h2 style={{ textAlign: 'center', marginBottom: '5%', marginTop: '5%', 
       ...(isDesktop ? { fontSize: '1.8rem' } : { fontSize: '1.5rem'}) }}>
         The Peg Campaign Pool is now <StyledLink href="http://app.frozenwalrus.finance/pcp">open</StyledLink>! </h2>
       
-      
+       */}
       <HomeCard>
         <CardContent
           style={{ margin: '37px', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}
