@@ -20,10 +20,11 @@ const useBank = (contractName: ContractName): Bank => {
     return banks.find((bank) => bank.sectionInUI === 0 && bank.depositTokenName === 'GRAPE');
   } else if (contractName === 'WlrsUsdtGenesisRewardPool') {
     return banks.find((bank) => bank.sectionInUI === 0 && bank.depositTokenName === 'USDT');
+  }else if (contractName === 'WBondWShareRewardPool') {
+      return banks.find((bank) => bank.sectionInUI === 0 && bank.depositTokenName === 'WBOND');
+  }else if (contractName === 'XWLRSShareRewardPool') {
+      return banks.find((bank) => bank.sectionInUI === 0 && bank.depositTokenName === 'XWLRS');
   }
- else if (contractName === 'WBondWShareRewardPool') {
-  return banks.find((bank) => bank.sectionInUI === 0 && bank.depositTokenName === 'WBOND');
-}
 
   if (contractName === 'PegLPNode') {
     return banks.find((bank) => bank.sectionInUI === 4 && bank.depositTokenName === 'WLRS-USDC-LP');
@@ -32,6 +33,8 @@ const useBank = (contractName: ContractName): Bank => {
   } else if (contractName === 'LPWlrsNode') {
     return banks.find((bank) => bank.sectionInUI === 4 && bank.depositTokenName === 'GRAPE-WLRS-LP');
   }
+
+  
 
   if (contractName === 'WShareUsdcLPWShareRewardPool') {
     return banks.find((bank) => bank.sectionInUI === 2 && bank.depositTokenName === 'WSHARE-USDC-LP');

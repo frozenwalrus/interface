@@ -8,6 +8,7 @@ import useLpStatsNrwl from '../../hooks/useLpStatsNrwl';
 import useBank from '../../hooks/useBank';
 import useStatsForPool from '../../hooks/useStatsForPool';
 import useBondStats from '../../hooks/useBondStats';
+import usexWlrsStats from '../../hooks/useXwlrsStats';
 import useTombFinance from '../../hooks/useTombFinance';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import useTokenBalance from '../../hooks/useTokenBalance';
@@ -55,6 +56,8 @@ const CemeteryCard = () => {
   const tDibsLpStats = useMemo(() => (tDibsFtmLpStats ? tDibsFtmLpStats : null), [tDibsFtmLpStats]);
   const nrwlLpStats = useMemo(() => (nrwlFtmLpStats ? nrwlFtmLpStats : null), [nrwlFtmLpStats]);
   const tombFinance = useTombFinance();
+
+  
   const tombBank = useBank('WlrsUsdcLPWShareRewardPool');
   const tombStatsOnPool = useStatsForPool(tombBank);
   const { Pegasaurus } = usePegasaurus(); 
@@ -66,15 +69,22 @@ const CemeteryCard = () => {
   const tDibsBank = useBank('WlrsUSDibsLPWShareRewardPool');
   const tDibsStatsOnPool = useStatsForPool(tDibsBank);
 
+  const newBank = useBank('WShareUSDCWLRSRewardPool');
+  const newBankStatsOnPool = useStatsForPool(newBank);
+
+  const xBank = useBank('XWLRSShareRewardPool');
+  const xBankStatsOnPool = useStatsForPool(xBank);
+  
   const nrwlBank = useBank('NrwlYusdLPWShareRewardPool');
   const nrwlStatsOnPool = useStatsForPool(nrwlBank);
   const tBondStats = useBondStats();
-
+  const xwlrsStats = usexWlrsStats();
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
   const tBondPriceInDollars = useMemo(() => (tBondStats ? Number(tBondStats.priceInDollars).toFixed(2) : null), [tBondStats]);
+  const xwlrsPriceInDollars = useMemo(() => (xwlrsStats ? Number(xwlrsStats.priceInDollars).toFixed(2) : null), [xwlrsStats]);
   const tbondBank = useBank('WBondWShareRewardPool');
   const tBondStatsonPool = useStatsForPool(tbondBank);
-  console.log(tBondPriceInDollars)
+  console.log(tombFinance)
 
 
   // const snoSnoShareLPStats = useMemo(() => (snoSnoShareLpStats ? snoSnoShareLpStats : null), [snoSnoShareLpStats]);
@@ -137,15 +147,11 @@ const CemeteryCard = () => {
             <TokenSymbol size={60} symbol="XWLRS" />
         </div>
         <div style={{ marginBottom: '10px', }}>
-          <span style={{ fontSize: '18px'}}>Price of WLRS: 
+          <span style={{ fontSize: '18px'}}>Price of xWLRS: 
           </span>
-          <span style={{ fontSize: '18px' }}>
-          ${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}
-          </span>
-  
-          <Box>${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}</Box>
+          <Box>${xwlrsPriceInDollars ? xwlrsPriceInDollars : '-.--'}</Box>
           <span style={{ fontSize: '12px' }}>
-            APR: {aprPS2?.yearlyAPR ? aprPS2?.yearlyAPR : '----.--'}%
+            APR: {xBankStatsOnPool?.yearlyAPR ? xBankStatsOnPool?.yearlyAPR : '----.--'}%
           </span>
         </div>
       </CardContent>
@@ -193,7 +199,7 @@ const CemeteryCard = () => {
           <span style={{ fontSize: '12px' }}>
             Liquidity: ${tshareLPStats?.totalLiquidity ? tshareLPStats.totalLiquidity : '-.--'} <br />
             Total supply: {tshareLPStats?.totalSupply ? (Number(tshareLPStats.totalSupply) < 1/10**4 ? (Number(tshareLPStats.totalSupply) * 10**6).toFixed(4) + 'µ' : tshareLPStats.totalSupply) : '-.--'} <br />
-            APR: {tShareStatsOnPool?.yearlyAPR ? tShareStatsOnPool?.yearlyAPR : '----.--'}%
+            APR: {newBankStatsOnPool?.yearlyAPR ? newBankStatsOnPool?.yearlyAPR : '----.--'}%
           </span>
         </div>
       </CardContent>

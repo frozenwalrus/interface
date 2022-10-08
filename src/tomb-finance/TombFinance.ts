@@ -161,14 +161,18 @@ export class TombFinance {
 
   async getXWalrusStat(): Promise<TokenStat> {
     // const { TombFtmRewardPool, TombFtmLpTombRewardPool, TombFtmLpTombRewardPoolOld } = this.contracts;
+    const { xwlrs } = this.contracts;
 
-    const [supply, priceInFTM, priceOfOneFTM] = await Promise.all([
+    const [supply, redeemRate, priceInFTM, priceOfOneFTM] = await Promise.all([
       this.XWLRS.totalSupply(),
+      xwlrs.redeemRate(),
       this.getTokenPriceFromPancakeswap(this.TOMB),
       this.getWFTMPriceFromPancakeswap(),
     ]);
+    
     const tombCirculatingSupply = supply.sub(25000);
-    const priceOfTombInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(18);
+    const priceOfTombInDollars = (Number(priceInFTM) * Number(redeemRate/1e18)).toFixed(18);
+    console.log('s', priceOfTombInDollars)
     return {
       tokenInFtm: priceInFTM,
       priceInDollars: priceOfTombInDollars,
@@ -531,7 +535,7 @@ export class TombFinance {
       poolContract,
       bank.depositTokenName,
     );
-
+      console.log('BANK', bank.contract)
     let tokenPerHour = tokenPerSecond.mul(60).mul(60);
     const totalRewardPricePerYear =
       Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24).mul(365)));
@@ -562,7 +566,8 @@ export class TombFinance {
     depositTokenName: string,
   ) {
     if (this.isCustomFarm(poolContract.address)) {
-      return BigNumber.from('0');
+      const { dripper } = this.contracts;
+      return await dripper.amountPerSecond();
     }
     if (earnTokenName === 'WLRS') {
       if (contractName.endsWith('GenesisRewardPool')) {
@@ -619,18 +624,19 @@ export class TombFinance {
 
     const rewardPerSecond = await poolContract.wSharePerSecond();
     if (depositTokenName === 'WLRS-USDC-LP') {
-      return rewardPerSecond.mul(4500).div(10000); 
+      
+      return rewardPerSecond.mul(3000).div(10000); 
     } else if (depositTokenName === 'WLRS-USDIBS-LP') {
       return rewardPerSecond.mul(0).div(10000); 
     } else if (depositTokenName === 'WSHARE-USDC-LP') {
       return rewardPerSecond.mul(300).div(10000); 
-    } else if (depositTokenName = 'NRWL-YUSD-LP') {
+    } else if (depositTokenName === 'NRWL-YUSD-LP') {
       return rewardPerSecond.mul(1000).div(10000); 
-    }
-      else if (depositTokenName = 'WBOND') {
+    }else if (depositTokenName === 'WBOND') {
         return rewardPerSecond.mul(1000).div(10000); 
     } else if (depositTokenName === 'XWLRS') {
-        return rewardPerSecond.mul(3200).div(10000); 
+      
+        return rewardPerSecond.mul(4700).div(10000); 
     }
   }
   /**
@@ -667,7 +673,7 @@ export class TombFinance {
     } else if (tokenName === 'NRWL-YUSD-LP') {
       tokenPrice = await this.getLPTokenPrice(token, this.NRWL, false);
     } else if (tokenName === 'XWLRS') {
-      tokenPrice = await this.getLPTokenPrice(token, this.TOMB, false);
+      tokenPrice = (await this.getXWalrusStat()).priceInDollars;
     } else {
       tokenPrice = await this.getTokenPriceFromPancakeswap(token);
       tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
