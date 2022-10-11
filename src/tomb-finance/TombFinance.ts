@@ -535,7 +535,6 @@ export class TombFinance {
       poolContract,
       bank.depositTokenName,
     );
-      console.log('BANK', bank.contract)
     let tokenPerHour = tokenPerSecond.mul(60).mul(60);
     const totalRewardPricePerYear =
       Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24).mul(365)));
@@ -635,7 +634,6 @@ export class TombFinance {
     }else if (depositTokenName === 'WBOND') {
         return rewardPerSecond.mul(1000).div(10000); 
     } else if (depositTokenName === 'XWLRS') {
-      
         return rewardPerSecond.mul(4700).div(10000); 
     }
   }
@@ -756,14 +754,16 @@ export class TombFinance {
     // const TSHAREPrice = (await this.getShareStat()).priceInDollars;
     // const masonrytShareBalanceOf = await this.TSHARE.balanceOf(this.currentMasonry().address);
 
-    const [shareStat, masonrytShareBalanceOf] = await Promise.all([
+    const [shareStat, masonrytShareBalanceOf, nrwlShares] = await Promise.all([
       this.getShareStat(),
-      this.TSHARE.balanceOf(this.currentMasonry().address)
+      this.TSHARE.balanceOf(this.currentMasonry().address),
+      this.TSHARE.balanceOf(this.currentMasonryNrwl().address)
     ]);
     const TSHAREPrice = shareStat.priceInDollars;
     const masonryTVL = Number(getDisplayBalance(masonrytShareBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
+    const masonryTVL2 = Number(getDisplayBalance(nrwlShares, this.TSHARE.decimal)) * Number(TSHAREPrice);
 
-    return totalValue + masonryTVL;
+    return totalValue + masonryTVL + masonryTVL2;
   }
 
   /**
@@ -776,21 +776,21 @@ export class TombFinance {
    */
   async getLPTokenPrice(lpToken: ERC20, token: ERC20, isTomb: boolean): Promise<string> {
     const totalSupply = getFullDisplayBalance(await lpToken.totalSupply(), lpToken.decimal);
-    console.log(totalSupply) // 0.424748198
+    //console.log(totalSupply) // 0.424748198
 
     //Get amount of tokenA
     const tokenSupply = getFullDisplayBalance(await token.balanceOf(lpToken.address), token.decimal);
-    console.log(tokenSupply) // 771165 
+    //console.log(tokenSupply) // 771165 
     // const stat = isTomb === true ? await this.getTombStat() : await this.getShareStat();
     const stat = await this.getTokenStat(token.symbol);
     const priceOfToken = stat.priceInDollars;
-    console.log(priceOfToken) // 0.36 - wlrs correct 
+    //console.log(priceOfToken) // 0.36 - wlrs correct 
     const divider = ['WLRS', 'WSHARE', 'USDC', 'USDT'].includes(token.symbol) && !['WLRS-USDIBS-LP'].includes(lpToken.symbol) ? 10 ** 6 : 1;
     const tokenInLP = Number(tokenSupply) / Number(totalSupply) / divider; 
-    console.log(tokenInLP) // NOTE: hot fix 1.8155826389045446
+    //console.log(tokenInLP) // NOTE: hot fix 1.8155826389045446
     const tokenPrice = (Number(priceOfToken) * tokenInLP * 2) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
       .toString();
-      console.log(tokenPrice)
+      //console.log(tokenPrice)
     return tokenPrice;
   }
 
@@ -874,7 +874,7 @@ export class TombFinance {
   }
 
   async getYusdStat(): Promise<TokenStat> {
-    const { data } = await axios('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=yusd-stablecoin');
+   const { data } = await axios('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=yusd-stablecoin');
     return {
       tokenInFtm: data[0].current_price,
       priceInDollars: data[0].current_price,
