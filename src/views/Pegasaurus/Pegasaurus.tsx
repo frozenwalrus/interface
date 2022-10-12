@@ -85,7 +85,7 @@ console.log(Pegasaurus)
 <Switch>
   <Page>
     <Route exact path={path}>
-    <BackgroundImage />
+    
          <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '5px' }}>PEG DEFENDER </h2>
       {!!account ? (
         <Container maxWidth="xl">

@@ -148,7 +148,7 @@ const NewHome = () => {
 
   return (
     <Page>
-      <BackgroundImage />
+      
       <div className="mt-3">
         lets fuckin go 
       <Grid container spacing={3}>

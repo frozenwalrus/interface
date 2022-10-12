@@ -52,7 +52,7 @@ const Masonry = () => {
 
   return (
     <>
-      <BackgroundImage />
+      
       {!!account ? (
         <>
           <Typography align="center" variant="h3" gutterBottom>

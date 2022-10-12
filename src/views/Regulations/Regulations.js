@@ -75,7 +75,7 @@ const Regulations = () => {
 
   return (
     <Page>
-      <BackgroundImage />
+      
       <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
         Graveyard regulations
       </Typography>

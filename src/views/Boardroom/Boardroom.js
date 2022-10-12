@@ -45,7 +45,7 @@ const Boardroom = () => {
     <Switch>
       <Page>
         <Route exact path={path}>
-          <BackgroundImage />
+          
           {!!account ? (
             <Container maxWidth="lg">
               <h2 style={{

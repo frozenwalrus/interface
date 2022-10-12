@@ -30,14 +30,15 @@ const AccountButton: React.FC<AccountButtonProps> = ({ text }) => {
       {!account ? (
         <Button
           onClick={handleWalletProviderOpen}
-          color="primary"
-          variant="contained"
-          style={{ width: '120px', borderRadius: '14px' }}
+          style={{ padding: '12px 22px', background: '#282C42', borderRadius: '10px', color: '#FCFCFC' }}
         >
           {buttonText}
         </Button>
       ) : (
-        <Button variant="contained" color="primary" style={{ borderRadius: '10px' }} onClick={onPresentAccountModal}>
+        <Button
+          style={{ padding: '12px 22px', background: '#282C42', borderRadius: '10px', color: '#FCFCFC' }}
+          onClick={onPresentAccountModal}
+        >
           My Wallet
         </Button>
       )}

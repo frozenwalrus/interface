@@ -97,7 +97,7 @@ const Sbs: React.FC = () => {
   return (
     <Switch>
       <Page>
-        <BackgroundImage />
+        
         {!!account ? (
           <>
             <Route exact path={path}>

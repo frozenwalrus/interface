@@ -43,7 +43,7 @@ const SnoNodes = () => {
   const isDesktop = useMediaQuery('(min-width:600px)');
   return (
     <Page>
-         <BackgroundImage />
+         
       <Switch>
         <Route exact path={path}>
         <h2 style={{

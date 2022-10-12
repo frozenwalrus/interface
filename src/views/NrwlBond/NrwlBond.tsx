@@ -65,7 +65,7 @@ const NrwlBond: React.FC = () => {
   return (
     <Switch>
       <>
-        <BackgroundImage />
+        
         {!!account ? (
           <>
             <Route exact path={path}>

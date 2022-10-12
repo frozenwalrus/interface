@@ -29,7 +29,7 @@ const Media = () => {
 
 return (
 <Page>
-<BackgroundImage />
+
   <Container maxWidth="lg">
     <h2 align="center" style={{ fontSize: '3rem', marginBottom: '5%' }}><img src={lhb} style={{height:'50px'}} /> 
        FROZEN WALRUS MEDIA 

@@ -24,7 +24,7 @@ const Compound = () => {
 
   return (
     <Page>
-      <BackgroundImage />
+      
       <Grid
         container
         xs={12}

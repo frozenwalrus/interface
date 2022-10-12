@@ -140,7 +140,7 @@ const Lottery: React.FC = () => {
   return (
 <Switch>
   <Page>
-    <BackgroundImage />
+    
     {!!account ? (
       <>
       <div>

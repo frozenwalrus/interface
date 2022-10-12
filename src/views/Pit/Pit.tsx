@@ -62,7 +62,7 @@ const Pit: React.FC = () => {
   return (
     <Switch>
       <>
-        <BackgroundImage />
+        
         {!!account ? (
           <>
             <Route exact path={path}>

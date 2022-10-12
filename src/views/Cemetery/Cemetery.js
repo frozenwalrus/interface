@@ -34,7 +34,7 @@ const Cemetery = () => {
     <Switch>
       <Page>
         <Route exact path={path}>
-          <BackgroundImage />
+          
           {!!account ? (
             <Container maxWidth="lg">
                <h2 style={{
@@ -118,7 +118,7 @@ const Cemetery = () => {
           )}
         </Route>
         <Route path={`${path}/:bankId`}>
-          <BackgroundImage />
+          
           <Bank />
         </Route>
       </Page>

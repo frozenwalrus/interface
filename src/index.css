@@ -6,12 +6,6 @@
   --font: 'Roboto Slab', serif;
 }
 
-body {
-  overflow-x: hidden !important;
-  color: #4b4453;
-  font-family: var(--font) !important;
-}
-
 body,
 html,
 h1 {
@@ -63,16 +57,42 @@ body {
   color: #ffffff;
 }
 
+.secondary-button {
+  font-weight: 900;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #000000;
+  height: 50px;
+  background: #9aa4da;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.primary-button {
+  font-weight: 900;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #000000;
+  height: 50px;
+  width: 100%;
+  background: #00f0e2;
+  border-radius: 10px;
+}
+
 body {
+  background: #12141d;
+  color: #fcfcfc;
   position: absolute;
   content: '';
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background-position: center center !important;
-  background-attachment: fixed !important;
-  background-size: cover !important;
+  font-family: var(--font) !important;
 }
 
 h1 {
@@ -108,10 +128,6 @@ footer .a:hover {
   fill: '#DA4567';
 }
 
-.MuiToolbar-regular {
-  color: #1b1b1b;
-}
-
 .MuiButton-containedPrimary,
 .MuiButton-containedPrimary:hover,
 .MuiListItem-button:hover,
@@ -123,10 +139,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', 'Lato', 'Kanit', 'Roboto';
 }
 
-.MuiButton-root {
-  background-color: #284c7b !important;
-}
-
 .Mui-disabled {
   background-color: #cdcdcd !important;
 }
@@ -134,7 +146,7 @@ code {
 .MuiTypography-root,
 .MuiAlert-root,
 .MuiButton-root {
-    font-family: var(--font) !important;
+  font-family: var(--font) !important;
 }
 .wallet-button {
   color: black !important;

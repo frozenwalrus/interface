@@ -48,7 +48,7 @@ const matches = useMediaQuery('(min-width:1000px)');
 
   return (
 <Page>
-  <BackgroundImage />
+  
   {matches ? (
   <>
     <h2 style={{fontSize: '3rem', textAlign: 'center', marginBottom: '0%',}}>FROZEN WALRUS</h2> <br /> 

@@ -52,7 +52,7 @@ return (
 <Switch>
   <Page>
     <Route exact path={path}>
-      <BackgroundImage />
+      
       {!!account ? (
     <Container maxWidth="lg">
       <h2 align="center" style={{ fontSize: '3rem', marginBottom: '5%' }}>BONDS</h2>

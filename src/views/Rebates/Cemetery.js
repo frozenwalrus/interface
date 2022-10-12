@@ -112,7 +112,7 @@ const Cemetery = () => {
     <Switch>
       <Page>
         <Route exact path={path}>
-          <BackgroundImage />
+          
           {!!account ? (
             <Grid container direction="column" style={{ alignItems: 'center' }} spacing={5}>
               <Grid item>
