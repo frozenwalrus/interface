@@ -145,14 +145,6 @@ const Nav = () => {
               <Link color="textPrimary" to="/nodes" className={classes.link}>
                 Nodes
               </Link>
-              <a
-                href="https://xwlrs.frozenwalrus.finance/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={classes.link}
-              >
-                XWLRS
-              </a>
               <Link color="textPrimary" to="/lottery" className={classes.link}>
                 Lottery
               </Link>
