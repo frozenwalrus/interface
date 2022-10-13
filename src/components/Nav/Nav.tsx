@@ -115,10 +115,24 @@ const Nav = () => {
                 <div style={{ fontWeight: 900 }}></div>
               </div>
             </Link>
+
             <Box style={{ width: 'auto !important', marginLeft: '0%' }}>
-              <Link color="textPrimary" to="/" className={classes.link}>
-                Home
-              </Link>
+            <a
+                href="https://mint.frozenwalrus.finance/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={classes.link}
+              >
+                NFT
+              </a>
+              <a
+                href="https://xwlrs.frozenwalrus.finance/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={classes.link}
+              >
+                XWLRS
+              </a>
               <Link color="textPrimary" to="/farms" className={classes.link}>
                 Farms
               </Link>
@@ -127,9 +141,6 @@ const Nav = () => {
               </Link>
               <Link color="textPrimary" to="/bonds" className={classes.link}>
                 Bonds
-              </Link>
-              <Link color="textPrimary" to="/rebates" className={classes.link}>
-                Rebates
               </Link>
               <Link color="textPrimary" to="/nodes" className={classes.link}>
                 Nodes
@@ -144,9 +155,6 @@ const Nav = () => {
               </a>
               <Link color="textPrimary" to="/lottery" className={classes.link}>
                 Lottery
-              </Link>
-              <Link color="textPrimary" to="/pcp" className={classes.link}>
-                PCP
               </Link>
               <Link color="textPrimary" to="/compound" className={classes.link}>
                 Compound
@@ -221,9 +229,12 @@ const Nav = () => {
                   alignItems: 'center',
                 }}
               >
-                <Link color="textPrimary" to="/" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>Home</div>
-                </Link>
+                <a href=" https://mint.frozenwalrus.finance/" target="_blank" className={classes.link}>
+                  <div style={{ margin: '4px 20px' }}>NFT</div>
+                </a>
+                <a href=" https://xwlrs.frozenwalrus.finance/" target="_blank" className={classes.link}>
+                  <div style={{ margin: '4px 20px' }}>XWLRS</div>
+                </a>
                 <Link color="textPrimary" to="/farms" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Farms</div>
                 </Link>
@@ -233,18 +244,10 @@ const Nav = () => {
                 <Link color="textPrimary" to="/bonds" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Bonds</div>
                 </Link>
-                <Link color="textPrimary" to="/rebates" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>Rebates</div>
-                </Link>
                 <Link color="textPrimary" to="/nodes" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Nodes</div>
                 </Link>
-                <Link color="textPrimary" to="/pcp" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>PCP</div>
-                </Link>
-                <a href=" https://xwlrs.frozenwalrus.finance/" target="_blank" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>XWLRS</div>
-                </a>
+
                 <Link color="textPrimary" to="/lottery" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Lottery</div>
                 </Link>
