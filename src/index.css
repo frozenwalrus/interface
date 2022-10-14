@@ -58,6 +58,7 @@ body {
 }
 
 .secondary-button {
+  border: 0;
   font-weight: 900;
   font-size: 16px;
   text-align: center;
@@ -71,6 +72,7 @@ body {
 }
 
 .primary-button {
+  border: 0;
   font-weight: 900;
   font-size: 16px;
   text-align: center;

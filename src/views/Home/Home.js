@@ -28,28 +28,8 @@ import Rebates from './Rebates';
 import wlrsIcon from '../../assets/img/SVG_Icons_and_web_bg/WLRS.svg';
 import wlrsBlueImg from '../../assets/img/blue-walrus.png';
 import Nav from '../../components/Nav';
+import montainsImg from '../../assets/img/hero-banner-moutains.png';
 
-const HomeCard = styled.div`
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 50px;
-  padding: 20px;
-  box-shadow: 6px 6px 12px black;
-  color: #4b4453;
-`;
-const HomeCardBlue = styled.div`
-  background: rgba(217, 238, 254, 0.75);
-  border-radius: 50px;
-  box-shadow: 6px 6px 12px black;
-  padding: 20px;
-  color: #4b4453;
-`;
-const HomeCardPurple = styled.div`
-  background: rgba(214, 211, 242, 0.6);
-  border-radius: 50px;
-  box-shadow: 6px 6px 12px black;
-  padding: 20px;
-  color: #4b4453;
-`;
 const useStyles = makeStyles((theme) => ({
   button: {
     [theme.breakpoints.down('415')]: {
@@ -61,18 +41,11 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   topBanner: {
-    zIndex: 10,
-    height: '352px',
-    backgroundImage: 'url(' + require('../../assets/img/montains.png') + ')',
-    backgroundPosition: 'center',
-    backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat',
+    height: '200px',
+    background: 'linear-gradient(129.61deg, #07C4FF 14.12%, #00F0E2 88.39%)',
+    borderRadius: '20px',
   },
-  innerBanner: {
-    zIndex: 10,
-    paddingLeft: '60px',
-    paddingTop: '90px',
-  },
+  innerBanner: {},
   bannerTitle: {
     color: '#FFF',
     fontSize: '36px',
@@ -238,12 +211,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   // Footer
- 
 }));
 
 const Home = () => {
-  const matches = useMediaQuery('(min-width:600px)');
   const isDesktop = useMediaQuery('(min-width:1000px)');
+  const widthUnder600 = useMediaQuery('(max-width:600px)');
   const classes = useStyles();
   const TVL = useTotalValueLocked();
   const tombFtmLpStats = useLpStats('WLRS-USDC-LP');
@@ -352,34 +324,44 @@ const Home = () => {
     margin-bottom: 8px;
   `;
 
-  const [activeTab, setActiveTab] = useState('Rebates');
+  const [activeTab, setActiveTab] = useState('Farms');
 
   return (
     <Page>
-      <Box>
-        <div className={classes.topBanner}>
-          <div className={classes.innerBanner}>
-            <div className={classes.bannerTitle} style={{ fontWeight: 'bold' }}>
-              Welcome to FrozenWalrus
-            </div>
-            <div className={classes.bannerDescription} style={{ fontWeight: 'bold' }}>
-              <div>The advanced protocol</div>
-              <div>based on Leverage Yield Farming.</div>
-            </div>
-            <div className={classes.bannerFooter}>
-              If you want to know more,{' '}
-              <a style={{ fontWeight: 'bold' }} href="#">
-                check this website
-              </a>
-            </div>
-          </div>
-
-          {/* <img src={montainsImg} className={classes.bannerMountains} alt="Mountains" /> */}
+      <Box className={classes.topBanner} mt={5}>
+        <div className={classes.innerBanner}>
+          <Grid container>
+            <Grid item xs={12} sm={6}>
+              <div style={{ padding: '20px' }}>
+                <div className={classes.bannerTitle} style={{ fontWeight: 'bold' }}>
+                  Welcome to FrozenWalrus
+                </div>
+                <div className={classes.bannerDescription} style={{ fontWeight: 'bold' }}>
+                  <div>The advanced protocol</div>
+                  <div>based on Leverage Yield Farming.</div>
+                </div>
+                <div className={classes.bannerFooter}>
+                  If you want to know more,{' '}
+                  <a style={{ fontWeight: 'bold' }} href="#">
+                    check this website
+                  </a>
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <img src={montainsImg} className={classes.bannerMountains} alt="Mountains" />
+            </Grid>
+          </Grid>
         </div>
       </Box>
 
       <Box>
-        <Grid container justify="center" spacing={6} className={`${classes.tabs} ${classes.uppercase}`}>
+        <Grid
+          container
+          justify={widthUnder600 ? 'space-between' : 'center'}
+          spacing={widthUnder600 ? 1 : 6}
+          className={`${classes.tabs} ${classes.uppercase}`}
+        >
           <Grid
             item
             className={activeTab === 'Farms' ? classes.tabItemActive : classes.tabItem}
@@ -424,7 +406,7 @@ const Home = () => {
         <Rebates />
       </Box>
 
-      <Box mt={5}>
+      {/* <Box mt={5}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
             <Box className={classes.boxItem}>
@@ -962,7 +944,7 @@ const Home = () => {
             </div>
           </Grid>
         </Grid>
-      </Box>
+      </Box> */}
     </Page>
   );
 };

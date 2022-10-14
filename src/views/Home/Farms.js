@@ -3,8 +3,9 @@ import wlrsUsdcIcon from '../../assets/img/wlrs-usdc.png';
 import wlrsIcon from '../../assets/img/SVG_Icons_and_web_bg/WLRS.svg';
 import chevronDown from '../../assets/img/chevrondown.png';
 
-import { Box, Grid, Accordion, AccordionDetails, AccordionSummary, Slider } from '@material-ui/core';
+import { Box, Grid, Accordion, AccordionDetails, AccordionSummary, Slider, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { match } from 'assert';
 
 const useStyles = makeStyles((theme) => ({
   uppercase: {
@@ -43,9 +44,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '10px',
     paddingRight: '10px',
   },
-  lineItemInner: {
-    paddingRight: '50px',
-  },
+  lineItemInner: {},
   lineLogo: {
     verticalAlign: 'middle',
     marginRight: '20px',
@@ -124,6 +123,8 @@ const useStyles = makeStyles((theme) => ({
 const Farms = () => {
   const classes = useStyles();
 
+  const widthUnder600 = useMediaQuery('(max-width:600px)');
+
   const [activeDetailsBoxTab, setActiveDetailsBoxTab] = useState('Deposit');
   const [expanded, setExpanded] = React.useState(false);
 
@@ -176,178 +177,34 @@ const Farms = () => {
           <Accordion
             expanded={expanded === 'farms'}
             onChange={handleChange('farms')}
-            style={{ backgroundColor: 'transparent', padding: '15px' }}
+            style={{ backgroundColor: 'transparent', padding: widthUnder600 ? '10px 0 10px 0' : '15px' }}
           >
             <AccordionSummary
               expandIcon={<img src={chevronDown} alt="down" className={classes.dropdown} />}
               aria-controls="panel1bh-content"
               id="panel1bh-header"
             >
-              <Grid container justify="space-between" alignItems="center" className={classes.lineItemInner}>
-                <Grid item className={classes.lineName}>
+              <Grid container justify={"space-between"} alignItems="center" className={classes.lineItemInner}>
+                <Grid
+                  item
+                  className={classes.lineName}
+                  xs={12}
+                  sm={3}
+                  md={3}
+                  style={{ textAlign: widthUnder600 ? 'center' : 'left' }}
+                >
                   <img src={wlrsUsdcIcon} alt="WLRS-USDC.E" className={classes.lineLogo} />
                   WLRS-USDC.E
                 </Grid>
-                <Grid item>
+                <Grid item style={{ marginTop: widthUnder600 ? '15px' : '0' }}>
                   <div className={classes.lineLabel}>APR</div>
                   <div className={classes.lineValue}>1112%</div>
                 </Grid>
-                <Grid item>
+                <Grid item style={{ marginTop: widthUnder600 ? '15px' : '0' }}>
                   <div className={classes.lineLabel}>TVL</div>
                   <div className={classes.lineValue}>$3,121,244</div>
                 </Grid>
-                <Grid item>
-                  <div className={classes.lineLabel}>Deposited</div>
-                  <div className={classes.lineValueDeposited}>$2,211</div>
-                </Grid>
-              </Grid>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Grid container spacing={5}>
-                <Grid item xs={12} sm={12} md={6}>
-                  <Box className={classes.lineDetailsBox}>
-                    <div className={classes.lineDetailsInner}>
-                      <Grid container justify="center" spacing={6}>
-                        <Grid
-                          item
-                          className={
-                            activeDetailsBoxTab === 'Deposit' ? classes.tabDetailsItemActive : classes.tabDetailsItem
-                          }
-                          onClick={() => setActiveDetailsBoxTab('Deposit')}
-                        >
-                          DEPOSIT
-                        </Grid>
-                        <Grid
-                          item
-                          className={
-                            activeDetailsBoxTab === 'Withdraw' ? classes.tabDetailsItemActive : classes.tabDetailsItem
-                          }
-                          onClick={() => setActiveDetailsBoxTab('Withdraw')}
-                        >
-                          WITHDRAW
-                        </Grid>
-                      </Grid>
-                      <div className={classes.inputDetailsBox}>
-                        <div className={classes.inputDetailsBoxInner}>
-                          <Grid container mt={4} justify="space-between" alignItems="center">
-                            <Grid item>
-                              <input type="number" placeholder="Enter amount" />
-                            </Grid>
-                            <Grid item className={classes.colorSecondary}>
-                              MAX
-                            </Grid>
-                          </Grid>
-                          <div>Balance: 0</div>
-                        </div>
-                      </div>
-                      <Box mt={3}>
-                        <Slider
-                          aria-label="Restricted values"
-                          defaultValue={0}
-                          valueLabelFormat={valueLabelFormat}
-                          getAriaValueText={valuetext}
-                          step={null}
-                          valueLabelDisplay="auto"
-                          marks={marks}
-                        />
-                      </Box>
-                      <Box mt={2}>
-                        <Grid container justify="space-between" spacing={3}>
-                          <Grid item xs={6}>
-                            <button className="secondary-button" title="Zap" onClick={zap}>
-                              Zap
-                            </button>
-                          </Grid>
-                          <Grid item xs={6}>
-                            <button className="primary-button" title="Deposit" onClick={deposit}>
-                              Deposit
-                            </button>
-                          </Grid>
-                        </Grid>
-                        <Box mt={3}>
-                          <div className={`${classes.addRemoveLiquidity} ${classes.colorSecondary}`}>
-                            Add / Remove Liquidity
-                          </div>
-                        </Box>
-                      </Box>
-                    </div>
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={12} md={6}>
-                  <Box className={classes.lineDetailsBox}>
-                    <div className={classes.lineDetailsInner}>
-                      <Box>
-                        <div className={classes.pendingRewards}>PENDING REWARDS</div>
-                      </Box>
-                      <Box style={{ textAlign: 'center' }} mt={6}>
-                        <img src={wlrsIcon} width={82} height={82} alt="Walrus" />
-                      </Box>
-                      <Box mt={2}>
-                        <Grid
-                          container
-                          direction="column"
-                          spacing={0}
-                          justify="center"
-                          alignContent="center"
-                          alignItems="center"
-                        >
-                          <Grid item className={classes.rewardTokenAmount}>
-                            12 WLRS
-                          </Grid>
-                          <Grid item className={classes.rewardTokenValue}>
-                            $123.42
-                          </Grid>
-                        </Grid>
-                      </Box>
-                      <Box mt={2}>
-                        <Grid container justify="center">
-                          <Grid item xs={12} sm={8} md={6}>
-                            <button className="primary-button" title="Deposit" onClick={deposit}>
-                              CLAIM
-                            </button>
-                          </Grid>
-                        </Grid>
-                      </Box>
-                      <Box mt={2}>
-                        <div className={`${classes.addRemoveLiquidity} ${classes.colorSecondary}`}>
-                          You will receive 12 WLRS per day
-                        </div>
-                      </Box>
-                    </div>
-                  </Box>
-                </Grid>
-              </Grid>
-            </AccordionDetails>
-          </Accordion>
-        </div>
-      </Grid>
-
-      <Grid item xs={12}>
-        <div className={classes.lineItem}>
-          <Accordion
-            expanded={expanded === 'farms'}
-            onChange={handleChange('farms')}
-            style={{ backgroundColor: 'transparent', padding: '15px' }}
-          >
-            <AccordionSummary
-              expandIcon={<img src={chevronDown} alt="down" className={classes.dropdown} />}
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
-            >
-              <Grid container justify="space-between" alignItems="center" className={classes.lineItemInner}>
-                <Grid item className={classes.lineName}>
-                  <img src={wlrsUsdcIcon} alt="WLRS-USDC.E" className={classes.lineLogo} />
-                  WLRS-USDC.E
-                </Grid>
-                <Grid item>
-                  <div className={classes.lineLabel}>APR</div>
-                  <div className={classes.lineValue}>1112%</div>
-                </Grid>
-                <Grid item>
-                  <div className={classes.lineLabel}>TVL</div>
-                  <div className={classes.lineValue}>$3,121,244</div>
-                </Grid>
-                <Grid item>
+                <Grid item style={{ marginTop: widthUnder600 ? '15px' : '0' }}>
                   <div className={classes.lineLabel}>Deposited</div>
                   <div className={classes.lineValueDeposited}>$2,211</div>
                 </Grid>

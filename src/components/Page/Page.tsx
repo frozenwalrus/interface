@@ -11,7 +11,7 @@ const Page: React.FC = ({ children }) => {
     <div
       style={{
         position: 'relative',
-        background: 'linear-gradient(180deg, #202231 0%, rgba(30, 32, 46, 0.6) 73.44%, rgba(29, 31, 44, 0) 100%)',
+        background: 'linear-gradient(180deg, #202231 0%, #0A0A0A 650px)',
       }}
     >
       <Nav />
