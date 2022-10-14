@@ -1,82 +1,59 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Grid, Typography, Link } from '@material-ui/core';
-
-import TwitterImage from '../../assets/img/twitter.svg';
-import DiscordImage from '../../assets/img/discord.svg';
-import MediumImage from '../../assets/img/medium.svg';
+import { Box, Grid } from '@material-ui/core';
+import Nav from '../Nav';
+import discordIcon from '../../assets/img/SVG_Icons_and_web_bg/discord.svg';
+import youtubeIcon from '../../assets/img/SVG_Icons_and_web_bg/youtube.svg';
+import telegramIcon from '../../assets/img/SVG_Icons_and_web_bg/telegram.svg';
+import githubIcon from '../../assets/img/SVG_Icons_and_web_bg/github.svg';
+import twitterIcon from '../../assets/img/SVG_Icons_and_web_bg/twitter.svg';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    position: 'absolute',
-    bottom: '0',
-    paddingTop: '15px',
-    paddingBottom: '15px',
-    width: '100%',
-    backgroundColor: 'transparent',
-    textAlign: 'center',
-    height: '1.3rem',
-    [theme.breakpoints.down('xs')]: {
-      display: 'none',
-    },
+    backgroundColor: '#12141D',
   },
-  link: {
-    width: '24px',
-    height: '24px',
-    display: 'inline',
-    marginLeft: '20px',
+  footerInner: {
+    padding: '40px',
+    color: '#9AA4DA',
   },
-
-  img: {
-    width: '40px',
-    height: '40px',
-    opacity: 0.8,
+  copyright: {
+    color: '#FCFCFC'
   },
-  elipse: {
-    position: 'absolute',
-    width: '80px',
-    height: '80px',
-    left: '1700px',
-    top: '-100px',
-  },
+  bottomLine: {
+    paddingLeft: '30px', 
+    paddingRight: '30px'
+  }
 }));
 
 const Footer = () => {
   const classes = useStyles();
   return (
     <footer className={classes.footer}>
-      <Container maxWidth="lg">
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography variant="h4" component="div" align="center">
-              <Link color="inherit" href="/" style={{ textDecoration: 'none' }}>
-                WALRUS Finance {new Date().getFullYear()}
-              </Link>
-            </Typography>
+      <div className={classes.footerInner}>
+        <Nav />
+        <Box mt={3}>
+          <Grid container justify="center">
+            <Grid item>
+              An algorithmic stablecoin on the Fantom Opera blockchain, pegged to the price of 1 FTM 3omb utilizes
+              multiple bonding mechanisms at the 3DAO as well as seigniorage.
+            </Grid>
           </Grid>
-          <Grid item xs={12} style={{ textAlign: 'center', marginTop: '10px' }}>
-            <a
-              href="https://twitter.com/WalrusFinance"
-              rel="noopener noreferrer"
-              target="_blank"
-              className={classes.link}
-            >
-              <img alt="twitter" src={TwitterImage} className={classes.img} />
-            </a>
-            <a href="https://discord.gg/qZDuUBnxsT" rel="noopener noreferrer" target="_blank" className={classes.link}>
-              <img alt="discord" src={DiscordImage} className={classes.img} />
-            </a>
-            <a
-              href="https://medium.com/@frozenwalrusfinance"
-              rel="noopener noreferrer"
-              target="_blank"
-              className={classes.link}
-            >
-              <img alt="discord" src={MediumImage} className={classes.img} />
-            </a>
-          </Grid>
-        </Grid>
-      </Container>
+          <Box mt={5} className={classes.bottomLine}>
+            <Grid container justify="space-between" alignContent="center" alignItems="center">
+              <Grid item>
+                <Grid container justify="space-between" spacing={5}>
+                  <Grid item><img src={discordIcon} alt="Discord" width={40} height={40} /></Grid>
+                  <Grid item><img src={youtubeIcon} alt="Youtube" width={40} height={40} /></Grid>
+                  <Grid item><img src={telegramIcon} alt="Telegram" width={40} height={40} /></Grid>
+                  <Grid item><img src={githubIcon} alt="Github" width={40} height={40} /></Grid>
+                  <Grid item><img src={twitterIcon} alt="Twitter" width={40} height={40} /></Grid>
+                </Grid>
+              </Grid>
+              <Grid item className={classes.copyright}>Copyright © frozenwalrus.finance 2022</Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </div>
     </footer>
   );
 };
