@@ -145,9 +145,15 @@ const Nav = () => {
               <Link color="textPrimary" to="/nodes" className={classes.link}>
                 Nodes
               </Link>
-              <Link color="textPrimary" to="/lottery" className={classes.link}>
+              
+              <a
+                href="https://win.frozenwalrus.finance/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={classes.link}
+              >
                 Lottery
-              </Link>
+              </a>
               <Link color="textPrimary" to="/compound" className={classes.link}>
                 Compound
               </Link>
@@ -240,9 +246,10 @@ const Nav = () => {
                   <div style={{ margin: '4px 20px' }}>Nodes</div>
                 </Link>
 
-                <Link color="textPrimary" to="/lottery" className={classes.link}>
+                
+                <a href="https://win.frozenwalrus.finance/" target="_blank" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Lottery</div>
-                </Link>
+                </a>
                 
                 <Link color="textPrimary" to="/compound" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Compound</div>
