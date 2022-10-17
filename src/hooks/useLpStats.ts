@@ -5,7 +5,7 @@ import useRefresh from './useRefresh';
 
 const useLpStats = (lpTicker: string) => {
   const [stat, setStat] = useState<LPStat>();
-  const { slowRefresh } = useRefresh();
+  const { fastRefresh } = useRefresh();
   const tombFinance = useTombFinance();
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const useLpStats = (lpTicker: string) => {
       }
     }
     fetchLpPrice();
-  }, [setStat, tombFinance, slowRefresh, lpTicker]);
+  }, [setStat, tombFinance, fastRefresh, lpTicker]);
 
   return stat;
 };

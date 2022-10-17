@@ -3,7 +3,7 @@ import wlrsUsdcIcon from '../../assets/img/wlrs-usdc.png';
 import wlrsIcon from '../../assets/img/SVG_Icons_and_web_bg/WLRS.svg';
 import chevronDown from '../../assets/img/chevrondown.png';
 
-import { Box, Grid, Accordion, AccordionDetails, AccordionSummary, Slider } from '@material-ui/core';
+import { Box, Grid, Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,9 +43,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '10px',
     paddingRight: '10px',
   },
-  lineItemInner: {
-    paddingRight: '50px',
-  },
+  lineItemInner: {},
   lineLogo: {
     verticalAlign: 'middle',
     marginRight: '20px',
@@ -118,6 +116,10 @@ const useStyles = makeStyles((theme) => ({
   },
   lineDetailsInner: {
     padding: '35px',
+    minHeight: '345px',
+  },
+  balance: {
+    paddingLeft: '3px',
   },
 }));
 
@@ -169,6 +171,9 @@ const Rebates = () => {
   const deposit = () => {
     console.log('deposit');
   };
+
+  const widthUnder600 = useMediaQuery('(max-width:600px)');
+
   return (
     <Grid container direction="column" spacing={2}>
       <Grid item xs={12}>
@@ -176,7 +181,7 @@ const Rebates = () => {
           <Accordion
             expanded={expanded === 'farms'}
             onChange={handleChange('farms')}
-            style={{ backgroundColor: 'transparent', padding: '15px' }}
+            style={{ backgroundColor: 'transparent', padding: widthUnder600 ? '10px 0 10px 0' : '15px' }}
           >
             <AccordionSummary
               expandIcon={<img src={chevronDown} alt="down" className={classes.dropdown} />}
@@ -184,19 +189,40 @@ const Rebates = () => {
               id="panel1bh-header"
             >
               <Grid container justify="space-between" alignItems="center" className={classes.lineItemInner}>
-                <Grid item className={classes.lineName}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={4}
+                  className={classes.lineName}
+                  style={{ textAlign: widthUnder600 ? 'center' : 'left' }}
+                >
                   <img src={wlrsUsdcIcon} alt="WLRS-USDC.E" className={classes.lineLogo} />
                   WALRUS REBATES
                 </Grid>
-                <Grid item>
+                <Grid
+                  item
+                  xs={3}
+                  sm={3}
+                  style={{ marginTop: widthUnder600 ? '15px' : '0', textAlign: widthUnder600 ? 'center' : 'left' }}
+                >
                   <div className={classes.lineLabel}>Bond Premium</div>
                   <div className={classes.lineValue}>1112%</div>
                 </Grid>
-                <Grid item>
+                <Grid
+                  item
+                  xs={3}
+                  sm={3}
+                  style={{ marginTop: widthUnder600 ? '15px' : '0', textAlign: widthUnder600 ? 'center' : 'left' }}
+                >
                   <div className={classes.lineLabel}>TWAP</div>
                   <div className={classes.lineValue}>1.01</div>
                 </Grid>
-                <Grid item>
+                <Grid
+                  item
+                  xs={widthUnder600 ? 3 : 2}
+                  sm={2}
+                  style={{ marginTop: widthUnder600 ? '15px' : '0', textAlign: widthUnder600 ? 'center' : 'left' }}
+                >
                   <div className={classes.lineLabel}>Vested</div>
                   <div className={classes.lineValueDeposited}>$211</div>
                 </Grid>
@@ -229,15 +255,15 @@ const Rebates = () => {
                       </Grid>
                       <div className={classes.inputDetailsBox}>
                         <div className={classes.inputDetailsBoxInner}>
-                          <Grid container mt={4} justify="space-between" alignItems="center">
-                            <Grid item>
-                              <input type="number" placeholder="Enter amount" />
+                          <Grid container mt={4} justify="space-between" alignItems="center" wrap="nowrap">
+                            <Grid item xs={10} md={11}>
+                              <input type="number" placeholder="Enter amount" className="amount-input" />
                             </Grid>
-                            <Grid item className={classes.colorSecondary}>
+                            <Grid item xs={2} md={1} className={classes.colorSecondary}>
                               MAX
                             </Grid>
                           </Grid>
-                          <div>Balance: 0</div>
+                          <div className={classes.balance}>Balance: 0 USDC.E</div>
                         </div>
                       </div>
                       <Box mt={7} textAlign={'center'}>
@@ -286,7 +312,7 @@ const Rebates = () => {
                       </Box>
                       <Box mt={3}>
                         <Grid container justify="center">
-                          <Grid item xs={12} sm={8} md={6}>
+                          <Grid item xs={6} sm={8} md={6}>
                             <button className="primary-button" title="Deposit" onClick={deposit}>
                               CLAIM
                             </button>

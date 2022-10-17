@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: 240,
+    backgroundColor: '#12141D',
   },
   hide: {
     display: 'none',
@@ -94,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
   },
   metricBox: {
     border: '1px solid #282C42',
-    padding: '12px 19px',
+    padding: '10px 10px',
     borderRadius: '10px',
   },
   productIcons: {
@@ -143,10 +144,18 @@ const useStyles = makeStyles((theme) => ({
   black: {
     color: '#000000 !important',
   },
+  closeDrawerIcon: {
+    color: '#fcfcfc',
+    marginTop: '20px',
+  },
 }));
 
-const Nav = () => {
-  const matches = useMediaQuery('(min-width:1000px)');
+type NavProps = {
+  fromParent: string;
+};
+
+const Nav: React.FC<NavProps> = ({ fromParent }) => {
+  const matches = useMediaQuery('(min-width:1225px)');
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -313,10 +322,12 @@ const Nav = () => {
                           </Grid>
                         </Grid>
                       </div>
-                      <div className={classes.defiProducts} onMouseEnter={handleDefiProductsClick}>
-                        <img alt="defi products" className={classes.productIcons} src={productIcons} />
-                        Defi Products
-                      </div>
+                      {fromParent === 'page' && (
+                        <div className={classes.defiProducts} onMouseEnter={handleDefiProductsClick}>
+                          <img alt="defi products" className={classes.productIcons} src={productIcons} />
+                          Defi Products
+                        </div>
+                      )}
                     </Grid>
                     <Grid item>
                       <Link to="/dashboard" className={classes.link}>
@@ -324,12 +335,17 @@ const Nav = () => {
                       </Link>
                     </Grid>
                     <Grid item>
-                      <Link to="/dashboard" className={classes.link}>
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://docs.frozenwalrus.finance/welcome"
+                        className={classes.link}
+                      >
                         Docs
-                      </Link>
+                      </a>
                     </Grid>
                     <Grid item>
-                      <Link to="/dashboard" className={classes.link}>
+                      <Link to="/media" className={classes.link}>
                         Media
                       </Link>
                     </Grid>
@@ -355,18 +371,45 @@ const Nav = () => {
           </>
         ) : (
           <>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap>
-              WALRUS Finance
-            </Typography>
+            <Grid container alignItems="center" spacing={1} style={{ marginLeft: '15px' }}>
+              <Grid item>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={handleDrawerOpen}
+                  edge="start"
+                  className={clsx(open && classes.hide)}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <Link to="/" className={classes.brandLink}>
+                  <div
+                    className={classes.label}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <img alt="logo" className={classes.logo} src={logo} />
+                    <div style={{ fontWeight: 900 }}></div>
+                  </div>
+                </Link>
+              </Grid>
+              <Grid item>
+                <div className={classes.metricBox}>
+                  <span className={classes.tvlLabel}>TVL</span> $76,241,122
+                </div>
+              </Grid>
+              <Grid item>
+                <div className={classes.metricBox}>
+                  <span className={classes.wlrsLabel}>WLRS</span> $12.32
+                </div>
+              </Grid>
+            </Grid>
 
             <Drawer
               className={classes.drawer}
@@ -380,11 +423,10 @@ const Nav = () => {
               }}
             >
               <div>
-                <IconButton onClick={handleDrawerClose}>
+                <IconButton onClick={handleDrawerClose} className={classes.closeDrawerIcon}>
                   {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                 </IconButton>
               </div>
-              <Divider />
               <div
                 style={{
                   width: '100%',
@@ -397,41 +439,16 @@ const Nav = () => {
                 <Link color="textPrimary" to="/" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Home</div>
                 </Link>
-                <Link color="textPrimary" to="/farms" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>Farms</div>
-                </Link>
-                <Link color="textPrimary" to="/boardroom" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>Boardrooms</div>
-                </Link>
-                <Link color="textPrimary" to="/bonds" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>Bonds</div>
-                </Link>
-                <Link color="textPrimary" to="/rebates" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>Rebates</div>
-                </Link>
-                <Link color="textPrimary" to="/nodes" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>Nodes</div>
-                </Link>
-                <Link color="textPrimary" to="/pcp" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>PCP</div>
-                </Link>
-                <a href=" https://xwlrs.frozenwalrus.finance/" target="_blank" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>XWLRS</div>
-                </a>
-                <Link color="textPrimary" to="/lottery" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>Lottery</div>
-                </Link>
-
-                <Link color="textPrimary" to="/compound" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>Compound</div>
-                </Link>
-
-                <Link color="textPrimary" to="/media" className={classes.link}>
-                  <div style={{ margin: '4px 20px' }}>Media</div>
+                <Link color="textPrimary" to="/dashboard" className={classes.link}>
+                  <div style={{ margin: '4px 20px' }}>Dashboard</div>
                 </Link>
                 <a href="https://docs.frozenwalrus.finance/welcome" target="_blank" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Docs</div>
                 </a>
+
+                <Link color="textPrimary" to="/media" className={classes.link}>
+                  <div style={{ margin: '4px 20px' }}>Media</div>
+                </Link>
 
                 <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <AccountButton text="Connect" />

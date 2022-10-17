@@ -39,9 +39,10 @@ const useStyles = makeStyles((theme) => ({
   },
   bannerMountains: {
     width: '100%',
+    marginBottom: '-5px',
+    borderBottomRightRadius: '20px',
   },
   topBanner: {
-    height: '200px',
     background: 'linear-gradient(129.61deg, #07C4FF 14.12%, #00F0E2 88.39%)',
     borderRadius: '20px',
   },
@@ -95,6 +96,11 @@ const useStyles = makeStyles((theme) => ({
   },
   boxItemInner: {
     padding: '30px',
+  },
+  welcomeBox: {
+    paddingTop: '20px',
+    paddingLeft: '50px',
+    paddingBottom: '10px',
   },
   boxTitle: {
     fontSize: '21px',
@@ -153,13 +159,13 @@ const useStyles = makeStyles((theme) => ({
   },
   dashboardBoxTitle: {
     color: '#00F0E2',
-    marginTop: '30px',
+    marginTop: '20px',
     fontSize: '16px',
   },
   dashboardBoxLink: {
     color: '#FCFCFC',
     fontSize: '18px',
-    marginTop: '15px',
+    marginTop: '10px',
     fontWeight: '400',
     textDecoration: 'underline',
     textUnderlineOffset: '5px',
@@ -227,16 +233,6 @@ const Home = () => {
   const tBondStats = useBondStats();
   const tombFinance = useTombFinance();
   const { price: JOEPrice, marketCap: JOEMarketCap, priceChange: JOEPriceChange } = useFantomPrice();
-
-  // let tomb;
-  // let tShare;
-  // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-  //   tomb = tombTesting;
-  //   tShare = tShareTesting;
-  // } else {
-  //   tomb = tombProd;
-  //   tShare = tShareProd;
-  // }
 
   const buyTombAddress =
     'https://app.bogged.finance/avax/swap?tokenIn=0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664&tokenOut=0x395908aeb53d33A9B8ac35e148E9805D34A555D3';
@@ -330,9 +326,9 @@ const Home = () => {
     <Page>
       <Box className={classes.topBanner} mt={5}>
         <div className={classes.innerBanner}>
-          <Grid container>
-            <Grid item xs={12} sm={6}>
-              <div style={{ padding: '20px' }}>
+          <Grid container alignItems="flex-end">
+            <Grid item xs={12} sm={8} md={6}>
+              <div className={classes.welcomeBox}>
                 <div className={classes.bannerTitle} style={{ fontWeight: 'bold' }}>
                   Welcome to FrozenWalrus
                 </div>
@@ -342,20 +338,20 @@ const Home = () => {
                 </div>
                 <div className={classes.bannerFooter}>
                   If you want to know more,{' '}
-                  <a style={{ fontWeight: 'bold' }} href="#">
+                  <a target="_blank" rel="noopener noreferrer" style={{ fontWeight: 'bold' }} href="https://docs.frozenwalrus.finance/welcome">
                     check this website
                   </a>
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4} md={6}>
               <img src={montainsImg} className={classes.bannerMountains} alt="Mountains" />
             </Grid>
           </Grid>
         </div>
       </Box>
 
-      <Box>
+      <Box mt={7}>
         <Grid
           container
           justify={widthUnder600 ? 'space-between' : 'center'}
@@ -406,7 +402,7 @@ const Home = () => {
         <Rebates />
       </Box>
 
-      {/* <Box mt={5}>
+      <Box mt={5}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
             <Box className={classes.boxItem}>
@@ -470,17 +466,35 @@ const Home = () => {
 
       <Box mt={5}>
         <Grid container alignContent="center" alignItems="center">
-          <Grid item xs={6} className={classes.treasuryBox}>
-            <div className={classes.treasuryBoxTitle}>Total Treasury Balance:</div>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            className={classes.treasuryBox}
+            style={{
+              borderTopRightRadius: widthUnder600 ? '20px' : '0',
+              borderBottomLeftRadius: widthUnder600 ? '0' : '20px',
+            }}
+          >
+            <div className={classes.treasuryBoxTitle}>Total Treasury Balance</div>
             <div className={classes.treasuryBoxBalance}>$10,501,211</div>
           </Grid>
-          <Grid item xs={6} className={classes.dashboardBox}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            className={classes.dashboardBox}
+            style={{
+              borderBottomLeftRadius: widthUnder600 ? '20px' : '0',
+              borderTopRightRadius: widthUnder600 ? '0' : '20px',
+            }}
+          >
             <div className={classes.dashboardBoxInner}>
-              <Grid container>
-                <Grid item xs={6}>
-                  <img src={wlrsBlueImg} height={140} alt="Walrus" style={{ paddingTop: '10px' }} />
+              <Grid container wrap={'nowrap'} spacing={2} alignItems="flex-end">
+                <Grid item xs={4}>
+                  <img src={wlrsBlueImg} alt="Walrus" style={{ width: '100%' }} />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={8}>
                   <div className={classes.dashboardBoxTitle}>
                     Check out our financial dashboard to see more details of the treasury and other metrics
                   </div>
@@ -508,7 +522,7 @@ const Home = () => {
                   </Grid>
                 </Grid>
                 <Box mt={2} style={{ textAlign: 'center' }}>
-                  <img src={wlrsIcon} height={140} alt="Walrus" style={{ paddingTop: '10px' }} />
+                  <img src={wlrsIcon} height={100} alt="Walrus" style={{ paddingTop: '10px' }} />
                 </Box>
                 <Box mt={3} style={{ textAlign: 'center' }}>
                   <Grid container direction="column" justify="center">
@@ -583,7 +597,7 @@ const Home = () => {
                   </Grid>
                 </Grid>
                 <Box mt={2} style={{ textAlign: 'center' }}>
-                  <img src={wlrsIcon} height={140} alt="Walrus" style={{ paddingTop: '10px' }} />
+                  <img src={wlrsIcon} height={100} alt="Walrus" style={{ paddingTop: '10px' }} />
                 </Box>
                 <Box mt={3} style={{ textAlign: 'center' }}>
                   <Grid container direction="column" justify="center">
@@ -658,7 +672,7 @@ const Home = () => {
                   </Grid>
                 </Grid>
                 <Box mt={2} style={{ textAlign: 'center' }}>
-                  <img src={wlrsIcon} height={140} alt="Walrus" style={{ paddingTop: '10px' }} />
+                  <img src={wlrsIcon} height={100} alt="Walrus" style={{ paddingTop: '10px' }} />
                 </Box>
                 <Box mt={3} style={{ textAlign: 'center' }}>
                   <Grid container direction="column" justify="center">
@@ -733,7 +747,7 @@ const Home = () => {
                   </Grid>
                 </Grid>
                 <Box mt={2} style={{ textAlign: 'center' }}>
-                  <img src={wlrsIcon} height={140} alt="Walrus" style={{ paddingTop: '10px' }} />
+                  <img src={wlrsIcon} height={100} alt="Walrus" style={{ paddingTop: '10px' }} />
                 </Box>
                 <Box mt={3} style={{ textAlign: 'center' }}>
                   <Grid container direction="column" justify="center">
@@ -808,7 +822,7 @@ const Home = () => {
                   </Grid>
                 </Grid>
                 <Box mt={2} style={{ textAlign: 'center' }}>
-                  <img src={wlrsIcon} height={140} alt="Walrus" style={{ paddingTop: '10px' }} />
+                  <img src={wlrsIcon} height={100} alt="Walrus" style={{ paddingTop: '10px' }} />
                 </Box>
                 <Box mt={3} style={{ textAlign: 'center' }}>
                   <Grid container direction="column" justify="center">
@@ -883,7 +897,7 @@ const Home = () => {
                   </Grid>
                 </Grid>
                 <Box mt={2} style={{ textAlign: 'center' }}>
-                  <img src={wlrsIcon} height={140} alt="Walrus" style={{ paddingTop: '10px' }} />
+                  <img src={wlrsIcon} height={100} alt="Walrus" style={{ paddingTop: '10px' }} />
                 </Box>
                 <Box mt={3} style={{ textAlign: 'center' }}>
                   <Grid container direction="column" justify="center">
@@ -944,7 +958,7 @@ const Home = () => {
             </div>
           </Grid>
         </Grid>
-      </Box> */}
+      </Box>
     </Page>
   );
 };

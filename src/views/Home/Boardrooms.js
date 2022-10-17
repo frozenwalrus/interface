@@ -3,7 +3,7 @@ import wlrsUsdcIcon from '../../assets/img/wlrs-usdc.png';
 import wlrsIcon from '../../assets/img/SVG_Icons_and_web_bg/WLRS.svg';
 import chevronDown from '../../assets/img/chevrondown.png';
 
-import { Box, Grid, Accordion, AccordionDetails, AccordionSummary, Slider } from '@material-ui/core';
+import { Box, Grid, Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,9 +43,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '10px',
     paddingRight: '10px',
   },
-  lineItemInner: {
-    paddingRight: '50px',
-  },
+  lineItemInner: {},
   lineLogo: {
     verticalAlign: 'middle',
     marginRight: '20px',
@@ -65,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '18px',
   },
   lineDetailsBox: {
-    minHeight: '405px',
+    minHeight: '415px',
     backgroundColor: '#1D1F2C',
     borderRadius: '10px',
   },
@@ -127,7 +125,11 @@ const useStyles = makeStyles((theme) => ({
   },
   lineDetailsInner: {
     padding: '35px',
+    minHeight: '345px' 
   },
+  balance: {
+    paddingLeft: '3px'
+  }
 }));
 
 const Farms = () => {
@@ -178,6 +180,9 @@ const Farms = () => {
   const deposit = () => {
     console.log('deposit');
   };
+
+  const widthUnder600 = useMediaQuery('(max-width:600px)');
+
   return (
     <Grid container direction="column" spacing={2}>
       <Grid item xs={12}>
@@ -185,7 +190,7 @@ const Farms = () => {
           <Accordion
             expanded={expanded === 'farms'}
             onChange={handleChange('farms')}
-            style={{ backgroundColor: 'transparent', padding: '15px' }}
+            style={{ backgroundColor: 'transparent', padding: widthUnder600 ? '10px 0 10px 0' : '15px' }}
           >
             <AccordionSummary
               expandIcon={<img src={chevronDown} alt="down" className={classes.dropdown} />}
@@ -193,53 +198,41 @@ const Farms = () => {
               id="panel1bh-header"
             >
               <Grid container justify="space-between" className={classes.lineItemInner}>
-                <Grid item className={classes.lineName}>
-                  <Grid container direction="column" spacing={3}>
-                    <Grid item>
-                      <img src={wlrsUsdcIcon} alt="WLRS-USDC.E" className={classes.lineLogo} />
-                      WLRS BOARDROOM
-                    </Grid>
-                    <Grid item style={{ paddingLeft: '95px' }}>
-                      <div className={classes.lineLabel}>APR</div>
-                      <div className={classes.lineValue}>1112%</div>
-                    </Grid>
-                  </Grid>
+                <Grid item className={classes.lineName} xs={12} sm={4} style={{ textAlign: widthUnder600 ? 'center' : 'left' }}>
+                  <img src={wlrsUsdcIcon} alt="WLRS-USDC.E" className={classes.lineLogo} />
+                  WLRS BOARDROOM
                 </Grid>
-                <Grid item>
-                  <Grid container direction="column" spacing={3}>
-                    <Grid item>
-                      <div className={classes.lineLabel}>Current Epoch</div>
-                      <div className={classes.lineValue}>108</div>
-                    </Grid>
-                    <Grid item>
-                      <div className={classes.lineLabel}>Daily APR</div>
-                      <div className={classes.lineValue}>10.2%</div>
-                    </Grid>
-                  </Grid>
+                <Grid item xs={3} sm={3} style={{ marginTop: widthUnder600 ? '15px' : '0', textAlign: widthUnder600 ? 'center' : 'left' }}>
+                  <div className={classes.lineLabel}>Current Epoch</div>
+                  <div className={classes.lineValue}>108</div>
                 </Grid>
-                <Grid item>
-                  <Grid container direction="column" spacing={3}>
-                    <Grid item>
-                      <div className={classes.lineLabel}>Next Epoch</div>
-                      <div className={classes.lineValue}>05:04:02</div>
-                    </Grid>
-                    <Grid item>
-                      <div className={classes.lineLabel}>Epochs Above PEG</div>
-                      <div className={classes.lineValue}>31%</div>
-                    </Grid>
-                  </Grid>
+                <Grid item xs={3} sm={3} style={{ marginTop: widthUnder600 ? '15px' : '0', textAlign: widthUnder600 ? 'center' : 'left' }}>
+                  <div className={classes.lineLabel}>Next Epoch</div>
+                  <div className={classes.lineValue}>05:04:02</div>
                 </Grid>
-                <Grid item>
-                  <Grid container direction="column" spacing={3}>
-                    <Grid item>
-                      <div className={classes.lineLabel}>TWAP</div>
-                      <div className={classes.lineValue}>0.233</div>
-                    </Grid>
-                    <Grid item>
-                      <div className={classes.lineLabel}>WSHARE Staked</div>
-                      <div className={classes.lineValue}>2003.11</div>
-                    </Grid>
-                  </Grid>
+                <Grid item xs={3} sm={2} style={{ marginTop: widthUnder600 ? '15px' : '0', textAlign: widthUnder600 ? 'center' : 'left' }}>
+                  <div className={classes.lineLabel}>TWAP</div>
+                  <div className={classes.lineValue}>0.233</div>
+                </Grid>
+                <Grid item xs={3} sm={4} style={{marginTop: '15px', textAlign: widthUnder600 ? 'center' : 'left'}}>
+                  <div className={classes.lineLabel} style={{ paddingLeft: widthUnder600 ? '0' : '80px' }}>
+                    APR
+                  </div>
+                  <div className={classes.lineValue} style={{ paddingLeft: widthUnder600 ? '0' : '80px' }}>
+                    1112%
+                  </div>
+                </Grid>
+                <Grid item xs={3} sm={3} style={{marginTop: '15px', textAlign: widthUnder600 ? 'center' : 'left'}}>
+                  <div className={classes.lineLabel}>Daily APR</div>
+                  <div className={classes.lineValue}>10.2%</div>
+                </Grid>
+                <Grid item xs={4} sm={3} style={{marginTop: '15px', textAlign: widthUnder600 ? 'center' : 'left'}}>
+                  <div className={classes.lineLabel}>Epochs Above PEG</div>
+                  <div className={classes.lineValue}>31%</div>
+                </Grid>
+                <Grid item xs={3} sm={2} style={{marginTop: '15px', textAlign: widthUnder600 ? 'center' : 'left'}}>
+                  <div className={classes.lineLabel}>WSHARE Staked</div>
+                  <div className={classes.lineValue}>2003.11</div>
                 </Grid>
               </Grid>
             </AccordionSummary>
@@ -270,15 +263,15 @@ const Farms = () => {
                       </Box>
                       <Box mt={2}>
                         <div className={classes.inputDetailsBoxInner}>
-                          <Grid container mt={4} justify="space-between" alignItems="center">
-                            <Grid item>
-                              <input type="number" placeholder="Enter amount" />
+                        <Grid container mt={4} justify="space-between" alignItems="center" wrap='nowrap'>
+                            <Grid item xs={10} md={11}>
+                              <input type="number" placeholder="Enter amount" className="amount-input" />
                             </Grid>
-                            <Grid item className={classes.colorSecondary}>
+                            <Grid item xs={2} md={1} className={classes.colorSecondary}>
                               MAX
                             </Grid>
                           </Grid>
-                          <div>Balance: 0</div>
+                          <div className={classes.balance}>Balance: 0 WSHARE</div>
                         </div>
                       </Box>
 

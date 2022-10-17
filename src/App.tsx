@@ -18,6 +18,7 @@ import Popups from './components/Popups';
 import { RefreshContextProvider } from './contexts/RefreshContext';
 
 const Home = lazy(() => import('./views/Home'));
+const Dashboard = lazy(() => import('./views/Dashboard'));
 const Cemetery = lazy(() => import('./views/Cemetery'));
 // const Farm = lazy(() => import('./views/Farm'));
 const Boardroom = lazy(() => import('./views/Boardroom'));
@@ -28,14 +29,12 @@ const Bonds = lazy(() => import('./views/Bonds'));
 const Rebates = lazy(() => import('./views/Rebates'));
 // const Raffle = lazy(() => import('./views/Raffle'));
 const Compound = lazy(() => import('./views/Compound'));
-const Nodes = lazy(() => import('./views/Nodes')); 
-const Lottery = lazy(() => import('./views/Lottery')); 
-const NodeLeaderboard = lazy(() => import('./views/NodeLeaderboard')); 
-const Media = lazy(() => import('./views/Media')); 
-const PCP = lazy(() => import('./views/PCP')); 
-const PegDefender = lazy(() => import('./views/Pegasaurus')); 
-
-
+const Nodes = lazy(() => import('./views/Nodes'));
+const Lottery = lazy(() => import('./views/Lottery'));
+const NodeLeaderboard = lazy(() => import('./views/NodeLeaderboard'));
+const Media = lazy(() => import('./views/Media'));
+const PCP = lazy(() => import('./views/PCP'));
+const PegDefender = lazy(() => import('./views/Pegasaurus'));
 
 const NoMatch = () => (
   <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -60,6 +59,9 @@ const App: React.FC = () => {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route exact path="/dashboard">
+              <Dashboard />
             </Route>
             <Route path="/farms">
               <Cemetery />
@@ -98,14 +100,14 @@ const App: React.FC = () => {
               <Lottery />
             </Route>
             <Route path="/pcp">
-              <PCP /> 
-          </Route> 
-          <Route path="/pegdefender">
-              <PegDefender /> 
-          </Route>
+              <PCP />
+            </Route>
+            <Route path="/pegdefender">
+              <PegDefender />
+            </Route>
             <Route path="/leaderboard">
-              <NodeLeaderboard /> 
-          </Route>  
+              <NodeLeaderboard />
+            </Route>
             <Route path="*">
               <NoMatch />
             </Route>

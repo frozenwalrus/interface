@@ -14,7 +14,7 @@ const Page: React.FC = ({ children }) => {
         background: 'linear-gradient(180deg, #202231 0%, #0A0A0A 650px)',
       }}
     >
-      <Nav />
+      <Nav fromParent="page" />
       <Container maxWidth="lg" style={{ paddingBottom: '5rem' }}>
         {children}
       </Container>

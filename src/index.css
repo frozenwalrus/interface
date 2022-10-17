@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --font: 'Roboto Slab', serif;
+  --font: 'Satoshi-Variable', serif;
+}
+
+.MuiSlider-markLabel {
+  display: none;
 }
 
 body,
@@ -55,9 +59,51 @@ body {
 .MuiPaper-root,
 .MuiPaper-root h2 {
   color: #ffffff;
+  background-color: #12141d;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  border: none;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #9aa4da;
+  opacity: 0.3; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #9aa4da;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #9aa4da;
+}
+/* Firefox */
+
+.amount-input {
+  color: #9aa4da;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+
+  background-color: inherit;
+  border-width: 0px;
+  border-radius: 0;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .secondary-button {
+  cursor: pointer;
   border: 0;
   font-weight: 900;
   font-size: 16px;
@@ -71,7 +117,12 @@ body {
   border-radius: 10px;
 }
 
+.secondary-button:hover {
+  background: #b2bbf0;
+}
+
 .primary-button {
+  cursor: pointer;
   border: 0;
   font-weight: 900;
   font-size: 16px;
@@ -83,6 +134,20 @@ body {
   width: 100%;
   background: #00f0e2;
   border-radius: 10px;
+}
+
+.primary-button:hover {
+  background: #1bfff4;
+}
+
+.primary-button:disabled {
+  background: #cfd5f3;
+  cursor: not-allowed;
+}
+
+.secondary-button:disabled {
+  background: #d7d7d7;
+  cursor: not-allowed;
 }
 
 body {
@@ -151,7 +216,7 @@ code {
   font-family: var(--font) !important;
 }
 .wallet-button {
-  color: black !important;
+  color: #fcfcfc !important;
   background-color: #ddd !important;
   font-size: 1.1rem !important;
   text-align: left !important;

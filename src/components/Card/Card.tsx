@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const Card: React.FC = ({ children }) => <StyledCard>{children}</StyledCard>;
 
 const StyledCard = styled.div`
-  background: #f2f5ff;
+  background: #12141D;
   border-radius: 15px;
-  color: #4b4453;
+  color: #fcfcfc;
   position: relative;
 `;
 

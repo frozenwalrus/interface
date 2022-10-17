@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     width: '400px',
     maxWidth: '100%',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: '#12141D',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(4),
     outline: 'none',

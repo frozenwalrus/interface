@@ -3,7 +3,7 @@ import wlrsUsdcIcon from '../../assets/img/wlrs-usdc.png';
 import wlrsIcon from '../../assets/img/SVG_Icons_and_web_bg/WLRS.svg';
 import chevronDown from '../../assets/img/chevrondown.png';
 
-import { Box, Grid, Accordion, AccordionDetails, AccordionSummary, Slider } from '@material-ui/core';
+import { Box, Grid, Accordion, AccordionDetails, AccordionSummary, Slider, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,9 +43,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '10px',
     paddingRight: '10px',
   },
-  lineItemInner: {
-    paddingRight: '50px',
-  },
+  lineItemInner: {},
   lineLogo: {
     verticalAlign: 'middle',
     marginRight: '20px',
@@ -75,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '14px',
   },
   lineDetailsBox: {
-    minHeight: '405px',
+    minHeight: '330px',
     backgroundColor: '#1D1F2C',
     borderRadius: '10px',
   },
@@ -127,6 +125,20 @@ const useStyles = makeStyles((theme) => ({
   },
   lineDetailsInner: {
     padding: '35px',
+    minHeight: '345px',
+  },
+  balance: {
+    paddingLeft: '3px',
+  },
+  sliderValue: {
+    color: '#FCFCFC',
+    fontWeight: '900',
+    fontSize: '16px',
+    lineHeight: '22px',
+  },
+  sliderBox: {
+    paddingLeft: '5px',
+    paddingRight: '5px',
   },
 }));
 
@@ -178,6 +190,14 @@ const Nodes = () => {
   const deposit = () => {
     console.log('deposit');
   };
+
+  const widthUnder600 = useMediaQuery('(max-width:600px)');
+
+  const [sliderValue, setSliderValue] = useState(0);
+  const changeSliderValue = (event, newValue) => {
+    setSliderValue(newValue);
+  };
+
   return (
     <Grid container direction="column" spacing={2}>
       <Grid item xs={12}>
@@ -185,7 +205,7 @@ const Nodes = () => {
           <Accordion
             expanded={expanded === 'farms'}
             onChange={handleChange('farms')}
-            style={{ backgroundColor: 'transparent', padding: '15px' }}
+            style={{ backgroundColor: 'transparent', padding: widthUnder600 ? '10px 0 10px 0' : '15px' }}
           >
             <AccordionSummary
               expandIcon={<img src={chevronDown} alt="down" className={classes.dropdown} />}
@@ -193,15 +213,31 @@ const Nodes = () => {
               id="panel1bh-header"
             >
               <Grid container justify="space-between" alignItems="center" className={classes.lineItemInner}>
-                <Grid item className={classes.lineName}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  className={classes.lineName}
+                  style={{ textAlign: widthUnder600 ? 'center' : 'left' }}
+                >
                   <img src={wlrsUsdcIcon} alt="WLRS-USDC.E" className={classes.lineLogo} />
                   WLRS-USDC.E NODE
                 </Grid>
-                <Grid item>
+                <Grid
+                  item
+                  xs={6}
+                  sm={4}
+                  style={{ marginTop: widthUnder600 ? '15px' : '0', textAlign: widthUnder600 ? 'center' : 'left' }}
+                >
                   <div className={classes.lineLabel}>DAILY APR</div>
                   <div className={classes.lineValue}>1.5%</div>
                 </Grid>
-                <Grid item>
+                <Grid
+                  item
+                  xs={6}
+                  sm={2}
+                  style={{ marginTop: widthUnder600 ? '15px' : '0', textAlign: widthUnder600 ? 'center' : 'left' }}
+                >
                   <div className={classes.lineLabel}>YEARLY APR</div>
                   <div className={classes.lineValue}>322%</div>
                 </Grid>
@@ -210,8 +246,8 @@ const Nodes = () => {
             <AccordionDetails>
               <Grid container direction="column" spacing={1}>
                 <Grid item>
-                  <Grid container spacing={1} justify="space-between" wrap="nowrap">
-                    <Grid item xs={4} sm={4} md={3} lg={2}>
+                  <Grid container spacing={1} justify="space-between">
+                    <Grid item xs={4} sm={4} md={4} lg={2}>
                       <div className={classes.statBox}>
                         <div className={classes.statBoxInner}>
                           <div className={classes.lineLabel}>Your Nodes | TVL</div>
@@ -219,7 +255,7 @@ const Nodes = () => {
                         </div>
                       </div>
                     </Grid>
-                    <Grid item xs={4} sm={4} md={3} lg={2}>
+                    <Grid item xs={4} sm={4} md={4} lg={2}>
                       <div className={classes.statBox}>
                         <div className={classes.statBoxInner}>
                           <div className={classes.lineLabel}>APR | Daily APR</div>
@@ -227,7 +263,7 @@ const Nodes = () => {
                         </div>
                       </div>
                     </Grid>
-                    <Grid item xs={4} sm={4} md={3} lg={2}>
+                    <Grid item xs={4} sm={4} md={4} lg={2}>
                       <div className={classes.statBox}>
                         <div className={classes.statBoxInner}>
                           <div className={classes.lineLabel}>Amount Claimed</div>
@@ -235,7 +271,7 @@ const Nodes = () => {
                         </div>
                       </div>
                     </Grid>
-                    <Grid item xs={4} sm={4} md={3} lg={2}>
+                    <Grid item xs={4} sm={4} md={4} lg={2}>
                       <div className={classes.statBox}>
                         <div className={classes.statBoxInner}>
                           <div className={classes.lineLabel}>Max Possible Pay</div>
@@ -243,7 +279,7 @@ const Nodes = () => {
                         </div>
                       </div>
                     </Grid>
-                    <Grid item xs={4} sm={4} md={3} lg={2}>
+                    <Grid item xs={4} sm={4} md={4} lg={2}>
                       <div className={classes.statBox}>
                         <div className={classes.statBoxInner}>
                           <div className={classes.lineLabel}>Total Nodes</div>
@@ -251,7 +287,7 @@ const Nodes = () => {
                         </div>
                       </div>
                     </Grid>
-                    <Grid item xs={4} sm={4} md={3} lg={2}>
+                    <Grid item xs={4} sm={4} md={4} lg={2}>
                       <div className={classes.statBox}>
                         <div className={classes.statBoxInner}>
                           <div className={classes.lineLabel}>TVL</div>
@@ -292,29 +328,29 @@ const Nodes = () => {
                           </Grid>
                           <div className={classes.inputDetailsBox}>
                             <div className={classes.inputDetailsBoxInner}>
-                              <Grid container mt={4} justify="space-between" alignItems="center">
-                                <Grid item>
-                                  <input type="number" placeholder="Enter amount" />
+                              <Grid container mt={4} justify="space-between" alignItems="center" wrap="nowrap">
+                                <Grid item xs={10} md={11}>
+                                  <input type="number" placeholder="Enter amount of Nodes" className="amount-input" />
                                 </Grid>
-                                <Grid item className={classes.colorSecondary}>
+                                <Grid item xs={2} md={1} className={classes.colorSecondary}>
                                   MAX
                                 </Grid>
                               </Grid>
-                              <div>Balance: 0</div>
+                              <div className={classes.balance}>Balance: 0 WLRS-USDC.E</div>
                             </div>
                           </div>
-                          <Box mt={5}>
-                            <Slider
-                              aria-label="Restricted values"
-                              defaultValue={0}
-                              valueLabelFormat={valueLabelFormat}
-                              getAriaValueText={valuetext}
-                              step={null}
-                              valueLabelDisplay="auto"
-                              marks={marks}
-                            />
+                          <Box mt={2}>
+                            <div className={classes.sliderValue}>{sliderValue}%</div>
+                            <div className={classes.sliderBox}>
+                              <Slider
+                                defaultValue={0}
+                                onChange={changeSliderValue}
+                                valueLabelDisplay={'off'}
+                                marks={marks}
+                              />
+                            </div>
                           </Box>
-                          <Box mt={5}>
+                          <Box mt={0}>
                             <Grid container justify="center" spacing={3}>
                               <Grid item xs={6}>
                                 <button className="primary-button" title="Deposit" onClick={deposit}>
