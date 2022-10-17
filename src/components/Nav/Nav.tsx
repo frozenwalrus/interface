@@ -436,6 +436,7 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                   alignItems: 'center',
                 }}
               >
+
                 <Link color="textPrimary" to="/" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Home</div>
                 </Link>
@@ -445,6 +446,7 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                 <a href="https://docs.frozenwalrus.finance/welcome" target="_blank" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Docs</div>
                 </a>
+
 
                 <Link color="textPrimary" to="/media" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Media</div>
