@@ -21,14 +21,13 @@ const ProgressCountdown: React.FC<ProgressCountdownProps> = ({ base, deadline, h
     const m = String(minutes);
     const s = String(seconds);
     return (
-      <StyledCountdown>
+      <span>
         {h.padStart(2, '0')}:{m.padStart(2, '0')}:{s.padStart(2, '0')}
-      </StyledCountdown>
+      </span>
     );
   };
   return (
-    // <Card>
-    <StyledCardContentInner>
+    <div>
       {/* <StyledDesc>{description}</StyledDesc> */}
       <Countdown key={new Date().getTime()} date={deadline} renderer={countdownRenderer} />
       {hideBar ? (
@@ -38,17 +37,10 @@ const ProgressCountdown: React.FC<ProgressCountdownProps> = ({ base, deadline, h
           <StyledProgress progress={percentage} />
         </StyledProgressOuter>
       )}
-    </StyledCardContentInner>
+    </div>
     // </Card>
   );
 };
-
-const StyledCountdown = styled.p`
-  font-size: 24px;
-  font-weight: 400;
-  // color: ${(props) => props.theme.color.grey[100]};
-  margin: 0 0 6px 0;
-`;
 
 const StyledProgressOuter = styled.div`
   width: 100%;

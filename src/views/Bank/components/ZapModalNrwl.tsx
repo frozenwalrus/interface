@@ -19,7 +19,6 @@ import useApproveZapperNrwl, { ApprovalState } from '../../../hooks/useApproveZa
 import { NRWL_TICKER, YUSD_TICKER } from '../../../utils/constants';
 import { Alert } from '@material-ui/lab';
 
-
 interface ZapProps extends ModalProps {
   onConfirm: (zapAsset: string, lpName: string, amount: string) => void;
   tokenName?: string;
@@ -30,7 +29,9 @@ const ZapModalNrwl: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = ''
   const tombFinance = useTombFinance();
 
   const yusdBalance = useTokenBalance(tombFinance.YUSD);
-  useEffect(() => {setZappingTokenBalance(getDisplayBalance(yusdBalance, decimals));}, [yusdBalance, decimals]);
+  useEffect(() => {
+    setZappingTokenBalance(getDisplayBalance(yusdBalance, decimals));
+  }, [yusdBalance, decimals]);
 
   const nrwlBalance = useTokenBalance(tombFinance.NRWL);
 
@@ -89,16 +90,10 @@ const ZapModalNrwl: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = ''
       <ModalTitle text={`Zap in ${tokenName.replace('USDC', 'USDC.e')}`} />
 
       <StyledActionSpacer />
-      <InputLabel style={{ color: 'black', marginBottom: '8px' }} id="label">
+      <InputLabel style={{ color: '#fcfcfc', marginBottom: '8px' }} id="label">
         Select asset to zap with
       </InputLabel>
-      <Select
-        onChange={handleChangeAsset}
-        style={{ color: 'black', borderBottom: '1px solid rgba(0, 0, 0, 0.15)', }}
-        labelId="label"
-        id="select"
-        value={zappingToken}
-      >
+      <Select onChange={handleChangeAsset} style={{ color: 'fcfcfc' }} labelId="label" id="select" value={zappingToken}>
         <StyledMenuItem value={YUSD_TICKER}>{'YUSD'}</StyledMenuItem>
         {/* <StyledMenuItem value={tokenName.startsWith(NRWL_TICKER) ? NRWL_TICKER : TSHARE_TICKER}>{tokenName.startsWith(NRWL_TICKER) ? NRWL_TICKER : TSHARE_TICKER}</StyledMenuItem> */}
         {/* Tomb as an input for zapping will be disabled due to issues occuring with the Gatekeeper system */}
@@ -111,7 +106,7 @@ const ZapModalNrwl: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = ''
         max={zappingTokenBalance}
         symbol={zappingToken}
       />
-      <Label text="Zap Estimations" color='black' />
+      <Label text="Zap Estimations" color="black" />
       <StyledDescriptionText>
         {' '}
         {tokenName}: {ftmAmountPerLP !== undefined ? Number(estimate.token0) / Number(ftmAmountPerLP) : 0}
@@ -120,13 +115,14 @@ const ZapModalNrwl: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = ''
         ({Number(estimate.token0)} {YUSD_TICKER} / {Number(estimate.token1)} {NRWL_TICKER})
       </StyledDescriptionText>
       <ModalActions>
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => approveZapperStatus !== ApprovalState.APPROVED ? approveZapper() : onConfirm(zappingToken, tokenName, val)}
+        <button
+          className="primary-button"
+          onClick={() =>
+            approveZapperStatus !== ApprovalState.APPROVED ? approveZapper() : onConfirm(zappingToken, tokenName, val)
+          }
         >
           {approveZapperStatus !== ApprovalState.APPROVED ? 'Approve' : "Let's go"}
-        </Button>
+        </button>
       </ModalActions>
 
       <StyledActionSpacer />

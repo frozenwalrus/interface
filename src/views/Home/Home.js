@@ -115,12 +115,6 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
   },
 
-  colorSecondary: {
-    color: '#9AA4DA',
-  },
-  lineDetailsInner: {
-    padding: '35px',
-  },
   '@media only screen and (max-width: 850px)': {
     tokenButton: {
       width: '40% !important',
@@ -338,7 +332,12 @@ const Home = () => {
                 </div>
                 <div className={classes.bannerFooter}>
                   If you want to know more,{' '}
-                  <a target="_blank" rel="noopener noreferrer" style={{ fontWeight: 'bold' }} href="https://docs.frozenwalrus.finance/welcome">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ fontWeight: 'bold' }}
+                    href="https://docs.frozenwalrus.finance/welcome"
+                  >
                     check this website
                   </a>
                 </div>
@@ -415,7 +414,7 @@ const Home = () => {
                     <span className={classes.boxTitle}>Compound</span>
                   </Grid>
                   <Grid item>
-                    <span className={classes.colorSecondary}>
+                    <span className="color-secondary">
                       Random text here and adding some shizzle to make it two (2) lines. Yup.
                     </span>
                   </Grid>
@@ -434,7 +433,7 @@ const Home = () => {
                     <span className={classes.boxTitle}>Rebates</span>
                   </Grid>
                   <Grid item>
-                    <span className={classes.colorSecondary}>
+                    <span className="color-secondary">
                       Random text here and adding some shizzle to make it two (2) lines. Yup.
                     </span>
                   </Grid>
@@ -453,7 +452,7 @@ const Home = () => {
                     <span className={classes.boxTitle}>Lottery</span>
                   </Grid>
                   <Grid item>
-                    <span className={classes.colorSecondary}>
+                    <span className="color-secondary">
                       Random text here and adding some shizzle to make it two (2) lines. Yup.
                     </span>
                   </Grid>

@@ -91,18 +91,20 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
       <ModalTitle text={`Zap in ${tokenName.replace('USDC', 'USDC.e')}`} />
 
       <StyledActionSpacer />
-      <InputLabel style={{ color: 'black', marginBottom: '8px' }} id="label">
+      <InputLabel style={{ color: '#fcfcfc', marginBottom: '8px' }} id="label">
         Select asset to zap with
       </InputLabel>
       <Select
         onChange={handleChangeAsset}
-        style={{ color: 'black', borderBottom: '1px solid rgba(0, 0, 0, 0.15)', }}
+        style={{ color: '#fcfcfc' }}
         labelId="label"
         id="select"
         value={zappingToken}
       >
         <StyledMenuItem value={FTM_TICKER}>{'USDC.e'}</StyledMenuItem>
-        <StyledMenuItem value={tokenName.startsWith(TOMB_TICKER) ? TOMB_TICKER : TSHARE_TICKER}>{tokenName.startsWith(TOMB_TICKER) ? TOMB_TICKER : TSHARE_TICKER}</StyledMenuItem>
+        <StyledMenuItem value={tokenName.startsWith(TOMB_TICKER) ? TOMB_TICKER : TSHARE_TICKER}>
+          {tokenName.startsWith(TOMB_TICKER) ? TOMB_TICKER : TSHARE_TICKER}
+        </StyledMenuItem>
         {/* Tomb as an input for zapping will be disabled due to issues occuring with the Gatekeeper system */}
         {/* <StyledMenuItem value={TOMB_TICKER}>TOMB</StyledMenuItem> */}
       </Select>
@@ -124,15 +126,14 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         {tokenName.startsWith(TOMB_TICKER) ? TOMB_TICKER : TSHARE_TICKER}){' '}
       </StyledDescriptionText> */}
       <ModalActions>
-        <Button
-          color="primary"
-          variant="contained"
+        <button
+          className="primary-button"
           onClick={() =>
             approveZapperStatus !== ApprovalState.APPROVED ? approveZapper() : onConfirm(zappingToken, tokenName, val)
           }
         >
           {approveZapperStatus !== ApprovalState.APPROVED ? 'Approve' : "Let's go"}
-        </Button>
+        </button>
       </ModalActions>
 
       <StyledActionSpacer />

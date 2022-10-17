@@ -150,6 +150,150 @@ input::-webkit-inner-spin-button {
   cursor: not-allowed;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+.tabs {
+  font-weight: 700;
+  font-size: 18px;
+}
+.tabItem {
+  cursor: pointer;
+  color: #9aa4da;
+  font-weight: 700;
+  font-size: 18px;
+}
+.tabItemActive {
+  text-decoration: underline;
+  text-underline-offset: 10px;
+  color: #fcfcfc;
+}
+.tabDetailsItem {
+  cursor: pointer;
+  color: #9aa4da;
+  font-weight: 700;
+  font-size: 16px;
+}
+.tabDetailsItemActive {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+  color: #fcfcfc;
+}
+.lineItem {
+  background: #12141d;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.lineLogo {
+  vertical-align: middle;
+  margin-right: 20px;
+}
+.lineLabel {
+  color: #9aa4da;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.lineValue {
+  color: #fcfcfc;
+  font-size: 18px;
+}
+.dropdown {
+  cursor: pointer;
+}
+.lineName {
+  font-size: 18px;
+}
+.lineDetailsBox {
+  min-height: 420px;
+  background-color: #1d1f2c;
+  border-radius: 10px;
+}
+.inputDetailsBox {
+  margin-top: 50px;
+}
+.inputDetailsBoxInner {
+  padding: 16px;
+  background-color: #282c42;
+  border-radius: 10px;
+}
+.lineValueDeposited {
+  color: #07c4ff;
+  font-size: 18px;
+}
+.rewardTokenAmount {
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 28px;
+  text-align: center;
+  color: #fcfcfc;
+}
+.rewardTokenValue {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 28px;
+  text-align: center;
+  color: #07c4ff;
+}
+.addRemoveLiquidity {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+.max-button {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.rewards-per-day {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+.pending-rewards {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fcfcfc;
+}
+.color-secondary {
+  color: #9aa4da;
+}
+.line-details-inner {
+  padding: 35px;
+  min-height: 345px;
+}
+.balance {
+  padding-left: 3px;
+}
+.slider-value {
+  color: #fcfcfc;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 22px;
+}
+.slider-box {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.time-left {
+  color: #00f0e2;
+}
+.withdraw-time-left {
+  color: #07c4ff;
+}
+
 body {
   background: #12141d;
   color: #fcfcfc;
