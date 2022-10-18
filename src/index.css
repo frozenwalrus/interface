@@ -41,6 +41,7 @@ html,
 body {
   overflow-y: auto;
   height: 100%;
+  font-family: 'Satoshi-Variable';
 }
 
 .shinyButtonDisabled {
@@ -103,6 +104,7 @@ input::-webkit-inner-spin-button {
 }
 
 .secondary-button {
+  font-family: 'Satoshi-Variable';
   cursor: pointer;
   border: 0;
   font-weight: 900;
@@ -122,6 +124,7 @@ input::-webkit-inner-spin-button {
 }
 
 .primary-button {
+  font-family: 'Satoshi-Variable';
   cursor: pointer;
   border: 0;
   font-weight: 900;
@@ -361,7 +364,7 @@ code {
 }
 .wallet-button {
   color: #fcfcfc !important;
-  background-color: #ddd !important;
+  background-color: #282c42 !important;
   font-size: 1.1rem !important;
   text-align: left !important;
   justify-content: flex-start !important;
@@ -369,6 +372,6 @@ code {
   margin: 3px 0 !important;
 }
 .wallet-button:hover {
-  background-color: black !important;
-  color: #757ce8 !important;
+  background-color: #232634 !important;
+  color: #fcfcfc !important;
 }

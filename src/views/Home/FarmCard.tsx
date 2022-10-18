@@ -1,5 +1,6 @@
 import wlrsUsdcIcon from '../../assets/img/wlrs-usdc.png';
 import xWlrsIcon from '../../assets/img/xWLRS.png';
+import bondIcon from '../../assets/img/bond.png';
 import wShareUSDC from '../../assets/img/WSHARE-USDC.E.png';
 import nrwlYusd from '../../assets/img/nrwlYusd.png';
 import wlrsIcon from '../../assets/img/SVG_Icons_and_web_bg/WLRS.svg';
@@ -210,7 +211,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
     } else if (bank.depositTokenName === 'NRWL-YUSD-LP') {
       return nrwlYusd;
     } else if (bank.depositTokenName === 'WBOND') {
-      return xWlrsIcon;
+      return bondIcon;
     }
   };
 
