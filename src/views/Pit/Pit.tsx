@@ -133,6 +133,7 @@ const StyledBond = styled.div`
 const StyledCardWrapper = styled.div`
   display: flex;
   flex: 1;
+  background-color: '#1d1f2c';
   flex-direction: column;
   @media (max-width: 768px) {
     width: 80%;

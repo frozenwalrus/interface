@@ -5,7 +5,7 @@ import tombLogo from '../../assets/img/SVG_Icons_and_web_bg/WLRS-Icon-01.svg';
 import tShareLogo from '../../assets/img/SVG_Icons_and_web_bg/WSHARE-Icon-01.svg';
 import tombLogoPNG from '../../assets/img/sno.png';
 import tShareLogoPNG from '../../assets/img/snoshare.png';
-import tBondLogo from '../../assets/img/SVG_Icons_and_web_bg/Bond icon-01.svg';
+import tBondLogo from '../../assets/img/bond.png';
 
 import tombFtmLpLogo from '../../assets/img/SVG_Icons_and_web_bg/WLRS-USDC-LP-01.svg';
 import tshareFtmLpLogo from '../../assets/img/SVG_Icons_and_web_bg/SHARE-USDC-LP-01.svg';
@@ -22,14 +22,15 @@ import usdtLogoPNG from '../../assets/img/usdt.png';
 import usdcLogoPNG from '../../assets/img/USDC.png';
 import avaxLogoPNG from '../../assets/img/avax.png';
 import grapeLogoPNG from '../../assets/img/grape.png';
-import grapeWlrsLP from '../../assets/img/grape-wlrs.png';
+import grapeWlrsLP from '../../assets/img/wlrsGRAPE.png';
 import wlrsUsdibsLP from '../../assets/img/wlrs-usdibs.png';
 import nrwlPNG from '../../assets/img/nrwl.png'; 
 import yusdPNG from '../../assets/img/yusd.png';
 import nrwlSVG from '../../assets/img/nrwl.svg';
-import nbondSVG from '../../assets/img/nbond.svg';
+import nbondSVG from '../../assets/img/nrwlBond.png';
 import nrwlYusdPNG from '../../assets/img/nrwl-yusd.png';
 import xWLRS from '../../assets/img/xWLRS.png'; 
+import wlrsIcon from '../../assets/img/SVG_Icons_and_web_bg/WLRS.svg';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -41,7 +42,7 @@ const logosBySymbol: { [title: string]: string } = {
   WSHARE: tShareLogo,
   WBOND: tBondLogo,
   WFTM: wftmLogo,
-  WLRS: tombLogo,
+  WLRS: wlrsIcon,
   BOO: booLogo,
   SHIBA: shibaLogo,
   ZOO: zooLogo,

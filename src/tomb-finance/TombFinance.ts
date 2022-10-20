@@ -18,9 +18,22 @@ import {
 // import { Fetcher as FetcherSpirit, Token as TokenSpirit } from 'quickswap-sdk';
 // import { Fetcher, Route, Token } from 'quickswap-sdk';
 import { Configuration } from './config';
-import { ContractName, TokenStat, AllocationTime, LPStat, Bank, PoolStats, TShareSwapperStat, 
-  PegPoolToken, PegPool, PegPoolUserInfo, ExtinctionRewardToken, 
-Pegasaurus, PegasaurusToken, PegasaurusUserInfo } from './types';
+import {
+  ContractName,
+  TokenStat,
+  AllocationTime,
+  LPStat,
+  Bank,
+  PoolStats,
+  TShareSwapperStat,
+  PegPoolToken,
+  PegPool,
+  PegPoolUserInfo,
+  ExtinctionRewardToken,
+  Pegasaurus,
+  PegasaurusToken,
+  PegasaurusUserInfo,
+} from './types';
 import { BigNumber, Contract, ethers, EventFilter } from 'ethers';
 import { decimalToBalance } from './ether-utils';
 import { TransactionResponse } from '@ethersproject/providers';
@@ -32,7 +45,14 @@ import { /*config,*/ bankDefinitions } from '../config';
 import moment from 'moment';
 import { formatUnits, parseUnits } from 'ethers/lib/utils';
 import { commify, formatEther } from 'ethers/lib/utils';
-import { FTM_TICKER, NRWL_TICKER, SPOOKY_ROUTER_ADDR, SWAPSICLE_ROUTER_ADDR, TOMB_TICKER, TSHARE_TICKER } from '../utils/constants';
+import {
+  FTM_TICKER,
+  NRWL_TICKER,
+  SPOOKY_ROUTER_ADDR,
+  SWAPSICLE_ROUTER_ADDR,
+  TOMB_TICKER,
+  TSHARE_TICKER,
+} from '../utils/constants';
 // import { CompareArrowsOutlined } from '@material-ui/icons';
 // import { CompareArrowsOutlined, CompassCalibrationOutlined } from '@material-ui/icons';
 /**
@@ -59,11 +79,11 @@ export class TombFinance {
   DIBS: ERC20;
   GRAPE: ERC20;
   USDIBS: ERC20;
-  
+
   YUSD: ERC20;
   NRWL: ERC20;
   NBOND: ERC20;
-  XWLRS: ERC20; 
+  XWLRS: ERC20;
 
   constructor(cfg: Configuration) {
     const { deployments, externalTokens } = cfg;
@@ -76,7 +96,7 @@ export class TombFinance {
         this.contracts[name] = new Contract(
           deployment.address,
           '[{"inputs":[{"internalType":"address","name":"token_","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnerSet","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"changeOwner","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"claimRewards","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"depositRewards","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"emergencyWithdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"shareholder","type":"address"}],"name":"pendingShare","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"reward","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"token","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"userInfo","outputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"totalExcluded","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token_","type":"address"}],"name":"withdrawForeignToken","outputs":[],"stateMutability":"nonpayable","type":"function"}]',
-          provider
+          provider,
         );
       } else {
         this.contracts[name] = new Contract(deployment.address, deployment.abi, provider);
@@ -99,7 +119,7 @@ export class TombFinance {
     this.YUSD = this.externalTokens['YUSD'];
     this.NRWL = this.externalTokens['NRWL'];
     this.NBOND = this.externalTokens['NBOND'];
-    this.XWLRS = this.externalTokens['XWLRS']; 
+    this.XWLRS = this.externalTokens['XWLRS'];
     // Uniswap V2 Pair
     this.TOMBWFTM_LP = new Contract(externalTokens['WLRS-USDC-LP'][0], IUniswapV2PairABI, provider);
     this.config = cfg;
@@ -169,16 +189,30 @@ export class TombFinance {
       this.getTokenPriceFromPancakeswap(this.TOMB),
       this.getWFTMPriceFromPancakeswap(),
     ]);
-    
+
     const tombCirculatingSupply = supply.sub(25000);
-    const priceOfTombInDollars = (Number(priceInFTM) * Number(redeemRate/1e18)).toFixed(18);
-    console.log('s', priceOfTombInDollars)
+    const priceOfTombInDollars = (Number(priceInFTM) * Number(redeemRate / 1e18)).toFixed(18);
+    console.log('s', priceOfTombInDollars);
     return {
       tokenInFtm: priceInFTM,
       priceInDollars: priceOfTombInDollars,
       totalSupply: getDisplayBalance(supply, this.TOMB.decimal, 0),
       circulatingSupply: getDisplayBalance(tombCirculatingSupply, this.TOMB.decimal, 0),
     };
+  }
+
+  async getBoardroomPrintRate(): Promise<number> {
+    const { Masonry } = this.contracts;
+    const snapshotIndex = await Masonry.latestSnapshotIndex();
+    const currentEpoch = await Masonry.epoch();
+    return (snapshotIndex * 100) / currentEpoch;
+  }
+
+  async getNrwlBoardroomPrintRate(): Promise<number> {
+    const { NrwlBoardroom } = this.contracts;
+    const snapshotIndex = await NrwlBoardroom.latestSnapshotIndex();
+    const currentEpoch = await NrwlBoardroom.epoch();
+    return (snapshotIndex * 100) / currentEpoch;
   }
 
   /**
@@ -190,17 +224,17 @@ export class TombFinance {
     let lpToken = this.externalTokens[name];
     let lpTokenSupplyBN = await lpToken.totalSupply();
     let lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, lpToken.decimal, lpToken.decimal / 2);
-    let token0 =  name.startsWith('WLRS') ? this.TOMB : this.TSHARE; // name === 'WLRS-USDC-LP' ? this.TOMB : this.TSHARE;
+    let token0 = name.startsWith('WLRS') ? this.TOMB : this.TSHARE; // name === 'WLRS-USDC-LP' ? this.TOMB : this.TSHARE;
     let isTomb = name.startsWith('WLRS'); // name === 'WLRS-USDC-LP';
     let tokenAmountBN = await token0.balanceOf(lpToken.address);
     let tokenAmount = getDisplayBalance(tokenAmountBN, token0.decimal);
     let ftmAmountBN = await this.FTM.balanceOf(lpToken.address);
     let ftmAmount = getDisplayBalance(ftmAmountBN, this.FTM.decimal);
-    let tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply) / 10**6;
-    let ftmAmountInOneLP = Number(ftmAmount) / Number(lpTokenSupply) / 10**6;
+    let tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply) / 10 ** 6;
+    let ftmAmountInOneLP = Number(ftmAmount) / Number(lpTokenSupply) / 10 ** 6;
     let lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isTomb);
     let lpTokenPriceFixed = Number(lpTokenPrice).toFixed(2).toString();
-    let liquidity = (Number(lpTokenSupply) * Number(lpTokenPrice) * 10**6).toFixed(2).toString();
+    let liquidity = (Number(lpTokenSupply) * Number(lpTokenPrice) * 10 ** 6).toFixed(2).toString();
 
     // if (name === 'SNO-SNOSHARE-LP') {
     //   ftmAmountBN = await this.TOMB.balanceOf(lpToken.address);
@@ -343,9 +377,7 @@ export class TombFinance {
   async compound(poolName: ContractName, poolId: Number, sectionInUI: Number): Promise<TransactionResponse> {
     const pool = this.contracts[poolName];
     //By passing 0 as the amount, we are asking the contract to only redeem the reward and not the currently staked token
-    return sectionInUI !== 4
-    ? await pool.withdraw(poolId, 0)
-    : await pool.compound();
+    return sectionInUI !== 4 ? await pool.withdraw(poolId, 0) : await pool.compound();
   }
 
   async claimedBalanceNode(poolName: ContractName, account = this.myAccount): Promise<BigNumber> {
@@ -437,7 +469,10 @@ export class TombFinance {
 
   async getTombStatInEstimatedTWAP(): Promise<TokenStat> {
     const { SeigniorageOracle, TombFtmRewardPool } = this.contracts;
-    const expectedPrice = (await SeigniorageOracle.twap(this.TOMB.address, ethers.utils.parseEther('1')))/*.mul(10**12)*/;
+    const expectedPrice = await SeigniorageOracle.twap(
+      this.TOMB.address,
+      ethers.utils.parseEther('1'),
+    ); /*.mul(10**12)*/
 
     const supply = await this.TOMB.totalSupply();
     const tombRewardPoolSupply = await this.TOMB.balanceOf(TombFtmRewardPool.address);
@@ -453,7 +488,7 @@ export class TombFinance {
 
   async getTombStatInEstimatedTWAPNrwl(): Promise<TokenStat> {
     const { NrwlOracle } = this.contracts;
-    const expectedPrice = (await NrwlOracle.twap(this.NRWL.address, ethers.utils.parseEther('1')))/*.mul(10**12)*/;
+    const expectedPrice = await NrwlOracle.twap(this.NRWL.address, ethers.utils.parseEther('1')); /*.mul(10**12)*/
     const nrwlStats = await this.getNrwlStat();
     return {
       tokenInFtm: getDisplayBalance(expectedPrice),
@@ -494,7 +529,8 @@ export class TombFinance {
     const poolContract = this.contracts[bank.contract];
 
     if (bank.sectionInUI === 4) {
-        const [depositTokenPrice, points, totalPoints, tierAmount, poolBalance, totalBalance, dripRate, dailyUserDrip] = await Promise.all([
+      const [depositTokenPrice, points, totalPoints, tierAmount, poolBalance, totalBalance, dripRate, dailyUserDrip] =
+        await Promise.all([
           this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken),
           poolContract.tierAllocPoints(bank.poolId),
           poolContract.totalAllocPoints(),
@@ -504,52 +540,64 @@ export class TombFinance {
           poolContract.dripRate(),
           poolContract.getDayDripEstimate(this.myAccount),
         ]);
-        const stakeAmount = Number(tierAmount)/1e18
-        
-        const dailyDrip = totalPoints && +totalPoints > 0 
-          ? (poolBalance.mul(BigNumber.from(86400)).mul(points).div(totalPoints).div(dripRate))/1e18
+      const stakeAmount = Number(tierAmount) / 1e18;
+
+      const dailyDrip =
+        totalPoints && +totalPoints > 0
+          ? poolBalance.mul(BigNumber.from(86400)).mul(points).div(totalPoints).div(dripRate) / 1e18
           : 0;
-        const dailyDripAPR = (Number(dailyDrip) / stakeAmount) * 100;
-        const yearlyDripAPR = (Number(dailyDrip) * 365 / stakeAmount) * 100;
-        const dailyDripUser = Number(getDisplayBalance(dailyUserDrip));
-        const yearlyDripUser = Number(dailyDripUser) * 365;
+      const dailyDripAPR = (Number(dailyDrip) / stakeAmount) * 100;
+      const yearlyDripAPR = ((Number(dailyDrip) * 365) / stakeAmount) * 100;
+      const dailyDripUser = Number(getDisplayBalance(dailyUserDrip));
+      const yearlyDripUser = Number(dailyDripUser) * 365;
 
-        const TVL = bank.earnTokenName === 'NRWL-YUSD-LP'? (Number(depositTokenPrice) * Number(totalBalance)/1e18): (Number(depositTokenPrice) * Number(totalBalance)/1e12);
+      const TVL =
+        bank.earnTokenName === 'NRWL-YUSD-LP'
+          ? (Number(depositTokenPrice) * Number(totalBalance)) / 1e18
+          : (Number(depositTokenPrice) * Number(totalBalance)) / 1e12;
 
-        return {
-          userDailyBurst: dailyDripUser.toFixed(2).toString(),
-          userYearlyBurst: yearlyDripUser.toFixed(2).toString(),
-          dailyAPR: dailyDripAPR.toFixed(2).toString(),
-          yearlyAPR: yearlyDripAPR.toFixed(2).toString(),
-          TVL: TVL.toFixed(2).toString(),
-        };
-      
-    }else{
-    const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
-    const stakeInPool = (await depositToken.balanceOf(bank.address)).mul(bank.depositTokenName.endsWith('USDC-LP') ? 10**6 : 1);
-    const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal, depositToken.decimal === 6 ? 3 : 9));
-    const stat = bank.earnTokenName === 'WLRS' ? await this.getTombStat() : bank.earnTokenName === 'NRWL'? await this.getNrwlStat() : await this.getShareStat(); 
-    const tokenPerSecond = await this.getTokenPerSecond(
-      bank.earnTokenName,
-      bank.contract,
-      poolContract,
-      bank.depositTokenName,
-    );
-    let tokenPerHour = tokenPerSecond.mul(60).mul(60);
-    const totalRewardPricePerYear =
-      Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24).mul(365)));
-    const totalRewardPricePerDay = Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24)));
-    const totalStakingTokenInPool =
-      Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
-    const dailyAPR = (totalRewardPricePerDay / totalStakingTokenInPool) * 100;
-    const yearlyAPR = (totalRewardPricePerYear / totalStakingTokenInPool) * 100;
-    return {
-      dailyAPR: dailyAPR.toFixed(2).toString(),
-      yearlyAPR: yearlyAPR.toFixed(2).toString(),
-      TVL: TVL.toFixed(2).toString(),
-    };
+      return {
+        userDailyBurst: dailyDripUser.toFixed(2).toString(),
+        userYearlyBurst: yearlyDripUser.toFixed(2).toString(),
+        dailyAPR: dailyDripAPR.toFixed(2).toString(),
+        yearlyAPR: yearlyDripAPR.toFixed(2).toString(),
+        TVL: TVL.toFixed(2).toString(),
+      };
+    } else {
+      const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
+      const stakeInPool = (await depositToken.balanceOf(bank.address)).mul(
+        bank.depositTokenName.endsWith('USDC-LP') ? 10 ** 6 : 1,
+      );
+      const TVL =
+        Number(depositTokenPrice) *
+        Number(getDisplayBalance(stakeInPool, depositToken.decimal, depositToken.decimal === 6 ? 3 : 9));
+      const stat =
+        bank.earnTokenName === 'WLRS'
+          ? await this.getTombStat()
+          : bank.earnTokenName === 'NRWL'
+          ? await this.getNrwlStat()
+          : await this.getShareStat();
+      const tokenPerSecond = await this.getTokenPerSecond(
+        bank.earnTokenName,
+        bank.contract,
+        poolContract,
+        bank.depositTokenName,
+      );
+      let tokenPerHour = tokenPerSecond.mul(60).mul(60);
+      const totalRewardPricePerYear =
+        Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24).mul(365)));
+      const totalRewardPricePerDay = Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24)));
+      const totalStakingTokenInPool =
+        Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
+      const dailyAPR = (totalRewardPricePerDay / totalStakingTokenInPool) * 100;
+      const yearlyAPR = (totalRewardPricePerYear / totalStakingTokenInPool) * 100;
+      return {
+        dailyAPR: dailyAPR.toFixed(2).toString(),
+        yearlyAPR: yearlyAPR.toFixed(2).toString(),
+        TVL: TVL.toFixed(2).toString(),
+      };
+    }
   }
-}
 
   /**
    * Method to return the amount of tokens the pool yields per second
@@ -580,7 +628,7 @@ export class TombFinance {
         // } else if (depositTokenName === 'SHIBA') {
         //   return rewardPerSecond.mul(1500).div(11000).div(24);
         // }
-        return rewardPerSecond/*.div(24)*/;
+        return rewardPerSecond /*.div(24)*/;
       }
 
       const poolStartTime = await poolContract.poolStartTime();
@@ -597,44 +645,40 @@ export class TombFinance {
       if (contractName.endsWith('WlrsUsdcGenesisNrwlRewardPool')) {
         const rewardPerSecond = await poolContract.wlrsPerSecond();
         return rewardPerSecond;
-      }
-      else if (contractName.endsWith('NrwlYusdGenesisNrwlRewardPool')) {
+      } else if (contractName.endsWith('NrwlYusdGenesisNrwlRewardPool')) {
+        const rewardPerSecond = await poolContract.wlrsPerSecond();
+        return rewardPerSecond;
+      } else if (contractName.endsWith('WshareUsdcGenesisNrwlRewardPool')) {
+        const rewardPerSecond = await poolContract.wlrsPerSecond();
+        return rewardPerSecond;
+      } else if (contractName.endsWith('WshareGenesisNrwlRewardPool')) {
         const rewardPerSecond = await poolContract.wlrsPerSecond();
         return rewardPerSecond;
       }
-      else if (contractName.endsWith('WshareUsdcGenesisNrwlRewardPool')) {
-        const rewardPerSecond = await poolContract.wlrsPerSecond();
-        return rewardPerSecond;
-      }
-      else if (contractName.endsWith('WshareGenesisNrwlRewardPool')) {
-        const rewardPerSecond = await poolContract.wlrsPerSecond();
-        return rewardPerSecond;
-      }
-    
+
       const poolStartTime = await poolContract.poolStartTime();
       const startDateTime = new Date(poolStartTime.toNumber() * 1000);
       const FOURTEEN_DAYS = 14 * 24 * 60 * 60 * 1000;
-       if (Date.now() - startDateTime.getTime() > FOURTEEN_DAYS) {
+      if (Date.now() - startDateTime.getTime() > FOURTEEN_DAYS) {
         return await poolContract.epochTombPerSecond(1);
       }
 
       return await poolContract.epochTombPerSecond(0);
-    } 
+    }
 
     const rewardPerSecond = await poolContract.wSharePerSecond();
     if (depositTokenName === 'WLRS-USDC-LP') {
-      
-      return rewardPerSecond.mul(3000).div(10000); 
+      return rewardPerSecond.mul(3000).div(10000);
     } else if (depositTokenName === 'WLRS-USDIBS-LP') {
-      return rewardPerSecond.mul(0).div(10000); 
+      return rewardPerSecond.mul(0).div(10000);
     } else if (depositTokenName === 'WSHARE-USDC-LP') {
-      return rewardPerSecond.mul(300).div(10000); 
+      return rewardPerSecond.mul(300).div(10000);
     } else if (depositTokenName === 'NRWL-YUSD-LP') {
-      return rewardPerSecond.mul(1000).div(10000); 
-    }else if (depositTokenName === 'WBOND') {
-        return rewardPerSecond.mul(1000).div(10000); 
+      return rewardPerSecond.mul(1000).div(10000);
+    } else if (depositTokenName === 'WBOND') {
+      return rewardPerSecond.mul(1000).div(10000);
     } else if (depositTokenName === 'XWLRS') {
-        return rewardPerSecond.mul(4700).div(10000); 
+      return rewardPerSecond.mul(4700).div(10000);
     }
   }
   /**
@@ -741,12 +785,12 @@ export class TombFinance {
 
       const [tokenPrice, tokenAmountInPool] = await Promise.all([
         this.getDepositTokenPriceInDollars(bankInfo.depositTokenName, token),
-        token.balanceOf(pool.address)
+        token.balanceOf(pool.address),
       ]);
       const value = Number(getDisplayBalance(tokenAmountInPool, token.decimal, 6)) * Number(tokenPrice);
       let poolValue = Number.isNaN(value) ? 0 : value;
       if (bankInfo.depositTokenName.endsWith('-USDC-LP')) {
-        poolValue = poolValue * 10**6;
+        poolValue = poolValue * 10 ** 6;
       }
       totalValue += poolValue;
     }
@@ -757,7 +801,7 @@ export class TombFinance {
     const [shareStat, masonrytShareBalanceOf, nrwlShares] = await Promise.all([
       this.getShareStat(),
       this.TSHARE.balanceOf(this.currentMasonry().address),
-      this.TSHARE.balanceOf(this.currentMasonryNrwl().address)
+      this.TSHARE.balanceOf(this.currentMasonryNrwl().address),
     ]);
     const TSHAREPrice = shareStat.priceInDollars;
     const masonryTVL = Number(getDisplayBalance(masonrytShareBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
@@ -780,36 +824,43 @@ export class TombFinance {
 
     //Get amount of tokenA
     const tokenSupply = getFullDisplayBalance(await token.balanceOf(lpToken.address), token.decimal);
-    //console.log(tokenSupply) // 771165 
+    //console.log(tokenSupply) // 771165
     // const stat = isTomb === true ? await this.getTombStat() : await this.getShareStat();
     const stat = await this.getTokenStat(token.symbol);
     const priceOfToken = stat.priceInDollars;
-    //console.log(priceOfToken) // 0.36 - wlrs correct 
-    const divider = ['WLRS', 'WSHARE', 'USDC', 'USDT'].includes(token.symbol) && !['WLRS-USDIBS-LP'].includes(lpToken.symbol) ? 10 ** 6 : 1;
-    const tokenInLP = Number(tokenSupply) / Number(totalSupply) / divider; 
+    //console.log(priceOfToken) // 0.36 - wlrs correct
+    const divider =
+      ['WLRS', 'WSHARE', 'USDC', 'USDT'].includes(token.symbol) && !['WLRS-USDIBS-LP'].includes(lpToken.symbol)
+        ? 10 ** 6
+        : 1;
+    const tokenInLP = Number(tokenSupply) / Number(totalSupply) / divider;
     //console.log(tokenInLP) // NOTE: hot fix 1.8155826389045446
     const tokenPrice = (Number(priceOfToken) * tokenInLP * 2) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
       .toString();
-      //console.log(tokenPrice)
+    //console.log(tokenPrice)
     return tokenPrice;
   }
 
   async getNrwlStat(): Promise<TokenStat> {
     const { chainId } = this.config;
     const pairAddress = this.config.externalTokens['NRWL-YUSD-LP'][0];
-    const contract = new Contract(pairAddress, [
-      'function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast)',
-      'function token0() external view returns (address)',
-      'function token1() external view returns (address)'
-    ], this.provider);
+    const contract = new Contract(
+      pairAddress,
+      [
+        'function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast)',
+        'function token0() external view returns (address)',
+        'function token1() external view returns (address)',
+      ],
+      this.provider,
+    );
     const reserves = await contract.getReserves();
     const token0Address = await contract.token0();
     const token1Address = await contract.token1();
     const { YUSD, NRWL } = this.config.externalTokens;
     const tokenA = new TokenSwapsicle(chainId, YUSD[0], YUSD[1]);
     const tokenB = new TokenSwapsicle(chainId, NRWL[0], NRWL[1]);
-    const token0 = [tokenA, tokenB].find(token => token.address === token0Address);
-    const token1 = [tokenA, tokenB].find(token => token.address === token1Address);
+    const token0 = [tokenA, tokenB].find((token) => token.address === token0Address);
+    const token1 = [tokenA, tokenB].find((token) => token.address === token1Address);
     const pair = new PairSwapsicle(
       CurrencyAmountSwapsicle.fromRawAmount(token1, reserves.reserve1.toString()),
       CurrencyAmountSwapsicle.fromRawAmount(token0, reserves.reserve0.toString()),
@@ -818,7 +869,12 @@ export class TombFinance {
     const tokenAmount = CurrencyAmountSwapsicle.fromRawAmount(tokenA, '1000000000000000000');
     const trade = new TradeSwapsicle(route, tokenAmount, TradeTypeSwapsicle.EXACT_INPUT);
     const yusdStat = await this.getYusdStat();
-    const { NrwlYusdGenesisNrwlRewardPool, WlrsUsdcGenesisNrwlRewardPool, WshareUsdcGenesisNrwlRewardPool, WshareGenesisNrwlRewardPool } = this.contracts;
+    const {
+      NrwlYusdGenesisNrwlRewardPool,
+      WlrsUsdcGenesisNrwlRewardPool,
+      WshareUsdcGenesisNrwlRewardPool,
+      WshareGenesisNrwlRewardPool,
+    } = this.contracts;
     const supply = await this.NRWL.totalSupply();
     const [supply1, supply2, supply3, supply4] = await Promise.all([
       this.NRWL.balanceOf(NrwlYusdGenesisNrwlRewardPool.address),
@@ -831,14 +887,16 @@ export class TombFinance {
 
     return {
       tokenInFtm: (1 / Number(trade.executionPrice.toSignificant(18))).toFixed(4),
-      priceInDollars: (1 / Number(trade.executionPrice.toSignificant(18)) * Number(yusdStat.priceInDollars)).toFixed(18),
+      priceInDollars: ((1 / Number(trade.executionPrice.toSignificant(18))) * Number(yusdStat.priceInDollars)).toFixed(
+        18,
+      ),
       totalSupply: getDisplayBalance(supply, this.NRWL.decimal, 0),
       circulatingSupply: getDisplayBalance(circulatingSupply, this.NRWL.decimal, 0),
     };
   }
 
   async getTokenStat(tokenName: string): Promise<TokenStat> {
-    switch(tokenName) {
+    switch (tokenName) {
       case 'YUSD':
         return this.getYusdStat();
       case 'NRWL':
@@ -866,7 +924,7 @@ export class TombFinance {
         return this.getUSDibsStat();
       case 'WBOND':
         return this.getBondStat();
-        case 'XWLRS':
+      case 'XWLRS':
         return this.getXWalrusStat();
       default:
         throw new Error(`Unknown token name: ${tokenName}`);
@@ -874,7 +932,7 @@ export class TombFinance {
   }
 
   async getYusdStat(): Promise<TokenStat> {
-   const { data } = await axios('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=yusd-stablecoin');
+    const { data } = await axios('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=yusd-stablecoin');
     return {
       tokenInFtm: data[0].current_price,
       priceInDollars: data[0].current_price,
@@ -884,7 +942,9 @@ export class TombFinance {
   }
 
   async getUsdtStat(): Promise<TokenStat> {
-    const { data } = await axios('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=tether-avalanche-bridged-usdt-e');
+    const { data } = await axios(
+      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=tether-avalanche-bridged-usdt-e',
+    );
     return {
       tokenInFtm: data[0].current_price,
       priceInDollars: data[0].current_price,
@@ -894,7 +954,9 @@ export class TombFinance {
   }
 
   async getUsdcStat(): Promise<TokenStat> {
-    const { data } = await axios('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=usd-coin-avalanche-bridged-usdc-e');
+    const { data } = await axios(
+      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=usd-coin-avalanche-bridged-usdc-e',
+    );
     return {
       tokenInFtm: data[0].current_price,
       priceInDollars: data[0].current_price,
@@ -904,7 +966,7 @@ export class TombFinance {
   }
 
   async getDibsStat(): Promise<TokenStat> {
-    const {WAVAX} = this.config.externalTokens;
+    const { WAVAX } = this.config.externalTokens;
     const [priceInAvax, priceOfOneAvax] = await Promise.all([
       this.getTokenPriceFromPancakeswap(this.DIBS, new Token(this.config.chainId, WAVAX[0], WAVAX[1], 'WAVAX')),
       this.getAvaxPriceFromPancakeswap(),
@@ -920,7 +982,7 @@ export class TombFinance {
   }
 
   async getSnoStat(): Promise<TokenStat> {
-    const {JOE} = this.config.externalTokens;
+    const { JOE } = this.config.externalTokens;
     const [priceInJoe, priceOfOneJoe] = await Promise.all([
       this.getTokenPriceFromPancakeswap(this.SNO, new Token(this.config.chainId, JOE[0], JOE[1], 'JOE')),
       this.getJoePriceFromPancakeswap(),
@@ -936,7 +998,7 @@ export class TombFinance {
   }
 
   async getFoxStat(): Promise<TokenStat> {
-    const {JOE} = this.config.externalTokens;
+    const { JOE } = this.config.externalTokens;
     const [priceInJoe, priceOfOneJoe] = await Promise.all([
       this.getTokenPriceFromPancakeswap(this.FOX, new Token(this.config.chainId, JOE[0], JOE[1], 'JOE')),
       this.getJoePriceFromPancakeswap(),
@@ -952,7 +1014,7 @@ export class TombFinance {
   }
 
   async getGrapeStat(): Promise<TokenStat> {
-    const {MIM} = this.config.externalTokens;
+    const { MIM } = this.config.externalTokens;
     const [priceInMim, priceOfOneMim] = await Promise.all([
       this.getTokenPriceFromPancakeswap(this.GRAPE, new Token(this.config.chainId, MIM[0], MIM[1], 'MIM')),
       this.getMimPriceFromPancakeswap(),
@@ -976,7 +1038,6 @@ export class TombFinance {
       circulatingSupply: '0',
     };
   }
-  
 
   async getUSDibsStat(): Promise<TokenStat> {
     const [priceInFTM, priceOfOneFTM] = await Promise.all([
@@ -996,7 +1057,7 @@ export class TombFinance {
   async getAvaxPriceFromPancakeswap(): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
-    const {WAVAX, USDC} = this.externalTokens;
+    const { WAVAX, USDC } = this.externalTokens;
     try {
       const busd_eth_lp_pair = this.externalTokens['USDC-WAVAX-LP'];
       let eth_amount_BN = await WAVAX.balanceOf(busd_eth_lp_pair.address);
@@ -1013,7 +1074,7 @@ export class TombFinance {
     const ready = await this.provider.ready;
     if (!ready) return;
     const avaxPrice = await this.getAvaxPriceFromPancakeswap();
-    const {MIM, WAVAX} = this.externalTokens;
+    const { MIM, WAVAX } = this.externalTokens;
     try {
       const busd_eth_lp_pair = this.externalTokens['MIM-WAVAX-LP'];
       let eth_amount_BN = await WAVAX.balanceOf(busd_eth_lp_pair.address);
@@ -1029,7 +1090,7 @@ export class TombFinance {
   async getJoePriceFromPancakeswap(): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
-    const {JOE, USDC} = this.externalTokens;
+    const { JOE, USDC } = this.externalTokens;
     try {
       const busd_eth_lp_pair = this.externalTokens['USDC-JOE-LP'];
       let eth_amount_BN = await JOE.balanceOf(busd_eth_lp_pair.address);
@@ -1068,7 +1129,8 @@ export class TombFinance {
       }
       if (earnTokenName === 'WLRS') {
         return await pool.pendingWLRS(poolId, account);
-      } if (earnTokenName === 'NRWL') {
+      }
+      if (earnTokenName === 'NRWL') {
         return await pool.pendingWLRS(poolId, account);
       } else {
         return await pool.pendingShare(poolId, account);
@@ -1095,7 +1157,7 @@ export class TombFinance {
 
   isCustomFarm = (poolAddress: string): boolean => {
     return poolAddress === '0x1472bA4257Fe551274bC46d09F826ab7979dE43a';
-  }
+  };
 
   /**
    * Deposits token to given pool.
@@ -1103,14 +1165,17 @@ export class TombFinance {
    * @param amount Number of tokens with decimals applied. (e.g. 1.45 DAI * 10^18)
    * @returns {string} Transaction hash
    */
-   async stake(poolName: ContractName, poolId: Number, sectionInUI: Number, amount: BigNumber): Promise<TransactionResponse> {
+  async stake(
+    poolName: ContractName,
+    poolId: Number,
+    sectionInUI: Number,
+    amount: BigNumber,
+  ): Promise<TransactionResponse> {
     const pool = this.contracts[poolName];
     if (this.isCustomFarm(pool.address)) {
       return await pool.deposit(amount);
     }
-    return sectionInUI !== 4 
-      ? await pool.deposit(poolId, amount)
-      : await pool.create(poolId, amount);
+    return sectionInUI !== 4 ? await pool.deposit(poolId, amount) : await pool.create(poolId, amount);
   }
 
   /**
@@ -1130,15 +1195,13 @@ export class TombFinance {
   /**
    * Transfers earned token reward from given pool to my account.
    */
-   async harvest(poolName: ContractName, poolId: Number, sectionInUI: Number): Promise<TransactionResponse> {
+  async harvest(poolName: ContractName, poolId: Number, sectionInUI: Number): Promise<TransactionResponse> {
     const pool = this.contracts[poolName];
     if (this.isCustomFarm(pool.address)) {
       return await pool.claimRewards();
     }
     //By passing 0 as the amount, we are asking the contract to only redeem the reward and not the currently staked token
-    return sectionInUI !== 4
-    ? await pool.withdraw(poolId, 0)
-    : await pool.claim();
+    return sectionInUI !== 4 ? await pool.withdraw(poolId, 0) : await pool.claim();
   }
 
   /**
@@ -1548,9 +1611,8 @@ export class TombFinance {
       assetUrl = 'https://gateway.pinata.cloud/ipfs/QmSkdqbueZTKDjb2oqKo6bEcn6qenA9Z6iiSNR1omHGVZx';
     } else if (assetName === 'NRWL') {
       asset = this.NRWL;
-     // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmSkdqbueZTKDjb2oqKo6bEcn6qenA9Z6iiSNR1omHGVZx';
-    }
-    else if (assetName === 'WBOND') {
+      // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmSkdqbueZTKDjb2oqKo6bEcn6qenA9Z6iiSNR1omHGVZx';
+    } else if (assetName === 'WBOND') {
       asset = this.TBOND;
       assetUrl = 'https://gateway.pinata.cloud/ipfs/QmVCNLxo6vRUr3qCaNHJPwVL7jMGBf18FSa65zkeaHSbua';
     }
@@ -1673,18 +1735,18 @@ export class TombFinance {
     const lpToken = this.externalTokens[lpName];
     let estimate;
     if (parseFloat(amount) === 0) {
-      return [0,0];
+      return [0, 0];
     }
     /*if (tokenName === FTM_TICKER) {
       estimate = await zapper.estimateZapIn(lpToken.address, SPOOKY_ROUTER_ADDR, parseUnits(amount, 18));
     } else {*/
-      const token = tokenName === TOMB_TICKER ? this.TOMB : tokenName === TSHARE_TICKER ? this.TSHARE : this.FTM;
-      estimate = await zapper.estimateZapInToken(
-        token.address,
-        lpToken.address,
-        SPOOKY_ROUTER_ADDR,
-        parseUnits(amount, 18),
-      );
+    const token = tokenName === TOMB_TICKER ? this.TOMB : tokenName === TSHARE_TICKER ? this.TSHARE : this.FTM;
+    estimate = await zapper.estimateZapInToken(
+      token.address,
+      lpToken.address,
+      SPOOKY_ROUTER_ADDR,
+      parseUnits(amount, 18),
+    );
     /*}*/
     return [estimate[0] / 1e18, estimate[1] / 1e18];
   }
@@ -1694,7 +1756,7 @@ export class TombFinance {
     const lpToken = this.externalTokens[lpName];
     let estimate;
     if (parseFloat(amount) === 0) {
-      return [0,0];
+      return [0, 0];
     }
 
     const token = tokenName === NRWL_TICKER ? this.NRWL : this.YUSD;
@@ -1717,14 +1779,21 @@ export class TombFinance {
       };
       return await zapper.zapIn(lpToken.address, SPOOKY_ROUTER_ADDR, this.myAccount, overrides);
     } else {*/
-      const token = tokenName === TOMB_TICKER ? this.TOMB : (tokenName === TSHARE_TICKER ? this.TSHARE : tokenName === FTM_TICKER ? this.FTM : null);
-      return await zapper.zapInToken(
-        token.address,
-        parseUnits(amount, token.decimal),
-        lpToken.address,
-        SPOOKY_ROUTER_ADDR,
-        this.myAccount,
-      );
+    const token =
+      tokenName === TOMB_TICKER
+        ? this.TOMB
+        : tokenName === TSHARE_TICKER
+        ? this.TSHARE
+        : tokenName === FTM_TICKER
+        ? this.FTM
+        : null;
+    return await zapper.zapInToken(
+      token.address,
+      parseUnits(amount, token.decimal),
+      lpToken.address,
+      SPOOKY_ROUTER_ADDR,
+      this.myAccount,
+    );
     /*}*/
   }
 
@@ -1783,193 +1852,191 @@ export class TombFinance {
   async rebatesClaim(): Promise<TransactionResponse> {
     const { RebateTreasury } = this.contracts;
     return await RebateTreasury.claimRewards();
-  };
-
-
-// Peg Pool
-
-async getPegPool(): Promise<PegPool> {
-  const contract = this.contracts.PegPool;
-  const busd = new ERC20('0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', this.signer, 'USDC', 6);
-  const [depositsEnabled, totalDepositTokenAmount, userInfo, approval] = await Promise.all([
-    contract.depositsEnabled(),
-    contract.totalDepositTokenAmount(),
-    this.getPegPoolUserInfo(),
-    busd.allowance(this.myAccount, contract.address),
-  ]);
-
-  return {
-    depositsEnabled,
-    totalDesposits: Number(formatUnits(totalDepositTokenAmount, 6)).toFixed(2),
-    depositTokenName: 'USDC',
-    depositToken: busd,
-    userInfo,
-    approved: approval.gt(0),
-  };
-}
-
-async getPegPoolUserInfo(): Promise<PegPoolUserInfo> {
-  const amount: BigNumber = await this.contracts.PegPool.userInfo(this.myAccount);
-  return {
-    amountDeposited: getDisplayBalance(amount, 6),
-    isDeposited: amount.gt(0),
-    amountDepositedBN: amount,
-  };
-}
-
-async getPegPoolPendingRewards(): Promise<PegPoolToken[]> {
-  const tokenMap: {
-    [key: string]: {
-      name: string;
-      pair: string;
-      injection: number;
-    };
-  } = {
-    '0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6': {
-      name: 'WSHARE',
-      pair: '0x03d15E0451e54Eec95ac5AcB5B0a7ce69638c62A',
-      injection: 0,
-    },
-    '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7': {
-      name: 'WAVAX',
-      pair: '0xA389f9430876455C36478DeEa9769B7Ca4E3DDB1',
-      injection: 0,
-    },
-  };
-
-  const [tks, tokens] = await Promise.all([
-    this.contracts.PegPool.getRewardTokens(),
-    this.contracts.PegPool.pendingRewards(this.myAccount),
-  ]);
-  const addresses = tokens[0];
-  const amounts = tokens[1];
-  const rewards: PegPoolToken[] = [];
-
-  for (let i = 0; i < addresses.length; i++) {
-    const info = tokenMap[addresses[i]];
-    rewards.push({
-      token: new ERC20(addresses[i], this.provider.getSigner(), info.name),
-      name: info.name,
-      pairAddress: info.pair,
-      amount: Number(formatUnits(amounts[i])).toFixed(8),
-      pendingValueBN: amounts[i],
-      rewardPerBlock: Number(formatEther(tks[i].rewardPerBlock)),
-      canCompound: info.name != 'AALTO',
-    });
-  }
-  return rewards;
-}
-async depositPegPool(amount: BigNumber) {
-  return this.contracts.PegPool.deposit(amount);
-}
-
-async compoundRewardsPegPool() {
-  return this.contracts.PegPool.compound();
-}
-
-async compoundTokenPegPool() {
-  return this.contracts.PegPool.compound();
-}
-
-async withdrawPegPool(amount: BigNumber) {
-  return this.contracts.PegPool.withdraw(amount);
-}
-
-async claimPegPool() {
-  return this.contracts.PegPool.claim();
-}
-// pegasaurus
-async getPegasaurus(): Promise<Pegasaurus> {
-  const contract = this.contracts.Pegasaurus;
-  const busd = new ERC20('0x82845B52b53c80595bbF78129126bD3E6Fc2C1DF', this.signer, 'WLRS-USDC-LP', 18);
-  const [depositsEnabled, totalDepositTokenAmount, userInfo, approval] = await Promise.all([
-    contract.depositsEnabled(),
-    contract.totalDepositTokenAmount(),
-    this.getPegasaurusUserInfo(),
-    busd.allowance(this.myAccount, contract.address),
-  ]);
-
-  return {
-    depositsEnabled,
-    totalDesposits: Number(formatUnits(totalDepositTokenAmount, 18)).toFixed(12),
-    depositTokenName: 'WLRS-USDC-LP',
-    depositToken: busd,
-    userInfo,
-    approved: approval.gt(0),
-  };
-}
-
-async getPegasaurusUserInfo(): Promise<PegasaurusUserInfo> {
-  const amount: BigNumber = await this.contracts.Pegasaurus.userInfo(this.myAccount);
-  return {
-    amountDeposited: getDisplayBalance(amount, 18),
-    isDeposited: amount.gt(0),
-    amountDepositedBN: amount,
-  };
-}
-
-async getPegasaurusPendingRewards(): Promise<PegasaurusToken[]> {
-  const tokenMap: {
-    [key: string]: {
-      name: string;
-      pair: string;
-      injection: number;
-    };
-  } = {
-    '0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6': {
-      name: 'WSHARE',
-      pair: '0x03d15E0451e54Eec95ac5AcB5B0a7ce69638c62A',
-      injection: 0,
-    },
-    '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7': {
-      name: 'WAVAX',
-      pair: '0xA389f9430876455C36478DeEa9769B7Ca4E3DDB1',
-      injection: 0,
-    },
-  };
-
-  const [tks, tokens] = await Promise.all([
-    this.contracts.Pegasaurus.getRewardTokens(),
-    this.contracts.Pegasaurus.pendingRewards(this.myAccount),
-  ]);
-  const addresses = tokens[0];
-  const amounts = tokens[1];
-  const rewards: PegasaurusToken[] = [];
-
-  for (let i = 0; i < addresses.length; i++) {
-    const info = tokenMap[addresses[i]];
-    rewards.push({
-      token: new ERC20(addresses[i], this.provider.getSigner(), info.name),
-      name: info.name,
-      pairAddress: info.pair,
-      amount: Number(formatUnits(amounts[i])).toFixed(8),
-      pendingValueBN: amounts[i],
-      rewardPerBlock: Number(formatEther(tks[i].rewardPerBlock)),
-      canCompound: info.name != 'AALTO',
-    });
   }
 
-  return rewards;
-}
+  // Peg Pool
 
-async depositPegasaurus(amount: BigNumber) {
-  return this.contracts.Pegasaurus.deposit(amount);
-}
+  async getPegPool(): Promise<PegPool> {
+    const contract = this.contracts.PegPool;
+    const busd = new ERC20('0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', this.signer, 'USDC', 6);
+    const [depositsEnabled, totalDepositTokenAmount, userInfo, approval] = await Promise.all([
+      contract.depositsEnabled(),
+      contract.totalDepositTokenAmount(),
+      this.getPegPoolUserInfo(),
+      busd.allowance(this.myAccount, contract.address),
+    ]);
 
-async compoundRewardsPegasaurus() {
-  return this.contracts.Pegasaurus.compound();
-}
+    return {
+      depositsEnabled,
+      totalDesposits: Number(formatUnits(totalDepositTokenAmount, 6)).toFixed(2),
+      depositTokenName: 'USDC',
+      depositToken: busd,
+      userInfo,
+      approved: approval.gt(0),
+    };
+  }
 
-async compoundTokenPegasaurus() {
-  return this.contracts.Pegasaurus.compound();
-}
+  async getPegPoolUserInfo(): Promise<PegPoolUserInfo> {
+    const amount: BigNumber = await this.contracts.PegPool.userInfo(this.myAccount);
+    return {
+      amountDeposited: getDisplayBalance(amount, 6),
+      isDeposited: amount.gt(0),
+      amountDepositedBN: amount,
+    };
+  }
 
-async withdrawPegasaurus(amount: BigNumber) {
-  return this.contracts.Pegasaurus.withdraw(amount);
-}
+  async getPegPoolPendingRewards(): Promise<PegPoolToken[]> {
+    const tokenMap: {
+      [key: string]: {
+        name: string;
+        pair: string;
+        injection: number;
+      };
+    } = {
+      '0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6': {
+        name: 'WSHARE',
+        pair: '0x03d15E0451e54Eec95ac5AcB5B0a7ce69638c62A',
+        injection: 0,
+      },
+      '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7': {
+        name: 'WAVAX',
+        pair: '0xA389f9430876455C36478DeEa9769B7Ca4E3DDB1',
+        injection: 0,
+      },
+    };
 
-async claimPegasaurus() {
-  return this.contracts.Pegasaurus.claim();
-}
-}
+    const [tks, tokens] = await Promise.all([
+      this.contracts.PegPool.getRewardTokens(),
+      this.contracts.PegPool.pendingRewards(this.myAccount),
+    ]);
+    const addresses = tokens[0];
+    const amounts = tokens[1];
+    const rewards: PegPoolToken[] = [];
 
+    for (let i = 0; i < addresses.length; i++) {
+      const info = tokenMap[addresses[i]];
+      rewards.push({
+        token: new ERC20(addresses[i], this.provider.getSigner(), info.name),
+        name: info.name,
+        pairAddress: info.pair,
+        amount: Number(formatUnits(amounts[i])).toFixed(8),
+        pendingValueBN: amounts[i],
+        rewardPerBlock: Number(formatEther(tks[i].rewardPerBlock)),
+        canCompound: info.name != 'AALTO',
+      });
+    }
+    return rewards;
+  }
+  async depositPegPool(amount: BigNumber) {
+    return this.contracts.PegPool.deposit(amount);
+  }
+
+  async compoundRewardsPegPool() {
+    return this.contracts.PegPool.compound();
+  }
+
+  async compoundTokenPegPool() {
+    return this.contracts.PegPool.compound();
+  }
+
+  async withdrawPegPool(amount: BigNumber) {
+    return this.contracts.PegPool.withdraw(amount);
+  }
+
+  async claimPegPool() {
+    return this.contracts.PegPool.claim();
+  }
+  // pegasaurus
+  async getPegasaurus(): Promise<Pegasaurus> {
+    const contract = this.contracts.Pegasaurus;
+    const busd = new ERC20('0x82845B52b53c80595bbF78129126bD3E6Fc2C1DF', this.signer, 'WLRS-USDC-LP', 18);
+    const [depositsEnabled, totalDepositTokenAmount, userInfo, approval] = await Promise.all([
+      contract.depositsEnabled(),
+      contract.totalDepositTokenAmount(),
+      this.getPegasaurusUserInfo(),
+      busd.allowance(this.myAccount, contract.address),
+    ]);
+
+    return {
+      depositsEnabled,
+      totalDesposits: Number(formatUnits(totalDepositTokenAmount, 18)).toFixed(12),
+      depositTokenName: 'WLRS-USDC-LP',
+      depositToken: busd,
+      userInfo,
+      approved: approval.gt(0),
+    };
+  }
+
+  async getPegasaurusUserInfo(): Promise<PegasaurusUserInfo> {
+    const amount: BigNumber = await this.contracts.Pegasaurus.userInfo(this.myAccount);
+    return {
+      amountDeposited: getDisplayBalance(amount, 18),
+      isDeposited: amount.gt(0),
+      amountDepositedBN: amount,
+    };
+  }
+
+  async getPegasaurusPendingRewards(): Promise<PegasaurusToken[]> {
+    const tokenMap: {
+      [key: string]: {
+        name: string;
+        pair: string;
+        injection: number;
+      };
+    } = {
+      '0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6': {
+        name: 'WSHARE',
+        pair: '0x03d15E0451e54Eec95ac5AcB5B0a7ce69638c62A',
+        injection: 0,
+      },
+      '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7': {
+        name: 'WAVAX',
+        pair: '0xA389f9430876455C36478DeEa9769B7Ca4E3DDB1',
+        injection: 0,
+      },
+    };
+
+    const [tks, tokens] = await Promise.all([
+      this.contracts.Pegasaurus.getRewardTokens(),
+      this.contracts.Pegasaurus.pendingRewards(this.myAccount),
+    ]);
+    const addresses = tokens[0];
+    const amounts = tokens[1];
+    const rewards: PegasaurusToken[] = [];
+
+    for (let i = 0; i < addresses.length; i++) {
+      const info = tokenMap[addresses[i]];
+      rewards.push({
+        token: new ERC20(addresses[i], this.provider.getSigner(), info.name),
+        name: info.name,
+        pairAddress: info.pair,
+        amount: Number(formatUnits(amounts[i])).toFixed(8),
+        pendingValueBN: amounts[i],
+        rewardPerBlock: Number(formatEther(tks[i].rewardPerBlock)),
+        canCompound: info.name != 'AALTO',
+      });
+    }
+
+    return rewards;
+  }
+
+  async depositPegasaurus(amount: BigNumber) {
+    return this.contracts.Pegasaurus.deposit(amount);
+  }
+
+  async compoundRewardsPegasaurus() {
+    return this.contracts.Pegasaurus.compound();
+  }
+
+  async compoundTokenPegasaurus() {
+    return this.contracts.Pegasaurus.compound();
+  }
+
+  async withdrawPegasaurus(amount: BigNumber) {
+    return this.contracts.Pegasaurus.withdraw(amount);
+  }
+
+  async claimPegasaurus() {
+    return this.contracts.Pegasaurus.claim();
+  }
+}

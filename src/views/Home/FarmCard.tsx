@@ -39,7 +39,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
   const [activeDetailsBoxTab, setActiveDetailsBoxTab] = useState('Deposit');
   const [expanded, setExpanded] = useState(false);
   const [rewardsPerDay, setRewardsPerDay] = useState(0);
-  const [inputValue, setInputValue] = useState(0);
+  const [inputValue, setInputValue] = useState<string>();
   const [sliderValue, setSliderValue] = useState(0);
 
   // Custom Hooks functinos
@@ -121,12 +121,12 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
   };
 
   const withdraw = () => {
-    if (inputValue > 0) {
+    if (Number(inputValue) > 0) {
       onWithdraw(inputValue.toString());
     }
   };
   const stake = () => {
-    if (inputValue > 0) {
+    if (Number(inputValue) > 0) {
       onStake(inputValue.toString());
     }
   };
@@ -134,19 +134,23 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
   const changeSliderValue = (event: any, newValue: any) => {
     setSliderValue(newValue);
     if (activeDetailsBoxTab === 'Deposit') {
-      setInputValue((Number(walletTokenBalance) / 1e18) * (newValue / 100));
+      setInputValue(((Number(walletTokenBalance) / 1e18) * (newValue / 100)).toString());
     } else if (activeDetailsBoxTab === 'Withdraw') {
-      setInputValue(Number(stakedBalanceNumber) * (newValue / 100));
+      setInputValue((Number(stakedBalanceNumber) * (newValue / 100)).toString());
     }
   };
 
   const maxClicked = () => {
     if (activeDetailsBoxTab === 'Deposit') {
-      setInputValue(Number(walletTokenBalance) / 1e18);
+      setInputValue((Number(walletTokenBalance) / 1e18).toString());
     } else if (activeDetailsBoxTab === 'Withdraw') {
-      setInputValue(Number(stakedBalanceNumber));
+      setInputValue(Number(stakedBalanceNumber).toString());
     }
     setSliderValue(100);
+  };
+
+  const updateInput = (event: any) => {
+    setInputValue(event.target.value);
   };
 
   const getLiquidityLink = () => {
@@ -267,7 +271,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
                   <div className="lineLabel">Deposited</div>
                   <div className="lineValueDeposited">
                     <span style={{ color: '#fcfcfc' }}>{stakedBalanceNumber ? stakedBalanceNumber : '--.--'}</span>
-                    <span style={{ marginLeft: '5px', fontSize: '14px' }}>(${depositedInDollars})</span>
+                    <span style={{ marginLeft: '5px', fontSize: '14px' }}>
+                      (${Number(depositedInDollars).toFixed(0)})
+                    </span>
                   </div>
                 </Grid>
               </Grid>
@@ -277,7 +283,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
                 <Grid item xs={12} sm={12} md={6}>
                   <Box className="lineDetailsBox">
                     <div className="line-details-inner">
-                      <Grid container justify="center" spacing={6}>
+                      <Grid container justify="space-evenly">
                         <Grid
                           item
                           className={activeDetailsBoxTab === 'Deposit' ? 'tabDetailsItemActive' : 'tabDetailsItem'}
@@ -302,6 +308,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
                                 placeholder="Enter amount"
                                 className="amount-input"
                                 value={inputValue}
+                                onChange={updateInput}
                               />
                             </Grid>
                             <Grid item xs={2} md={1} className="color-secondary">
@@ -350,7 +357,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
                               {activeDetailsBoxTab === 'Deposit' && (
                                 <Grid item xs={6}>
                                   <button
-                                    disabled={inputValue === 0}
+                                    disabled={Number(inputValue) === 0}
                                     onClick={stake}
                                     className="secondary-button"
                                     title="Deposit"
@@ -367,7 +374,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
                               <Grid item xs={6}>
                                 {activeDetailsBoxTab === 'Withdraw' && (
                                   <button
-                                    disabled={inputValue === 0}
+                                    disabled={Number(inputValue) === 0}
                                     onClick={withdraw}
                                     className="secondary-button"
                                     title="Withdraw"

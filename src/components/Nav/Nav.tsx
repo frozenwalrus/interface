@@ -1,24 +1,12 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import {
-  AppBar,
-  Box,
-  Drawer,
-  IconButton,
-  Toolbar,
-  Typography,
-  useMediaQuery,
-  ListItem,
-  Divider,
-  Grid,
-} from '@material-ui/core';
+import { AppBar, Drawer, IconButton, Toolbar, useMediaQuery, ListItem, Grid } from '@material-ui/core';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Popover } from '@material-ui/core';
 import { ClickAwayListener } from '@material-ui/core';
 import AccountButton from './AccountButton';
 import logo from '../../assets/img/SVG_Icons_and_web_bg/logo.svg';
@@ -225,7 +213,7 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                       >
                         <Grid container spacing={3} style={{ padding: '50px' }}>
                           <Grid item xs={6}>
-                            <Link to="/farms" className={classes.noDecoration}>
+                            <Link to="/home#farms" className={classes.noDecoration}>
                               <Grid container wrap="nowrap" spacing={3}>
                                 <Grid item>
                                   <img src={farmsIcon} alt="Farms" />
@@ -241,7 +229,7 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                             </Link>
                           </Grid>
                           <Grid item xs={6}>
-                            <Link to="/boardrooms" className={classes.noDecoration}>
+                            <Link to="/home#boardrooms" className={classes.noDecoration}>
                               <Grid container wrap="nowrap" spacing={3}>
                                 <Grid item>
                                   <img src={boardroomsIcon} alt="boardrooms" />
@@ -256,24 +244,9 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                               </Grid>
                             </Link>
                           </Grid>
+
                           <Grid item xs={6}>
-                            <Link to="/bonds" className={classes.noDecoration}>
-                              <Grid container wrap="nowrap" spacing={3}>
-                                <Grid item>
-                                  <img src={bondsIcon} alt="Bonds" />
-                                </Grid>
-                                <Grid item>
-                                  <div className={classes.defiProductsTitle}>Bonds</div>
-                                  <div className={classes.defiProductsDescription}>
-                                    It is a long established fact that a reader will be distracted by the readable
-                                    content of a page when looking at its layout.{' '}
-                                  </div>
-                                </Grid>
-                              </Grid>
-                            </Link>
-                          </Grid>
-                          <Grid item xs={6}>
-                            <Link to="/nodes" className={classes.noDecoration}>
+                            <Link to="/home#nodes" className={classes.noDecoration}>
                               <Grid container wrap="nowrap" spacing={3}>
                                 <Grid item>
                                   <img src={nodesIcon} alt="Nodes" />
@@ -288,8 +261,8 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                               </Grid>
                             </Link>
                           </Grid>
-                          <Grid item xs={6}>
-                            <Link to="/rebates" className={classes.noDecoration}>
+                          {/* <Grid item xs={6}>
+                            <Link to="/home#rebates" className={classes.noDecoration}>
                               <Grid container wrap="nowrap" spacing={3}>
                                 <Grid item>
                                   <img src={rebatesIcon} alt="Rebates" />
@@ -303,15 +276,36 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                                 </Grid>
                               </Grid>
                             </Link>
-                          </Grid>
+                          </Grid> */}
                           <Grid item xs={6}>
-                            <Link to="/lottery" className={classes.noDecoration}>
+                            <a
+                              href="https://win.frozenwalrus.finance/"
+                              target="_blank"
+                              rel="noreferrer noopener"
+                              className={classes.noDecoration}
+                            >
                               <Grid container wrap="nowrap" spacing={3}>
                                 <Grid item>
                                   <img src={lotteryIcon} alt="Lottery" />
                                 </Grid>
                                 <Grid item>
                                   <div className={classes.defiProductsTitle}>Lottery</div>
+                                  <div className={classes.defiProductsDescription}>
+                                    It is a long established fact that a reader will be distracted by the readable
+                                    content of a page when looking at its layout.{' '}
+                                  </div>
+                                </Grid>
+                              </Grid>
+                            </a>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Link to="/bonds" className={classes.noDecoration}>
+                              <Grid container wrap="nowrap" spacing={3}>
+                                <Grid item>
+                                  <img src={bondsIcon} alt="Bonds" />
+                                </Grid>
+                                <Grid item>
+                                  <div className={classes.defiProductsTitle}>Bonds</div>
                                   <div className={classes.defiProductsDescription}>
                                     It is a long established fact that a reader will be distracted by the readable
                                     content of a page when looking at its layout.{' '}
@@ -436,7 +430,6 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                   alignItems: 'center',
                 }}
               >
-
                 <Link color="textPrimary" to="/" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Home</div>
                 </Link>
@@ -446,7 +439,6 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                 <a href="https://docs.frozenwalrus.finance/welcome" target="_blank" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Docs</div>
                 </a>
-
 
                 <Link color="textPrimary" to="/media" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Media</div>

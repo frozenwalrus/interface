@@ -1,10 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import Page from '../../components/Page';
 import styled from 'styled-components';
 import AvaxLogo from '../../assets/img/USDC.png';
 import yusdLogo from '../../assets/img/yusd.png';
 import CountUp from 'react-countup';
 import TokenSymbol from '../../components/TokenSymbol';
+import magikIcon from '../../assets/img/MAGIK.png';
 import useTombStats from '../../hooks/useTombStats';
 import useLpStats from '../../hooks/useLpStats';
 import useLpStatsNrwl from '../../hooks/useLpStatsNrwl';
@@ -14,6 +15,8 @@ import usetShareStats from '../../hooks/usetShareStats';
 import useNrwlStats from '../../hooks/useNrwlStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import logo from '../../assets/img/SVG_Icons_and_web_bg/logo.svg';
+import xWlrsIcon from '../../assets/img/xWLRS.png';
+import xWlrsDesatIcon from '../../assets/img/xWLRS-desaturated.png';
 
 import { Box, Button, CardContent, Grid, Typography, useMediaQuery } from '@material-ui/core';
 import tvl from '../../assets/img/TVL-Icon.png';
@@ -24,11 +27,15 @@ import { getDisplayBalance } from '../../utils/formatBalance';
 import Farms from './Farms';
 import Boardrooms from './Boardrooms';
 import Nodes from './Nodes';
+import Bonds from './Bonds';
 import Rebates from './Rebates';
 import wlrsIcon from '../../assets/img/SVG_Icons_and_web_bg/WLRS.svg';
 import wlrsBlueImg from '../../assets/img/blue-walrus.png';
 import Nav from '../../components/Nav';
 import montainsImg from '../../assets/img/hero-banner-moutains.png';
+import lotteryIcon from '../../assets/img/SVG_Icons_and_web_bg/Lottery.svg';
+
+import { useHistory, useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -228,6 +235,22 @@ const Home = () => {
   const tombFinance = useTombFinance();
   const { price: JOEPrice, marketCap: JOEMarketCap, priceChange: JOEPriceChange } = useFantomPrice();
 
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash;
+    if (hash === '#farms') {
+      setActiveTab('Farms');
+    } else if (hash === '#boardrooms') {
+      setActiveTab('Boardrooms');
+    } else if (hash === '#nodes') {
+      setActiveTab('Nodes');
+    }
+    //  else if (hash === '#rebates') {
+    //   setActiveTab('Rebates');
+    // }
+  }, [location]);
+
   const buyTombAddress =
     'https://app.bogged.finance/avax/swap?tokenIn=0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664&tokenOut=0x395908aeb53d33A9B8ac35e148E9805D34A555D3';
   const buyTShareAddress =
@@ -380,11 +403,18 @@ const Home = () => {
           </Grid>
           <Grid
             item
+            className={activeTab === 'Bonds' ? classes.tabItemActive : classes.tabItem}
+            onClick={() => setActiveTab('Bonds')}
+          >
+            Bonds
+          </Grid>
+          {/* <Grid
+            item
             className={activeTab === 'Rebates' ? classes.tabItemActive : classes.tabItem}
             onClick={() => setActiveTab('Rebates')}
           >
             Rebates
-          </Grid>
+          </Grid> */}
         </Grid>
       </Box>
 
@@ -397,68 +427,86 @@ const Home = () => {
       <Box hidden={activeTab !== 'Nodes'} mt={4}>
         <Nodes />
       </Box>
-      <Box hidden={activeTab !== 'Rebates'} mt={4}>
-        <Rebates />
+      <Box hidden={activeTab !== 'Bonds'} mt={4}>
+        <Bonds />
       </Box>
+      {/* <Box hidden={activeTab !== 'Rebates'} mt={4}>
+        <Rebates />
+      </Box> */}
 
       <Box mt={5}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
-            <Box className={classes.boxItem}>
-              <div className={classes.boxItemInner}>
-                <Grid container direction="column" spacing={3}>
-                  <Grid item>
-                    <img src={wlrsIcon} width={70} height={70} alt="Walrus" />
+            <a
+              href="https://magik.farm/#/avax"
+              target="_blank"
+              rel="noreferrer noopener"
+              style={{ textDecoration: 'none' }}
+            >
+              <Box className={classes.boxItem}>
+                <div className={classes.boxItemInner}>
+                  <Grid container direction="column" spacing={3}>
+                    <Grid item>
+                      <img src={magikIcon} height={70} alt="Walrus" />
+                    </Grid>
+                    <Grid item>
+                      <span className={classes.boxTitle}>Compound on Magik Farms</span>
+                    </Grid>
+                    <Grid item>
+                      <span className="color-secondary">Stake your assets in Auto-Compounding Vaults</span>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <span className={classes.boxTitle}>Compound</span>
-                  </Grid>
-                  <Grid item>
-                    <span className="color-secondary">
-                      Random text here and adding some shizzle to make it two (2) lines. Yup.
-                    </span>
-                  </Grid>
-                </Grid>
-              </div>
-            </Box>
+                </div>
+              </Box>
+            </a>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Box className={classes.boxItem}>
-              <div className={classes.boxItemInner}>
-                <Grid container direction="column" spacing={3}>
-                  <Grid item>
-                    <img src={wlrsIcon} width={70} height={70} alt="Walrus" />
+            <a
+              href="https://xwlrs.frozenwalrus.finance"
+              target="_blank"
+              rel="noreferrer noopener"
+              style={{ textDecoration: 'none' }}
+            >
+              <Box className={classes.boxItem}>
+                <div className={classes.boxItemInner}>
+                  <Grid container direction="column" spacing={3}>
+                    <Grid item>
+                      <img src={xWlrsIcon} height={70} alt="Walrus" />
+                    </Grid>
+                    <Grid item>
+                      <span className={classes.boxTitle}>Mint xWlrs</span>
+                    </Grid>
+                    <Grid item>
+                      <span className="color-secondary">Turn WLRS into XWLRS to get extra yield!</span>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <span className={classes.boxTitle}>Rebates</span>
-                  </Grid>
-                  <Grid item>
-                    <span className="color-secondary">
-                      Random text here and adding some shizzle to make it two (2) lines. Yup.
-                    </span>
-                  </Grid>
-                </Grid>
-              </div>
-            </Box>
+                </div>
+              </Box>
+            </a>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Box className={classes.boxItem}>
-              <div className={classes.boxItemInner}>
-                <Grid container direction="column" spacing={3}>
-                  <Grid item>
-                    <img src={wlrsIcon} width={70} height={70} alt="Walrus" />
+            <a
+              href="https://win.frozenwalrus.finance"
+              target="_blank"
+              rel="noreferrer noopener"
+              style={{ textDecoration: 'none' }}
+            >
+              <Box className={classes.boxItem}>
+                <div className={classes.boxItemInner}>
+                  <Grid container direction="column" spacing={3}>
+                    <Grid item>
+                      <img src={xWlrsDesatIcon} height={70} alt="Walrus" />
+                    </Grid>
+                    <Grid item>
+                      <span className={classes.boxTitle}>Prize Pool</span>
+                    </Grid>
+                    <Grid item>
+                      <span className="color-secondary">Buy tickets to win xWLRS pot!</span>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <span className={classes.boxTitle}>Lottery</span>
-                  </Grid>
-                  <Grid item>
-                    <span className="color-secondary">
-                      Random text here and adding some shizzle to make it two (2) lines. Yup.
-                    </span>
-                  </Grid>
-                </Grid>
-              </div>
-            </Box>
+                </div>
+              </Box>
+            </a>
           </Grid>
         </Grid>
       </Box>
