@@ -74,7 +74,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
       : 1;
   const stakedBalanceNumber = Number(
     getDisplayBalance(stakedBalance, bank.depositToken.decimal, bank.depositToken.decimal === 6 ? 3 : 9),
-  ).toFixed(3);
+  );
   const totalEarnedInDollars = (Number(earnedTokenPriceOfOneInDollars) * Number(getDisplayBalance(earnings))).toFixed(
     2,
   );
