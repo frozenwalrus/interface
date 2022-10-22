@@ -38,7 +38,7 @@ const PegLPCard = ({}) => {
                 justifyContent: 'center',
               }}
             >
-              <TokenSymbol size={55} symbol={'WLRS-USDC-LP'} />
+              <TokenSymbol width={55} height={55} symbol={'WLRS-USDC-LP'} />
             </Box>
             <Typography variant="h6" component="h2" style={{ color: '#2c2560' }}>
             WLRS-USDC.e LP Node

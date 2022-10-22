@@ -63,7 +63,7 @@ const PCP: React.FC = () => {
   <HomeCard>
   <Grid container spacing={2} style= {{marginTop: '5px', justifyContent: 'center'}}>           
       <Grid item>
-          <TokenSymbol size={100} symbol={'WLRS'} />
+          <TokenSymbol width={100} height={100} symbol={'WLRS'} />
       </Grid>
   </Grid>
   <div>
@@ -78,7 +78,7 @@ const PCP: React.FC = () => {
 
         <Grid container spacing={2} style={{marginTop: '5px', justifyContent: 'center', alignItems: 'center' }} >               
           <Grid item style={{ textAlign:'center', alignItems: 'center', justifyContent: 'center'}}>
-            <TokenSymbol size={72} symbol={'WSHARE'} />
+            <TokenSymbol width={72} height={72} symbol={'WSHARE'} />
         </Grid>              
   </Grid>
   {/* <h2 style={{ marginTop: '12px', textAlign: 'center', fontSize: '1.0rem',   }}>

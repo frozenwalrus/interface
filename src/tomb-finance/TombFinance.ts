@@ -69,6 +69,8 @@ export class TombFinance {
   masonryVersionOfUser?: string;
 
   TOMBWFTM_LP: Contract;
+  WSHAREUSDC: Contract;
+  NRWLYUSD: Contract;
   TOMB: ERC20;
   TSHARE: ERC20;
   TBOND: ERC20;
@@ -84,6 +86,25 @@ export class TombFinance {
   NRWL: ERC20;
   NBOND: ERC20;
   XWLRS: ERC20;
+
+  yUSDStats: TokenStat = {
+    circulatingSupply: null,
+    priceInDollars: null,
+    tokenInFtm: null,
+    totalSupply: null,
+  };
+  usdtStats: TokenStat = {
+    circulatingSupply: null,
+    priceInDollars: null,
+    tokenInFtm: null,
+    totalSupply: null,
+  };
+  usdcStats: TokenStat = {
+    circulatingSupply: null,
+    priceInDollars: null,
+    tokenInFtm: null,
+    totalSupply: null,
+  };
 
   constructor(cfg: Configuration) {
     const { deployments, externalTokens } = cfg;
@@ -122,6 +143,8 @@ export class TombFinance {
     this.XWLRS = this.externalTokens['XWLRS'];
     // Uniswap V2 Pair
     this.TOMBWFTM_LP = new Contract(externalTokens['WLRS-USDC-LP'][0], IUniswapV2PairABI, provider);
+    this.WSHAREUSDC = new Contract(externalTokens['WSHARE-USDC-LP'][0], IUniswapV2PairABI, provider);
+    this.NRWLYUSD = new Contract(externalTokens['NRWL-YUSD-LP'][0], IUniswapV2PairABI, provider);
     this.config = cfg;
     this.provider = provider;
   }
@@ -775,7 +798,7 @@ export class TombFinance {
     return await NrwlTreasury.redeemBonds(decimalToBalance(amount), priceForTomb);
   }
 
-  async getTotalValueLocked(): Promise<Number> {
+  async getTotalValueLocked(): Promise<number> {
     let totalValue = 0;
     for (const bankInfo of Object.values(bankDefinitions)) {
       const pool = this.contracts[bankInfo.contract];
@@ -932,37 +955,63 @@ export class TombFinance {
   }
 
   async getYusdStat(): Promise<TokenStat> {
-    const { data } = await axios('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=yusd-stablecoin');
-    return {
-      tokenInFtm: data[0].current_price,
-      priceInDollars: data[0].current_price,
-      totalSupply: '0',
-      circulatingSupply: '0',
-    };
+    try {
+      if (!this.yUSDStats.priceInDollars) {
+        console.log('getYusdStat');
+        const { data } = await axios(
+          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=yusd-stablecoin',
+        );
+        this.yUSDStats = {
+          tokenInFtm: data[0].current_price,
+          priceInDollars: data[0].current_price,
+          totalSupply: '0',
+          circulatingSupply: '0',
+        };
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    return this.yUSDStats;
   }
 
   async getUsdtStat(): Promise<TokenStat> {
-    const { data } = await axios(
-      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=tether-avalanche-bridged-usdt-e',
-    );
-    return {
-      tokenInFtm: data[0].current_price,
-      priceInDollars: data[0].current_price,
-      totalSupply: '0',
-      circulatingSupply: '0',
-    };
+    try {
+      if (!this.usdtStats.priceInDollars) {
+        console.log('getUsdtStat');
+        const { data } = await axios(
+          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=tether-avalanche-bridged-usdt-e',
+        );
+        this.usdtStats = {
+          tokenInFtm: data[0].current_price,
+          priceInDollars: data[0].current_price,
+          totalSupply: '0',
+          circulatingSupply: '0',
+        };
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    return this.usdtStats;
   }
 
   async getUsdcStat(): Promise<TokenStat> {
-    const { data } = await axios(
-      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=usd-coin-avalanche-bridged-usdc-e',
-    );
-    return {
-      tokenInFtm: data[0].current_price,
-      priceInDollars: data[0].current_price,
-      totalSupply: '0',
-      circulatingSupply: '0',
-    };
+    try {
+      if (!this.usdcStats.priceInDollars) {
+        console.log('getUsdcStat');
+        const { data } = await axios(
+          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=usd-coin-avalanche-bridged-usdc-e',
+        );
+        this.usdcStats = {
+          tokenInFtm: data[0].current_price,
+          priceInDollars: data[0].current_price,
+          totalSupply: '0',
+          circulatingSupply: '0',
+        };
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    return this.usdcStats;
   }
 
   async getDibsStat(): Promise<TokenStat> {
@@ -1605,24 +1654,35 @@ export class TombFinance {
     let assetUrl;
     if (assetName === 'WLRS') {
       asset = this.TOMB;
-      assetUrl = 'https://gateway.pinata.cloud/ipfs/QmVL6cK5iUmkfGhw41s4gCksHn4H4KoF2tnEin2fhbEMmQ';
+      // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmVL6cK5iUmkfGhw41s4gCksHn4H4KoF2tnEin2fhbEMmQ';
     } else if (assetName === 'WSHARE') {
       asset = this.TSHARE;
-      assetUrl = 'https://gateway.pinata.cloud/ipfs/QmSkdqbueZTKDjb2oqKo6bEcn6qenA9Z6iiSNR1omHGVZx';
+      // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmSkdqbueZTKDjb2oqKo6bEcn6qenA9Z6iiSNR1omHGVZx';
     } else if (assetName === 'NRWL') {
       asset = this.NRWL;
       // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmSkdqbueZTKDjb2oqKo6bEcn6qenA9Z6iiSNR1omHGVZx';
     } else if (assetName === 'WBOND') {
       asset = this.TBOND;
-      assetUrl = 'https://gateway.pinata.cloud/ipfs/QmVCNLxo6vRUr3qCaNHJPwVL7jMGBf18FSa65zkeaHSbua';
+      // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmVCNLxo6vRUr3qCaNHJPwVL7jMGBf18FSa65zkeaHSbua';
+    } else if (assetName === 'WLRS-USDC.e LP') {
+      asset = this.TOMBWFTM_LP;
+      // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmVCNLxo6vRUr3qCaNHJPwVL7jMGBf18FSa65zkeaHSbua';
+    } else if (assetName === 'WSHARE-USDC.e LP') {
+      asset = this.WSHAREUSDC;
+      // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmVCNLxo6vRUr3qCaNHJPwVL7jMGBf18FSa65zkeaHSbua';
+    } else if (assetName === 'NRWL-YUSD LP') {
+      asset = this.NRWLYUSD;
+      // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmVCNLxo6vRUr3qCaNHJPwVL7jMGBf18FSa65zkeaHSbua';
     }
+    console.log('asset.address  = ' + asset.address);
+
     await ethereum.request({
       method: 'wallet_watchAsset',
       params: {
         type: 'ERC20',
         options: {
           address: asset.address,
-          symbol: asset.symbol,
+          symbol: assetName,
           decimals: 18,
           image: assetUrl,
         },

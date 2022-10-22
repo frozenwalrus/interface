@@ -69,7 +69,7 @@ const NodeCard: React.FC<NodeCardProps> = ({ nodeName, bank, pool, account }) =>
 
   const [inputValue, setInputValue] = useState<string>();
   const maxClicked = () => {
-    setInputValue((Math.floor(Number(nodeTokenBalance) / Number(nodePrice))).toString());
+    setInputValue(Math.floor(Number(nodeTokenBalance) / Number(nodePrice)).toString());
   };
 
   const stake = () => {
@@ -258,7 +258,7 @@ const NodeCard: React.FC<NodeCardProps> = ({ nodeName, bank, pool, account }) =>
                                 </Grid>
                               </Grid>
                               <div className="balance">
-                                Balance: {(Number(nodeTokenBalance) / 1e18).toFixed(5)} {bank.depositTokenName}
+                                Balance: {Number(nodeTokenBalance) / 1e18} {bank.depositTokenName}
                               </div>
                             </div>
                           </div>

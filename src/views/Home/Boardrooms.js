@@ -122,7 +122,7 @@ const Boardrooms = () => {
         approveStatus={wlrsApproveStatus}
         canWithdraw={wlrsCanWithdrawFromMasonry}
         canClaim={wlrsCanClaimReward}
-        earnings={Number(wlrsEarnings).toFixed(3)}
+        earnings={Number(wlrsEarnings) / 1e18}
         earningsTokenPrice={wlrsPrice}
         claimTimerTo={wlrsClaimTimerTo}
         claimTimerFrom={wlrsClaimTimerFrom}

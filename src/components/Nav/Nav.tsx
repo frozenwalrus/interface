@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { AppBar, Drawer, IconButton, Toolbar, useMediaQuery, ListItem, Grid } from '@material-ui/core';
@@ -17,6 +17,12 @@ import bondsIcon from '../../assets/img/SVG_Icons_and_web_bg/Bonds.svg';
 import lotteryIcon from '../../assets/img/SVG_Icons_and_web_bg/Lottery.svg';
 import nodesIcon from '../../assets/img/SVG_Icons_and_web_bg/Nodes.svg';
 import rebatesIcon from '../../assets/img/SVG_Icons_and_web_bg/Rebates.svg';
+import useTotalValueLocked from '../../hooks/useTotalValueLocked';
+import useTombStats from '../../hooks/useTombStats';
+import useNrwlStats from '../../hooks/useNrwlStats';
+import { getDisplayBalance } from '../../utils/formatBalance';
+import { BigNumber } from 'ethers';
+import CountUp from 'react-countup';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -147,6 +153,13 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const TVL = useTotalValueLocked();
+
+  const tombStats = useTombStats();
+  const nrwlStats = useNrwlStats();
+
+  const tombPriceInFTM = useMemo(() => (tombStats ? Number(tombStats.tokenInFtm).toFixed(3) : null), [tombStats]);
+  const nrwlPriceInFTM = useMemo(() => (nrwlStats ? Number(nrwlStats.tokenInFtm).toFixed(3) : null), [nrwlStats]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -192,12 +205,18 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                     </Grid>
                     <Grid item>
                       <div className={classes.metricBox}>
-                        <span className={classes.tvlLabel}>TVL</span> $76,241,122
+                        <span className={classes.tvlLabel}>TVL</span>
+                        {TVL ? <CountUp end={TVL} separator="," prefix="$" /> : '-----'}
                       </div>
                     </Grid>
                     <Grid item>
                       <div className={classes.metricBox}>
-                        <span className={classes.wlrsLabel}>WLRS</span> $12.32
+                        <span className={classes.wlrsLabel}>WLRS</span> ${tombPriceInFTM ? tombPriceInFTM : '-.---'}
+                      </div>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.metricBox}>
+                        <span className={classes.wlrsLabel}>NRWL</span> ${nrwlPriceInFTM ? nrwlPriceInFTM : '-.---'}
                       </div>
                     </Grid>
                   </Grid>
@@ -299,7 +318,23 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                             </a>
                           </Grid>
                           <Grid item xs={6}>
-                            <Link to="/bonds" className={classes.noDecoration}>
+                            <Link to="/compound" className={classes.noDecoration}>
+                              <Grid container wrap="nowrap" spacing={3}>
+                                <Grid item>
+                                  <img src={rebatesIcon} alt="Compound" />
+                                </Grid>
+                                <Grid item>
+                                  <div className={classes.defiProductsTitle}>Compound</div>
+                                  <div className={classes.defiProductsDescription}>
+                                    It is a long established fact that a reader will be distracted by the readable
+                                    content of a page when looking at its layout.{' '}
+                                  </div>
+                                </Grid>
+                              </Grid>
+                            </Link>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Link to="/home#bonds" className={classes.noDecoration}>
                               <Grid container wrap="nowrap" spacing={3}>
                                 <Grid item>
                                   <img src={bondsIcon} alt="Bonds" />
@@ -395,12 +430,18 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
               </Grid>
               <Grid item>
                 <div className={classes.metricBox}>
-                  <span className={classes.tvlLabel}>TVL</span> $76,241,122
+                  <span className={classes.tvlLabel}>TVL</span>{' '}
+                  {TVL ? <CountUp end={TVL} separator="," prefix="$" /> : '-----'}
                 </div>
               </Grid>
               <Grid item>
                 <div className={classes.metricBox}>
-                  <span className={classes.wlrsLabel}>WLRS</span> $12.32
+                  <span className={classes.wlrsLabel}>WLRS</span> ${tombPriceInFTM ? tombPriceInFTM : '-.---'}
+                </div>
+              </Grid>
+              <Grid item>
+                <div className={classes.metricBox}>
+                  <span className={classes.wlrsLabel}>NRWL</span> ${nrwlPriceInFTM ? nrwlPriceInFTM : '-.---'}
                 </div>
               </Grid>
             </Grid>

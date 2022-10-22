@@ -80,7 +80,7 @@ console.log(apr);
                   marginTop:'15px' }}
                 >
                   <Grid item xs={1}>
-                    <TokenSymbol size={38} symbol={token.name} />
+                    <TokenSymbol width={38} height={38} symbol={token.name} />
                   </Grid>
                   <Grid item xs={1}>
                     <Typography

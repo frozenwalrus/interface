@@ -24,7 +24,6 @@ const Compound = () => {
 
   return (
     <Page>
-      
       <Grid
         container
         xs={12}
@@ -35,10 +34,8 @@ const Compound = () => {
             : {
                 marginLeft: 'auto',
                 marginRight: 'auto',
-                justifyContent: 'center', 
-                ...(heightBreakpoint
-                  ? { marginTop: '7vh' }
-                  : { marginTop: '2vh' }),
+                justifyContent: 'center',
+                ...(heightBreakpoint ? { marginTop: '7vh' } : { marginTop: '2vh' }),
               }),
         }}
       >
@@ -48,8 +45,8 @@ const Compound = () => {
             fontWeight: 'normal',
             width: '100%',
             textAlign: 'center',
-            alignItems: 'center', 
-            color: black,
+            alignItems: 'center',
+            color: '#fcfcfc',
             marginBottom: 0,
           }}
         >
@@ -57,12 +54,12 @@ const Compound = () => {
         </h1>
 
         <p style={{ fontWeight: 'lighter', textAlign: 'center' }}>
-          Use <strong>magik.farm</strong> compounding protocol to maximise
-          your farms. Be sure to read their docs to assess risk.
+          Use <strong>magik.farm</strong> compounding protocol to maximise your farms. Be sure to read their docs to
+          assess risk.
         </p>
 
         <Grid item container spacing={4} style={{ marginTop: '2rem', justifyContent: 'center' }}>
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={12} sm={4}>
             <CompoundCard
               cardData={{
                 title: 'WLRS-USDC.e LP',
@@ -74,7 +71,7 @@ const Compound = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={12} sm={4}>
             <CompoundCard
               cardData={{
                 title: 'WSHARE-USDC.e LP',
@@ -85,7 +82,7 @@ const Compound = () => {
               }}
             />
           </Grid>
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={12} sm={4}>
             <CompoundCard
               cardData={{
                 title: 'NRWL-YUSD LP',

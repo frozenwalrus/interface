@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card } from '@material-ui/core';
+import { Button, Card, Box } from '@material-ui/core';
 import { styled } from '@material-ui/styles';
 
 import TokenSymbol from '../../../../components/TokenSymbol';
@@ -12,6 +12,13 @@ const StyledCard = styled(Card)({
   flexDirection: 'column',
   alignItems: 'center',
   width: '100%',
+  borderRadius: '20px',
+  backgroundColor: '#23252e',
+});
+
+const PaddedInner = styled('div')({
+  padding: '25px',
+  textAlign: 'center'
 });
 
 const StyledButton = styled(Button)({
@@ -32,50 +39,41 @@ const StyledButton = styled(Button)({
 });
 
 const CompoundCard = ({ cardData, buttonProps }) => {
-  const { title, tokenSymbol, tokenWidth = 120, tokenHeight = 60 } = cardData;
+  const { title, tokenSymbol, tokenWidth = 100, tokenHeight = 65 } = cardData;
   const { href } = buttonProps;
 
   return (
     <StyledCard>
-      <h2
-        style={{
-          fontSize: 20,
-          textAlign: 'center',
-          marginTop: 16,
-          marginBottom: 32,
-          color: black,
-        }}
-      >
-        {title}
-      </h2>
+      <PaddedInner>
+        <Box mt={4}>
+          <div className="pending-rewards">{title}</div>
+        </Box>
 
-      <TokenSymbol
-        symbol={tokenSymbol}
-        width={tokenWidth}
-        height={tokenHeight}
-      />
+        <Box mt={4}>
+          <TokenSymbol symbol={tokenSymbol} width={tokenWidth} height={tokenHeight} />{' '}
+        </Box>
 
-      <p
-        style={{
-          fontSize: 14,
-          fontWeight: 'lighter',
-          textAlign: 'center',
-          color: black,
-          margin: 32,
-        }}
-      >
-        This compounding is hosted on <strong>magik.farm</strong>
-      </p>
+        <p
+          style={{
+            fontSize: 14,
+            fontWeight: 'lighter',
+            textAlign: 'center',
+            color: '#fcfcfc',
+            margin: 32,
+          }}
+        >
+          This compounding is hosted on <strong>magik.farm</strong>
+        </p>
 
-      <img
-        src={MagicLogo}
-        alt="invest cow"
-        style={{ width: 60 }}
-      />
+        <img src={MagicLogo} alt="invest cow" style={{ width: 60 }} />
 
-      <StyledButton target="_blank" rel="noreferrer noopener" href={href}>
-        Invest
-      </StyledButton>
+        <Box mt={3}>
+          {' '}
+          <a href={href} target="_blank" rel="noreferrer noopener">
+            <button className="primary-button">Invest</button>
+          </a>
+        </Box>
+      </PaddedInner>
     </StyledCard>
   );
 };

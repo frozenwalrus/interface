@@ -92,7 +92,7 @@ const CemeteryCard = ({ bank }) => {
               color: '#000000 !important',
             }}
           >
-            <TokenSymbol size={50} symbol={bank.depositTokenName} />
+            <TokenSymbol width={50} height={50} symbol={bank.depositTokenName} />
           </Box>
           {/* <div className={classes.black}>
             {bank.depositTokenName.replace('USDC', 'USDC.e')}

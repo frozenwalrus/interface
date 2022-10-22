@@ -88,7 +88,7 @@ const PegPoolInfo: React.FC<{
 
           <Grid container style={{ marginTop: '10px',  justifyContent:'center', alignItems: 'center', }}>
                 <div  style={{ justifyContent: 'center', alignItems:'center'}}>
-                      <TokenSymbol size={72} symbol={'USDC'} />
+                      <TokenSymbol width={72} height={72} symbol={'USDC'} />
                 </div>     
 
               <Grid item xs={12} style={{ marginTop: '10px'}}>

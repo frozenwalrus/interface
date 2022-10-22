@@ -71,7 +71,7 @@ const ExchangeCardNRWL: React.FC<ExchangeCardProps> = ({
           <StyledExchanger>
             <StyledToken>
               <StyledCardIcon>
-                <TokenSymbol symbol={fromToken.symbol} size={75} />
+                <TokenSymbol symbol={fromToken.symbol} height={75} width={75} />
               </StyledCardIcon>
               {/*<Label text={fromTokenName} color="#000" />*/}
             </StyledToken>

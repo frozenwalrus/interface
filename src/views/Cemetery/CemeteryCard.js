@@ -99,7 +99,7 @@ const CemeteryCard = () => {
               <Typography variant="h5" component="h2">
                 WLRS-USDC.e LP
               </Typography>
-              <TokenSymbol size={60} symbol="WLRS-USDC-LP" />
+              <TokenSymbol width={60} height={60} symbol="WLRS-USDC-LP" />
         </div>
         <div>
           <span style={{ fontSize: '20px' }}>
@@ -144,7 +144,7 @@ const CemeteryCard = () => {
               XWLRS  
               
               </Typography>
-            <TokenSymbol size={60} symbol="XWLRS" />
+            <TokenSymbol width={60} height={60} symbol="XWLRS" />
         </div>
         <div style={{ marginBottom: '10px', }}>
           <span style={{ fontSize: '18px'}}>Price of xWLRS: 
@@ -187,7 +187,7 @@ const CemeteryCard = () => {
           <Typography variant="h5" component="h2" style={{ marginLeft:'-8px'}} >
             WSHARE-USDC.e LP, earning WLRS
           </Typography>
-          <TokenSymbol size={60} symbol="WSHARE-USDC-LP" />
+          <TokenSymbol width={60} height={60} symbol="WSHARE-USDC-LP" />
         </div>
         <div>
           <span style={{ fontSize: '19px',}}>
@@ -235,7 +235,7 @@ const CemeteryCard = () => {
           <Typography variant="h5" component="h2" style={{ marginLeft:'-8px'}} >
             WSHARE-USDC.e LP
           </Typography>
-          <TokenSymbol size={60} symbol="WSHARE-USDC-LP" />
+          <TokenSymbol width={60} height={60} symbol="WSHARE-USDC-LP" />
         </div>
         <div>
           <span style={{ fontSize: '19px',}}>
@@ -283,7 +283,7 @@ const CemeteryCard = () => {
           <Typography variant="h5" component="h2">
             NRWL-YUSD LP
           </Typography>
-          <TokenSymbol size={60} symbol="NRWL-YUSD-LP" />
+          <TokenSymbol width={60} height={60} symbol="NRWL-YUSD-LP" />
         </div>
         <div>
           <span style={{ fontSize: '20px' }}>
@@ -339,7 +339,7 @@ const CemeteryCard = () => {
           <Typography variant="h5" component="h2">
             WLRS-USDibs LP
           </Typography>
-          <TokenSymbol size={60} symbol="WLRS-USDIBS-LP" />
+          <TokenSymbol width={60} height={60} symbol="WLRS-USDIBS-LP" />
         </div>
         <div>
           <span style={{ fontSize: '20px' }}>
@@ -394,7 +394,7 @@ const CemeteryCard = () => {
           </Typography>
         </div>
         <div>
-          <TokenSymbol size={60} symbol="WBOND" />
+          <TokenSymbol width={60} height={60} symbol="WBOND" />
         </div>
         <div>
           <span style={{ fontSize: '20px' }}>

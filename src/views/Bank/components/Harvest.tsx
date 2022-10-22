@@ -24,10 +24,15 @@ interface HarvestProps {
   bank: Bank;
 }
 const HomeCardPurple = styled.div`
-  background: linear-gradient(180deg, rgba(217,237,254,1) 0%, rgba(214,211,242,1) 33%, rgba(186,185,212, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(217, 237, 254, 1) 0%,
+    rgba(214, 211, 242, 1) 33%,
+    rgba(186, 185, 212, 1) 100%
+  );
   border-radius: 50px;
-  box-shadow: 6px 6px 12px black; 
-  padding: 20px; 
+  box-shadow: 6px 6px 12px black;
+  padding: 20px;
   color: #4b4453;
 `;
 const Harvest: React.FC<HarvestProps> = ({ bank }) => {
@@ -37,8 +42,9 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const tShareStats = useShareStats();
   const nrwlStats = useNrwlStats();
 
-  const tokenName = bank.earnTokenName /*=== 'WSHARE' ? 'WSHARE' : 'WSHARE'*/;
-  const tokenStats = bank.earnTokenName === 'WSHARE' ? tShareStats : (bank.earnTokenName === 'WLRS' ? tombStats : nrwlStats);
+  const tokenName = bank.earnTokenName; /*=== 'WSHARE' ? 'WSHARE' : 'WSHARE'*/
+  const tokenStats =
+    bank.earnTokenName === 'WSHARE' ? tShareStats : bank.earnTokenName === 'WLRS' ? tombStats : nrwlStats;
   const tokenPriceInDollars = useMemo(
     () => (tokenStats ? Number(tokenStats.priceInDollars).toFixed(2) : null),
     [tokenStats],
@@ -50,7 +56,7 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <TokenSymbol symbol={bank.earnToken.symbol} size={100} />
+            <TokenSymbol symbol={bank.earnToken.symbol} />
             <Value value={getDisplayBalance(earnings)} />
             <Label color="rgba(74, 68, 82)" text={`≈ $${earnedInDollars}`} />
             <Label color="rgba(74, 68, 82)" text={`${tokenName} Earned`} />

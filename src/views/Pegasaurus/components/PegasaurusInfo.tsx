@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
             
               <Grid container style={{ marginTop: '10px',  justifyContent:'center', alignItems: 'center', }}>
                 <div  style={{ justifyContent: 'center', alignItems:'center'}}>
-                      <TokenSymbol size={72} symbol={'WLRS-USDC-LP'} /> <br />
+                      <TokenSymbol width={72} height={72} symbol={'WLRS-USDC-LP'} /> <br />
                      
                 </div>
                

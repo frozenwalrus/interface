@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   footerInner: {
     color: '#9AA4DA',
-    padding: '20px'
+    padding: '20px',
   },
   copyright: {
     color: '#FCFCFC',
@@ -32,12 +32,12 @@ const Footer = () => {
   return (
     <footer className={classes.footer}>
       <div className={classes.footerInner}>
-        <Nav fromParent='footer'/>
+        <Nav fromParent="footer" />
         <Box mt={3}>
           <Grid container justify="center">
             <Grid item>
-              An algorithmic stablecoin on the Fantom Opera blockchain, pegged to the price of 1 FTM 3omb utilizes
-              multiple bonding mechanisms at the 3DAO as well as seigniorage.
+              Frozen Walrus Finance is an algorithmic stable coin protocol pegged 1:1 to USDC on Avalanche via
+              seigniorage.
             </Grid>
           </Grid>
           <Box mt={5} className={classes.bottomLine}>
@@ -50,19 +50,25 @@ const Footer = () => {
               <Grid item>
                 <Grid container justify="space-between" spacing={4} wrap={'nowrap'}>
                   <Grid item>
-                    <img src={discordIcon} alt="Discord" width={40} height={40} />
+                    <a href="https://discord.gg/gGWGR9UDkm">
+                      <img src={discordIcon} alt="Discord" width={40} height={40} />
+                    </a>
                   </Grid>
                   <Grid item>
-                    <img src={youtubeIcon} alt="Youtube" width={40} height={40} />
+                    <a href="https://www.youtube.com/c/LameHillbilly">
+                      <img src={youtubeIcon} alt="Youtube" width={40} height={40} />
+                    </a>
+                  </Grid>
+
+                  <Grid item>
+                    <a href="https://github.com/frozenwalrus/interface">
+                      <img src={githubIcon} alt="Github" width={40} height={40} />
+                    </a>
                   </Grid>
                   <Grid item>
-                    <img src={telegramIcon} alt="Telegram" width={40} height={40} />
-                  </Grid>
-                  <Grid item>
-                    <img src={githubIcon} alt="Github" width={40} height={40} />
-                  </Grid>
-                  <Grid item>
-                    <img src={twitterIcon} alt="Twitter" width={40} height={40} />
+                    <a href="https://twitter.com/WalrusFinance">
+                      <img src={twitterIcon} alt="Twitter" width={40} height={40} />
+                    </a>
                   </Grid>
                 </Grid>
               </Grid>

@@ -368,7 +368,7 @@ const NewHome = () => {
             <CardContent align="center">
               <h2>WLRS-USDC.e LP</h2>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol size={50} symbol="WLRS-USDC-LP" />
+                <TokenSymbol width={50} height={50} symbol="WLRS-USDC-LP" />
               </div>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
@@ -389,7 +389,7 @@ const NewHome = () => {
             <CardContent align="center">
               <h2>WSHARE-USDC.e LP</h2>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol size={50} symbol="WSHARE-USDC-LP" />
+                <TokenSymbol width={50} height={50} symbol="WSHARE-USDC-LP" />
               </div>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
@@ -411,7 +411,7 @@ const NewHome = () => {
             <CardContent align="center">
               <h2>NRWL-YUSD LP</h2>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol size={50} symbol="WSHARE-USDC-LP" />
+                <TokenSymbol width={50} height={50} symbol="WSHARE-USDC-LP" />
               </div>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
@@ -433,7 +433,7 @@ const NewHome = () => {
           <Card>
             <CardContent style={{ position: 'relative' }}>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol symbol="USDC" size={50} />
+                <TokenSymbol symbol="USDC" height={50} width={50}/>
               </div>
               <h2 align="center">USDC.e</h2>
               <p align="center">Current Price</p>
@@ -475,7 +475,7 @@ const NewHome = () => {
           <Card>
             <CardContent style={{ position: 'relative' }}>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol symbol="TOMB" size={50} />
+                <TokenSymbol symbol="TOMB"  height={50} width={50} />
               </div>
               <h2 align="center">WLRS</h2>
               <p align="center">Current Price</p>
@@ -522,7 +522,7 @@ const NewHome = () => {
           <Card>
             <CardContent style={{ position: 'relative' }}>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol symbol="WSHARE" size={50} />
+                <TokenSymbol symbol="WSHARE"  height={50} width={50} />
               </div>
               <h2 align="center">WSHARE</h2>
               <p align="center">Current Price</p>
@@ -566,7 +566,7 @@ const NewHome = () => {
           <Card>
             <CardContent style={{ position: 'relative' }}>
               <div style={{ position: 'absolute', right: 5, top: 5 }}>
-                <TokenSymbol symbol="NRWL" size={50} />
+                <TokenSymbol symbol="NRWL"  height={50} width={50} />
               </div>
               <h2 align="center">NRWL</h2>
               <p align="center">Current Price</p>

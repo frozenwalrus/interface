@@ -320,7 +320,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
                           <div className="balance">
                             {activeDetailsBoxTab === 'Deposit' && (
                               <span>
-                                Balance: {getDisplayBalance(walletTokenBalance)} {bank.depositTokenName}
+                                Balance: {Number(walletTokenBalance) / 1e18} {bank.depositTokenName}
                               </span>
                             )}
                             {activeDetailsBoxTab === 'Withdraw' && (

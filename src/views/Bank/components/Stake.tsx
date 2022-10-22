@@ -35,13 +35,12 @@ interface StakeProps {
   bank: Bank;
 }
 const HomeCardBlue = styled.div`
-background: linear-gradient(0deg, rgba(217,237,254,1) 0%, rgba(214,211,242,1) 66%, rgba(186,185,212,1) 100%);
-border-radius: 50px;  
-  box-shadow: 6px 6px 12px black; 
-  padding: 20px; 
+  background: linear-gradient(0deg, rgba(217, 237, 254, 1) 0%, rgba(214, 211, 242, 1) 66%, rgba(186, 185, 212, 1) 100%);
+  border-radius: 50px;
+  box-shadow: 6px 6px 12px black;
+  padding: 20px;
   color: #4b4453;
 `;
-
 
 const Stake: React.FC<StakeProps> = ({ bank }) => {
   const [approveStatus, approve] = useApprove(bank.depositToken, bank.address);
@@ -50,14 +49,23 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
   const tokenBalance = useTokenBalance(bank.depositToken);
   const stakedBalance = useStakedBalance(bank.contract, bank.poolId);
   const stakedTokenPriceInDollars = useStakedTokenPriceInDollars(bank.depositTokenName, bank.depositToken);
-  console.log(stakedTokenPriceInDollars)
+  console.log(stakedTokenPriceInDollars);
   const tokenPriceInDollars = useMemo(
     () => (stakedTokenPriceInDollars ? stakedTokenPriceInDollars : null),
     [stakedTokenPriceInDollars],
   );
 
-  const multiplier = (bank.depositTokenName.includes('WLRS') || bank.depositTokenName.includes('WSHARE-USDC-LP'))  && !bank.depositTokenName.includes('WLRS-USDIBS-LP') && !bank.depositTokenName.includes('XWLRS') ? 10**6 : 1;
-  const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(stakedBalance, bank.depositToken.decimal, bank.depositToken.decimal === 6 ? 3 : 9)) * multiplier).toFixed(2); 
+  const multiplier =
+    (bank.depositTokenName.includes('WLRS') || bank.depositTokenName.includes('WSHARE-USDC-LP')) &&
+    !bank.depositTokenName.includes('WLRS-USDIBS-LP') &&
+    !bank.depositTokenName.includes('XWLRS')
+      ? 10 ** 6
+      : 1;
+  const earnedInDollars = (
+    Number(tokenPriceInDollars) *
+    Number(getDisplayBalance(stakedBalance, bank.depositToken.decimal, bank.depositToken.decimal === 6 ? 3 : 9)) *
+    multiplier
+  ).toFixed(2);
   const { onStake } = useStake(bank);
   const { onZap } = useZap(bank);
   const { onZapNrwl } = useZapNrwl(bank);
@@ -113,17 +121,32 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
     />,
   );
 
-  const stakedBalanceNumber = Number(getDisplayBalance(stakedBalance, bank.depositToken.decimal, bank.depositToken.decimal === 6 ? 3 : 9));
+  const stakedBalanceNumber = Number(
+    getDisplayBalance(stakedBalance, bank.depositToken.decimal, bank.depositToken.decimal === 6 ? 3 : 9),
+  );
   return (
     <HomeCardBlue>
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <TokenSymbol symbol={bank.depositToken.symbol} size={100} />
-            <Value value={'' + (stakedBalanceNumber < 1/10**4 ? (stakedBalanceNumber * 10**6).toFixed(4) + 'µ' : stakedBalanceNumber)} /> 
+            <TokenSymbol symbol={bank.depositToken.symbol} />
+            <Value
+              value={
+                '' +
+                (stakedBalanceNumber < 1 / 10 ** 4
+                  ? (stakedBalanceNumber * 10 ** 6).toFixed(4) + 'µ'
+                  : stakedBalanceNumber)
+              }
+            />
             <Label color="rgba(74, 68, 82)" text={`≈ $${earnedInDollars}`} />
-            <Label color="rgba(74, 68, 82)" text={`${bank.depositTokenName === 'USDC' || bank.depositTokenName === 'USDT' ? 
-            bank.depositTokenName + '.e' : bank.depositTokenName.replace('USDC', 'USDC.e')} Staked`} />
+            <Label
+              color="rgba(74, 68, 82)"
+              text={`${
+                bank.depositTokenName === 'USDC' || bank.depositTokenName === 'USDT'
+                  ? bank.depositTokenName + '.e'
+                  : bank.depositTokenName.replace('USDC', 'USDC.e')
+              } Staked`}
+            />
           </StyledCardHeader>
           <StyledCardActions>
             {approveStatus !== ApprovalState.APPROVED ? (
@@ -149,26 +172,23 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
                   <StyledActionSpacer />
                   {
                     // bank.depositTokenName !== 'WLRS-USDC-LP' &&  bank.depositTokenName !== 'WSHARE-USDC-LP' && bank.depositTokenName !== 'WLRS-USDIBS-LP'
-                    bank.depositTokenName !== 'WLRS-USDC-LP' && bank.depositTokenName !== 'WSHARE-USDC-LP'
-                      ? null
-                      : <IconButton
-                          disabled={bank.closedForStaking}
-                          onClick={() => (bank.closedForStaking ? null : onPresentZap())}
-                        >
-                          <FlashOnIcon style={{color: '#ccc'}} />
-                        </IconButton>
+                    bank.depositTokenName !== 'WLRS-USDC-LP' && bank.depositTokenName !== 'WSHARE-USDC-LP' ? null : (
+                      <IconButton
+                        disabled={bank.closedForStaking}
+                        onClick={() => (bank.closedForStaking ? null : onPresentZap())}
+                      >
+                        <FlashOnIcon style={{ color: '#ccc' }} />
+                      </IconButton>
+                    )
                   }
-                  {
-                    bank.depositTokenName === 'NRWL-YUSD-LP'
-                      ? <IconButton
-                          
-                          disabled={bank.closedForStaking}
-                          onClick={() => (bank.closedForStaking ? null : onPresentZapNrwl())}
-                        >
-                          <FlashOnIcon style={{color: '#ccc'}} />
-                        </IconButton>
-                      : null
-                  }
+                  {bank.depositTokenName === 'NRWL-YUSD-LP' ? (
+                    <IconButton
+                      disabled={bank.closedForStaking}
+                      onClick={() => (bank.closedForStaking ? null : onPresentZapNrwl())}
+                    >
+                      <FlashOnIcon style={{ color: '#ccc' }} />
+                    </IconButton>
+                  ) : null}
                   <StyledActionSpacer />
                   <IconButton
                     disabled={bank.closedForStaking}

@@ -3,7 +3,7 @@ import useTombFinance from './useTombFinance';
 import useRefresh from './useRefresh';
 
 const useTotalValueLocked = () => {
-  const [totalValueLocked, setTotalValueLocked] = useState<Number>(0);
+  const [totalValueLocked, setTotalValueLocked] = useState<number>(0);
   const { slowRefresh } = useRefresh();
   const tombFinance = useTombFinance();
 

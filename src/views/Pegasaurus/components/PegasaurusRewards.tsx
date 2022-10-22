@@ -57,7 +57,7 @@ console.log(apr);
       
         <Grid container style={{ marginTop: '1px',  justifyContent:'center', alignItems: 'center', }}>   
         <div  style={{ justifyContent: 'center', alignItems:'center'}}>
-                      <TokenSymbol size={72} symbol={'WSHARE'} /> <br />
+                      <TokenSymbol width={72} height={72} symbol={'WSHARE'} /> <br />
                      
                 </div>        
           <Grid item xs={12} style={{ marginTop: '10px'}}>
@@ -84,7 +84,7 @@ console.log(apr);
                   marginTop:'15px' }}
                 >
                   <Grid item xs={1}>
-                    <TokenSymbol size={38} symbol={token.name} />
+                    <TokenSymbol width={38} height={38} symbol={token.name} />
                   </Grid>
                   <Grid item xs={1}>
                     <Typography
