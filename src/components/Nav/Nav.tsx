@@ -349,9 +349,9 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                       )}
                     </Grid>
                     <Grid item>
-                      <Link to="/dashboard" className={classes.link}>
+                      <a href="https://dashboard.frozenwalrus.finance" target='_blank' rel="noreferrer noopener" className={classes.link}>
                         Dashboard
-                      </Link>
+                      </a>
                     </Grid>
                     <Grid item>
                       <a

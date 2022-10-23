@@ -18,7 +18,6 @@ import Popups from './components/Popups';
 import { RefreshContextProvider } from './contexts/RefreshContext';
 
 const Home = lazy(() => import('./views/Home'));
-const Dashboard = lazy(() => import('./views/Dashboard'));
 const Cemetery = lazy(() => import('./views/Cemetery'));
 // const Farm = lazy(() => import('./views/Farm'));
 const Boardroom = lazy(() => import('./views/Boardroom'));
@@ -62,9 +61,6 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/home">
               <Home />
-            </Route>
-            <Route exact path="/dashboard">
-              <Dashboard />
             </Route>
             <Route path="/farms">
               <Cemetery />

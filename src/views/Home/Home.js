@@ -14,7 +14,7 @@ import xWlrsIcon from '../../assets/img/xWLRS.png';
 import xWlrsDesatIcon from '../../assets/img/xWLRS-desaturated.png';
 import MetamaskFox from '../../assets/img/SVG_Icons_and_web_bg/metamask-fox.svg';
 
-import { Box,  Grid, useMediaQuery } from '@material-ui/core';
+import { Box, Grid, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
 import useTokenBalance from '../../hooks/useTokenBalance';
@@ -540,7 +540,11 @@ const Home = () => {
                   <div className={classes.dashboardBoxTitle}>
                     Check out our financial dashboard to see more details of the treasury and other metrics
                   </div>
-                  <div className={classes.dashboardBoxLink}>Go to the dashboard</div>
+                  <div className={classes.dashboardBoxLink}>
+                    <a href="https://dashboard.frozenwalrus.finance" target="_blank" rel="noreferrer noopener">
+                      Go to the dashboard
+                    </a>
+                  </div>
                 </Grid>
               </Grid>
             </div>
