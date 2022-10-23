@@ -715,7 +715,9 @@ export class TombFinance {
   async getDepositTokenPriceInDollars(tokenName: string, token: ERC20) {
     let tokenPrice;
     const priceOfOneFtmInDollars = await this.getWFTMPriceFromPancakeswap();
-    if (tokenName === 'NRWL') {
+    if (tokenName === 'USDC') {
+      tokenPrice = (await this.getUsdcStat()).priceInDollars;
+    } else if (tokenName === 'NRWL') {
       tokenPrice = (await this.getNrwlStat()).priceInDollars;
     } else if (tokenName === 'YUSD') {
       tokenPrice = (await this.getYusdStat()).priceInDollars;
@@ -992,6 +994,41 @@ export class TombFinance {
       console.error(err);
     }
     return this.usdtStats;
+  }
+
+  async getTreasuryValue(): Promise<Number> {
+    const treasuryWalletAddress = '0x2bA4Da735d3cE9177216102E9FDABae67E1ac524';
+    const { WSHARE, USDC } = this.externalTokens;
+    const wlrsUsdcLP = this.externalTokens['WLRS-USDC-LP'];
+    const wshareUsdcLP = this.externalTokens['WSHARE-USDC-LP'];
+    const nrwlYusdLP = this.externalTokens['NRWL-YUSD-LP'];
+
+    const usdcBalance = Number(await USDC.balanceOf(treasuryWalletAddress)) / 1e6;
+    const wshareBalance = Number(await WSHARE.balanceOf(treasuryWalletAddress)) / 1e18;
+    const usdcPrice = Number(await this.getDepositTokenPriceInDollars('USDC', null));
+    const wsharePrice = Number(await this.getDepositTokenPriceInDollars('WSHARE', null));
+
+    const wlrsUSDCNodes = Number((await this.getNodes('PegLPNode', treasuryWalletAddress))[0]);
+    const wshareUSDCNodes = Number((await this.getNodes('ShareLPNode', treasuryWalletAddress))[0]);
+    const nrwlYusdNodes = Number((await this.getNodes('LPNrwlNode', treasuryWalletAddress))[0]);
+    const wlrsUSDCPrice = Number(await this.getDepositTokenPriceInDollars('WLRS-USDC-LP', wlrsUsdcLP));
+    const wshareUSDCPrice = Number(await this.getDepositTokenPriceInDollars('WSHARE-USDC-LP', wshareUsdcLP));
+    const nrwlYUSDPrice = Number(await this.getDepositTokenPriceInDollars('NRWL-YUSD-LP', nrwlYusdLP));
+    const wlrsUSDCNodePrice = Number(await this.getNodePrice('PegLPNode', 0));
+    const wshareUSDCNodePrice = Number(await this.getNodePrice('ShareLPNode', 0));
+    const nrwlYUDNodePrice = Number(await this.getNodePrice('LPNrwlNode', 0));
+
+    const stakedWSHAREBalance = Number((await this.contracts.Masonry.balanceOf(treasuryWalletAddress)) / 1e18);
+
+    const totalInWallet = usdcBalance * usdcPrice + wshareBalance * wsharePrice;
+    const totalInBR = stakedWSHAREBalance * wsharePrice;
+    const totalInNodes =
+      (wlrsUSDCNodes * wlrsUSDCPrice * wlrsUSDCNodePrice +
+        wshareUSDCNodes * wshareUSDCPrice * wshareUSDCNodePrice +
+        nrwlYusdNodes * nrwlYUSDPrice * nrwlYUDNodePrice) /
+      1e12;
+
+    return totalInWallet + totalInBR + totalInNodes;
   }
 
   async getUsdcStat(): Promise<TokenStat> {

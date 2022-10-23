@@ -33,6 +33,7 @@ import nrwlYusdIcon from '../../assets/img/nrwlYusd.png';
 import wlrsIcon from '../../assets/img/SVG_Icons_and_web_bg/WLRS.svg';
 
 import { useLocation } from 'react-router-dom';
+import useGetTreasuryValue from '../../hooks/useGetTreasuryValue';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -232,6 +233,7 @@ const Home = () => {
   const tBondStats = useBondStats();
   const tombFinance = useTombFinance();
   const location = useLocation();
+  const treasuryValue = useGetTreasuryValue()
 
   useEffect(() => {
     const hash = location.hash;
@@ -519,7 +521,7 @@ const Home = () => {
             }}
           >
             <div className={classes.treasuryBoxTitle}>Total Treasury Balance</div>
-            <div className={classes.treasuryBoxBalance}>$10,501,211</div>
+            <div className={classes.treasuryBoxBalance}>${treasuryValue ? treasuryValue.toLocaleString('en-US') : null}</div>
           </Grid>
           <Grid
             item

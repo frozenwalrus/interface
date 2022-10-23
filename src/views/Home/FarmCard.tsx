@@ -25,7 +25,6 @@ import ZapModal from '../Bank/components/ZapModal';
 import ZapModalNrwl from '../Bank/components/ZapModalNrwl';
 import useModal from '../../hooks/useModal';
 import useApprove, { ApprovalState } from '../../hooks/useApprove';
-import { BigNumber } from 'ethers';
 
 interface FarmCardProps {
   bankName: string;
