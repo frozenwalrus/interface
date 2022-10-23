@@ -24,7 +24,7 @@ import useGrapeStats from '../../hooks/useTombStats';
 import useStakedTokenPriceInDollars from '../../hooks/useStakedTokenPriceInDollars';
 import totalNodes from '../../hooks/useTotalNodes';
 import useNodePrice from '../../hooks/useNodePrice';
-import { getDisplayBalance } from '../../utils/formatBalance';
+import { getDisplayBalance, getFullDisplayBalance } from '../../utils/formatBalance';
 import useMaxPayout from '../../hooks/useMaxPayout';
 import useUserDetails from '../../hooks/useUserDetails';
 import useTokenBalance from '../../hooks/useTokenBalance';
@@ -69,7 +69,11 @@ const NodeCard: React.FC<NodeCardProps> = ({ nodeName, bank, pool, account }) =>
 
   const [inputValue, setInputValue] = useState<string>();
   const maxClicked = () => {
-    setInputValue(Math.floor(Number(nodeTokenBalance) / Number(nodePrice)).toString());
+    setInputValue(
+      Math.floor(
+        Number(getFullDisplayBalance(nodeTokenBalance, bank.depositToken.decimal, false)) / Number(nodePrice),
+      ).toString(),
+    );
   };
 
   const stake = () => {
@@ -258,7 +262,8 @@ const NodeCard: React.FC<NodeCardProps> = ({ nodeName, bank, pool, account }) =>
                                 </Grid>
                               </Grid>
                               <div className="balance">
-                                Balance: {Number(nodeTokenBalance) / 1e18} {bank.depositTokenName}
+                                Balance: {getFullDisplayBalance(nodeTokenBalance, bank.depositToken.decimal, false)}{' '}
+                                {bank.depositTokenName}
                               </div>
                             </div>
                           </div>

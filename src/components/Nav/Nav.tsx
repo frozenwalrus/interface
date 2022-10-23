@@ -240,8 +240,7 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                                 <Grid item>
                                   <div className={classes.defiProductsTitle}>Farms</div>
                                   <div className={classes.defiProductsDescription}>
-                                    It is a long established fact that a reader will be distracted by the readable
-                                    content of a page when looking at its layout.{' '}
+                                    Stake your assets to earn rewards!
                                   </div>
                                 </Grid>
                               </Grid>
@@ -255,10 +254,7 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                                 </Grid>
                                 <Grid item>
                                   <div className={classes.defiProductsTitle}>Boardrooms</div>
-                                  <div className={classes.defiProductsDescription}>
-                                    It is a long established fact that a reader will be distracted by the readable
-                                    content of a page when looking at its layout.{' '}
-                                  </div>
+                                  <div className={classes.defiProductsDescription}>Stake shares for NRWL and WLRS.</div>
                                 </Grid>
                               </Grid>
                             </Link>
@@ -272,10 +268,7 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                                 </Grid>
                                 <Grid item>
                                   <div className={classes.defiProductsTitle}>Nodes</div>
-                                  <div className={classes.defiProductsDescription}>
-                                    It is a long established fact that a reader will be distracted by the readable
-                                    content of a page when looking at its layout.{' '}
-                                  </div>
+                                  <div className={classes.defiProductsDescription}>Lock liquidity to earn more.</div>
                                 </Grid>
                               </Grid>
                             </Link>
@@ -310,8 +303,7 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                                 <Grid item>
                                   <div className={classes.defiProductsTitle}>Lottery</div>
                                   <div className={classes.defiProductsDescription}>
-                                    It is a long established fact that a reader will be distracted by the readable
-                                    content of a page when looking at its layout.{' '}
+                                    Buy tickets with WLRS or WBOND a chance to earn a pot of XWLRS.
                                   </div>
                                 </Grid>
                               </Grid>
@@ -326,8 +318,7 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                                 <Grid item>
                                   <div className={classes.defiProductsTitle}>Compound</div>
                                   <div className={classes.defiProductsDescription}>
-                                    It is a long established fact that a reader will be distracted by the readable
-                                    content of a page when looking at its layout.{' '}
+                                    Deposit assets that will automatically increase overtime.
                                   </div>
                                 </Grid>
                               </Grid>
@@ -342,8 +333,7 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                                 <Grid item>
                                   <div className={classes.defiProductsTitle}>Bonds</div>
                                   <div className={classes.defiProductsDescription}>
-                                    It is a long established fact that a reader will be distracted by the readable
-                                    content of a page when looking at its layout.{' '}
+                                    Exchange WLRS or NRWL for illiquid bonds that will redeem for a bonus when over peg.
                                   </div>
                                 </Grid>
                               </Grid>

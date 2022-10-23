@@ -138,7 +138,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
 
       <StyledActionSpacer />
       <Alert variant="filled" severity="warning">
-        Beta feature. Use at your own risk!
+        Zapping only creates the asset, but doesn't stake it. Beta feature. Use at your own risk!
       </Alert>
     </Modal>
   );

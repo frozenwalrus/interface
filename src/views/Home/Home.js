@@ -2,6 +2,8 @@ import React, { useMemo, useState, useEffect } from 'react';
 import Page from '../../components/Page';
 import styled from 'styled-components';
 import magikIcon from '../../assets/img/MAGIK.png';
+import nrwlIcon from '../../assets/img/nrwl.png';
+import wShareIcon from '../../assets/img/wshare.png';
 import useTombStats from '../../hooks/useTombStats';
 import useLpStats from '../../hooks/useLpStats';
 import useLpStatsNrwl from '../../hooks/useLpStatsNrwl';
@@ -960,7 +962,7 @@ const Home = () => {
                   </Grid>
                 </Grid>
                 <Box mt={2} style={{ textAlign: 'center' }}>
-                  <img src={wlrsIcon} height={80} alt="Walrus" style={{ paddingTop: '10px' }} />
+                  <img src={wShareIcon} height={80} alt="Walrus" style={{ paddingTop: '10px' }} />
                 </Box>
                 <Box mt={3} style={{ textAlign: 'center' }}>
                   <Grid container direction="column" justify="center">
@@ -1044,7 +1046,7 @@ const Home = () => {
                   </Grid>
                 </Grid>
                 <Box mt={2} style={{ textAlign: 'center' }}>
-                  <img src={wlrsIcon} height={80} alt="Walrus" style={{ paddingTop: '10px' }} />
+                  <img src={nrwlIcon} height={80} alt="Walrus" style={{ paddingTop: '10px' }} />
                 </Box>
                 <Box mt={3} style={{ textAlign: 'center' }}>
                   <Grid container direction="column" justify="center">

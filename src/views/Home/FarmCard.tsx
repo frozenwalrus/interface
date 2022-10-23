@@ -12,7 +12,7 @@ import { Box, Grid, Accordion, AccordionDetails, AccordionSummary, Slider, useMe
 import { Bank, PoolStats, TokenStat } from '../../tomb-finance/types';
 import useEarnings from '../../hooks/useEarnings';
 import useHarvest from '../../hooks/useHarvest';
-import { getDisplayBalance } from '../../utils/formatBalance';
+import { getDisplayBalance, getFullDisplayBalance } from '../../utils/formatBalance';
 import useGetTokenStats from '../../hooks/useGetTokenStats';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import useStakedBalance from '../../hooks/useStakedBalance';
@@ -24,6 +24,7 @@ import useWithdraw from '../../hooks/useWithdraw';
 import ZapModal from '../Bank/components/ZapModal';
 import ZapModalNrwl from '../Bank/components/ZapModalNrwl';
 import useModal from '../../hooks/useModal';
+import useApprove, { ApprovalState } from '../../hooks/useApprove';
 
 interface FarmCardProps {
   bankName: string;
@@ -55,6 +56,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
   const walletTokenBalance = useTokenBalance(bank.depositToken);
   const stakedBalance = useStakedBalance(bank.contract, bank.poolId);
   const stakedTokenPriceInDollars = useStakedTokenPriceInDollars(bank.depositTokenName, bank.depositToken);
+  const [approveStatus, approve] = useApprove(bank.depositToken, bank.address);
 
   // Memos
   const earnedTokenPriceOfOneInDollars = useMemo(
@@ -126,6 +128,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
     }
   };
   const stake = () => {
+    console.log('Staking ' + inputValue);
     if (Number(inputValue) > 0) {
       onStake(inputValue.toString());
     }
@@ -142,7 +145,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
 
   const maxClicked = () => {
     if (activeDetailsBoxTab === 'Deposit') {
-      setInputValue((Number(walletTokenBalance) / 1e18).toString());
+      setInputValue(getFullDisplayBalance(walletTokenBalance, bank.depositToken.decimal, false));
     } else if (activeDetailsBoxTab === 'Withdraw') {
       setInputValue(Number(stakedBalanceNumber).toString());
     }
@@ -320,7 +323,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
                           <div className="balance">
                             {activeDetailsBoxTab === 'Deposit' && (
                               <span>
-                                Balance: {Number(walletTokenBalance) / 1e18} {bank.depositTokenName}
+                                Balance: {getFullDisplayBalance(walletTokenBalance, bank.depositToken.decimal, false)}{' '}
+                                {bank.depositTokenName}
                               </span>
                             )}
                             {activeDetailsBoxTab === 'Withdraw' && (
@@ -356,14 +360,25 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
                               )}
                               {activeDetailsBoxTab === 'Deposit' && (
                                 <Grid item xs={6}>
-                                  <button
-                                    disabled={Number(inputValue) === 0}
-                                    onClick={stake}
-                                    className="secondary-button"
-                                    title="Deposit"
-                                  >
-                                    Deposit
-                                  </button>
+                                  {approveStatus !== ApprovalState.APPROVED ? (
+                                    <button
+                                      disabled={Number(inputValue) === 0}
+                                      onClick={approve}
+                                      className="secondary-button"
+                                      title="Approve"
+                                    >
+                                      Approve
+                                    </button>
+                                  ) : (
+                                    <button
+                                      disabled={Number(inputValue) === 0}
+                                      onClick={stake}
+                                      className="secondary-button"
+                                      title="Deposit"
+                                    >
+                                      Deposit
+                                    </button>
+                                  )}
                                 </Grid>
                               )}
                             </>
