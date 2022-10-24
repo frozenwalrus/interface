@@ -161,13 +161,11 @@ const useStyles = makeStyles((theme) => ({
   },
   dashboardBoxTitle: {
     color: '#00F0E2',
-    marginTop: '20px',
     fontSize: '16px',
   },
   dashboardBoxLink: {
     color: '#FCFCFC',
     fontSize: '18px',
-    marginTop: '10px',
     fontWeight: '400',
     textDecoration: 'underline',
     textUnderlineOffset: '5px',
@@ -177,10 +175,6 @@ const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: '20px',
     borderBottomRightRadius: '20px',
     height: '150px',
-  },
-  dashboardBoxInner: {
-    paddingLeft: '30px',
-    paddingRight: '30px',
   },
 
   cardTitle: {
@@ -233,7 +227,7 @@ const Home = () => {
   const tBondStats = useBondStats();
   const tombFinance = useTombFinance();
   const location = useLocation();
-  const treasuryValue = useGetTreasuryValue()
+  const treasuryValue = useGetTreasuryValue();
 
   useEffect(() => {
     const hash = location.hash;
@@ -521,7 +515,9 @@ const Home = () => {
             }}
           >
             <div className={classes.treasuryBoxTitle}>Total Treasury Balance</div>
-            <div className={classes.treasuryBoxBalance}>${treasuryValue ? treasuryValue.toLocaleString('en-US') : null}</div>
+            <div className={classes.treasuryBoxBalance}>
+              ${treasuryValue ? treasuryValue.toLocaleString('en-US') : '---.---'}
+            </div>
           </Grid>
           <Grid
             item
@@ -533,23 +529,26 @@ const Home = () => {
               borderTopRightRadius: widthUnder600 ? '0' : '20px',
             }}
           >
-            <div className={classes.dashboardBoxInner}>
-              <Grid container wrap={'nowrap'} spacing={2} alignItems="flex-end">
-                <Grid item xs={4}>
-                  <img src={wlrsBlueImg} alt="Walrus" style={{ width: '100%' }} />
-                </Grid>
-                <Grid item xs={8}>
-                  <div className={classes.dashboardBoxTitle}>
-                    Check out our financial dashboard to see more details of the treasury and other metrics
-                  </div>
-                  <div className={classes.dashboardBoxLink}>
-                    <a href="https://dashboard.frozenwalrus.finance" target="_blank" rel="noreferrer noopener">
-                      Go to the dashboard
-                    </a>
-                  </div>
-                </Grid>
+            <Grid container style={{ height: '155px' }} wrap={'nowrap'} justifyContent="center" alignItems="flex-end">
+              <Grid item xs={4}>
+                <img src={wlrsBlueImg} alt="Walrus" style={{ width: '100%', marginLeft: '15px' }} />
               </Grid>
-            </div>
+              <Grid item xs={8} style={{ paddingBottom: '40px', marginLeft: '20px' }}>
+                <div className={classes.dashboardBoxTitle}>
+                  Check out our financial dashboard to see more details of the treasury and other metrics
+                </div>
+                <div className={classes.dashboardBoxLink}>
+                  <a
+                    style={{ color: '#fcfcfc' }}
+                    href="https://dashboard.frozenwalrus.finance"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    Go to the dashboard
+                  </a>
+                </div>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Box>
