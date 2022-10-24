@@ -1691,13 +1691,13 @@ export class TombFinance {
     let assetUrl;
     if (assetName === 'WLRS') {
       asset = this.TOMB;
-      // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmVL6cK5iUmkfGhw41s4gCksHn4H4KoF2tnEin2fhbEMmQ';
+      assetUrl = 'https://github.com/frozenwalrus/interface/blob/7bfbca5e1a18a763f46165b0ed0c45960fcdece1/public/wlrs-resize.png?raw=true';
     } else if (assetName === 'WSHARE') {
       asset = this.TSHARE;
-      // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmSkdqbueZTKDjb2oqKo6bEcn6qenA9Z6iiSNR1omHGVZx';
+      assetUrl = 'https://github.com/frozenwalrus/interface/blob/main/public/wshare-resize.png?raw=true';
     } else if (assetName === 'NRWL') {
       asset = this.NRWL;
-      // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmSkdqbueZTKDjb2oqKo6bEcn6qenA9Z6iiSNR1omHGVZx';
+      assetUrl = 'https://github.com/frozenwalrus/interface/blob/main/public/nrwl-resize.png?raw=true';
     } else if (assetName === 'WBOND') {
       asset = this.TBOND;
       // assetUrl = 'https://gateway.pinata.cloud/ipfs/QmVCNLxo6vRUr3qCaNHJPwVL7jMGBf18FSa65zkeaHSbua';
