@@ -13,7 +13,7 @@ import logo from '../../assets/img/SVG_Icons_and_web_bg/logo.svg';
 import productIcons from '../../assets/img/SVG_Icons_and_web_bg/products-icon.svg';
 import farmsIcon from '../../assets/img/SVG_Icons_and_web_bg/Farms.svg';
 import boardroomsIcon from '../../assets/img/SVG_Icons_and_web_bg/Boardrooms.svg';
-import bondsIcon from '../../assets/img/SVG_Icons_and_web_bg/Bonds.svg';
+import nftsIcon from '../../assets/img/nfticon.png';
 import lotteryIcon from '../../assets/img/SVG_Icons_and_web_bg/Lottery.svg';
 import nodesIcon from '../../assets/img/SVG_Icons_and_web_bg/Nodes.svg';
 import rebatesIcon from '../../assets/img/SVG_Icons_and_web_bg/Rebates.svg';
@@ -325,19 +325,24 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                             </Link>
                           </Grid>
                           <Grid item xs={6}>
-                            <Link to="/home#bonds" className={classes.noDecoration}>
+                            <a
+                              href="https://mint.frozenwalrus.finance/"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                              className={classes.noDecoration}
+                            >
                               <Grid container wrap="nowrap" spacing={3}>
                                 <Grid item>
-                                  <img src={bondsIcon} alt="Bonds" />
+                                  <img src={nftsIcon} width={72} height={72} alt="NFTs" />
                                 </Grid>
                                 <Grid item>
-                                  <div className={classes.defiProductsTitle}>Bonds</div>
+                                  <div className={classes.defiProductsTitle}>NFTs</div>
                                   <div className={classes.defiProductsDescription}>
-                                    Exchange WLRS or NRWL for illiquid bonds that will redeem for a bonus when over peg.
+                                    Mint a NFT for profits from physical ASIC miners!
                                   </div>
                                 </Grid>
                               </Grid>
-                            </Link>
+                            </a>
                           </Grid>
                         </Grid>
                       </div>
@@ -349,7 +354,12 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                       )}
                     </Grid>
                     <Grid item>
-                      <a href="https://dashboard.frozenwalrus.finance" target='_blank' rel="noreferrer noopener" className={classes.link}>
+                      <a
+                        href="https://dashboard.frozenwalrus.finance"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className={classes.link}
+                      >
                         Dashboard
                       </a>
                     </Grid>
