@@ -474,10 +474,20 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                 <Link color="textPrimary" to="/" className={classes.link}>
                   <div style={{ margin: '4px 20px' }}>Home</div>
                 </Link>
-                <Link color="textPrimary" to="/dashboard" className={classes.link}>
+                <a
+                  href="https://dashboard.frozenwalrus.finance"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  className={classes.link}
+                >
                   <div style={{ margin: '4px 20px' }}>Dashboard</div>
-                </Link>
-                <a href="https://docs.frozenwalrus.finance/welcome" target="_blank" className={classes.link}>
+                </a>
+                <a
+                  href="https://docs.frozenwalrus.finance/welcome"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  className={classes.link}
+                >
                   <div style={{ margin: '4px 20px' }}>Docs</div>
                 </a>
 
