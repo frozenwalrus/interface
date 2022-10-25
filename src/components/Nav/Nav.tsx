@@ -483,6 +483,27 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                   <div style={{ margin: '4px 20px' }}>Dashboard</div>
                 </a>
                 <a
+                  href="https://win.frozenwalrus.finance/"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  className={classes.link}
+                >
+                  <div style={{ margin: '4px 20px' }}>Lottery</div>
+                </a>
+                <Link to="/compound" className={classes.link}>
+                  {' '}
+                  <div style={{ margin: '4px 20px' }}>Compound</div>
+                </Link>
+
+                <a
+                  href="https://mint.frozenwalrus.finance/"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  className={classes.link}
+                >
+                  <div style={{ margin: '4px 20px' }}>NFTs</div>
+                </a>
+                <a
                   href="https://docs.frozenwalrus.finance/welcome"
                   rel="noreferrer noopener"
                   target="_blank"
