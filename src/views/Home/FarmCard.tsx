@@ -253,8 +253,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ bankName, bank, poolStats, account 
                   xs={3}
                   style={{ marginTop: widthUnder600 ? '15px' : '0', textAlign: widthUnder600 ? 'center' : 'left' }}
                 >
-                  <div className="lineLabel">APR</div>
-                  <div className="lineValue">{poolStats?.yearlyAPR ? poolStats?.yearlyAPR : '--.--'}%</div>
+                  <div className="lineLabel">Daily APR</div>
+                  <div className="lineValue">{poolStats?.dailyAPR ? poolStats?.dailyAPR : '--.--'}%</div>
                 </Grid>
                 <Grid
                   item

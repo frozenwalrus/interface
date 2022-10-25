@@ -8,6 +8,7 @@ import Modal, { ModalProps } from '../Modal';
 import ModalTitle from '../ModalTitle';
 import useTombFinance from '../../hooks/useTombFinance';
 import TokenSymbol from '../TokenSymbol';
+import useStakedTokenPriceInDollars from '../../hooks/useStakedTokenPriceInDollars';
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const tombFinance = useTombFinance();
@@ -20,6 +21,18 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
 
   const nrwlBalance = useTokenBalance(tombFinance.NRWL);
   const displayNrwlBalance = useMemo(() => getDisplayBalance(nrwlBalance), [nrwlBalance]);
+
+  const wsharePrice = useStakedTokenPriceInDollars('WSHARE', tombFinance.TSHARE);
+  const displayWSharePrice = useMemo(
+    () => (Number(tshareBalance) / 1e18) * Number(wsharePrice),
+    [tshareBalance, wsharePrice],
+  );
+
+  const wlrsPrice = useStakedTokenPriceInDollars('WLRS', tombFinance.FTM);
+  const displayWlrsPrice = useMemo(() => (Number(tombBalance) / 1e18) * Number(wlrsPrice), [tombBalance, wlrsPrice]);
+
+  const nrwlPrice = useStakedTokenPriceInDollars('NRWL', tombFinance.NRWL);
+  const displayNrwlPrice = useMemo(() => (Number(nrwlBalance) / 1e18) * Number(nrwlPrice), [nrwlBalance, nrwlPrice]);
 
   // const tbondBalance = useTokenBalance(tombFinance.TBOND);
   // const displayTbondBalance = useMemo(() => getDisplayBalance(tbondBalance), [tbondBalance]);
@@ -34,6 +47,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
           <StyledBalance>
             <StyledValue>{displayTombBalance}</StyledValue>
             <Label color="black" text="WLRS Available" />
+            <div style={{ color: '#07c4ff' }}>${displayWlrsPrice.toFixed(2)}</div>
           </StyledBalance>
         </StyledBalanceWrapper>
 
@@ -42,6 +56,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
           <StyledBalance>
             <StyledValue>{displayTshareBalance}</StyledValue>
             <Label color="black" text="WSHARE Available" />
+            <div style={{ color: '#07c4ff' }}>${displayWSharePrice.toFixed(2)}</div>
           </StyledBalance>
         </StyledBalanceWrapper>
 
@@ -49,7 +64,8 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
           <TokenSymbol symbol="NRWL" />
           <StyledBalance>
             <StyledValue>{displayNrwlBalance}</StyledValue>
-            <Label color="black" text="NRWL Available" />
+            <Label color="black" text="NRWL Available" />{' '}
+            <div style={{ color: '#07c4ff' }}>${displayNrwlPrice.toFixed(2)}</div>
           </StyledBalance>
         </StyledBalanceWrapper>
 
