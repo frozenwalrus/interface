@@ -50,7 +50,7 @@ const Footer = () => {
               <Grid item>
                 <Grid container justify="space-between" spacing={4} wrap={'nowrap'}>
                   <Grid item>
-                    <a href="https://discord.gg/gGWGR9UDkm">
+                    <a href="https://discord.gg/wlrs">
                       <img src={discordIcon} alt="Discord" width={40} height={40} />
                     </a>
                   </Grid>
