@@ -13,7 +13,7 @@ import useApprove, { ApprovalState } from '../../hooks/useApprove';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../tomb-finance/constants';
 import { useTransactionAdder } from '../../state/transactions/hooks';
 
-const Bonds = () => {
+const Bonds = (props) => {
   const frozenWlrs = useTombFinance();
   const addTransaction = useTransactionAdder();
   const {
@@ -76,6 +76,7 @@ const Bonds = () => {
       <BondCard
         tokenName="WLRS"
         bondName="WBOND"
+        activesOnly={props.activesOnly}
         price={Number(bcashPrice) / 1e18}
         availableForPurchase={Number(bbondsPurchasable) / 1e18}
         walletBalance={Number(bWlrsBalance) / 1e18}
@@ -89,6 +90,7 @@ const Bonds = () => {
       <BondCard
         tokenName="NRWL"
         bondName="NBOND"
+        activesOnly={props.activesOnly}
         price={Number(ncashPrice) / 1e18}
         availableForPurchase={Number(nbondsPurchasable) / 1e18}
         walletBalance={Number(nNrwlBalance) / 1e18}

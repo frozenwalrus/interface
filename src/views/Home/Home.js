@@ -14,7 +14,7 @@ import xWlrsIcon from '../../assets/img/xWLRS.png';
 import xWlrsDesatIcon from '../../assets/img/xWLRS-desaturated.png';
 import MetamaskFox from '../../assets/img/SVG_Icons_and_web_bg/metamask-fox.svg';
 
-import { Box, Grid, useMediaQuery } from '@material-ui/core';
+import { Box, FormControlLabel, FormGroup, Grid, Switch, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
 import useTokenBalance from '../../hooks/useTokenBalance';
@@ -229,6 +229,11 @@ const Home = () => {
   const location = useLocation();
   const treasuryValue = useGetTreasuryValue();
 
+  const [activesOnly, setActivesOnly] = React.useState(false);
+  const handleSwitchChange = (event) => {
+    setActivesOnly(event.target.checked);
+  };
+
   useEffect(() => {
     const hash = location.hash;
     if (hash === '#farms') {
@@ -409,17 +414,26 @@ const Home = () => {
         </Grid>
       </Box>
 
-      <Box hidden={activeTab !== 'Farms'} mt={4}>
-        <Farms />
+      <Box mt={4}>
+        <FormGroup style={{ color: 'white' }}>
+          <FormControlLabel
+            control={<Switch color="secondary" checked={activesOnly} onChange={handleSwitchChange} />}
+            label="Active(s) only"
+          />
+        </FormGroup>
       </Box>
-      <Box hidden={activeTab !== 'Boardrooms'} mt={4}>
-        <Boardrooms />
+
+      <Box hidden={activeTab !== 'Farms'} mt={1}>
+        <Farms activesOnly={activesOnly} />
       </Box>
-      <Box hidden={activeTab !== 'Nodes'} mt={4}>
-        <Nodes />
+      <Box hidden={activeTab !== 'Boardrooms'} mt={1}>
+        <Boardrooms activesOnly={activesOnly} />
       </Box>
-      <Box hidden={activeTab !== 'Bonds'} mt={4}>
-        <Bonds />
+      <Box hidden={activeTab !== 'Nodes'} mt={1}>
+        <Nodes activesOnly={activesOnly} />
+      </Box>
+      <Box hidden={activeTab !== 'Bonds'} mt={1}>
+        <Bonds activesOnly={activesOnly} />
       </Box>
       {/* <Box hidden={activeTab !== 'Rebates'} mt={4}>
         <Rebates />

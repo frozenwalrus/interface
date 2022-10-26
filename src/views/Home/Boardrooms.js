@@ -39,7 +39,7 @@ import useUnstakeTimerMasonry from '../../hooks/masonry/useUnstakeTimerMasonry';
 import useClaimRewardCheck from '../../hooks/masonry/useClaimRewardCheck';
 import useClaimRewardCheckNrwl from '../../hooks/masonryNrwl/useClaimRewardCheck';
 
-const Boardrooms = () => {
+const Boardrooms = (props) => {
   const tombFinance = useTombFinance();
   const wsharePrice = useStakedTokenPriceInDollars('WSHARE', tombFinance.TSHARE);
   const wlrsPrice = useStakedTokenPriceInDollars('WLRS', tombFinance.FTM);
@@ -109,6 +109,7 @@ const Boardrooms = () => {
     <Grid container direction="column" spacing={2}>
       <BoardroomCard
         boardroomName="WLRS BOARDROOM"
+        activesOnly={props.activesOnly}
         currentEpoch={Number(wlrsCurrentEpoch)}
         nextEpoch={wlrsNextEpochDate}
         twap={wlrsTwap}
@@ -136,6 +137,7 @@ const Boardrooms = () => {
       />
       <BoardroomCard
         boardroomName="NRWL BOARDROOM"
+        activesOnly={props.activesOnly}
         currentEpoch={Number(nrwlCurrentEpoch)}
         nextEpoch={nrwlNextEpochDate}
         twap={nrwlTwap}

@@ -3,10 +3,9 @@ import { Grid } from '@material-ui/core';
 import useBank from '../../hooks/useBank';
 import useWallet from 'use-wallet';
 import FarmCard from './FarmCard';
-import useLpStats from '../../hooks/useLpStats';
 import useStatsForPool from '../../hooks/useStatsForPool';
 
-const Farms = () => {
+function Farms(props) {
   const { account } = useWallet();
 
   // WLRS USDC
@@ -34,19 +33,52 @@ const Farms = () => {
   const bondPool = useStatsForPool(bondBank);
 
   return (
-    <Grid container direction="column" spacing={2}>
-      <FarmCard bankName="WLRS-USDC.e LP" bank={wlrsUSDCBank} poolStats={wlrsUSDCPoolStats} account={account} />
-      <FarmCard bankName="xWLRS" bank={xWLRSBank} poolStats={xWLRSBankStatsPool} account={account} />
-      <FarmCard
-        bankName="WSHARE-USDC.e LP (WLRS)"
-        bank={wShareUSDCEarningWLRSBank}
-        poolStats={wShareUSDCEarningWLRSStatsPool}
-        account={account}
-      />
-      <FarmCard bankName="WSHARE-USDC.e LP" bank={wShareUSDCBank} poolStats={wShareUSDCPoolStats} account={account} />
-      <FarmCard bankName="NRWL-YUSD LP" bank={nrwlBank} poolStats={nrwlPoolStats} account={account} />
-      <FarmCard bankName="WBOND" bank={bondBank} poolStats={bondPool} account={account} />
-    </Grid>
+    <>
+      <Grid container direction="column" spacing={2}>
+        <FarmCard
+          bankName="WLRS-USDC.e LP"
+          activesOnly={props.activesOnly}
+          bank={wlrsUSDCBank}
+          poolStats={wlrsUSDCPoolStats}
+          account={account}
+        />
+        <FarmCard
+          bankName="xWLRS"
+          activesOnly={props.activesOnly}
+          bank={xWLRSBank}
+          poolStats={xWLRSBankStatsPool}
+          account={account}
+        />
+        <FarmCard
+          bankName="WSHARE-USDC.e LP (WLRS)"
+          activesOnly={props.activesOnly}
+          bank={wShareUSDCEarningWLRSBank}
+          poolStats={wShareUSDCEarningWLRSStatsPool}
+          account={account}
+        />
+        <FarmCard
+          bankName="WSHARE-USDC.e LP"
+          activesOnly={props.activesOnly}
+          bank={wShareUSDCBank}
+          poolStats={wShareUSDCPoolStats}
+          account={account}
+        />
+        <FarmCard
+          bankName="NRWL-YUSD LP"
+          activesOnly={props.activesOnly}
+          bank={nrwlBank}
+          poolStats={nrwlPoolStats}
+          account={account}
+        />
+        <FarmCard
+          bankName="WBOND"
+          activesOnly={props.activesOnly}
+          bank={bondBank}
+          poolStats={bondPool}
+          account={account}
+        />
+      </Grid>
+    </>
   );
-};
+}
 export default Farms;

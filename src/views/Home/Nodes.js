@@ -5,7 +5,7 @@ import useStatsForPool from '../../hooks/useStatsForPool';
 import useBank from '../../hooks/useBank';
 import { useWallet } from 'use-wallet';
 
-const Nodes = () => {
+const Nodes = (props) => {
 
   const { account } = useWallet();
 
@@ -27,10 +27,10 @@ const Nodes = () => {
   
   return (
     <Grid container direction="column" spacing={2}>
-      <NodeCard nodeName="WLRS-USDC.e LP Node" bank={wlrsUSDCBank} pool={wlrsUSDCPool} account={account}/>
-      <NodeCard nodeName="WSHARE-USDC.e LP Node" bank={wshareUSDCBank} pool={wshareUSDCPool} account={account} />
-      <NodeCard nodeName="NRWL-YUSD LP Node" bank={nrwlYUSDBank} pool={nrwlYUSDPool}  account={account}/>
-      <NodeCard nodeName="GRAPE-WLRS LP Node" bank={grapeWLRSBank} pool={grapeWLRSPool}  account={account}/>
+      <NodeCard nodeName="WLRS-USDC.e LP Node" activesOnly={props.activesOnly} bank={wlrsUSDCBank} pool={wlrsUSDCPool} account={account}/>
+      <NodeCard nodeName="WSHARE-USDC.e LP Node" activesOnly={props.activesOnly} bank={wshareUSDCBank} pool={wshareUSDCPool} account={account} />
+      <NodeCard nodeName="NRWL-YUSD LP Node" activesOnly={props.activesOnly} bank={nrwlYUSDBank} pool={nrwlYUSDPool}  account={account}/>
+      <NodeCard nodeName="GRAPE-WLRS LP Node" activesOnly={props.activesOnly} bank={grapeWLRSBank} pool={grapeWLRSPool}  account={account}/>
     </Grid>
   );
 };
