@@ -153,6 +153,10 @@ input::-webkit-inner-spin-button {
   cursor: not-allowed;
 }
 
+.MuiMenu-list {
+  background-color: #12141d;
+}
+
 .uppercase {
   text-transform: uppercase;
 }

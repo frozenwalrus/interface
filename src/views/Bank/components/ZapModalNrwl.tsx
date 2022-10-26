@@ -140,15 +140,9 @@ const StyledActionSpacer = styled.div`
 
 const StyledMenuItem = withStyles({
   root: {
-    backgroundColor: 'white',
-    color: 'black',
-    '&:hover': {
-      backgroundColor: 'grey',
-      color: 'black',
-    },
+    color: '#fcfcfc',
     selected: {
-      backgroundColor: 'black',
-      color: 'white',
+      color: '#9aa4da',
     },
   },
 })(MenuItem);

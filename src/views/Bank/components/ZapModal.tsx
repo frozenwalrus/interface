@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 
-import { Button, Select, MenuItem, InputLabel, withStyles } from '@material-ui/core';
+import { Button, Select, MenuItem, InputLabel, withStyles, FormControl } from '@material-ui/core';
 // import Button from '../../../components/Button'
 import Modal, { ModalProps } from '../../../components/Modal';
 import ModalActions from '../../../components/ModalActions';
@@ -94,6 +94,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
       <InputLabel style={{ color: '#fcfcfc', marginBottom: '8px' }} id="label">
         Select asset to zap with
       </InputLabel>
+
       <Select
         onChange={handleChangeAsset}
         style={{ color: '#fcfcfc' }}
@@ -105,8 +106,6 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         <StyledMenuItem value={tokenName.startsWith(TOMB_TICKER) ? TOMB_TICKER : TSHARE_TICKER}>
           {tokenName.startsWith(TOMB_TICKER) ? TOMB_TICKER : TSHARE_TICKER}
         </StyledMenuItem>
-        {/* Tomb as an input for zapping will be disabled due to issues occuring with the Gatekeeper system */}
-        {/* <StyledMenuItem value={TOMB_TICKER}>TOMB</StyledMenuItem> */}
       </Select>
       <TokenInput
         onSelectMax={handleSelectMax}
@@ -138,7 +137,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
 
       <StyledActionSpacer />
       <Alert variant="filled" severity="info">
-       Make sure to manually stake your LP after zapping. Beta feature. Use at your own risk!
+        Make sure to manually stake your LP after zapping. Beta feature. Use at your own risk!
       </Alert>
     </Modal>
   );
@@ -149,26 +148,11 @@ const StyledActionSpacer = styled.div`
   width: ${(props) => props.theme.spacing[4]}px;
 `;
 
-const StyledDescriptionText = styled.div`
-  align-items: center;
-  color: ${(props) => props.theme.color.grey[400]};
-  display: flex;
-  font-size: 14px;
-  font-weight: 700;
-  height: 22px;
-  justify-content: flex-start;
-`;
 const StyledMenuItem = withStyles({
   root: {
-    backgroundColor: 'white',
-    color: 'black',
-    '&:hover': {
-      backgroundColor: 'grey',
-      color: 'black',
-    },
+    color: '#fcfcfc',
     selected: {
-      backgroundColor: 'black',
-      color: 'white',
+      color: '#9aa4da',
     },
   },
 })(MenuItem);
