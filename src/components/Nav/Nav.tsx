@@ -365,6 +365,16 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                     </Grid>
                     <Grid item>
                       <a
+                        href="https://shop.frozenwalrus.finance/"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className={classes.link}
+                      >
+                        Shop
+                      </a>
+                    </Grid>
+                    <Grid item>
+                      <a
                         target="_blank"
                         rel="noopener noreferrer"
                         href="https://docs.frozenwalrus.finance/welcome"
@@ -481,6 +491,14 @@ const Nav: React.FC<NavProps> = ({ fromParent }) => {
                   className={classes.link}
                 >
                   <div style={{ margin: '4px 20px' }}>Dashboard</div>
+                </a>
+                <a
+                  href="https://shop.frozenwalrus.finance/"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className={classes.link}
+                >
+                  Shop
                 </a>
                 <a
                   href="https://win.frozenwalrus.finance/"
