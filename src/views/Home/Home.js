@@ -633,7 +633,7 @@ const Home = () => {
                           <a
                             rel="noreferrer noopener"
                             target="_blank"
-                            href="https://traderjoexyz.com/pool/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/0x395908aeb53d33A9B8ac35e148E9805D34A555D3#/"
+                            href="https://traderjoexyz.com/avalanche/pool/v1/0x395908aeb53d33a9b8ac35e148e9805d34a555d3/0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664"
                           >
                             <button className="primary-button">Add Liquidity</button>
                           </a>{' '}
@@ -710,7 +710,7 @@ const Home = () => {
                           <a
                             rel="noreferrer noopener"
                             target="_blank"
-                            href="https://traderjoexyz.com/pool/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/0xe6d1aFea0B76C8f51024683DD27FA446dDAF34B6#/"
+                            href="https://traderjoexyz.com/avalanche/pool/v1/0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664/0xe6d1afea0b76c8f51024683dd27fa446ddaf34b6"
                           >
                             <button className="primary-button">Add Liquidity</button>
                           </a>{' '}
